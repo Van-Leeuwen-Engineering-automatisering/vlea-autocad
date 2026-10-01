@@ -1,0 +1,50 @@
+name: Fout melden
+description: Iets werkt niet zoals verwacht in VLEA - kaarten voor AutoCAD.
+title: "Fout: "
+labels: ["fout"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Voeg geen tekeningen, projectgegevens, klantnamen of projectadressen toe.** Dit issue is openbaar.
+        Het logboek staat in `%LOCALAPPDATA%\VLEA-AutoCAD\logs\` (één bestand per dag). Lees het eerst
+        door en haal bestandsnamen en coördinaten weg die iets over een project zeggen, voordat je het plakt.
+
+        Laden mislukt of duurt lang? De plugin praat alleen met PDOK (api.pdok.nl, service.pdok.nl),
+        de BRO voor de sonderingen (publiek.broservices.nl), de legger van Rijkswaterstaat voor de zones
+        (geo.rijkswaterstaat.nl) en GitHub (api.github.com; bij VKUPDATE ook github.com en
+        release-assets.githubusercontent.com). Laat een proxy of firewall die door, of noem hieronder
+        welke niet bereikbaar is.
+  - type: input
+    id: autocad
+    attributes:
+      label: AutoCAD-product en -versie
+      placeholder: "bijv. Civil 3D 2025, AutoCAD 2026"
+    validations:
+      required: true
+  - type: input
+    id: versie
+    attributes:
+      label: Versie van VLEA
+      description: Onderaan het palet, of typ VKHELP of VKOVER.
+      placeholder: "bijv. 0.2.0"
+    validations:
+      required: true
+  - type: textarea
+    id: stappen
+    attributes:
+      label: Wat deed je?
+      description: Stappen om de fout te herhalen. Gebruik een openbare plek (bijv. een adres in het centrum van Amersfoort) als het kan.
+    validations:
+      required: true
+  - type: textarea
+    id: verwacht
+    attributes:
+      label: Wat verwachtte je, en wat gebeurde er?
+    validations:
+      required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: Foutmelding of stuk uit het log (optioneel, eerst nalezen)
+      render: text

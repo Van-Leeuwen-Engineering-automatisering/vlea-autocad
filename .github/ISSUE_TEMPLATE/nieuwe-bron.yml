@@ -1,0 +1,53 @@
+name: Nieuwe kaartbron
+description: Stel een open kaartbron voor die VLEA in AutoCAD moet kunnen laden (bij voorkeur van PDOK).
+title: "Nieuwe bron: "
+labels: ["nieuwe bron"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Alleen open data. De plugin praat alleen met deze netwerkbestemmingen: PDOK (api.pdok.nl en
+        service.pdok.nl), de BRO voor de sonderingen (publiek.broservices.nl), de legger van
+        Rijkswaterstaat (één vast pad op geo.rijkswaterstaat.nl) en GitHub (versiecheck en VKUPDATE).
+        Een bron die daar niet staat, is een nieuwe netwerkbestemming: dat vraagt eerst een besluit
+        van beheer. Zet hier geen tekeningen, klantnamen of projectlocaties in.
+  - type: input
+    id: naam
+    attributes:
+      label: Naam van de bron
+      placeholder: "bijv. Bestuurlijke gebieden"
+    validations:
+      required: true
+  - type: input
+    id: adres
+    attributes:
+      label: Adres van de dienst (bij voorkeur bij PDOK)
+      placeholder: "https://api.pdok.nl/..."
+    validations:
+      required: true
+  - type: textarea
+    id: collecties
+    attributes:
+      label: Welke collecties of lagen zijn nodig?
+  - type: dropdown
+    id: licentie
+    attributes:
+      label: Licentie volgens PDOK / het Nationaal Georegister
+      options:
+        - CC0 1.0
+        - CC BY 4.0
+        - Public Domain Mark 1.0
+        - Anders of onbekend
+    validations:
+      required: true
+  - type: textarea
+    id: lagen
+    attributes:
+      label: Gewenste NLCS-laag en weergave
+      description: Welke NLCS-laag of welk NLCS-object past het best? Weet je het niet, laat dan leeg.
+  - type: textarea
+    id: waarom
+    attributes:
+      label: Waarvoor gebruik je deze kaart?
+    validations:
+      required: true

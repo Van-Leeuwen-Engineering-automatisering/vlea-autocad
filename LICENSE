@@ -1,0 +1,34 @@
+Licentie - VLEA, kaarten voor AutoCAD
+
+Copyright (c) 2026 Van Leeuwen Engineering & Automatisering B.V. Alle rechten voorbehouden.
+
+Deze licentie geldt voor VLEA - kaarten voor AutoCAD vanaf versie 0.2.1: de plugin, de
+installatiescripts en de documentatie (samen: de software).
+
+1. Gebruik
+   U mag de software gratis installeren en gebruiken, ook voor uw werk en op meerdere
+   computers.
+
+2. Niet toegestaan
+   - de software of een deel ervan wijzigen, vertalen of er een eigen versie van maken;
+   - de software terugvertalen naar broncode (decompileren of disassembleren), behalve voor
+     zover de wet dat uitdrukkelijk toestaat;
+   - de software verkopen, verhuren of zelf verspreiden, ook niet als onderdeel van een ander
+     product. Wilt u de software delen, verwijs dan naar
+     https://vanleeuwenea.nl/autocad-kaarten;
+   - de naam VLEA, het beeldmerk of het logo gebruiken, behalve om naar de software te
+     verwijzen (zie TRADEMARK.md).
+
+3. Kaarten en andere bestanden
+   De kaarten die de software ophaalt, vallen onder de licentie van de bronhouder (zie
+   BRONNEN.md). De NLCS-bestanden vallen onder CC BY 4.0 (zie LICENSE-CC-BY-4.0.txt en
+   NOTICE-NLCS.txt).
+
+4. Geen garantie
+   De software wordt geleverd zoals hij is, zonder garantie en zonder ondersteuning.
+   Van Leeuwen Engineering & Automatisering B.V. is niet aansprakelijk voor schade door het
+   gebruik van de software, behalve bij opzet of bewuste roekeloosheid, voor zover de wet dat
+   toelaat.
+
+5. Toepasselijk recht
+   Op deze licentie is Nederlands recht van toepassing.

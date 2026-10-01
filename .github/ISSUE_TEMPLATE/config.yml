@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Geen GitHub-account? Gebruik het contactformulier
+    url: https://vanleeuwenea.nl/contact
+    about: Voor vragen zonder GitHub-account. De tool is gratis en zonder gegarandeerde ondersteuning.
+  - name: Beveiligingsprobleem
+    url: https://github.com/Van-Leeuwen-Engineering-automatisering/vlea-autocad/security/advisories/new
+    about: Meld een kwetsbaarheid vertrouwelijk, niet in een openbaar issue.
