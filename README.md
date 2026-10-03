@@ -20,13 +20,14 @@ Basisregistratie Ondergrond, de zones van Rijkswaterstaat uit de legger van Rijk
 | | `VKCONTOUR` | Een strook op een vaste breedte langs een lijn (in Civil 3D ook een as) tekenen en als gebied kiezen. |
 | Laden | `VKLADEN` | Kaarten laden voor het gekozen gebied, ook meer tegelijk (sleutels met komma's, bijvoorbeeld `bgt,bag`). In het palet heeft elke kaart een eigen knop "Laden". |
 | Ondergrond | `VKBGT` | BGT (actuele versie), in groepen: wegen, water, panden, terrein, namen en nummers, overig. |
+| | `VKBGTBEELD` | De BGT als kaartbeeld (beta): de BGT van PDOK als afbeelding onder de tekening, in vier kaartstijlen (achtergrond, pastel, standaard en omtrek; zonder keuze komt de achtergrond), tot 5 km². Een plaatje: je kunt er niet op vastklikken; voor lijnen en vlakken is er `VKBGT`. Het rustiger kaartbeeld van de BRT in kleur staat onder `VKBRT` (soort kaartbeeld, stijl In kleur). |
 | | `VKBAG` | BAG-panden en, als optie, de adressen met huisnummer (alleen actuele objecten; de rest wordt gemeld). |
 | | `VKBRT` | BRT-topografie voor een groter gebied (beta): vector (TOP10NL) of het kaartbeeld van de achtergrondkaart. |
 | | `VKKADASTER` | Kadastrale grenzen en perceelnummers. |
 | | `VKLUCHTFOTO` | Luchtfoto, "snel" (25 cm) of "scherp" (8 cm). |
 | Hoogte | `VKAHN` | AHN-maaiveld (of oppervlak met gebouwen) als surface, één per gebied ("VLEA AHN RD 154750-462750 500x500"). **Alleen in Civil 3D**; in AutoCAD zonder Civil 3D staat AHN in het palet grijs. |
 | | `VKAHNPUNT` | AHN-hoogte op aangewezen punten: een punt op die hoogte en een label "NAP +4,98 m". Ook zonder Civil 3D. |
-| Grondonderzoek | `VKSONDERINGEN` | Sonderingen uit de BRO met label en, per sondering, een sondeerplot naast de kaart (beta). |
+| Grondonderzoek | `VKSONDERINGEN` | Sonderingen uit de BRO met label en, per sondering, een sondeerplot naast de kaart (beta). Zonder keuze de 25 dichtst bij het midden van het gebied (bij een strook van `VKCONTOUR`: bij de lijn); meer, minder of alle kies je in de instellingen (optie `aantal`). |
 | Infra | `VKNWB` | Wegassen en hectometrering (Nationaal Wegenbestand). |
 | | `VKSPOOR` | Sporen, wissels, kilometrering, overwegen (beta). |
 | | `VKRIOOL` | Gemeentelijke riolering. Gedeeltelijke dekking; niet voor WIBON/KLIC. |
@@ -34,8 +35,8 @@ Basisregistratie Ondergrond, de zones van Rijkswaterstaat uit de legger van Rijk
 | Beperkingen | `VKZONERINGEN` | Zones langs waterkeringen: kernzone, beschermingszone en profiel van vrije ruimte (beta). Niet elk waterschap levert zijn zones aan; een ontbrekende zone betekent niet dat er geen zone is; de legger van de beheerder is leidend. |
 | KLIC | `VKKLIC` | Een KLIC-levering (de IMKL-XML of de zip van het Kadaster) inlezen en op NLCS-lagen tekenen, met een telling per thema en bij elk object dat niet getekend kan worden de reden. Opnieuw inlezen gaat per meldnummer: een andere levering wordt nooit gewist. Werkt zonder internet. |
 | Google Earth | `VKKMZ`, `VKKMLIMPORT` | Objecten als KMZ (en standaard ook als los .kml-bestand) naar Google Earth (één open lijn: boortracé met begin, eind en lengte; Enter = alle VLEA-kaarten in het gebied, zonder KLIC-levering); een KML of KMZ inlezen op vaste lagen. |
-| Bekijk de plek | `VKGOOGLE`, `VKSTREETVIEW`, `VKSTREETSMART`, `VKDINO` | Een punt aanwijzen (Enter = midden van het beeld) en die plek in je browser openen: Google Maps met een speld, Street View (het dichtstbijzijnde panorama; met een tweede punt ook de kijkrichting), StreetSmart van Cyclomedia (daarvoor heb je een eigen account van Cyclomedia nodig) of DINOloket. DINOloket kent geen link naar een plek: het opent de zoekpagina en de coördinaten om te zoeken staan op de opdrachtregel. In het palet en op het lint: "Bekijk de plek". |
-| Gereedschap | `VKINFO`, `VKWISSEN`, `VKSTIJL`, `VKOVER` | Gegevens van een object, eigen imports wissen, NLCS-kleuren of grijze onderlegger, versie, commando's en licenties. |
+| Bekijk de plek | `VKGOOGLE`, `VKSTREETVIEW`, `VKSTREETSMART`, `VKDINO` | Een punt aanwijzen (Enter = midden van het beeld) en die plek in je browser openen: Google Maps met een speld, Street View (het dichtstbijzijnde panorama; met een tweede punt ook de kijkrichting), StreetSmart van Cyclomedia (daarvoor heb je een eigen account van Cyclomedia nodig) of DINOloket van TNO. DINOloket opent ingezoomd op de plek, die in het midden van de kaart ligt; zet in DINOloket zelf "Bodem- en grondonderzoek" aan om sonderingen en boringen te zien. In het palet en op het lint: "Bekijk de plek". |
+| Gereedschap | `VKINFO`, `VKWISSEN`, `VKSTIJL`, `VKOVER` | Gegevens van een object, eigen imports wissen (per kaart, of met de keuze Selectie alleen wat je kiest: van een sondering gaan symbool, label en plot samen weg), NLCS-kleuren of grijze onderlegger, versie, commando's en licenties. |
 | Hulp | `VKHELP`, `VKWEBSITE` | Versie, installatiemap, map van instellingen en logboek, bijwerken; de handleiding of de website van VLEA in je browser. |
 | Bijwerken | `VKUPDATE` | Nieuwste versie ophalen, controleren (SHA-256) en uitgepakt klaarzetten. Installeren doe je zelf met `Installeer.bat` (of met het installatieprogramma van de nieuwe versie). |
 
@@ -52,7 +53,8 @@ geen sondering uit de BRO binnen dit gebied.") in plaats van "0 objecten".
 - BGT en riolering volgen de officiële NLCS 5.0-mappings van digiGO.
 - Kadaster, BAG, BRT, wegen, spoor, AHN, Natura 2000, sonderingen en de zones langs waterkeringen
   hebben geen officiële mapping; daar kiest VLEA een laag uit de NLCS-objectentabellen.
-- De luchtfoto en het kaartbeeld van de BRT staan op een eigen laag (NLCS kent geen rasterlaag),
+- De luchtfoto en de kaartbeelden van de BRT en de BGT staan op een eigen laag (NLCS kent geen rasterlaag:
+  `VLEA-KAART-LUCHTFOTO`, `VLEA-KAART-BRT` en `VLEA-KAART-BGT`),
   de contour van `VKCONTOUR` ook (`VLEA-KAART-GEBIED`: een laadgebied, geen object).
 - KLIC heeft geen officiële NLCS-mapping; VLEA kiest per thema (laagspanning, gas, water, riool …)
   lagen uit de NLCS-objectentabellen (discipline OI) en maakt alleen voor het thema "overig" een
@@ -83,6 +85,10 @@ geen sondering uit de BRO binnen dit gebied.") in plaats van "0 objecten".
   `VKHELP`, `VKWEBSITE` en de commando's onder "Bekijk de plek" openen je eigen browser.
 - De tekening staat in meters (RD). Een tekening in een andere eenheid weigert VLEA, zonder iets
   te tekenen.
+- Voor de luchtfoto en de kaartbeelden van de BRT en de BGT (`VKBGTBEELD`) moet de tekening zijn
+  opgeslagen: de beelden komen als losse bestanden in de map `<tekening>_kaarten` naast de tekening
+  (een kaartbeeld van de BGT is ongeveer 2 MB bij 0,25 km², 3 tot 4 MB bij 1 km² en 6 tot 7 MB bij 5 km², hoogstens
+  ongeveer 10 MB; het laden duurt tot ongeveer een minuut). Stuur die map mee als je de tekening deelt.
 
 ## Installeren
 
@@ -122,8 +128,8 @@ Dezelfde installatie als script: je ziet elke stap in een venster met tekst.
    en pak de zip helemaal uit (rechtsklik, **Alles uitpakken**). Start niets vanuit de zip.
 2. Sluit AutoCAD.
 3. Dubbelklik `Installeer.bat`. **Windows kan waarschuwen** dat het bestand van internet komt; kies
-   dan **Meer informatie** en daarna **Toch uitvoeren** als je de download vertrouwt (zie
-   [Download controleren](#download-controleren)). Het script zegt wat het gaat doen en vraagt
+   dan **Meer informatie** en daarna **Toch uitvoeren** (in een ander venster van Windows heet de knop
+   **Uitvoeren**) als je de download vertrouwt (zie [Download controleren](#download-controleren)). Het script zegt wat het gaat doen en vraagt
    `Doorgaan? (J/N)`: typ J en druk op Enter. Het doet daarna wat bij stap 3 hierboven staat.
 4. Start AutoCAD; verder zoals stap 4 en 5 hierboven.
 
@@ -131,8 +137,8 @@ Meldt het script "0 profielen": start AutoCAD één keer, sluit het en draai `In
 
 ### Verwijderen
 
-Sluit AutoCAD en open `VLEA-AutoCAD-Setup.exe` opnieuw: staat VLEA op de pc, dan heeft het venster de
-knop **Verwijderen**. Of dubbelklik `Verwijder.bat` uit de zip; het script vraagt
+Sluit AutoCAD en open `VLEA-AutoCAD-Setup.exe` opnieuw: staat VLEA op de pc (of staan er nog
+instellingen van VLEA in AutoCAD), dan heeft het venster de knop **Verwijderen**. Of dubbelklik `Verwijder.bat` uit de zip; het script vraagt
 `VLEA verwijderen uit AutoCAD 2025, 2026 en 2027? (J/N)`. Beide halen, voor jouw Windows-gebruiker, weg:
 de map `%APPDATA%\Autodesk\ApplicationPlugins\VLEA-AutoCAD.bundle`, de registraties die AutoCAD voor
 VLEA aanmaakte ("VLEA AutoCAD <jaar>", "… Palet" en "… Civil") en in `TRUSTEDPATHS`, in elk profiel,
@@ -176,7 +182,7 @@ geen sleutels. Hij maakt alleen deze verbindingen, allemaal via https:
 | Alleen als je `VKUPDATE` start (typen, de knop Bijwerken in het palet of op het lint, of de regel "Nieuwe versie beschikbaar" onderaan het palet) | GitHub: `api.github.com`, `github.com` en `release-assets.githubusercontent.com` (daar laat GitHub de downloads vandaan komen) | alleen de versie van de plugin |
 | Alleen als je `VKHELP` of `VKWEBSITE` typt, Help op het lint kiest, of in het palet de link vanleeuwenea.nl of de knop "?" gebruikt | je eigen browser opent de handleiding op `github.com` of de website `vanleeuwenea.nl`; de plugin maakt zelf geen verbinding | wat je browser altijd meestuurt; de plugin geeft alleen het vaste adres door |
 | Alleen als je `VKGOOGLE`, `VKSTREETVIEW` of `VKSTREETSMART` start (typen, of de knoppen onder "Bekijk de plek" in het palet en op het lint) | je eigen browser opent Google Maps of Street View (`www.google.com`) of StreetSmart van Cyclomedia (`streetsmart.cyclomedia.com`); de plugin maakt zelf geen verbinding | de coördinaten van het gekozen punt (bij Street View ook de kijkrichting): die dienst ziet die plek (en wat de pagina van die dienst zelf laadt, zoals analysediensten), dus waar je project ligt; plus wat je browser altijd meestuurt (bij Google ook je Google-account als je daar ingelogd bent, bij StreetSmart je account van Cyclomedia) |
-| Alleen als je `VKDINO` start (typen, of de knop DINOloket) | je eigen browser opent de zoekpagina van DINOloket (`www.dinoloket.nl`); de plugin maakt zelf geen verbinding | geen coördinaten: die staan op de opdrachtregel en je zoekt er zelf mee; wat je browser altijd meestuurt |
+| Alleen als je `VKDINO` start (typen, of de knop DINOloket) | je eigen browser opent de kaart van DINOloket (`www.dinoloket.nl`); de plugin maakt zelf geen verbinding | de coördinaten van het gekozen punt in hele meters, achter het #-teken van het adres: dat deel stuurt je browser niet mee met het eerste verzoek, maar de pagina van DINOloket leest het en vraagt dan zelf de kaart voor die plek op bij TNO (`www.dinoloket.nl`) en de achtergrondkaart bij PDOK (`service.pdok.nl`); TNO en PDOK zien dus die plek, plus wat je browser altijd meestuurt |
 | Na `VKKMZ`, als Google Earth het bestand opent (alleen in AutoCAD met schermen) | Google Earth zelf, niet de plugin: het haalt kaartbeelden bij Google op voor het gebied in het bestand | wat Google Earth meestuurt (zie de voorwaarden van Google); de plugin stuurt niets |
 
 Bij elke verbinding ziet de ontvanger je IP-adres. Cookies bewaart en stuurt de plugin niet. Een
@@ -211,7 +217,7 @@ In het kort, wat de licenties vragen als je een tekening of export met de kaartd
 | Licentie | Kaarten | Wat het betekent voor wie de data verder verspreidt |
 |---|---|---|
 | CC0 1.0, Public Domain Mark 1.0 | AHN, NWB, spoor, riolering, sonderingen, Natura 2000, BAG | geen voorwaarden; een bronvermelding is netjes, maar niet verplicht |
-| CC BY 4.0 | BGT, BRT, kadaster, luchtfoto | naam van de bronhouder en de licentie noemen, en zeggen dat de data bewerkt is: de bronvermelding van VLEA doet dat |
+| CC BY 4.0 | BGT (ook als kaartbeeld), BRT, kadaster, luchtfoto | naam van de bronhouder en de licentie noemen, en zeggen dat de data bewerkt is: de bronvermelding van VLEA doet dat |
 | **CC BY-SA 4.0** ("gelijk delen") | de **zones langs waterkeringen** (`VKZONERINGEN`): Het Waterschapshuis en Rijkswaterstaat | als bij CC BY, en daarbij: wie de zones (of een bewerking ervan, bijvoorbeeld de uitgesneden zones in een DWG, KMZ of export) verder verspreidt, moet die bewerking onder dezelfde of een compatibele licentie delen en mag er geen extra beperkingen op leggen. De licentie spreekt van delen met het publiek; of een tekening aan één opdrachtgever daaronder valt, beoordeelt VLEA niet. Of het ook voor de rest van een tekening geldt, hangt af van hoe de zones erin gebruikt zijn; ook daarover geeft VLEA geen juridisch oordeel. Wil je dat vermijden, deel de zones dan niet mee: wis ze in de kopie die je verstuurt (`VKWISSEN`, kaart `zoneringen`). Een bevroren of uitgezette laag zit nog in het bestand. |
 
 Voor de zones houdt VLEA de strengste licentie van de twee aan: de zones van de waterschappen zijn

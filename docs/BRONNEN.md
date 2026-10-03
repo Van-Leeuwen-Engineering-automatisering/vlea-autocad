@@ -11,6 +11,7 @@ VLEA zet per kaart een bronvermelding in de tekeningeigenschappen ("Bronvermeldi
 | AHN hoogtemodel | VKAHN | Actueel Hoogtebestand Nederland | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/deed.nl) |
 | BAG (panden en adressen) | VKBAG | Kadaster | [Public Domain Mark 1.0](https://creativecommons.org/publicdomain/mark/1.0/deed.nl) |
 | BGT (topografie) | VKBGT | Kadaster | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.nl) |
+| BGT als kaartbeeld | VKBGTBEELD | Kadaster | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.nl) |
 | BRT (topografie 1:10.000) | VKBRT | Kadaster | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.nl) |
 | Kadastrale kaart | VKKADASTER | Kadaster | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.nl) |
 | Luchtfoto | VKLUCHTFOTO | Beeldmateriaal.nl | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.nl) |

@@ -1,6 +1,6 @@
 # Handleiding – VLEA, kaarten voor AutoCAD
 
-> **Versie 0.2.2.** Voor AutoCAD 2025, 2026 en 2027. `VKHELP` opent deze pagina in je browser.
+> **Versie 0.2.3.** Voor AutoCAD 2025, 2026 en 2027. `VKHELP` opent deze pagina in je browser.
 
 ## 1. Voordat je begint
 - AutoCAD 2025, 2026 of 2027 voor Windows (ook Civil 3D of Map 3D); AutoCAD 2027 is nieuw in deze
@@ -17,7 +17,7 @@
   millimeters (`INSUNITS` 4). Zet de eenheid op meters: typ `UNITS` en kies bij **Insertion scale** (invoegschaal)
   "Meters" (of typ `INSUNITS` en dan `6`). Teken je zelf al in millimeters, dan passen RD-meters er
   niet bij: begin dan met een tekening in meters.
-- Sla je tekening op voordat je een luchtfoto laadt: de foto komt in een map naast de tekening.
+- Sla je tekening op voordat je een luchtfoto of een kaartbeeld (BRT of BGT) laadt: het beeld komt in een map naast de tekening.
 
 ## 2. Het palet
 Na de installatie opent het palet één keer vanzelf. Daarna: typ `VKPALET` of klik op het
@@ -36,8 +36,8 @@ lint-tabblad **VLEA** op **Palet** (nog een keer = sluiten). Van boven naar bene
   grijs met de reden eronder: "te groot (max. … km²)" (de uitleg bij de knop zegt wat de kaart zou
   ophalen, zie 4), "alleen Civil 3D", of "niets gekozen in de instellingen" (alle onderdelen van die
   kaart staan uit). Zonder gebied staat erboven "Kies eerst een gebied"; staat de tekening niet in
-  meters, dan staan alle kaarten grijs en staat erboven hoe je de eenheid goed zet (zie 1). De luchtfoto en de BRT als
-  kaartbeeld komen als beeld in een map naast de tekening: in een tekening zonder naam staat daar
+  meters, dan staan alle kaarten grijs en staat erboven hoe je de eenheid goed zet (zie 1). De luchtfoto en de kaartbeelden van
+  de BRT en de BGT komen als beeld in een map naast de tekening: in een tekening zonder naam staat daar
   "Sla de tekening eerst op" met een knop **Opslaan**. Beta-kaarten zijn zo gemarkeerd; een driehoekje
   toont de vaste waarschuwing van een kaart.
 - **Gereedschap** – een rij knoppen: AHN-punt (`VKAHNPUNT`), KLIC-levering (`VKKLIC`, met een
@@ -91,7 +91,8 @@ lint gebruiken deze keuzes; getypte commando's en scripts gebruiken de vaste sta
   een ronde hoek, de uiteinden een halve cirkel. Omsluit de lijn zelf een stuk grond (een lus), dan
   hoort dat stuk bij de contour: je laadt dan iets meer, nooit minder. De lijn wordt eerst iets
   vereenvoudigd: de contour wijkt hoogstens 1 % van de breedte af (25 cm bij 25 m); bij een heel
-  grillige lijn meer, en dat meldt VLEA.
+  grillige lijn meer, en dat meldt VLEA. VLEA bewaart ook de lijn zelf bij het gebied: de sonderingen
+  kiezen dan de dichtstbijzijnde langs die lijn (zie 4).
 - **Een strook langs een tracé:** kies bij `VKGEBIED` een gesloten polylijn om het tracé. VLEA knipt
   de kaarten dan op die polylijn (niet op de rechthoek eromheen) en haalt bij PDOK alleen de stukken
   op die de polylijn raken. De grens per kaart geldt voor wat er wordt opgehaald: bij BGT bijvoorbeeld
@@ -116,6 +117,7 @@ lint gebruiken deze keuzes; getypte commando's en scripts gebruiken de vaste sta
 |---|---|---|---|---|
 | BAG (panden en adressen) | `VKBAG` | `verblijfsobjecten` (adressen met huisnummer) | 1 km² | alleen bestaande en vergunde objecten; gesloopt en ingetrokken niet (wel gemeld) |
 | BGT | `VKBGT` | groepen `wegen`, `water`, `panden`, `terrein`, `namen` (straatnamen en huisnummers), `overig` | 1 km² | actuele versie |
+| BGT als kaartbeeld | `VKBGTBEELD` | `kaartstijl` = `achtergrond` (de standaardkeuze), `pastel`, `standaard` (felle kleuren; een van de vier waarden) of `omtrek`; in het instellingenvenster staat de keuze onder Kaarten, bij BGT als kaartbeeld, als "Stijl" | 5 km² | beta; een plaatje van de BGT naast de tekening, eerst opslaan; zie hieronder |
 | BRT (topografie 1:10.000) | `VKBRT` | `soort` = `vector` (TOP10NL) of `kaartbeeld` (achtergrondkaart als afbeelding); `kaartstijl` = `grijs` (standaard), `standaard` (in kleur; in het instellingenvenster "In kleur"), `pastel` of `water`; groepen `wegen`, `water`, `gebouwen`, `terrein`, `inrichting` (vector) | 16 km² | beta; volgens het Kadaster niet voor een schaal groter dan 1:5.000 (vector) of 1:750 (kaartbeeld); kaartbeeld naast de tekening, eerst opslaan |
 | Kadastrale kaart | `VKKADASTER` | `perceelnummers` | 5 km² | in een stad orde 50.000 objecten bij 5 km²: laden duurt dan langer |
 | Luchtfoto | `VKLUCHTFOTO` | `scherpte` = `snel` (25 cm) of `scherp` (8 cm) | 5 km² | foto naast de tekening; eerst opslaan; bij een groot gebied wordt de pixel grover (snel tot 50 cm bij 5 km²) |
@@ -125,7 +127,7 @@ lint gebruiken deze keuzes; getypte commando's en scripts gebruiken de vaste sta
 | Riolering | `VKRIOOL` | `labels` (materiaal en diameter), `aansluitingen` | 4 km² | onvolledig; niet voor WIBON/KLIC |
 | Natura 2000 | `VKNATURA2000` | | 100 km² | beta |
 | Zones langs waterkeringen | `VKZONERINGEN` | `kernzone`, `beschermingszone`, `vrijeruimte` (profiel van vrije ruimte), `rws` (ook de zones van Rijkswaterstaat) | 9 km² | beta; niet elk waterschap levert zijn zones aan; een ontbrekende zone betekent niet dat er geen zone is; de legger van de beheerder is leidend (dat staat ook na het laden op de opdrachtregel); `rws` haalt bij `geo.rijkswaterstaat.nl` |
-| Sonderingen (BRO) | `VKSONDERINGEN` | `sondeerplots`, `labels`, `xml` | 4 km² | beta; zie hieronder |
+| Sonderingen (BRO) | `VKSONDERINGEN` | `sondeerplots`, `labels`, `xml`; `aantal` = `5`, `10`, `25` (de standaardkeuze), `50`, `100` of `alle` | 4 km² | beta; zonder keuze de 25 dichtstbijzijnde; zie hieronder |
 
 Aan/uit-opties staan standaard aan; in een script schrijf je `aan` of `uit`. Staan alle onderdelen van
 een kaart uit (bijvoorbeeld alle drie de zonesoorten, alle BGT-groepen of bij de BRT als vector alle
@@ -144,10 +146,62 @@ zeggen dan al "te groot". Kies dan een kortere strook of laad AHN in delen.
 geen bronvermelding. Mislukt het ophalen, dan staat de reden er, niet deze zin; is er daardoor niets
 getekend, dan staat die reden op de opdrachtregel bovenaan, in plaats van "0 objecten getekend".
 
+### De BGT als kaartbeeld (`VKBGTBEELD`)
+`VKBGTBEELD` zet de BGT als afbeelding onder de tekening, zoals de luchtfoto: PDOK maakt het kaartbeeld, VLEA
+voegt de tegels samen en zet ze als beeld op de laag `VLEA-KAART-BGT`, achter alle andere objecten. Het is een
+**tweede kaart naast `VKBGT`**: die blijft de BGT als lijnen, vlakken, bomen en huisnummers op NLCS-lagen, waar je
+op kunt vastklikken en meten. Het kaartbeeld is een **plaatje**: je kunt er niet op vastklikken. Het rustiger
+kaartbeeld van de BRT in kleur staat onder BRT (`VKBRT`, soort Kaartbeeld, stijl In kleur).
+- **Kaartstijl** (in het instellingenvenster onder Kaarten, bij BGT als kaartbeeld, heet de keuze "Stijl"; dat is
+  niet het hoofdstuk Stijl voor NLCS-kleuren of grijs; in een script `kaartstijl`): `achtergrond` (de standaardkeuze:
+  zachte kleuren, het echte BGT-beeld met erven, stoepen en huisnummers; de huisnummers staan er alleen bij 0,42 m
+  per pixel of scherper, dus bij een gebied tot ongeveer 2,8 km², zie "Niveau en pixel"), `pastel` (een rustige
+  onderlegger in wit en lichtgrijs), `standaard` (felle kleuren; een van de vier waarden, niet de standaardkeuze) of
+  `omtrek` (alleen lijnen, bedoeld op een doorzichtige achtergrond, bijvoorbeeld boven een luchtfoto: laad de
+  luchtfoto eerst; de bedoeling is dat een later geladen beeld boven een eerder geladen beeld komt. Ligt de omtrek
+  toch onder de foto, zet hem dan met `DRAWORDER` bovenaan).
+- **Eerst opslaan.** Het beeld komt als PNG met world-file (`.pgw`) in de map `<tekening>_kaarten` naast de
+  tekening, als `bgtbeeld_<stijl>_n<niveau>_<x>_<y>_<x>_<y>.png`. Stuur die map mee als je de tekening deelt.
+- **Niveau en pixel.** VLEA kiest het fijnste niveau waarop het gebied binnen 16 miljoen pixels blijft: bij 0,25 km²
+  0,21 m per pixel, bij 1 km² 0,42 m, bij 5 km² (de grens) 0,84 m, en bij een klein gebied tot 0,05 m. Is het beeld
+  grover dan 0,21 m, dan zegt VLEA dat; een kleiner gebied geeft een scherper beeld. Grover dan 0,84 m kan niet: PDOK
+  levert daaronder geen kaartbeeld. Past het gebied op 0,84 m niet binnen het budget (kan bij een lang, schuin tracé,
+  ook al is het oppervlak klein), dan weigert VLEA met "kies een kleiner gebied" in plaats van een wit beeld te maken.
+- **Duur en grootte** (gemeten op 02-10-2026 in Amersfoort en Rotterdam): 0,25 km² ongeveer 7 s en 2 MB (100
+  kaarttegels), 1 km² 15 tot 30 s en 3 tot 4 MB, 5 km² ongeveer 50 s en 6 tot 7 MB (120 tot 145 kaarttegels); het
+  grootste beeld dat we maten was ongeveer 10 MB. Esc annuleert; de beelden die dan al waren weggeschreven, haalt
+  VLEA weer weg.
+- **Strook langs een tracé:** alleen de beelden die de strook raken worden opgehaald; een tegel in zo'n beeld die de
+  strook niet raakt, blijft leeg (wit; bij `omtrek` bedoeld als doorzichtig).
+- Opnieuw laden (Vervangen, Erbij of Overslaan), `VKINFO` en `VKWISSEN` werken zoals bij elke kaart (sleutel
+  `bgtbeeld`). `VKSTIJL` (grijze onderlegger) laat het beeld ongemoeid: een afbeelding heeft geen laagkleur.
+- Bronvermelding: Kadaster, CC BY 4.0, bewerkt. De kaart is beta tot ze in AutoCAD is geprobeerd: dat de omtrek
+  doorzichtig is en dat een later geladen beeld boven een eerder geladen beeld komt, is de bedoeling en is nog niet
+  in AutoCAD gezien.
+
 ### Sonderingen (BRO)
 `VKSONDERINGEN` haalt de sonderingen (CPT) uit de Basisregistratie Ondergrond (BRO) in het gebied.
 Het palet zet ze onder **Grondonderzoek**.
-- Elke sondering komt als symbool (een cirkel met de conus erin, blok `VK_SONDERING`) op
+- **Hoeveel sonderingen** (optie `aantal`): VLEA tekent hoogstens **25 sonderingen**: de 25 het dichtst bij
+  het midden van het gebied. Tot en met 0.2.2 kwamen alle sonderingen in het gebied; op een plek met veel
+  sonderingen waren dat duizenden objecten. Liggen er meer dan 25, dan zegt de melding hoeveel er niet
+  getekend zijn, hoe ver de verste van het midden ligt en hoe je meer krijgt, bijvoorbeeld "25 van de 69
+  sonderingen in het gebied getekend: de 25 dichtst bij het midden van het gebied (de verste ligt 162 m van
+  het midden)".
+  - Meer of minder: in het palet het tandwiel, Kaarten, Sonderingen (BRO), **Aantal sonderingen (de
+    dichtstbijzijnde)**: hoogstens 5, 10, 25, 50 of 100, of alle in het gebied. Bij het commando de optie
+    `aantal`, bijvoorbeeld `aantal=10` of `aantal=alle` (een ander getal dan uit de lijst weigert VLEA).
+  - De regel: de afstand tot het midden van het gebied, op een decimeter. Liggen twee sonderingen even ver,
+    dan gaat de diepste voor (de einddiepte), daarna het laagste BRO-id.
+  - **Bij een strook van `VKCONTOUR` telt de afstand tot de lijn** waar de strook omheen ligt, niet tot één
+    punt in het midden: je krijgt de sonderingen langs het hele tracé, ook bij de uiteinden. De melding zegt
+    dat ("de 12 dichtst bij de lijn van de contour (de verste ligt 31 m van de lijn)"). De lijn staat bij het
+    gebied in de tekening, ook na opslaan en opnieuw openen.
+  - Een eigen gesloten polylijn (`VKGEBIED`) of een contour van vóór deze versie heeft geen lijn: dan telt
+    het midden, en dat is bij een polylijn het punt in het gebied dat het verst van de rand ligt. Bij een
+    lange strook ligt dat ergens op het tracé; maak de strook dan opnieuw met `VKCONTOUR`.
+  - Een andere keuze: laad opnieuw; Enter bij [Vervangen/Erbij/Overslaan] vervangt de vorige keuze.
+- Elke gekozen sondering komt als symbool (een cirkel met de conus erin, blok `VK_SONDERING`) op
   `B-WE-MO-ONDERZOEK_SONDERING-S`, met een label op `B-WE-MO-T18`: het BRO-id, het maaiveld t.o.v.
   NAP, de einddiepte en de datum (optie `labels`).
 - **Sondeerplots** (optie `sondeerplots`): per sondering een grafiek rechts naast het gebied, in rijen
@@ -159,12 +213,40 @@ Het palet zet ze onder **Grondonderzoek**.
   kaart. Komen de waarden boven de schaal, dan wordt die 2 of 4 keer zo ruim; dat staat onder de plot,
   net als waarden die zelfs daarboven komen (daar is de lijn onderbroken). De teksten zijn bedoeld voor
   afdrukken op 1:200.
-- Hoogstens **25 plots per keer**: die van de sonderingen het dichtst bij het midden van het gebied.
-  Wil je andere, kies dan een kleiner gebied rond die sonderingen.
+- Hoogstens **25 plots per keer**: de eerste 25 van de getekende sonderingen, de dichtstbijzijnde eerst.
+  Teken je er meer (`aantal` 50, 100 of alle), dan krijgen de andere alleen symbool en label; wil je van die
+  een plot, kies dan een kleiner gebied rond die sonderingen. Een sondering zonder maaiveldhoogte of met
+  een hoogte die niet t.o.v. NAP is, krijgt geen plot en kost geen plek; de melding noemt haar.
 - De BRO-bestanden (XML) van de sonderingen met een plot komen in de map
   `<tekening>_kaarten\sonderingen` naast de tekening (optie `xml`; sla de tekening eerst op).
 - De sonderingen zijn informatief; controleer datum en kwaliteitsklasse (in de plot en in `VKINFO`)
-  voordat je ze gebruikt.
+  voordat je ze gebruikt. De dichtstbijzijnde sondering is niet vanzelf de beste: een diepere of nieuwere
+  kan net buiten de keuze vallen. Kies dan een hoger aantal of een kleiner gebied.
+
+Een script, één regel per vraag (een vak bij het station van Amersfoort; daar lagen op 29-09-2026 69
+sonderingen):
+
+```text
+VKSONDERINGEN
+C
+153944,462553,154444,463053
+aantal=10,vervangen=ja
+```
+
+#### Sonderingen weghalen
+Eén of een paar sonderingen te veel in de tekening? Typ `VKWISSEN` (in het palet **Import wissen**) en kies
+`Selectie`. Klik het symbool, een labelregel of de plot van de sondering aan, of trek een venster over meer
+sonderingen, en druk op Enter.
+- Per gekozen sondering gaan het symbool, alle labelregels en de hele sondeerplot samen weg. De melding
+  noemt het aantal sonderingen en objecten, bijvoorbeeld "2 sonderingen weggehaald (138 objecten: symbool,
+  label en plot)". `U` maakt het ongedaan.
+- De andere plots schuiven niet op: in de rij blijft een plek leeg en de volgnummers blijven zoals ze
+  waren. Wil je weer een nette rij, laad dan opnieuw met Vervangen; dan komen ook de weggehaalde sonderingen
+  terug (kies eerst een lager `aantal` of een kleiner gebied als je ze niet wilt).
+- De BRO-bestanden (XML) in de map naast de tekening blijven staan.
+- Alle sonderingen weg: `VKWISSEN` en dan `sonderingen`.
+
+Meer over `Selectie`, ook voor andere kaarten: zie 5.
 
 ### Tijdens en na het laden
 - Tijdens het ophalen zie je per kaart de voortgang (pagina's en objecten; PDOK geeft vooraf geen
@@ -207,6 +289,17 @@ C
 154750,462750,155250,463250
 namen=uit,vervangen=ja
 ```
+
+**Een antwoord dat niet past.** Typ je zelf iets wat bij geen keuze past (`xyz`), of maar een deel van een
+sleutel (`bgtb`), dan zegt VLEA dat en stelt dezelfde vraag opnieuw (Esc stopt). In een script gebeurt dat niet:
+de herhaalde vraag zou de volgende regel van het script als antwoord nemen en zo bij `VKWISSEN` iets kunnen
+wissen. Daar stopt het commando meteen, met één regel die zegt wat er mis was, dat het commando is gestopt en
+dat dit antwoord niets heeft gewijzigd. Dat geldt ook voor een lege regel bij een vraag zonder standaard (bij
+`VKWISSEN`) en voor AutoLISP (`(command "VKWISSEN" "bgt")`). Een goed antwoord, ook een afkorting zoals `A`,
+werkt in een script gewoon. De regels na het gestopte commando worden weer als commando gelezen: staat daar een
+commando (`_.QSAVE`), dan loopt dat; staat daar een regel die voor het gestopte commando bedoeld was (een
+sleutel, een coördinaat), dan zegt AutoCAD "Unknown command" en stopt het script. Probeer een script dus eerst
+op een kopie van je tekening.
 
 ### Hoogte op een punt (`VKAHNPUNT`)
 Wijs een of meer punten aan (of typ `x,y`); Enter of Esc stopt. Per punt haalt VLEA bij PDOK de
@@ -270,8 +363,46 @@ Laatste
     `vervangen=vragen`.
   - Bij een KLIC-levering gaat dit per meldnummer, niet per plek: een andere levering wordt nooit
     gewist (zie 6).
-- `VKWISSEN` wist eigen imports, per kaart te kiezen. Andere objecten in de tekening blijven staan.
-  Hoogtepunten staan erin als `ahn-punt`, contouren als `contour`.
+- `VKWISSEN` wist eigen imports, per kaart te kiezen (of `Alle`). Andere objecten in de tekening blijven
+  staan. Hoogtepunten staan erin als `ahn-punt`, contouren als `contour`.
+  - Typ de sleutel van een kaart voluit, ook als hij het begin is van een andere (`bgt` naast `bgtbeeld`,
+    `ahn` naast `ahn-punt`); hoofdletters maken niet uit. Alleen `Alle` en `Selectie` mag je afkorten, tot `A`
+    en `S`, zoals overal in AutoCAD. Een losse `s` is daarom altijd Selectie, ook als `sonderingen` of `spoor`
+    in de tekening staat. Past wat je typt bij geen keuze, of is het maar een deel van een sleutel (`bgtb`),
+    dan zegt VLEA dat en stelt dezelfde vraag opnieuw. Staat zo'n antwoord in een script, dan stopt `VKWISSEN`
+    meteen en wist niets (zie 4): de volgende regel van het script wordt weer als commando gelezen.
+- **Een deel wissen: `VKWISSEN`, keuze `Selectie`.** Kies de objecten die weg moeten (aanklikken, of een
+  venster trekken) en druk op Enter. VLEA wist wat bij een gekozen object hoort: van een sondering het
+  symbool, de labelregels en de hele sondeerplot; van een vlak de arcering en de randen. De opdrachtregel
+  zegt daarna per kaart wat er weg is.
+  - Een label hoort bij zijn object: klik je het label aan, dan gaat het object mee. Een huisnummer van de
+    BGT neemt het pand mee (met zijn andere huisnummers), een huisnummer van de BAG het adrespunt, het label
+    van een rioolleiding die leiding, de tekst bij een hectometerpaal het paaltje. Van een straatnaam gaan
+    alle plekken waar die naam staat samen weg. Een perceelnummer en een kilometertekst van het spoor staan
+    op zichzelf. Wil je alleen een tekst weg, gebruik dan het gewone `ERASE` van AutoCAD: dat haalt alleen
+    weg wat je aanwijst.
+  - Het geldt voor alles wat VLEA tekende, behalve een KLIC-levering. Trek je een venster over een stuk
+    tekening, dan gaat dus ook de BGT of het kadaster mee dat daar ligt; klik liever de objecten zelf aan
+    als er andere kaarten onder liggen.
+  - Objecten die VLEA niet tekende, blijven staan; de melding zegt hoeveel.
+  - Een KLIC-levering wis je alleen als geheel (`VKWISSEN`, sleutel `klic`): gekozen KLIC-objecten blijven
+    staan, en de melding zegt dat.
+  - Wat bij elkaar hoort, leest VLEA uit het id bij de bron (`VKINFO` toont het). Spoor, riolering of zones
+    langs waterkeringen die met 0.2.2 of eerder zijn geladen, hebben nog id's die twee objecten kunnen delen
+    (bij het spoor het tracé en de kilometrering, bij de riolering op de grens van twee gemeenten, bij de
+    zones de kernzone en de beschermingszone van enkele waterkeringen van Rijkswaterstaat): laad die kaart eerst
+    opnieuw (Vervangen). De opdrachtregel zegt altijd hoeveel objecten er weg zijn.
+  - Wat je zelf aan die objecten veranderde, gaat mee weg, net als bij Vervangen.
+  - Blijft van een import alleen de bronvermelding over, dan gaat die tekst mee; staat er van een kaart
+    niets meer, dan verdwijnt ook de bronvermelding uit de tekeningeigenschappen.
+  - Bij een sondering met een sondeerplot blijft de plek in de rij plots leeg; de andere plots en hun
+    volgnummers blijven zoals ze waren (zie 4, Sonderingen weghalen).
+  - Enter zonder iets te kiezen wist niets. `U` maakt het wissen ongedaan.
+  - In een script, één regel per vraag: `VKWISSEN`, `Selectie`, dan de keuze zoals bij elk AutoCAD-commando
+    (bijvoorbeeld `W` met twee hoekpunten) en een lege regel. Geprobeerd in de AutoCAD-kern zonder schermen,
+    met `W`, `C`, `F`, `L` en `ALL`.
+- Een kopie die je zelf van een VLEA-object maakte (bijvoorbeeld met `COPY`), telt als hetzelfde object: ze
+  draagt hetzelfde kenmerk en gaat dus mee bij Selectie, bij Vervangen en bij wissen per kaart.
 - `VKINFO` toont bij een object waar het vandaan komt (bron, id, datum) en de gegevens van PDOK, ook
   bij het AHN-model in Civil 3D. Wissen of vervangen van dat model haalt het uit profielen die erop
   gebaseerd zijn; koppel ze daarna opnieuw.
@@ -423,7 +554,7 @@ FILEDIA
 De bronvermelding staat in de tekeningeigenschappen (een KLIC-levering heeft per levering een eigen
 eigenschap: "Bronvermelding klic <meldnummer>") en kan als tekst in de tekening komen (optie
 "bronvermelding plaatsen"). Verplaats die tekst naar je layout, zodat hij op de plot staat. Bij
-CC BY-bronnen (BGT, BRT, kadaster, luchtfoto) is naamsvermelding verplicht wanneer je de tekening deelt
+CC BY-bronnen (BGT, ook als kaartbeeld, BRT, kadaster, luchtfoto) is naamsvermelding verplicht wanneer je de tekening deelt
 of publiceert. De zones langs waterkeringen (`VKZONERINGEN`) vallen onder CC BY-SA 4.0 ("gelijk delen"):
 die van de waterschappen zijn CC BY-SA 4.0, de legger van Rijkswaterstaat is CC0 1.0, en VLEA houdt voor
 de hele kaart de strengste licentie van de twee aan. Deel je die zones (of een bewerking ervan) verder,
@@ -585,7 +716,7 @@ palet onder **Bekijk de plek** (op het lint: paneel **Bekijk de plek**) op de kn
 | `VKGOOGLE` | Google Maps | Google Maps met een speld op de plek. |
 | `VKSTREETVIEW` | Street View | Street View van Google: het dichtstbijzijnde panorama. Wijs je een tweede punt aan, dan kijk je die kant op. |
 | `VKSTREETSMART` | StreetSmart | StreetSmart van Cyclomedia, op de RD-coördinaten. Daarvoor heb je een eigen account van Cyclomedia nodig (vaak via een gemeente, waterschap of netbeheerder); zonder account zie je alleen het inlogscherm. |
-| `VKDINO` | DINOloket | De zoekpagina van DINOloket. DINOloket kent geen link naar een plek: zoek daar met het vergrootglas op de coördinaten die op de opdrachtregel staan (hele meters, bijvoorbeeld `155000,463000`). |
+| `VKDINO` | DINOloket | De kaart van DINOloket (van TNO), ingezoomd op de plek; de plek ligt in het midden van de kaart, zonder speld. Zet bovenaan in DINOloket **Bodem- en grondonderzoek** aan om de sonderingen en boringen te zien. Staat de kaart toch ergens anders, zoek dan in het zoekveld op de coördinaten van de opdrachtregel (hele meters, bijvoorbeeld `155000,463000`). |
 
 - Wijs een punt aan of typ `x,y` (RD, meters); **Enter = midden van het beeld**.
 - Bij `VKSTREETVIEW` volgt "Kijkrichting: wijs een tweede punt aan (Enter = zonder kijkrichting)". VLEA
@@ -601,10 +732,16 @@ palet onder **Bekijk de plek** (op het lint: paneel **Bekijk de plek**) op de kn
 - **StreetSmart:** of je na het inloggen meteen op de plek uitkomt, hangt af van Cyclomedia; dat is nog
   niet met een account getest. Kom je er niet, zoek dan in StreetSmart op de RD-coördinaten van de
   opdrachtregel.
-- **Privacy:** Google en Cyclomedia krijgen de coördinaten van het gekozen punt: die dienst ziet die plek
-  (en wat de pagina van die dienst zelf laadt, zoals analysediensten), dus waar je project ligt (bij Google
-  ook je Google-account als je in je browser bent ingelogd). DINOloket krijgt geen coördinaten. De plugin
-  maakt zelf geen verbinding: je browser opent het adres.
+- **DINOloket:** de kaart opent op de plek, met de schaalbalk op 20 m (de viewer rondt de schaal af op
+  ongeveer 1:977; een browservenster van 1600 pixels breed toont ongeveer 390 meter, een breder venster
+  meer). TNO beschrijft dit adres niet; zou een nieuwe versie van DINOloket er anders mee omgaan, dan opent
+  de kaart zonder plek en zoek je in DINOloket op de coördinaten van de opdrachtregel.
+- **Privacy:** Google, Cyclomedia en TNO (DINOloket) krijgen de coördinaten van het gekozen punt: die dienst
+  ziet die plek (en wat de pagina van die dienst zelf laadt, zoals analysediensten), dus waar je project
+  ligt (bij Google ook je Google-account als je in je browser bent ingelogd). Bij DINOloket staat de plek
+  achter het #-teken van het adres: je browser stuurt dat deel niet mee met het eerste verzoek, maar de
+  pagina leest het en haalt dan de kaart voor die plek op bij TNO en de achtergrondkaart bij PDOK; TNO en
+  PDOK zien dus die plek. De plugin maakt zelf geen verbinding: je browser opent het adres.
 - In de AutoCAD-kern zonder schermen (`accoreconsole`) gaat er geen browser open: dan staat alleen het
   adres op de opdrachtregel. Een script in AutoCAD met schermen opent de browser wel.
 
@@ -628,7 +765,7 @@ VKDINO
 | Je browser of Windows waarschuwt bij `VLEA-AutoCAD-Setup.exe` ("wordt niet vaak gedownload", of een blauw venster van Windows) | Het programma is niet ondertekend. Vertrouw je de download (zie "Download controleren" in de README), kies dan in je browser dat je het bestand wilt behouden en in Windows **Meer informatie** en daarna **Toch uitvoeren**. |
 | Windows zegt dat Smart App Control het installatieprogramma (of `Installeer.bat`) heeft geblokkeerd | Smart App Control van Windows 11 laat niet-ondertekende programma's en scripts van internet niet toe, en heeft geen knop om door te gaan. VLEA is niet ondertekend; op die pc lukt installeren zo niet. Meld het via de issues, dan weten we voor hoeveel gebruikers dit speelt. |
 | Het installatieprogramma zegt "AutoCAD draait nog" | Sluit alle AutoCAD-vensters en klik op **Opnieuw proberen**. Er is niets gewijzigd. |
-| Het installatieprogramma zegt "Het is niet gelukt" | De zin eronder zegt wat er wel en niet gewijzigd is. De technische melding staat in `%LOCALAPPDATA%\VLEA-AutoCAD\logs\setup.log`; zet die bij je melding. |
+| Het installatieprogramma zegt "Het is niet gelukt" | De zin eronder zegt wat er wel en niet gewijzigd is; vaak helpt even wachten en **Opnieuw proberen** (een virusscanner kan nieuwe bestanden kort vasthouden). De technische melding staat in `%LOCALAPPDATA%\VLEA-AutoCAD\logs\setup.log`, zonder je Windows-naam; zet dat bestand bij je melding. |
 | AutoCAD vraagt of de plugin geladen mag worden (venster "Security - Unsigned Executable File", want de DLL's zijn niet ondertekend, of "File Loading - Security Concern") | Kies **Load** of **Load Once** (AutoCAD heeft geen Nederlandse knoppen). Installeer opnieuw (met het installatieprogramma of `Installeer.bat`) als AutoCAD het elke keer vraagt. |
 | Geen lint-tabblad VLEA en geen `VKPALET` | Controleer met `APPAUTOLOAD` dat de waarde 14 is; start AutoCAD opnieuw. |
 | "De tekeningeenheid is millimeters" (of een andere eenheid), of alle kaarten in het palet grijs | Typ `UNITS` en kies bij **Insertion scale** (invoegschaal) "Meters" (of typ `INSUNITS` en dan `6`). Een nieuwe tekening uit het metrische standaardsjabloon staat in millimeters. Teken je zelf al in millimeters, begin dan met een tekening in meters. |
@@ -637,8 +774,11 @@ VKDINO
 | "Je werkt in de papierruimte" bij `VKGOOGLE`, `VKSTREETVIEW`, `VKSTREETSMART` of `VKDINO` | Ga naar de modelruimte (of dubbelklik in een viewport) en start het commando opnieuw. |
 | StreetSmart toont alleen het inlogscherm | Je hebt een account van Cyclomedia nodig. Kom je na het inloggen niet op de plek, zoek dan op de RD-coördinaten van de opdrachtregel. |
 | In het palet staat "wacht – zie opdrachtregel" | VLEA vraagt iets op de opdrachtregel, bijvoorbeeld [Vervangen/Erbij/Overslaan] omdat die kaart al in dit gebied staat. Beantwoord de vraag daar. |
-| "overlapt met een andere levering" bij `VKKLIC` | De nieuwe levering is erbij gezet; de andere levering staat er nog. Wil je alleen de nieuwe, wis dan eerst met `VKWISSEN` (sleutel `klic`; dat wist alle KLIC-imports) en lees de nieuwe opnieuw in. |
-| "Sla de tekening eerst op" bij de luchtfoto of de BRT als kaartbeeld | Het beeld komt in een map naast de tekening; die bestaat pas na opslaan. Klik **Opslaan** onder de kaart in het palet. |
+| In een script of in AutoLISP: "Het commando is gestopt en dit antwoord heeft niets gewijzigd; wat daarna komt, wordt weer als commando gelezen." | Een antwoord in je script past niet bij de vraag: een tikfout, een deel van een sleutel (`bgtb`), een sleutel die niet in de tekening staat, of een lege regel waar geen standaard is. De regel ervoor zegt welk antwoord het was en welke keuzes er zijn. Verbeter het antwoord in het script; zie 4 ("Een antwoord dat niet past"). Er is niets gewist of geladen. |
+| "overlapt met een andere levering" (bij meer dan één: "overlapt met 2 andere leveringen") bij `VKKLIC` | De nieuwe levering is erbij gezet; de andere levering of leveringen staan er nog. Wil je alleen de nieuwe, wis dan eerst met `VKWISSEN` (sleutel `klic`; dat wist alle KLIC-imports) en lees de nieuwe opnieuw in. |
+| Er staan minder sonderingen dan er in het gebied liggen | Zonder keuze tekent VLEA de 25 dichtst bij het midden van het gebied (bij een strook van `VKCONTOUR`: bij de lijn); de melding zegt hoeveel er niet getekend zijn. Kies een hoger aantal in de instellingen (tandwiel, Kaarten, Sonderingen (BRO)), of typ bij het commando `aantal=50`, `aantal=100` of `aantal=alle`, en laad opnieuw. |
+| Eén sondering te veel, of een gat in de rij sondeerplots | Weghalen: `VKWISSEN`, keuze `Selectie`, de sondering aanklikken en Enter (symbool, label en plot gaan samen weg). De andere plots schuiven dan niet op; laad opnieuw met Vervangen voor een nette rij (zie 4, Sonderingen weghalen). |
+| "Sla de tekening eerst op" bij de luchtfoto of een kaartbeeld (BRT of BGT) | Het beeld komt in een map naast de tekening; die bestaat pas na opslaan. Klik **Opslaan** onder de kaart in het palet. |
 | `VKBGT` (of een ander kaartcommando) is onbekend | De plugin is niet geladen. Controleer met `APPAUTOLOAD` dat de waarde 14 is en start AutoCAD opnieuw. |
 | Laden duurt lang of faalt | Controleer je internetverbinding naar PDOK; probeer een kleiner gebied. |
 | `VKUPDATE`: "GitHub weigert het verzoek (HTTP 403)" | Zonder account staat GitHub 60 verzoeken per uur per netwerk toe. Probeer het over een uur opnieuw, of download de zip zelf via de releasepagina. |

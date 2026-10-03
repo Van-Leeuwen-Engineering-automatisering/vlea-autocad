@@ -27,11 +27,14 @@ garanderen geen termijn.
   daarbij zelf geen verbinding en opent nooit een ander adres.
 - `VKGOOGLE`, `VKSTREETVIEW`, `VKSTREETSMART` en `VKDINO` (en in palet en lint de knoppen onder "Bekijk de
   plek") openen je browser op de plek die je in de tekening aanwijst: Google Maps of Street View
-  (`www.google.com`), StreetSmart van Cyclomedia (`streetsmart.cyclomedia.com`) of de zoekpagina van
-  DINOloket (`www.dinoloket.nl`). De kern maakt het adres alleen uit de coördinaten (getallen, vaste host,
-  pad en parameters), nooit uit tekst uit de tekening; vóór het openen moet het letterlijk op een van vier
-  vaste sjablonen passen. Google en Cyclomedia zien die plek (en wat hun pagina zelf laadt, zoals
-  analysediensten); DINOloket krijgt geen coördinaten. De plugin maakt daarbij zelf geen verbinding.
+  (`www.google.com`), StreetSmart van Cyclomedia (`streetsmart.cyclomedia.com`) of de kaart van
+  DINOloket (`www.dinoloket.nl`), met de plek in het vaste fragment van het adres. De kern maakt het adres
+  alleen uit de coördinaten (getallen, vaste host, pad en parameters), nooit uit tekst uit de tekening; vóór
+  het openen moet het letterlijk op een van vier vaste sjablonen passen. Google, Cyclomedia en TNO (DINOloket) zien die plek (en wat
+  hun pagina zelf laadt, zoals analysediensten). Bij DINOloket staat de plek achter het #-teken van het
+  adres: dat deel stuurt je browser niet mee met het eerste verzoek, maar de pagina leest het en vraagt dan
+  zelf de kaart voor die plek op bij TNO en de achtergrondkaart bij PDOK (`service.pdok.nl`); TNO en PDOK
+  zien dus die plek. De plugin maakt daarbij zelf geen verbinding.
 - Een ander programma starten doet de plugin op één plek, voor vier doelen: het Google
   Earth-bestand openen (`VKKMZ`), de map met een nieuwe versie in Verkenner (`VKUPDATE`), een van die
   twee adressen in de browser en de plek in de browser volgens die sjablonen; alleen in AutoCAD met
@@ -49,8 +52,8 @@ garanderen geen termijn.
   `%APPDATA%\Autodesk\ApplicationPlugins\VLEA-AutoCAD.bundle` (en tijdens het wisselen de mappen
   `VLEA-AutoCAD.nieuw` en `VLEA-AutoCAD.oud` ernaast), het register van de gebruiker onder
   `HKCU\Software\Autodesk\AutoCAD` (de waarde `TRUSTEDPATHS` per profiel; bij verwijderen ook de eigen
-  registraties) en het logboek `%LOCALAPPDATA%\VLEA-AutoCAD\logs\setup.log`. Het register van de
-  computer wordt alleen gelezen.
+  registraties) en het logboek `%LOCALAPPDATA%\VLEA-AutoCAD\logs\setup.log` (zonder de naam van het
+  Windows-account). Het register van de computer wordt alleen gelezen.
 - Het maakt geen verbinding met internet, start geen ander programma en heeft geen opdrachtregelopties.
   De plugin zit in de exe zelf: precies de zip die ernaast wordt uitgegeven (de bouw weigert een exe
   met een andere zip). Uitpakken gebeurt alleen binnen de eigen map; een pakket met een
@@ -60,8 +63,8 @@ garanderen geen termijn.
   `SHA256SUMS.txt`.
 
 ## Een download controleren
-Naast elke release staat `SHA256SUMS.txt`, met een regel voor de zip en een voor het
-installatieprogramma. `VKUPDATE` controleert de SHA-256 van de zip zelf; met de hand in PowerShell:
+Naast elke release staat `SHA256SUMS.txt`, met een regel voor de zip en, vanaf versie 0.2.2, een voor
+het installatieprogramma. `VKUPDATE` controleert de SHA-256 van de zip zelf; met de hand in PowerShell:
 `Get-FileHash .\VLEA-AutoCAD.zip -Algorithm SHA256` of
 `Get-FileHash .\VLEA-AutoCAD-Setup.exe -Algorithm SHA256`.
 
