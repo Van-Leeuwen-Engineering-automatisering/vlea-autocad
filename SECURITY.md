@@ -10,7 +10,8 @@ Dit is een gratis project zonder beloningsregeling. We reageren zo snel als we k
 garanderen geen termijn.
 
 ## Binnen scope
-- De plugin, de installatiescripts en de releasebestanden van deze repository.
+- De plugin, het installatieprogramma, de installatiescripts en de releasebestanden van deze
+  repository.
 - Buiten scope: PDOK, de BRO, de legger van Rijkswaterstaat, GitHub en de kaartdata zelf, de website van
   VLEA, AutoCAD, en aangepaste versies van anderen.
 
@@ -41,12 +42,32 @@ garanderen geen termijn.
   `SHA256SUMS.txt` van dezelfde release en pakt uit. Installeren doe je zelf met `Installeer.bat`;
   `VKUPDATE` start geen installatie, geen PowerShell en geen script.
 
+## Wat het installatieprogramma doet en niet doet
+`VLEA-AutoCAD-Setup.exe` doet hetzelfde als `Installeer.bat` en `Verwijder.bat`, met een venster.
+- Het werkt alleen voor de gebruiker die het start en vraagt nooit beheerdersrechten (manifest
+  `asInvoker`). Het schrijft op drie plekken: de map
+  `%APPDATA%\Autodesk\ApplicationPlugins\VLEA-AutoCAD.bundle` (en tijdens het wisselen de mappen
+  `VLEA-AutoCAD.nieuw` en `VLEA-AutoCAD.oud` ernaast), het register van de gebruiker onder
+  `HKCU\Software\Autodesk\AutoCAD` (de waarde `TRUSTEDPATHS` per profiel; bij verwijderen ook de eigen
+  registraties) en het logboek `%LOCALAPPDATA%\VLEA-AutoCAD\logs\setup.log`. Het register van de
+  computer wordt alleen gelezen.
+- Het maakt geen verbinding met internet, start geen ander programma en heeft geen opdrachtregelopties.
+  De plugin zit in de exe zelf: precies de zip die ernaast wordt uitgegeven (de bouw weigert een exe
+  met een andere zip). Uitpakken gebeurt alleen binnen de eigen map; een pakket met een
+  pad daarbuiten wordt geweigerd.
+- De exe is niet ondertekend, net als de DLL's van de plugin. Windows en je browser kunnen daarom
+  waarschuwen, en Smart App Control van Windows 11 blokkeert hem. Controleer een download met
+  `SHA256SUMS.txt`.
+
 ## Een download controleren
-Naast elke release staat `SHA256SUMS.txt`. `VKUPDATE` controleert de SHA-256 zelf; met de hand
-in PowerShell: `Get-FileHash .\VLEA-AutoCAD.zip -Algorithm SHA256`.
+Naast elke release staat `SHA256SUMS.txt`, met een regel voor de zip en een voor het
+installatieprogramma. `VKUPDATE` controleert de SHA-256 van de zip zelf; met de hand in PowerShell:
+`Get-FileHash .\VLEA-AutoCAD.zip -Algorithm SHA256` of
+`Get-FileHash .\VLEA-AutoCAD-Setup.exe -Algorithm SHA256`.
 
 ## Bekend restrisico: de vertrouwde map
-`Installeer.bat` zet de map `%APPDATA%\Autodesk\ApplicationPlugins\VLEA-AutoCAD.bundle\Contents\<jaar>`
+Het installatieprogramma en `Installeer.bat` zetten de map
+`%APPDATA%\Autodesk\ApplicationPlugins\VLEA-AutoCAD.bundle\Contents\<jaar>`
 in de lijst vertrouwde locaties van AutoCAD (`TRUSTEDPATHS`). AutoCAD laadt DLL's uit die map
 zonder te vragen. Die map staat in je eigen profiel: alles wat onder jouw Windows-account draait,
 kan er een bestand neerzetten dat AutoCAD daarna zonder melding laadt. Dat risico hoort bij elke
@@ -54,6 +75,7 @@ installatie per gebruiker zonder beheerdersrechten.
 
 Wat we ertegen doen:
 - alleen precies de jaarmap van deze plugin wordt vertrouwd, niet de bovenliggende mappen;
-- `Verwijder.bat` haalt die regel weer weg, en alleen die regel;
+- de knop Verwijderen van het installatieprogramma en `Verwijder.bat` halen die regel weer weg, en
+  alleen die regel;
 
-Installeer alleen zips van de releasepagina van deze repository.
+Installeer alleen het installatieprogramma en de zips van de releasepagina van deze repository.

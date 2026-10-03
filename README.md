@@ -5,10 +5,11 @@ RD-coördinaten (meters), op NLCS-lagen, met bronvermelding. Zonder account, zon
 de plugin haalt de kaarten rechtstreeks bij PDOK op (de sonderingen bij de openbare uitgifte van de
 Basisregistratie Ondergrond, de zones van Rijkswaterstaat uit de legger van Rijkswaterstaat).
 
-> **Downloaden:** [VLEA-AutoCAD.zip](https://github.com/Van-Leeuwen-Engineering-automatisering/vlea-autocad/releases/latest/download/VLEA-AutoCAD.zip), de nieuwste
-> versie, voor AutoCAD 2025, 2026 en 2027. Wat er per versie veranderd is, staat bij de
-> [releases](https://github.com/Van-Leeuwen-Engineering-automatisering/vlea-autocad/releases). De handleiding staat in [`docs/handleiding.md`](docs/handleiding.md).
-> Meer over de plugin: https://vanleeuwenea.nl/autocad-kaarten.
+> **Downloaden:** [VLEA-AutoCAD-Setup.exe](https://github.com/Van-Leeuwen-Engineering-automatisering/vlea-autocad/releases/latest/download/VLEA-AutoCAD-Setup.exe), het
+> installatieprogramma van de nieuwste versie, voor AutoCAD 2025, 2026 en 2027. Liever de zip met
+> `Installeer.bat`: [VLEA-AutoCAD.zip](https://github.com/Van-Leeuwen-Engineering-automatisering/vlea-autocad/releases/latest/download/VLEA-AutoCAD.zip). Wat er per
+> versie veranderd is, staat bij de [releases](https://github.com/Van-Leeuwen-Engineering-automatisering/vlea-autocad/releases). De handleiding staat in
+> [`docs/handleiding.md`](docs/handleiding.md). Meer over de plugin: https://vanleeuwenea.nl/autocad-kaarten.
 
 ## Wat kan het (versie 0.2)
 
@@ -36,7 +37,7 @@ Basisregistratie Ondergrond, de zones van Rijkswaterstaat uit de legger van Rijk
 | Bekijk de plek | `VKGOOGLE`, `VKSTREETVIEW`, `VKSTREETSMART`, `VKDINO` | Een punt aanwijzen (Enter = midden van het beeld) en die plek in je browser openen: Google Maps met een speld, Street View (het dichtstbijzijnde panorama; met een tweede punt ook de kijkrichting), StreetSmart van Cyclomedia (daarvoor heb je een eigen account van Cyclomedia nodig) of DINOloket. DINOloket kent geen link naar een plek: het opent de zoekpagina en de coördinaten om te zoeken staan op de opdrachtregel. In het palet en op het lint: "Bekijk de plek". |
 | Gereedschap | `VKINFO`, `VKWISSEN`, `VKSTIJL`, `VKOVER` | Gegevens van een object, eigen imports wissen, NLCS-kleuren of grijze onderlegger, versie, commando's en licenties. |
 | Hulp | `VKHELP`, `VKWEBSITE` | Versie, installatiemap, map van instellingen en logboek, bijwerken; de handleiding of de website van VLEA in je browser. |
-| Bijwerken | `VKUPDATE` | Nieuwste versie ophalen, controleren (SHA-256) en uitgepakt klaarzetten. Installeren doe je zelf met `Installeer.bat`. |
+| Bijwerken | `VKUPDATE` | Nieuwste versie ophalen, controleren (SHA-256) en uitgepakt klaarzetten. Installeren doe je zelf met `Installeer.bat` (of met het installatieprogramma van de nieuwe versie). |
 
 Alle commando's beginnen met `VK` en werken ook vanaf de opdrachtregel en in scripts, ook de
 kaartcommando's (`VKBGT` enz.) in de AutoCAD-kern zonder schermen.
@@ -64,10 +65,10 @@ geen sondering uit de BRO binnen dit gebied.") in plaats van "0 objecten".
 
 - Windows 10 of 11, 64-bit.
 - AutoCAD **2025**, **2026** of **2027** voor Windows, of een product op AutoCAD-basis (bijvoorbeeld
-  Civil 3D of Map 3D). In de zip zit voor elk jaar een eigen build; AutoCAD laadt die van zijn eigen
-  jaar:
+  Civil 3D of Map 3D). In de download zit voor elk jaar een eigen build; AutoCAD laadt die van zijn
+  eigen jaar:
 
-  | AutoCAD | Map in de zip | Opmerking |
+  | AutoCAD | Map in de bundel | Opmerking |
   |---|---|---|
   | 2025 | `Contents\2025` | |
   | 2026 | `Contents\2026` | |
@@ -85,6 +86,37 @@ geen sondering uit de BRO binnen dit gebied.") in plaats van "0 objecten".
 
 ## Installeren
 
+### Met het installatieprogramma
+
+1. Download `VLEA-AutoCAD-Setup.exe` bij de
+   [nieuwste release](https://github.com/Van-Leeuwen-Engineering-automatisering/vlea-autocad/releases/latest).
+2. Sluit AutoCAD en open het bestand. Het programma is niet ondertekend: **je browser en Windows kunnen
+   waarschuwen**. Kies in je browser dat je het bestand wilt behouden, en in Windows **Meer informatie**
+   en daarna **Toch uitvoeren**, als je de download vertrouwt (zie
+   [Download controleren](#download-controleren)).
+3. Het venster zegt wat het gaat doen en welke AutoCAD het vond. Klik op **Installeren**. Het programma
+   doet hetzelfde als `Installeer.bat` hieronder, voor jouw Windows-account en zonder beheerdersrechten:
+   het zet de plugin in `%APPDATA%\Autodesk\ApplicationPlugins\VLEA-AutoCAD.bundle` en zet voor elke
+   AutoCAD-versie alleen de map met de DLL's (`…\VLEA-AutoCAD.bundle\Contents\2025`, `…\Contents\2026`
+   of `…\Contents\2027`) in de lijst vertrouwde locaties van AutoCAD (`TRUSTEDPATHS`), niet de map
+   `ApplicationPlugins` zelf (zie [`SECURITY.md`](SECURITY.md)). Het maakt geen verbinding met internet.
+4. Start AutoCAD. Vraagt AutoCAD of de plugin geladen mag worden, kies **Load** of **Load Once**
+   (AutoCAD heeft geen Nederlandse versie). De DLL's van VLEA zijn niet ondertekend; het venster heet dan
+   "Security - Unsigned Executable File", met Always Load, Load Once en Do Not Load. Het kan ook
+   "File Loading - Security Concern" zijn, met de knop Load.
+5. Het palet opent de eerste keer vanzelf. Daarna: typ `VKPALET` of gebruik het lint-tabblad **VLEA**.
+
+Draait AutoCAD nog, dan zegt het programma dat en wijzigt het niets. Meldt het dat er nog geen
+AutoCAD-profiel is: start AutoCAD één keer, sluit het en installeer opnieuw.
+
+Staat op je pc **Smart App Control** van Windows 11 aan, dan blokkeert Windows niet-ondertekende
+programma's en scripts van internet, zonder knop om door te gaan: het installatieprogramma start dan
+niet, en `Installeer.bat` uit de zip ook niet.
+
+### Met de zip en `Installeer.bat`
+
+Dezelfde installatie als script: je ziet elke stap in een venster met tekst.
+
 1. Download `VLEA-AutoCAD.zip` bij de
    [nieuwste release](https://github.com/Van-Leeuwen-Engineering-automatisering/vlea-autocad/releases/latest)
    en pak de zip helemaal uit (rechtsklik, **Alles uitpakken**). Start niets vanuit de zip.
@@ -92,21 +124,16 @@ geen sondering uit de BRO binnen dit gebied.") in plaats van "0 objecten".
 3. Dubbelklik `Installeer.bat`. **Windows kan waarschuwen** dat het bestand van internet komt; kies
    dan **Meer informatie** en daarna **Toch uitvoeren** als je de download vertrouwt (zie
    [Download controleren](#download-controleren)). Het script zegt wat het gaat doen en vraagt
-   `Doorgaan? (J/N)`: typ J en druk op Enter. Het kopieert de plugin naar
-   `%APPDATA%\Autodesk\ApplicationPlugins\VLEA-AutoCAD.bundle` en zet voor elke AutoCAD-versie alleen
-   de map met de DLL's (`…\VLEA-AutoCAD.bundle\Contents\2025`, `…\Contents\2026` of `…\Contents\2027`)
-   in de lijst vertrouwde locaties van AutoCAD (`TRUSTEDPATHS`), niet de map `ApplicationPlugins` zelf
-   (zie [`SECURITY.md`](SECURITY.md)). Er zijn geen beheerdersrechten nodig.
-4. Start AutoCAD. Vraagt AutoCAD of de plugin geladen mag worden, kies **Load** of **Load Once**
-   (AutoCAD heeft geen Nederlandse versie). De DLL's van VLEA zijn niet ondertekend; het venster heet dan
-   "Security - Unsigned Executable File", met Always Load, Load Once en Do Not Load. Het kan ook
-   "File Loading - Security Concern" zijn, met de knop Load.
-5. Het palet opent de eerste keer vanzelf. Daarna: typ `VKPALET` of gebruik het lint-tabblad **VLEA**.
+   `Doorgaan? (J/N)`: typ J en druk op Enter. Het doet daarna wat bij stap 3 hierboven staat.
+4. Start AutoCAD; verder zoals stap 4 en 5 hierboven.
 
 Meldt het script "0 profielen": start AutoCAD één keer, sluit het en draai `Installeer.bat` opnieuw.
 
-**Verwijderen:** sluit AutoCAD en dubbelklik `Verwijder.bat` uit dezelfde zip. Het script vraagt
-`VLEA verwijderen uit AutoCAD 2025, 2026 en 2027? (J/N)` en haalt dan, voor jouw Windows-gebruiker, weg:
+### Verwijderen
+
+Sluit AutoCAD en open `VLEA-AutoCAD-Setup.exe` opnieuw: staat VLEA op de pc, dan heeft het venster de
+knop **Verwijderen**. Of dubbelklik `Verwijder.bat` uit de zip; het script vraagt
+`VLEA verwijderen uit AutoCAD 2025, 2026 en 2027? (J/N)`. Beide halen, voor jouw Windows-gebruiker, weg:
 de map `%APPDATA%\Autodesk\ApplicationPlugins\VLEA-AutoCAD.bundle`, de registraties die AutoCAD voor
 VLEA aanmaakte ("VLEA AutoCAD <jaar>", "… Palet" en "… Civil") en in `TRUSTEDPATHS`, in elk profiel,
 precies de regels van VLEA (`…\VLEA-AutoCAD.bundle\Contents\2025`, `…\Contents\2026` en
@@ -114,17 +141,24 @@ precies de regels van VLEA (`…\VLEA-AutoCAD.bundle\Contents\2025`, `…\Conten
 die `VKUPDATE` ophaalde, in `%LOCALAPPDATA%\VLEA-AutoCAD\`, blijven ook staan; wil je die ook weg, typ
 dan in een opdrachtprompt, in de uitgepakte map, `Verwijder.bat -OokInstellingen`.
 
-**Bijwerken:** typ `VKUPDATE` in AutoCAD. VLEA vraagt bij GitHub wat de nieuwste versie is, downloadt
+### Bijwerken
+
+Typ `VKUPDATE` in AutoCAD. VLEA vraagt bij GitHub wat de nieuwste versie is, downloadt
 die, controleert de SHA-256 tegen `SHA256SUMS.txt` en zet hem uitgepakt klaar in
 `%LOCALAPPDATA%\VLEA-AutoCAD\updates\<versie>\` (in AutoCAD opent die map in Verkenner). Sluit daarna
 AutoCAD en dubbelklik `Installeer.bat` in die map. VLEA installeert nooit zelf en start geen scripts.
 Nog geen release of al de nieuwste versie: `VKUPDATE` zegt dat en downloadt niets.
 
+Je kunt ook het installatieprogramma van de nieuwe versie downloaden en openen: het vervangt de versie
+die er staat.
+
 ### Download controleren
 
-Naast de zip staat `SHA256SUMS.txt` (`VKUPDATE` doet deze controle zelf). Vergelijk in PowerShell:
+Naast de downloads staat `SHA256SUMS.txt`, met een regel voor de zip en een voor het
+installatieprogramma (`VKUPDATE` controleert de zip zelf). Vergelijk in PowerShell:
 
 ```powershell
+Get-FileHash .\VLEA-AutoCAD-Setup.exe -Algorithm SHA256
 Get-FileHash .\VLEA-AutoCAD.zip -Algorithm SHA256
 ```
 

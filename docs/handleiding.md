@@ -1,12 +1,15 @@
 # Handleiding – VLEA, kaarten voor AutoCAD
 
-> **Versie 0.2.1.** Voor AutoCAD 2025, 2026 en 2027. `VKHELP` opent deze pagina in je browser.
+> **Versie 0.2.2.** Voor AutoCAD 2025, 2026 en 2027. `VKHELP` opent deze pagina in je browser.
 
 ## 1. Voordat je begint
 - AutoCAD 2025, 2026 of 2027 voor Windows (ook Civil 3D of Map 3D); AutoCAD 2027 is nieuw in deze
   versie. Niet AutoCAD LT, AutoCAD voor Mac of AutoCAD Web: die kunnen deze plugin niet laden (AutoCAD
   LT laadt geen .NET-plugins).
-- Installeren en verwijderen: zie de [README](../README.md#installeren).
+- Installeren: download `VLEA-AutoCAD-Setup.exe` bij de nieuwste release, sluit AutoCAD, open het
+  bestand en klik op **Installeren**. Verwijderen kan met hetzelfde programma. Alle stappen, ook die met
+  de zip en `Installeer.bat`, en wat je doet als Windows waarschuwt: zie de
+  [README](../README.md#installeren).
 - Je tekening staat in **meters, in RD** (Rijksdriehoekscoördinaten). Staat `INSUNITS` op een andere
   eenheid, dan weigert VLEA te tekenen en legt uit waarom; in het palet staan de kaarten dan grijs, met
   de reden erboven. Staat hij op 0 ("geen eenheid"), dan waarschuwt VLEA één keer.
@@ -476,7 +479,9 @@ Typ `VKUPDATE`. VLEA vraagt bij GitHub wat de nieuwste versie is. Is die nieuwer
    Verkenner.
 
 Daarna: **sluit AutoCAD en dubbelklik `Installeer.bat` in die map.** VLEA installeert nooit zelf en
-start geen scripts. Is er nog geen versie uitgebracht of heb je de nieuwste al, dan zegt `VKUPDATE` dat
+start geen scripts. Je kunt ook het installatieprogramma (`VLEA-AutoCAD-Setup.exe`) van de nieuwe versie
+downloaden en openen: het vervangt de versie die er staat.
+Is er nog geen versie uitgebracht of heb je de nieuwste al, dan zegt `VKUPDATE` dat
 en downloadt niets. Esc of **Annuleren** stopt het ophalen; er blijft dan niets staan. `VKUPDATE` stelt
 geen vragen en werkt dus ook in een script. In AutoCAD met schermen opent de map in Verkenner, ook
 vanuit een script; in de AutoCAD-kern zonder schermen (`accoreconsole`) niet (de melding noemt hem wel).
@@ -620,7 +625,11 @@ VKDINO
 ## 12. Problemen oplossen
 | Wat je ziet | Wat je doet |
 |---|---|
-| AutoCAD vraagt of de plugin geladen mag worden (venster "Security - Unsigned Executable File", want de DLL's zijn niet ondertekend, of "File Loading - Security Concern") | Kies **Load** of **Load Once** (AutoCAD heeft geen Nederlandse knoppen). Draai `Installeer.bat` opnieuw als AutoCAD het elke keer vraagt. |
+| Je browser of Windows waarschuwt bij `VLEA-AutoCAD-Setup.exe` ("wordt niet vaak gedownload", of een blauw venster van Windows) | Het programma is niet ondertekend. Vertrouw je de download (zie "Download controleren" in de README), kies dan in je browser dat je het bestand wilt behouden en in Windows **Meer informatie** en daarna **Toch uitvoeren**. |
+| Windows zegt dat Smart App Control het installatieprogramma (of `Installeer.bat`) heeft geblokkeerd | Smart App Control van Windows 11 laat niet-ondertekende programma's en scripts van internet niet toe, en heeft geen knop om door te gaan. VLEA is niet ondertekend; op die pc lukt installeren zo niet. Meld het via de issues, dan weten we voor hoeveel gebruikers dit speelt. |
+| Het installatieprogramma zegt "AutoCAD draait nog" | Sluit alle AutoCAD-vensters en klik op **Opnieuw proberen**. Er is niets gewijzigd. |
+| Het installatieprogramma zegt "Het is niet gelukt" | De zin eronder zegt wat er wel en niet gewijzigd is. De technische melding staat in `%LOCALAPPDATA%\VLEA-AutoCAD\logs\setup.log`; zet die bij je melding. |
+| AutoCAD vraagt of de plugin geladen mag worden (venster "Security - Unsigned Executable File", want de DLL's zijn niet ondertekend, of "File Loading - Security Concern") | Kies **Load** of **Load Once** (AutoCAD heeft geen Nederlandse knoppen). Installeer opnieuw (met het installatieprogramma of `Installeer.bat`) als AutoCAD het elke keer vraagt. |
 | Geen lint-tabblad VLEA en geen `VKPALET` | Controleer met `APPAUTOLOAD` dat de waarde 14 is; start AutoCAD opnieuw. |
 | "De tekeningeenheid is millimeters" (of een andere eenheid), of alle kaarten in het palet grijs | Typ `UNITS` en kies bij **Insertion scale** (invoegschaal) "Meters" (of typ `INSUNITS` en dan `6`). Een nieuwe tekening uit het metrische standaardsjabloon staat in millimeters. Teken je zelf al in millimeters, begin dan met een tekening in meters. |
 | Een kaart staat grijs | De reden staat eronder (of, bij de eenheid, boven de kaarten). Het gebied is te groot voor die kaart, (AHN) je werkt niet in Civil 3D, in de instellingen staan alle onderdelen van die kaart uit, of de tekening staat niet in meters. Bij een lange, schuine strook telt voor AHN en de sonderingen de rechthoek om de strook (zie 4). |
