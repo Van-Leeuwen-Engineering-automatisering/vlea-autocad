@@ -22,6 +22,12 @@ garanderen geen termijn.
   zetten), `api.github.com` (versiecheck, uit te zetten) en, alleen als je `VKUPDATE` start (typen of
   de knop), `github.com` en `release-assets.githubusercontent.com` (de nieuwe versie downloaden). Geen
   telemetrie, geen account, geen sleutels, geen cookies.
+- De status van de bronnen (het bolletje per kaart in het palet, en `VKSTATUS`) gebruikt alleen die bronnen: per
+  kaart een of twee kleine verzoeken aan dezelfde dienst als de kaart, altijd in een vast testgebied en nooit in het
+  gebied van de gebruiker. Het palet doet dat bij het openen hoogstens één keer per tien minuten (uit te zetten; de
+  legger van Rijkswaterstaat alleen met de optie `rws` aan). `VKSTATUS` vraagt altijd alle bronnen, ook de legger van
+  Rijkswaterstaat, ook als de optie `rws` of "Status van de bronnen tonen" uit staat: het is een commando dat je zelf
+  start. Geen nieuwe bestemming, geen verzoek aan VLEA.
 - `VKHELP` en `VKWEBSITE` (en in het palet de link en "?") openen alleen je eigen browser, met een van
   twee vaste adressen (de handleiding op `github.com` en de website `vanleeuwenea.nl`); de plugin maakt
   daarbij zelf geen verbinding en opent nooit een ander adres.

@@ -15,14 +15,14 @@ Basisregistratie Ondergrond, de zones van Rijkswaterstaat uit de legger van Rijk
 
 | Onderdeel | Commando | Wat |
 |---|---|---|
-| Palet | `VKPALET` | Palet openen of sluiten. Alles kan ook vanuit het palet: per kaart een knop "Laden", een rij knoppen voor het gereedschap en een link naar de website. De keuzes per kaart en per gereedschap staan in het instellingenvenster (tandwiel), aan/uit standaard aan. |
+| Palet | `VKPALET` | Palet openen of sluiten. Alles kan ook vanuit het palet: per kaart een knop "Laden", een rij knoppen voor het gereedschap en een link naar de website. De keuzes per kaart en per gereedschap staan in het instellingenvenster (tandwiel), aan/uit standaard aan (behalve maatvoering en annotaties van een KLIC-levering en het grondgebruik bij de BRT). |
 | Gebied | `VKADRES`, `VKGEBIED` | Adres, postcode of perceel zoeken; rechthoek, gesloten polylijn of coördinaten als gebied kiezen. |
 | | `VKCONTOUR` | Een strook op een vaste breedte langs een lijn (in Civil 3D ook een as) tekenen en als gebied kiezen. |
 | Laden | `VKLADEN` | Kaarten laden voor het gekozen gebied, ook meer tegelijk (sleutels met komma's, bijvoorbeeld `bgt,bag`). In het palet heeft elke kaart een eigen knop "Laden". |
 | Ondergrond | `VKBGT` | BGT (actuele versie), in groepen: wegen, water, panden, terrein, namen en nummers, overig. |
-| | `VKBGTBEELD` | De BGT als kaartbeeld (beta): de BGT van PDOK als afbeelding onder de tekening, in vier kaartstijlen (achtergrond, pastel, standaard en omtrek; zonder keuze komt de achtergrond), tot 5 km². Een plaatje: je kunt er niet op vastklikken; voor lijnen en vlakken is er `VKBGT`. Het rustiger kaartbeeld van de BRT in kleur staat onder `VKBRT` (soort kaartbeeld, stijl In kleur). |
+| | `VKBGTBEELD` | De BGT als kaartbeeld (beta): de BGT van PDOK als afbeelding onder de tekening, in vier kaartstijlen (achtergrond, pastel, standaard en omtrek; zonder keuze komt de achtergrond), tot 5 km². Een plaatje: je kunt er niet op vastklikken; voor lijnen en vlakken is er `VKBGT`. Het rustiger kaartbeeld van de BRT in kleur krijg je met `VKBRT`. |
 | | `VKBAG` | BAG-panden en, als optie, de adressen met huisnummer (alleen actuele objecten; de rest wordt gemeld). |
-| | `VKBRT` | BRT-topografie voor een groter gebied (beta): vector (TOP10NL) of het kaartbeeld van de achtergrondkaart. |
+| | `VKBRT` | BRT-topografie voor een groter gebied (beta): standaard het plaatje in kleur, dezelfde kaart als het VLEA-portaal; in de instellingen ook het plaatje grijs of de lijnen (TOP10NL, een overzichtskaart). |
 | | `VKKADASTER` | Kadastrale grenzen en perceelnummers. |
 | | `VKLUCHTFOTO` | Luchtfoto, "snel" (25 cm) of "scherp" (8 cm). |
 | Hoogte | `VKAHN` | AHN-maaiveld (of oppervlak met gebouwen) als surface, één per gebied ("VLEA AHN RD 154750-462750 500x500"). **Alleen in Civil 3D**; in AutoCAD zonder Civil 3D staat AHN in het palet grijs. |
@@ -38,6 +38,7 @@ Basisregistratie Ondergrond, de zones van Rijkswaterstaat uit de legger van Rijk
 | Bekijk de plek | `VKGOOGLE`, `VKSTREETVIEW`, `VKSTREETSMART`, `VKDINO` | Een punt aanwijzen (Enter = midden van het beeld) en die plek in je browser openen: Google Maps met een speld, Street View (het dichtstbijzijnde panorama; met een tweede punt ook de kijkrichting), StreetSmart van Cyclomedia (daarvoor heb je een eigen account van Cyclomedia nodig) of DINOloket van TNO. DINOloket opent ingezoomd op de plek, die in het midden van de kaart ligt; zet in DINOloket zelf "Bodem- en grondonderzoek" aan om sonderingen en boringen te zien. In het palet en op het lint: "Bekijk de plek". |
 | Gereedschap | `VKINFO`, `VKWISSEN`, `VKSTIJL`, `VKOVER` | Gegevens van een object, eigen imports wissen (per kaart, of met de keuze Selectie alleen wat je kiest: van een sondering gaan symbool, label en plot samen weg), NLCS-kleuren of grijze onderlegger, versie, commando's en licenties. |
 | Hulp | `VKHELP`, `VKWEBSITE` | Versie, installatiemap, map van instellingen en logboek, bijwerken; de handleiding of de website van VLEA in je browser. |
+| Status | `VKSTATUS` | Per kaart of de bron nu werkt, traag is of eruit ligt (een of twee kleine verzoeken per kaart, in een vast testgebied). In het palet staat dat als bolletje achter elke kaart; laden kan altijd. |
 | Bijwerken | `VKUPDATE` | Nieuwste versie ophalen, controleren (SHA-256) en uitgepakt klaarzetten. Installeren doe je zelf met `Installeer.bat` (of met het installatieprogramma van de nieuwe versie). |
 
 Alle commando's beginnen met `VK` en werken ook vanaf de opdrachtregel en in scripts, ook de
@@ -58,7 +59,9 @@ geen sondering uit de BRO binnen dit gebied.") in plaats van "0 objecten".
   de contour van `VKCONTOUR` ook (`VLEA-KAART-GEBIED`: een laadgebied, geen object).
 - KLIC heeft geen officiële NLCS-mapping; VLEA kiest per thema (laagspanning, gas, water, riool …)
   lagen uit de NLCS-objectentabellen (discipline OI) en maakt alleen voor het thema "overig" een
-  eigen object (`OVERIG`) volgens de NLCS-systematiek.
+  eigen object (`OVERIG`) volgens de NLCS-systematiek. Ook de stijl is daar een keuze van VLEA: op een deel van
+  de lagen wijken kleur, lijndikte of lijntype bewust af van de objectentabel (", VLEA-stijl" in de
+  laagbeschrijving).
 - VLEA tekent op NLCS-lagen; de tool is niet door digiGO gecertificeerd.
 - Lijntypen gebruiken `NLCS.shx`. Stuur je een tekening naar iemand zonder deze plugin, gebruik dan
   eTransmit zodat `NLCS.shx` meegaat.
@@ -178,6 +181,8 @@ geen sleutels. Hij maakt alleen deze verbindingen, allemaal via https:
 | Kaarten laden, adres zoeken | PDOK: `api.pdok.nl`, `service.pdok.nl` | het gebied of de zoektekst, en de versie van de plugin |
 | Sonderingen laden | BRO: `publiek.broservices.nl` (alleen zoeken en één sondering ophalen) | het gebied (als zoekvak in graden), en de versie van de plugin |
 | Zones langs waterkeringen laden, met de optie `rws` (standaard aan) | Rijkswaterstaat: `geo.rijkswaterstaat.nl` (alleen de openbare legger) | het gebied, en de versie van de plugin |
+| Bij het openen van het palet, hoogstens één keer per tien minuten vanzelf, en met de knop "Status vernieuwen" (de status van de bronnen; uit te zetten in de instellingen van het palet, onder "Algemeen") | dezelfde bronnen als de kaarten: PDOK (`api.pdok.nl`, `service.pdok.nl`), de BRO (`publiek.broservices.nl`, alleen zoeken) en, met de optie `rws` aan, de legger van Rijkswaterstaat (`geo.rijkswaterstaat.nl`) | per kaart een of twee kleine verzoeken in een vast testgebied (nooit jouw gebied), en de versie van de plugin |
+| Alleen als je `VKSTATUS` start (typen of in een script) | dezelfde bronnen, altijd allemaal: PDOK (`api.pdok.nl`, `service.pdok.nl`), de BRO (`publiek.broservices.nl`, alleen zoeken) en de legger van Rijkswaterstaat (`geo.rijkswaterstaat.nl`). `VKSTATUS` vraagt altijd alle bronnen, ook de legger van Rijkswaterstaat, ook als de optie `rws` of "Status van de bronnen tonen" uit staat: het is een commando dat je zelf start | per kaart een of twee kleine verzoeken in een vast testgebied (nooit jouw gebied), en de versie van de plugin |
 | Eén keer per dag (uit te zetten in de instellingen van het palet, onder "Algemeen") | GitHub: `api.github.com` | alleen de versie van de plugin |
 | Alleen als je `VKUPDATE` start (typen, de knop Bijwerken in het palet of op het lint, of de regel "Nieuwe versie beschikbaar" onderaan het palet) | GitHub: `api.github.com`, `github.com` en `release-assets.githubusercontent.com` (daar laat GitHub de downloads vandaan komen) | alleen de versie van de plugin |
 | Alleen als je `VKHELP` of `VKWEBSITE` typt, Help op het lint kiest, of in het palet de link vanleeuwenea.nl of de knop "?" gebruikt | je eigen browser opent de handleiding op `github.com` of de website `vanleeuwenea.nl`; de plugin maakt zelf geen verbinding | wat je browser altijd meestuurt; de plugin geeft alleen het vaste adres door |
