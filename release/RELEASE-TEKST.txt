@@ -1,0 +1,380 @@
+Nieuw: een KLIC-levering, de sonderingen en de BRT in een nieuwe stijl, met voor een deel andere laagnamen (per
+onderwerp hieronder, met de weg terug), en per kaart een bolletje met de status van de bron. Getest op de vaste
+testvakken, live tegen PDOK en de BRO, en met scripts in de AutoCAD-kern van 2025 en 2026 (zonder schermen, ook met een
+tekening uit 0.2.3). Deze versie komt uit zonder controle op een scherm: de bolletjes in het palet en de nieuwe keuzes
+in het instellingenvenster zijn niet op een scherm gezien, er is niets afgedrukt, en in AutoCAD 2027 heeft ze niet
+gedraaid. Zie je iets wat niet klopt, meld het (zie de handleiding).
+
+**Status van de bronnen (nieuw)**
+- In het palet staat achter elke kaart een bolletje: **groen** de bron werkt, **oranje** de bron werkt maar is traag
+  (langer dan 3 seconden), **rood** de bron ligt eruit (een fout, geen antwoord binnen 8 seconden, of een antwoord dat
+  niet is wat de kaart nodig heeft), **grijs** nog niet gecontroleerd. Wijs het bolletje aan voor de uitleg per bron,
+  bijvoorbeeld "PDOK BGT werkt (0,4 s)". Ook bij het zoeken van een adres staat er een.
+- Laden kan altijd, ook bij rood: het bolletje is alleen informatie. Je krijgt geen meldingen en er gaat niets naar
+  VLEA.
+- VLEA kijkt bij het openen van het palet (hoogstens één keer per tien minuten vanzelf) en als je op **Status
+  vernieuwen** naast KAARTEN klikt. Per kaart zijn dat een of twee kleine verzoeken (twee bij BRT en bij de zones)
+  aan dezelfde bron als de kaart zelf (PDOK, de BRO, en met de optie `rws` aan de legger van Rijkswaterstaat), altijd
+  in een vast testgebied, nooit in jouw gebied.
+- Uitzetten kan in het instellingenvenster (tandwiel), **Algemeen**, "Status van de bronnen tonen". Dan zijn de
+  bolletjes en de knop weg en doet het palet deze verzoeken niet.
+- Nieuw commando `VKSTATUS`: dezelfde controle, altijd vers, met per kaart één regel op de opdrachtregel. Het stelt
+  geen vragen, dus het werkt ook in een script. `VKSTATUS` vraagt altijd alle bronnen, ook de legger van
+  Rijkswaterstaat, ook als de optie `rws` of "Status van de bronnen tonen" uit staat: het is een commando dat je zelf
+  start.
+
+**Instellingen**
+- Een nieuwe standaard bereikt je nu ook als je ooit op **Opslaan** drukte in het instellingenvenster. Tot nu toe
+  bewaarde Opslaan elke keuze, ook die je niet had veranderd, en dan bleef je op de oude standaard staan. Nu bewaart
+  VLEA alleen wat je anders hebt gekozen dan de standaard. Een instellingenbestand van 0.2.3 of eerder ruimt VLEA
+  zelf op: wat gelijk was aan de standaard van toen, vervalt; wat je zelf anders had gezet, blijft. Uitzondering: drie
+  keuzes van de BRT uit 0.2.3 staan niet meer in het instellingenvenster (Kaartbeeld bij Soort, de stijl van het
+  kaartbeeld, en Terrein en reliëf). Wat je daar had gekozen, vervalt zonder melding: had je Kaartbeeld, dan krijg
+  je nu het plaatje in kleur, ook als dat kaartbeeld grijs was; had je Terrein en reliëf uit, dan staat het reliëf
+  weer aan. Zie **BRT** voor hoe je het terugzet.
+- Let op: koos je bewust een waarde die toen ook de standaard was, dan kan VLEA dat niet zien. Krijgt die keuze in
+  een nieuwe versie een andere standaard, dan volg je de nieuwe; wil je het oude gedrag, zet de keuze dan opnieuw
+  in het instellingenvenster. Bij elke nieuwe standaard staat in deze lijst om welke keuze het gaat.
+- Nieuwe standaarden in deze versie: maatvoering en annotaties van een KLIC-levering staan uit (zie **KLIC**); de
+  BRT komt als plaatje in kleur (keuze Soort) en het grondgebruik van de BRT staat uit (zie **BRT**). Nieuwe keuzes
+  met een standaard die anders werkt dan 0.2.3: bij de BRT **Vlakken** (randen), **Kleur van de lijnen** (zoals het
+  portaal) en **Namen** (aan), en onder **Algemeen** "Status van de bronnen tonen" (aan; zie **Status van de
+  bronnen**).
+
+**KLIC**
+- **Let op, ander gedrag:** `VKKLIC` tekent standaard geen maatvoering en geen annotaties van de netbeheerders meer
+  (hun maatlijnen, pijlen, maten, labels en verwijslijnen). In een gewone levering waren die samen meer dan de helft
+  van wat er getekend werd, en de kabels en leidingen verdwenen erin. Ze staan wel in de levering: de opdrachtregel
+  zegt per optie hoeveel objecten niet getekend zijn en hoe je ze terugkrijgt, en de verantwoording in de tekening
+  heeft een regel "Uitgezet, wel in de levering: maatvoering …, annotatie …". Dieptes, eigen topografie en de plekken
+  met detailinformatie blijven standaard aan. Oud gedrag: in een script of op de opdrachtregel
+  `maatvoering=aan,annotatie=aan`; voor de knoppen van palet en lint de vinkjes **Maatvoering** en **Annotaties** in
+  de instellingen (Gereedschap, KLIC-levering). Ook wie in 0.2.3 op Opslaan drukte, krijgt de nieuwe standaard (zie
+  **Instellingen**); zet de vinkjes dan opnieuw aan als je ze wilt.
+- De melding over wat een optie uitzette, zegt niet meer "door je keuze" (de standaard kan het ook zijn), maar
+  "Uitgezet (maatvoering=uit): …", met hoe je het aanzet.
+- **Let op, ander gedrag:** een KLIC-levering (`VKKLIC`) krijgt op een paar lagen een andere kleur, lijndikte of
+  lijntype: mantelbuizen, leidingen met gevaarlijke inhoud en zones met een eis vallen nu op, en overige leidingen
+  gaan naar de achtergrond. Geen laagnaam is veranderd; er komt één laag bij, voor de vulling van een zone (zie
+  hieronder). Wat er anders is (tussen haakjes wat het was):
+  - mantelbuizen, kabelgoten en kabelbedden: een band van **1,00 mm** in de kleur van het thema (0,18), op alle
+    `…_MANTELBUIS-G`-lagen behalve die van het persriool (zie hieronder). De omtrek van een mantelbuis staat op
+    dezelfde laag, maar is zelf 0,18 mm (een lijndikte op de omtrek, niet DOORLAAG), zodat er geen dikke rechthoek
+    om de band staat;
+  - buisleiding met gevaarlijke inhoud, `B-OI-KL-BRANDSTOF_TRANSPORTLEIDING-G`: kleur **20**, doorgetrokken en
+    **0,35 mm** (kleur 40, lijntype `KL-BRANDSTOF-SO`, 0,18); de hulpstukken (`B-OI-KL-BRANDSTOF_HULPSTUK-S` en
+    `-G`) en mantelbuizen ook kleur 20 (40). Zo lijkt hij niet meer op petrochemie;
+  - overige leidingen en een thema dat VLEA niet kent, `B-OI-KL-OVERIG-G`: grijs (**8**) en **0,09 mm** (7 en 0,18);
+    hun symbolen (`B-OI-KL-OVERIG_HULPSTUK-S`) ook grijs (7) en hun omtrekken (`B-OI-KL-OVERIG_HULPSTUK-G`) grijs en
+    0,09 mm (7 en 0,18). De mantelbuizen van overig en wees, `B-OI-KL-MANTELBUIS-G`: grijs, 1,00 mm (7, 0,18);
+  - weesleidingen, `B-OI-KL-WEESLEIDING-G` en de omtrek `B-OI-KL-WEESLEIDING_HULPSTUK-G`: doorgetrokken (lijntype
+    `KL-WEESLEIDING-SO`, een stip om de 8 m en dus bijna onzichtbaar);
+  - de mantelbuis van riool vrij verval, `B-OI-RI-OVERIG_MANTELBUIS-G`: kleur **210** en 1,00 mm (rood, 10, de
+    kleur van hoogspanning);
+  - riool vrij verval zonder stelsel, `B-OI-RI-OVERIG_RIOOLLEIDING-G`, de rioolputten, `B-OI-RI-OVERIG_RIOOLPUT-S`,
+    en hun omtrek, `B-OI-RI-OVERIG_RIOOLPUT-G`: kleur **210** (rood, 10). Het lijntype blijft
+    `RI-TRANSPORTLEIDING-SO`. Leiding en put delen hun laag met de rioleringskaart: zie **Riolering**;
+  - de zone met een eis voorzorgsmaatregel, `B-OI-OG-ZONE_BELEMMERING_LEIDINGSTROOK-G`: kleur **240** en
+    **0,70 mm** (7 en 0,18). De tekst met de eis bij de zone blijft. Een zone die een vlak is, krijgt nu ook een
+    vulling op een nieuwe laag (zie hieronder);
+  - eigen topografie van de netbeheerders, `B-OI-OG-TERREIN-G`: grijs en 0,09 mm (7 en 0,18); de symbolen op
+    `B-OI-OG-TERREIN-S` grijs (7).
+- Niet veranderd: een rioolleiding met een stelsel (gemengd, vuil water, hemelwater) houdt de NLCS-kleur van dat
+  stelsel, en de mantelbuis van het persriool (`B-OI-RI-PERSLEIDING_MANTELBUIS-G`) houdt 0,18 mm. Die lagen gebruikt
+  de rioleringskaart (`VKRIOOL`) ook, en één laag heeft in een tekening één stijl. Hoogspanning, gas hoge druk en
+  petrochemie houden hun NLCS-lijntypen.
+- **Let op, ander gedrag:** een kabelbed staat nu als band op de mantelbuislaag van zijn thema, bijvoorbeeld
+  `B-OI-KL-DATA_MANTELBUIS-G` (1,00 mm), en niet meer als kabel op de kabellaag (`B-OI-KL-DATA-G`, met het
+  kabellijntype). Er komt geen laag bij: mantelbuis, kabelgoot en kabelbed van een thema staan op één laag.
+  Een optie om een kabelbed weer als kabel te tekenen is er niet. Wil je een kabelbed toch op de kabellaag, zet hem
+  dan zelf op die laag; `VKINFO` toont bij elke band de klasse uit de levering (`Kabelbed`, `Duct` voor een
+  kabelgoot, of `Mantelbuis`).
+- **Let op, ander gedrag:** op de lagen van kabels, leidingen en mantelbuizen (ook weesleidingen) loopt het lijntype
+  nu door over de hoekpunten (lijntypegeneratie aan per polylijn, zoals `PLINEGEN`). Tot nu toe begon het patroon op
+  elk hoekpunt opnieuw, en een kabel met veel korte stukken bleef dan een kale lijn zonder streepjes of letters.
+  Maatvoering, annotaties, zones en omtrekken tekent VLEA zoals voorheen. Oud gedrag voor een polylijn: `PEDIT`,
+  optie lijntypegeneratie (Ltype gen) uit, of in het eigenschappenvenster.
+- **Nieuw, nieuwe laag:** een zone met een eis voorzorgsmaatregel die een vlak is, is nu ook gevuld: een gevuld vlak
+  in kleur **240**, **80 % doorzichtig**, op de nieuwe laag `B-OI-OG-ZONE_BELEMMERING_LEIDINGSTROOK-V` (V is in NLCS
+  een vlakvulling; er verdwijnt geen laag en er is geen laag hernoemd). Een rand van 0,70 mm viel tussen de leidingen
+  weg, en een zone met een eis gaat over veiligheid. De rand en de tekst met de eis blijven op hun lagen; de vulling
+  ligt onder de lijnen en boven een luchtfoto of kaartbeeld, en door de vulling heen zie je leidingen en ondergrond.
+  `VKINFO`, vervangen en wissen nemen de vulling mee met de zone; een zone als lijn of punt heeft geen vulling.
+  - Oud gedrag (alleen de rand): zet de laag `B-OI-OG-ZONE_BELEMMERING_LEIDINGSTROOK-V` uit of bevries hem.
+  - **Afdrukken:** de vullaag drukt niet af (in het lagenbeheer staat Plot uit voor die laag; in de AutoCAD-kern van
+    2025 en 2026 gecontroleerd). Op papier en in een PDF staan alleen de rand en de tekst met de eis, zoals in 0.2.3.
+    AutoCAD drukt transparantie alleen af met **Plot transparency** aan in het afdrukvenster, en die staat standaard
+    uit; dan kwam de vulling dekkend op papier, en met een zwart-witte plotstijl als een zwart vlak waarin de leidingen
+    van de zone wegvallen. Wil je de vulling toch op papier: zet Plot aan voor de laag `…-V`, zet bij het afdrukken
+    **Plot transparency** aan (of `PLOTTRANSPARENCYOVERRIDE` op 2) en druk af in kleur. `VKSTIJL` verandert niet of
+    een laag afdrukt.
+  - Staat in AutoCAD de huidige transparantie (`CETRANSPARENCY`) niet op DOORLAAG (ByLayer, de standaard van
+    AutoCAD), dan krijgt alles wat VLEA tekent die transparantie, ook de vulling (bijvoorbeeld 50 % in plaats van
+    de 80 % van de laag). Zo ging het in 0.2.3 al met de arceringen van `VKZONERINGEN` en `VKNATURA2000`. Zet
+    `CETRANSPARENCY` vóór het laden op DOORLAAG.
+  - Een export naar Google Earth (`VKKMZ`) toont de zone nu ook als vlak.
+  - Een levering die al in je tekening staat, krijgt de vulling pas als je hem opnieuw inleest.
+- Een lijndikte zie je op het scherm alleen als lijndikte weergeven aan staat (`LWDISPLAY`); op een plot altijd.
+  In het lagenbeheer staat bij een laag met zo'n afwijking ", VLEA-stijl" achter de beschrijving.
+- **Een levering die al in je tekening staat** (van 0.2.3 of eerder), verandert niet. Het kabelbed als band, het
+  doorlopende lijntype, de dunne omtrek, de vulling van een zone en de gegevens onder `VLEA_KLIC` krijgt hij pas als
+  je hem opnieuw inleest (Vervangen; wat je zelf aan die levering veranderde, gaat dan weg). Ook dan houden de lagen
+  hun oude stijl: een laag die al bestaat, past VLEA bij het inlezen niet aan. Nieuw: na het inlezen zegt een
+  melding welke KLIC-lagen die VLEA eerder maakte een andere kleur, lijndikte, lijntype of transparantie hebben dan
+  VLEA nu tekent. Wil je de nieuwe stijl: typ `VKSTIJL` en kies `Nlcs` (zie hieronder), of wis de levering
+  (`VKWISSEN`, sleutel `klic`), verwijder de lege lagen (bijvoorbeeld met `PURGE`) en lees de levering opnieuw in.
+  Wil je juist de oude stijl houden, zet de lagen dan met die stijl in je sjabloon of tekening vóór het inlezen:
+  lagen die je zelf maakte, laat VLEA ongemoeid, ook bij `VKSTIJL`.
+- **Let op, ander gedrag:** `VKSTIJL` met de keuze `Nlcs` zet op een KLIC-laag nu de kleur, de lijndikte, het
+  lijntype én de transparantie van VLEA (tot nu toe alleen een eerder bewaarde kleur, en nooit lijndikte of lijntype;
+  alleen de vullaag van een zone is doorzichtig). Zo krijgt een tekening met een levering uit een eerdere versie de
+  stijl van nu: de stijl van VLEA, met de afwijkingen hierboven, niet die van de NLCS-objectentabel. Op de lagen van
+  de kaarten zet `VKSTIJL` alleen de kleur, zoals voorheen; `Grijs` en `Terug` ook. Let op: `VKSTIJL` werkt op alle
+  lagen die VLEA maakte, dus `Nlcs` maakt ook een kaart die je grijs had gemaakt weer gekleurd. Staat een lijntype
+  niet in `NLCS-5.0.lin`, dan houdt de laag haar lijntype en zegt een melding dat. Wil je op een KLIC-laag je eigen
+  lijndikte of lijntype houden, gebruik dan `VKSTIJL` `Nlcs` niet, of zet ze daarna in het lagenbeheer terug.
+- Heeft een net in de levering geen thema (dat hoort niet, maar kan), dan neemt VLEA het thema van het soort net
+  als dat maar één thema kan zijn: telecommunicatie wordt datatransport, water water, warmte warmte. Tot nu toe
+  kwam zo'n net altijd op de lagen van overig. Bij elektriciteit, olie, gas en chemie, en riool doet VLEA dat niet
+  (dat kunnen meerdere thema's zijn, bijvoorbeeld laag-, midden- of hoogspanning): die blijven op de lagen van
+  overig, de melding noemt het soort net, en `VKINFO` toont het bij het object.
+- Elk KLIC-object dat VLEA tekent, krijgt nu ook de gegevens uit de levering in het formaat van het VLEA-portaal:
+  XData onder `VLEA_KLIC` met id, net, thema, netbeheerder, soort object, diameter met de eenheid uit de levering,
+  materiaal, spanning, druk, ligging, diepte en mantelbuis of kabelbed: dezelfde gegevens als bij een KLIC uit het
+  portaal. Ander VLEA-gereedschap dat die gegevens leest, vindt een KLIC die deze plugin in de tekening zet, nu nog
+  niet: het zoekt de KLIC in een xref of op een laag met "KLIC" in de naam, en de KLIC-lagen van deze plugin hebben
+  dat niet. In de tekening zie je er niets van; `VKINFO`, vervangen en wissen werken zoals voorheen. Een levering
+  die al in je tekening staat, krijgt de gegevens pas als je hem opnieuw inleest. Een tekening zonder KLIC-levering
+  krijgt geen `VLEA_KLIC`.
+
+**Riolering**
+- **Let op, ander gedrag:** in de rioleringskaart (`VKRIOOL`) hebben twee lagen nu kleur **210** (rood, 10, de kleur
+  van hoogspanning): `B-OI-RI-OVERIG_RIOOLLEIDING-G`, voor een leiding waarvan stelsel en type niet tot een laag
+  leiden, en `B-OI-RI-OVERIG_RIOOLPUT-S`, voor een put zonder laag en de meeste putten van een duikerstelsel. Een
+  KLIC-levering gebruikt dezelfde lagen voor riool zonder stelsel, en één laag heeft in een tekening één kleur. Geen
+  laagnaam is veranderd. De andere lagen houden de NLCS-kleur, ook de andere `B-OI-RI-OVERIG_…`-lagen (bijvoorbeeld
+  duikers en overstortleidingen blijven rood). Wil je de oude kleur houden, zet de twee lagen dan in kleur 10 in je
+  sjabloon of tekening vóór het inlezen; een bestaande laag past VLEA niet aan.
+
+**Sonderingen**
+
+De sondeerplot is opnieuw opgezet: andere lagen, kleuren en lijndiktes, een nieuwe kop en onderkant, een
+aanloopstrook, de waterspanning, een ander symbool en andere teksthoogtes. De plots staan nog steeds in rijen van vijf
+rechts naast het gebied. Hieronder per onderdeel wat er verandert en, waar het kan, hoe je het oude terugkrijgt.
+
+- **Let op, andere laagnamen:** de sondeerplot en het label bij een sondering staan op nieuwe lagen. De lijnen van
+  de plot zijn nu NLCS-element GD (geometrie in een doorsnede: één pen dikker, 0,25 mm in plaats van 0,18 mm), de
+  teksten element T35 in oranje (kleur 30, 0,35 mm). Per laag, oud → nieuw:
+  - `B-WE-MO-ONDERZOEK_SONDERING_CONUSWEERSTAND-G` → `B-WE-MO-ONDERZOEK_SONDERING_PUNTDRUK-GD` (conusweerstand,
+    blauw, kleur 5);
+  - `B-WE-MO-ONDERZOEK_SONDERING_WRIJVING-G` → `B-WE-MO-ONDERZOEK_SONDERING_WRIJVING-GD` (rood, kleur 1);
+  - `B-WE-MO-ONDERZOEK_SONDERING_WRIJVINGSGETAL-G` → `B-WE-MO-ONDERZOEK_SONDERING_WRIJVINGSGETAL-GD` (kleur 134);
+  - `B-WE-MO-ONDERZOEK_SONDERING_RASTER-G` → `B-WE-MO-ONDERZOEK_SONDERING_RASTER-GD` (grijs, kleur 253);
+  - `B-WE-MO-T18` → `B-WE-MO-ONDERZOEK_SONDERING-T35` (van rood, kleur 10, 0,18 mm naar oranje, kleur 30, 0,35 mm):
+    het label op de kaart en alle teksten van de plot.
+- Nieuwe laagnamen voor de waterspanning en voor de aanloopstrook met de sondeerlengte:
+  `B-WE-MO-ONDERZOEK_SONDERING_WATERDRUK-GD` en `B-WE-MO-ONDERZOEK_SONDERING_SONDEERLENGTE-GD` (kleur 7, 0,25 mm).
+  Een laag komt pas in je tekening als er iets op staat. Het symbool blijft op `B-WE-MO-ONDERZOEK_SONDERING-S`.
+- Een tekening met sonderingen uit een eerdere versie houdt haar oude lagen. Laad je opnieuw met Vervangen, dan
+  komen symbool, label en plot op de nieuwe lagen en blijven de oude lagen leeg staan; ruim die op met `PURGE`. Pas
+  laagfilters en scripts die de oude namen gebruiken aan.
+- Wil je toch de oude laagnamen: voeg na het laden in AutoCAD met `LAYMRG` elke nieuwe laag hierboven samen met haar
+  oude laag; de objecten krijgen dan ook de oude kleur en lijndikte. Staat de oude laag niet in je tekening, hernoem de
+  nieuwe dan met `RENAME` (de nieuwe kleur en lijndikte blijven). Dat moet na elke keer laden opnieuw: VLEA tekent
+  altijd op de nieuwe lagen. Waterdruk en aanloopstrook hadden geen oude laag.
+- **Let op, ander gedrag:** de grijze onderlegger (instellingen, Stijl, of `stijl=grijs` bij een commando) laat de
+  sonderingen nu in kleur. In grijs waren de lijnen van de sondeerplot niet uit elkaar te houden. Wil je ze toch
+  grijs, kies dan na het laden `VKSTIJL`, Grijs (dat maakt alle VLEA-lagen in de tekening grijs).
+- Nieuw in de sondeerplot: de **waterspanning**. Meet een sondering de waterspanning achter de conus (u2), dan heeft
+  de plot een vierde lijn, de waterdruk, op `B-WE-MO-ONDERZOEK_SONDERING_WATERDRUK-GD` (kleur 7), op een schaal van
+  -0,08 tot 0,12 MPa over 20 m; een waterdruk onder nul staat er ook in. Onderaan de kop komt daarvoor een vierde
+  schaalregel; de kop van die rij plots is een regel hoger. Een sondering zonder waterspanning heeft geen vierde
+  lijn en geen vierde schaalregel.
+- **Let op, ander gedrag:** een schaal die niet past, wordt nu tot **8 keer** zo ruim in plaats van 4 keer. Een
+  conusweerstand tot 240 MPa of een wrijving tot 1,60 MPa loopt dus door in de plot, waar de lijn tot nu toe
+  onderbroken was; de kop toont de verruimde getallen en de regel "Let op: schaal verruimd" onder de plot zegt het.
+  De waterdruk wordt aan beide kanten verruimd; het wrijvingsgetal nooit. Wat ook buiten 8 keer valt, onderbreekt de
+  lijn en staat onder de plot, net als een waterdruk onder de schaal. De oude grens van 4 keer terugkrijgen kan niet.
+- Meetregels die niet getekend worden omdat ze geen diepte hebben of onvolledig zijn, vielen tot nu toe stil weg. Nu
+  staat het aantal onder de plot ("Niet getekend: 202 meetregels zonder diepte of onvolledig") en geeft het laden een
+  waarschuwing.
+- **Let op, ander gedrag:** de kop van de sondeerplot is anders. Elke lijn heeft één schaalregel met de naam in
+  hoofdletters: `PUNTDRUK (MPa)` (de conusweerstand, zoals in de laagnaam), `WRIJVING (MPa)`, `WRIJVINGSGETAL (%)`
+  en, bij waterspanning, `WATERDRUK (MPa)`. De regels staan 0,9 m uit elkaar, de as onder de getallen heeft een
+  streepje op elke meter, de puntdruk heeft een getal op elke meter, en een dubbele grijze lijn scheidt de kop van
+  het raster. Volgnummer, BRO-id, maaiveld, datum en klasse staan nu onder de plot (zie hieronder). De oude kop
+  terugkrijgen kan niet.
+- **Let op, ander gedrag:** de onderkant van de sondeerplot is anders. Links onder het raster staat het volgnummer
+  groot (`3.`, 1,5 m hoog; hetzelfde nummer als in het label op de kaart), rechts daarvan een regel met het BRO-id,
+  het maaiveld, de datum en de kwaliteitsklasse (`CPT000000052294  mv=-1,45 NAP  26-06-2006  klasse 2`, 0,5 m hoog),
+  daaronder `Bron: BRO` en, als een schaal verruimd is, `Let op: schaal verruimd (puntdruk x2, wrijving x1)`; is ook
+  de waterdruk verruimd, dan staat die erachter. De andere opmerkingen staan daaronder, 0,8 m uit elkaar, en zeggen
+  nu ook puntdruk in plaats van conusweerstand, net als de kop. De oude onderkant terugkrijgen kan niet.
+- **Let op, ander gedrag:** links van het meetgebied staat nu een aanloopstrook van 1 m, met een streepje op elke
+  meter sondeerlengte vanaf maaiveld tot de einddiepte, op `B-WE-MO-ONDERZOEK_SONDERING_SONDEERLENGTE-GD` (kleur 7).
+  Het raster loopt over de strook door en is 21 m breed. De NAP-labels staan links van de strook en hebben geen
+  plusteken meer (`12` in plaats van `+12`); de astitel heet `DIEPTE (m) t.o.v. NAP`. Het raster begint op de hele
+  meter op of boven het maaiveld en eindigt op de hele meter op of onder de einddiepte; tot nu toe kwam er een meter
+  bij als het maaiveld of de einddiepte precies op een hele meter lag. De oude as terugkrijgen kan niet.
+- **Let op, ander symbool en andere bloknaam:** een sondering is nu een schuin kruisje van 1,6 x 1,6 m in plaats van
+  een cirkel met de conus erin. Bloknaam oud → nieuw: `VK_SONDERING` → `VK_SONDERING_KRUIS`; laag
+  (`B-WE-MO-ONDERZOEK_SONDERING-S`) en de vijf attributen (BRO_ID, MV_NAP, EINDDIEPTE, DATUM, NR) blijven. Een tekening
+  met sonderingen uit een eerdere versie houdt haar oude symbolen; laad je opnieuw met Vervangen, dan komen er
+  kruisjes en blijft de oude blokdefinitie ongebruikt staan (ruim op met `PURGE`). Pas een selectie of
+  gegevensextractie op de oude bloknaam aan. Het label staat rechts naast het kruisje. Het oude symbool terugkrijgen
+  kan niet.
+- De gewone teksten van de sondeerplot zijn 0,35 m hoog in plaats van 0,36 m.
+- **Let op, andere maten van de rij:** door de nieuwe kop, onderkant en aanloopstrook staan de plots anders in hun rij.
+  De kolommen van 30 m beginnen nog steeds 25 m rechts van het gebied, maar het meetgebied van elke plot staat 2 m
+  verder naar rechts (links ervan staan nu de namen van de schaalregels, de NAP-labels en de aanloopstrook). De kop is
+  3,15 m hoog, of 4,05 m in een rij met waterspanning (was 3,6 m), en onder elke rij is 9,6 m vrij voor volgnummer,
+  BRO-id, bron en opmerkingen (was 4,2 m), ook als er weinig opmerkingen zijn. De rijen staan daardoor ongeveer 5 m
+  verder uit elkaar, in een rij met waterspanning ongeveer 6 m. De oude maten terugkrijgen kan niet.
+- De volgnummers lopen nog steeds van west naar oost, maar liggen twee sonderingen precies even ver naar het oosten,
+  dan krijgt nu de zuidelijke het lagere nummer. Tot nu toe was dat de noordelijke, en golden twee sonderingen die
+  enkele centimeters naast elkaar lagen ook al als even ver naar het oosten.
+
+**Teksten (alle kaarten)**
+- **Let op, andere tekststijl:** alle teksten die VLEA tekent, ook de attributen in blokken, de bronvermelding en
+  het label van `VKAHNPUNT`, staan nu in tekststijl `VLEA_ISO` met het lijnlettertype `isocp.shx` (bij AutoCAD), in
+  plaats van `VK_TEKST` met `isocpeur.ttf`. Tekststijl oud → nieuw: `VK_TEKST` → `VLEA_ISO`. De letters zien er bijna
+  hetzelfde uit, maar een lijnlettertype wordt geplot met de lijndikte van de laag: een tekst op een T35-laag wordt
+  dikker dan voorheen. Een tekening uit een eerdere versie houdt `VK_TEKST` voor haar oude teksten; wat je opnieuw
+  laadt, komt in `VLEA_ISO`. Bestaat `VLEA_ISO` al in je tekening, dan blijft jouw instelling staan. Wil je het oude
+  lettertype terug: zet met `STYLE` het lettertype van `VLEA_ISO` op `isocpeur.ttf` (dat geldt dan voor alle teksten
+  in die stijl in je tekening).
+- Een paar tekens kent `isocp.shx` niet; die worden in de tekening een gewoon teken: het weglatingsteken (…) wordt drie
+  punten, een gedachtestreepje (– of —) of een minteken (−) een streepje, een gekruld of laag aanhalingsteken („) een
+  recht, ≤ en ≥ worden `<=` en `>=`, en het diameterteken (⌀) wordt Ø. Dat geldt ook voor teksten uit een
+  KLIC-levering. Andere tekens die `isocp.shx` niet kent (bijvoorbeeld de meeste Griekse letters of ‰) worden in de
+  tekening een vraagteken; `isocpeur.ttf` kende ze wel. Staan ze in jouw teksten, zet dan het lettertype van
+  `VLEA_ISO` terug op `isocpeur.ttf` (zie hierboven).
+
+**BRT**
+- `VKBRT` zet nu standaard het **plaatje in kleur** in je tekening: de BRT-achtergrondkaart van PDOK, dezelfde kaart
+  en stijl die het VLEA-portaal in een tekening zet, op de laag `VLEA-KAART-BRT` (die laag is niet veranderd). Tot en
+  met 0.2.3 kreeg je zonder keuze de lijnen van TOP10NL op de lagen `B-WE-OG-TOPOKAART_…`.
+  Nieuwe standaard voor de keuze BRT, Soort. Wil je de lijnen terug: kies in het instellingenvenster bij BRT
+  **Soort: Lijnen (TOP10NL, overzichtskaart)**, of typ `soort=lijnen` (ook in een script). Precies de lijnen van
+  0.2.3 krijg je met een paar keuzes meer: zie de laatste regel van dit blok.
+- **Let op met de grijze onderlegger** (instellingen, Stijl, of `stijl=grijs` bij een commando): die maakt lagen
+  grijs, geen plaatje. Het plaatje in kleur blijft dus in kleur onder een grijze tekening, net als een luchtfoto. Tot
+  en met 0.2.3 gaf `VKBRT` lijnen, en die werden wel grijs. Wil je de BRT grijs, kies dan bij BRT **Plaatje grijs**
+  (`soort=grijs`).
+- De keuze is nu één lijst met drie waarden, en onder de naam van de kaart staat per waarde één zin wat je krijgt:
+  **Plaatje in kleur (zoals het portaal)** (`soort=kleur`, de standaardkeuze), **Plaatje grijs** (`soort=grijs`, het
+  grijze plaatje dat 0.2.3 gaf bij soort Kaartbeeld) en **Lijnen (TOP10NL, overzichtskaart)** (`soort=lijnen`). De
+  aparte keuze "Stijl van het kaartbeeld" is weg: daar betekende "standaard" in kleur, en dat was verwarrend.
+- Het plaatje komt als beeld in de map `<tekening>_kaarten`, dus een tekening zonder naam moet eerst worden opgeslagen.
+  Omdat het plaatje nu de standaard is, zegt het palet bij BRT in een tekening zonder naam "Sla de tekening eerst op";
+  met de lijnen niet.
+- De kaart heet nu "BRT (topografische kaart)" (was "BRT (topografie 1:10.000)"), in het palet, het
+  instellingenvenster, de meldingen en `BRONNEN.md`.
+- Een script van 0.2.3 werkt nog: `soort=vector` geeft de lijnen (wel met de lagen, kleuren en namen van nu; zie
+  de laatste regel van dit blok voor precies die van 0.2.3), `soort=kaartbeeld` het plaatje in grijs (zoals toen), en
+  `soort=kaartbeeld,kaartstijl=standaard` (of `grijs`, `pastel`, `water`) het plaatje in die stijl. Pastel en water
+  staan niet meer in het instellingenvenster; alleen zo kun je ze nog kiezen. Typ je `kaartstijl` bij een andere
+  soort, dan doet die niets en zegt VLEA dat na het laden.
+- Had je in 0.2.3 in het instellingenvenster Kaartbeeld gekozen, dan krijg je nu het plaatje in kleur, ook als dat
+  kaartbeeld grijs was (de standaard van toen) of pastel of water. Een script met `soort=kaartbeeld` geeft wel nog
+  grijs; het instellingenvenster kent die waarde niet meer. Wil je grijs, kies dan **Plaatje grijs**.
+- De vraag [Vervangen/Erbij/Overslaan] bij de BRT zegt nu dat het plaatje en de lijnen als dezelfde kaart tellen:
+  Vervangen wist ook een eerder plaatje of eerdere lijnen. Wil je beide houden, kies dan **Erbij**.
+- Het palet (het driehoekje bij BRT) en de handleiding zeggen wat je krijgt: de lijnen zijn een overzichtskaart
+  (wegen als vlakken, gebouwen als huizenblokken, randen gemiddeld ruim een meter naast de BGT); voor detailwerk is
+  er `VKBGT`.
+- De **lijnen** van de BRT (`soort=lijnen`) zijn rustiger. Wegen, water en terrein komen als randen: een rand die twee
+  vlakken delen staat er één keer (op de laag van het vlak dat voorgaat: een gebouw, dan water, dan weg, dan terrein),
+  de dwarsstreepjes over de weg tussen twee wegdelen zijn weg, net als de naden tussen twee stukken water of terrein met
+  hetzelfde grondgebruik, en langs de rand van het gebied staat geen kaderlijn meer. Gebouwen houden hun gesloten
+  omtrek. Op 1 km² is de getekende lengte ongeveer gehalveerd en ligt er bijna niets meer dubbel (was 42 tot 44 %).
+  Deze wijziging verandert geen laagnamen (andere wel: zie onder maaiveld en wegen naar soort hieronder).
+- Wegen, water en terrein zijn daardoor meestal geen gesloten polylijnen meer: oppervlak of omtrek aflezen kan op die
+  lijnen niet, en `VKINFO` zegt dan `vk_zijden: deels`. Een vlak zonder eigen rand (bijvoorbeeld een kruising tussen
+  vier wegdelen) komt niet in de tekening; de melding na het laden zegt hoeveel. Een rand staat maar op één laag: zet
+  je in AutoCAD de gebouwlaag uit, dan mist ook het stuk wegrand langs die gebouwen (zet dan liever bij het laden
+  **Gebouwen** uit).
+- Nieuwe keuze bij BRT, **Vlakken** (`vlakken`): **Randen, elke rand één keer** (`vlakken=randen`, de standaardkeuze)
+  of **Gesloten omtrek per vlak** (`vlakken=omtrek`, elk vlak gesloten, ook langs de rand van het gebied, zoals tot en
+  met 0.2.3). Met `vlakken=omtrek,grondgebruik=aan` krijg je dezelfde lijnen als 0.2.3, maar nog op de lagen, in de
+  kleuren en met de namen van nu; precies 0.2.3: zie de laatste regel van dit blok.
+- Bij de **lijnen** staat wat **onder maaiveld** ligt (een weg in een tunnel of onder een viaduct, een duiker,
+  overkluisd water, een ondergrondse parkeergarage; in TOP10NL een hoogteniveau onder 0) nu **gestreept op eigen
+  lagen**, zodat het niet leest als een rand die je ziet. **Nieuwe lagen**, elk `B-WE-OG-TOPOKAART_…` met `_ONDER`
+  erachter: `…_WEG_ONDER-G`, `…_WATER_ONDER-G`, `…_SPOOR_ONDER-G`, `…_GEBOUW_ONDER-G`, `…_TERREIN_ONDER-G`,
+  `…_RELIEF_ONDER-G` en `…_INRICHTING_ONDER-G` (de kleur van dezelfde soort op maaiveld, zie hieronder, 0,18 mm, lijntype
+  `ZZ-HIDDEN-SO` uit NLCS, de verborgen lijn),
+  en voor punten `…_GEBOUW_ONDER-S` en `…_INRICHTING_ONDER-S` (doorgetrokken: een symbool heeft geen streep). Tot en met
+  0.2.3 stonden die objecten doorgetrokken op de gewone laag; **oud → nieuw** (telkens `B-WE-OG-TOPOKAART_…`):
+  `…_WEG-G` → `…_WEG_ONDER-G`, `…_WATER-G` → `…_WATER_ONDER-G`, `…_SPOOR-G` → `…_SPOOR_ONDER-G`, `…_GEBOUW-G` →
+  `…_GEBOUW_ONDER-G`, `…_GEBOUW-S` → `…_GEBOUW_ONDER-S`, `…_TERREIN-G` → `…_TERREIN_ONDER-G`, `…_RELIEF-G` →
+  `…_RELIEF_ONDER-G`, `…_INRICHTING-G` → `…_INRICHTING_ONDER-G` en `…_INRICHTING-S` → `…_INRICHTING_ONDER-S`. Een
+  nieuwe laag komt pas in de tekening als er iets op staat. Bij **Vlakken: Randen** staat een rand die zo'n object deelt
+  met iets op maaiveld (de mond van een tunnel) gewoon bij dat object op maaiveld. Wil je ze toch doorgetrokken op de
+  gewone laag, voeg dan in AutoCAD met `LAYMRG` de `_ONDER`-laag samen met de gewone laag.
+- **Grondgebruik** (de grenzen tussen grasland, bos en bebouwd gebied) is nu een eigen keuze bij BRT en staat
+  **standaard uit**: die lijnen waren het grootste deel van "overal lijnen", en op het plaatje zijn ze alleen een
+  kleurovergang. **Reliëf** (taluds en hoogteverschillen) is ook een eigen keuze en staat aan. Tot en met 0.2.3 waren ze
+  samen de keuze "Terrein en reliëf", standaard aan. Nieuwe standaard voor het grondgebruik. Zonder grondgebruik
+  krijgen wegen en water hun hele rand, ook waar ze aan terrein grenzen. Wil je het grondgebruik terug: zet in het
+  instellingenvenster bij BRT **Grondgebruik** aan, of typ `grondgebruik=aan` (ook in een script).
+- Een script van 0.2.3 met `terrein=aan` of `terrein=uit` werkt nog: dat zet grondgebruik en reliëf samen, behalve
+  wat je in hetzelfde commando zelf typt (`terrein=uit,relief=aan` geeft alleen het reliëf). In het instellingenvenster
+  staat "Terrein en reliëf" niet meer. Had je die keuze in 0.2.3 uitgezet, zet dan **Reliëf** uit; het grondgebruik
+  staat al uit.
+- Bij de **lijnen** staan de **wegen op maaiveld nu naar soort** op eigen lagen. **Nieuwe lagen**:
+  `B-WE-OG-TOPOKAART_WEG_HOOFDWEG-G` (in TOP10NL een autosnelweg, hoofdweg of regionale weg),
+  `B-WE-OG-TOPOKAART_WEG_FIETSPAD-G` (alleen fietsers en bromfietsers, eventueel ook voetgangers) en
+  `B-WE-OG-TOPOKAART_WEG_PAD-G` (alleen voetgangers of ruiters, ook een voetgangersgebied). Tot en met 0.2.3 stonden die
+  op `…_WEG-G`; **oud → nieuw**: hoofdwegen `…_WEG-G` → `…_WEG_HOOFDWEG-G`, fietspaden `…_WEG-G` → `…_WEG_FIETSPAD-G`,
+  paden `…_WEG-G` → `…_WEG_PAD-G`. De andere wegen (lokale weg, straat, parkeerplaats, busbaan) blijven op `…_WEG-G`, en
+  onder maaiveld staan alle wegen samen op `…_WEG_ONDER-G`. Een wegdeel op een kruising van twee soorten krijgt de
+  belangrijkste. Wil je alle wegen weer op één laag, voeg dan in AutoCAD met `LAYMRG` de drie nieuwe lagen samen met
+  `…_WEG-G`.
+- Bij **Vlakken: Randen** staat de **rand tussen twee soorten weg** er nu één keer, op de laag van de belangrijkste
+  (hoofdweg, weg, fietspad, pad): zo zie je weer een fietspad langs de rijbaan, en ook een streepje waar een fietspad, pad
+  of zijstraat op een andere soort weg aansluit. Een naad tussen twee stukken van dezelfde soort blijft weg. Op 1 km² in
+  een stad is dat ongeveer 6 km lijn erbij (6 %), in een polder 0,25 km; verder is er niets veranderd.
+- De **kleuren van de lijnen** zijn nu die van de onderleggers in het VLEA-portaal: wegen, terrein, reliëf, spoor en
+  inrichting **grijs (kleur 8)**, water **blauw (kleur 4)**, gebouwen **wit (kleur 7)**, ook onder maaiveld. Tot en met
+  0.2.3 was alles kleur 7. Dat geldt voor nieuwe lagen: een laag `B-WE-OG-TOPOKAART_…` die al in je tekening staat,
+  houdt zijn kleur, ook als je opnieuw laadt. Zet hem met `VKSTIJL`, **Nlcs** in de nieuwe kleur.
+- Nieuwe keuze bij BRT, **Kleur van de lijnen** (`lijnkleur`): **Zoals het portaal: grijs, water blauw, gebouwen wit**
+  (`lijnkleur=portaal`, de standaardkeuze) of **Alles wit (kleur 7, zoals tot en met 0.2.3)** (`lijnkleur=wit`). Wil je
+  de kleuren zoals tot en met 0.2.3, kies dan in het instellingenvenster bij BRT **Kleur van de lijnen: Alles wit**, of
+  typ `lijnkleur=wit` (ook in een script). Ook die keuze geldt voor nieuwe lagen. `VKSTIJL` kent hem niet: **Nlcs** zet
+  de BRT-lagen altijd in de kleuren zoals het portaal. Wil je bestaande lagen weer wit, zet de laagkleur dan zelf op 7.
+- De **lijnen** van de BRT hebben nu **namen**: straatnamen (zonder straatnaam het nummer van een autosnelweg of N-weg,
+  zoals A2), namen van water en plaatsnamen, als tekst op drie nieuwe lagen: `B-WE-OG-TOPOKAART_WEGNAAM-T18`,
+  `B-WE-OG-TOPOKAART_WATERNAAM-T18` en `B-WE-OG-TOPOKAART_PLAATSNAAM-T35`, in kleur 10 (bij **Kleur van de lijnen: Alles
+  wit** kleur 7). Straat- en waternamen zijn 18 m hoog, plaatsnamen 35 m, zoals past bij een overzichtskaart. Elke naam
+  staat rechtop leesbaar langs de straat of in het water, één keer per stuk straat, en namen raken elkaar niet. Past
+  een naam niet (de straat is binnen het gebied korter dan de naam, of er is geen vrije plek), dan komt hij er niet en
+  zegt de melding na het laden hoeveel namen dat waren; in een stadscentrum krijgt ongeveer één op de vijf straten een
+  naam. Wil je elke straatnaam, laad dan de BGT (`VKBGT`, groep `namen`). Wat onder maaiveld ligt, krijgt geen naam.
+  Heb je een gebied met een polylijn of een strook gekozen, dan ligt elke naam helemaal binnen dat gebied. Met `VKWISSEN`,
+  **Selectie** gaat een straatnaam samen weg met het stuk weg eronder (in TOP10NL hetzelfde object); met `ERASE` haal
+  je alleen de naam weg.
+- Nieuwe keuze bij BRT, **Namen** (`namen`, standaard aan). Straatnamen komen alleen mee met de wegen, waternamen alleen
+  met het water. Wil je de lijnen zonder namen, zoals tot en met 0.2.3, zet dan in het instellingenvenster bij BRT
+  **Namen** uit, of typ `namen=uit` (ook in een script). Voor de namen haalt VLEA twee soorten gegevens meer op (de
+  hartlijnen van de wegen en de plaatsen, die zelf niet in de tekening komen): het laden van de lijnen duurt daardoor
+  ongeveer anderhalf keer zo lang (op 16 km² gemeten: 10 s in plaats van 7 s).
+- **Precies de lijnen van 0.2.3** (dezelfde lijnen, op dezelfde lagen, alles kleur 7, zonder namen): typ
+  `soort=lijnen,vlakken=omtrek,grondgebruik=aan,lijnkleur=wit,namen=uit` (ook in een script), of kies in het
+  instellingenvenster bij BRT **Soort: Lijnen**, **Vlakken: Gesloten omtrek per vlak**, **Grondgebruik** aan, **Kleur
+  van de lijnen: Alles wit** en **Namen** uit. Voeg daarna in AutoCAD met `LAYMRG` de drie wegsoorten
+  (`…_WEG_HOOFDWEG-G`, `…_WEG_FIETSPAD-G` en `…_WEG_PAD-G`) samen met `…_WEG-G`, en elke `_ONDER`-laag met haar gewone
+  laag (bijvoorbeeld `…_WEG_ONDER-G` met `…_WEG-G`); staat die gewone laag niet in je tekening, hernoem de nieuwe dan
+  met `RENAME`. Dat moet na elke keer laden opnieuw: VLEA tekent altijd op de nieuwe lagen.
+
+**Wissen**
+- Wis je een **beeld** (de luchtfoto, de BRT als plaatje of de BGT als kaartbeeld) met `VKWISSEN`, met **Selectie** of
+  door opnieuw te laden met **Vervangen**, dan gaat nu ook de koppeling naar het beeldbestand weg: de rij in het palet
+  External References (`XREF`). Tot en met 0.2.3 bleef die rij daar staan zonder beeld in de tekening, en kwam er bij
+  elke keer Vervangen een rij bij. Gebruikt een ander beeld hetzelfde bestand nog (een beeld dat je zelf met dat bestand
+  invoegde, of een beeld in een blok), dan blijft de koppeling staan.
+- Het **bestand** zelf blijft staan in de map `<tekening>_kaarten`: `U` direct na het wissen zet het beeld meteen terug,
+  en een andere tekening kan dezelfde map gebruiken. Gebruikt geen tekening de beelden nog, ruim die map dan zelf op.
+- Koppelingen die met 0.2.3 of eerder zijn achtergebleven, haalt VLEA niet weg. Je ziet ze in External References als
+  **Unreferenced**; klik er met de rechtermuisknop op en kies **Detach**.
