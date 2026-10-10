@@ -17,7 +17,8 @@ garanderen geen termijn.
 
 ## Wat de plugin doet en niet doet
 - Netwerkverkeer alleen naar `api.pdok.nl` en `service.pdok.nl` (kaarten), `publiek.broservices.nl`
-  (sonderingen: alleen zoeken en één sondering ophalen,), één vast pad van
+  (sonderingen en boringen: per register alleen zoeken en één object ophalen; peilbuizen: alleen de meetreeks van één
+  filter als CSV;), één vast pad van
   `geo.rijkswaterstaat.nl` (de legger van Rijkswaterstaat, voor de zones langs waterkeringen; uit te
   zetten), `api.github.com` (versiecheck, uit te zetten) en, alleen als je `VKUPDATE` start (typen of
   de knop), `github.com` en `release-assets.githubusercontent.com` (de nieuwe versie downloaden). Geen

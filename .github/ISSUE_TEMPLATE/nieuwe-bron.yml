@@ -7,7 +7,7 @@ body:
     attributes:
       value: |
         Alleen open data. De plugin praat alleen met deze netwerkbestemmingen: PDOK (api.pdok.nl en
-        service.pdok.nl), de BRO voor de sonderingen (publiek.broservices.nl), de legger van
+        service.pdok.nl), de BRO voor de sonderingen, boringen en peilbuizen (publiek.broservices.nl), de legger van
         Rijkswaterstaat (één vast pad op geo.rijkswaterstaat.nl) en GitHub (versiecheck en VKUPDATE).
         Een bron die daar niet staat, is een nieuwe netwerkbestemming: dat vraagt eerst een besluit
         van beheer. Zet hier geen tekeningen, klantnamen of projectlocaties in.

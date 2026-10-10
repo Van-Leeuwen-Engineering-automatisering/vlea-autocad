@@ -1,10 +1,9 @@
 # Handleiding – VLEA, kaarten voor AutoCAD
 
-> **Versie 0.2.4.** Voor AutoCAD 2025, 2026 en 2027. `VKHELP` opent deze pagina in je browser.
+> **Versie 0.2.5.** Voor AutoCAD 2025, 2026 en 2027. `VKHELP` opent deze pagina in je browser.
 
 ## 1. Voordat je begint
-- AutoCAD 2025, 2026 of 2027 voor Windows (ook Civil 3D of Map 3D); AutoCAD 2027 is nieuw in deze
-  versie. Niet AutoCAD LT, AutoCAD voor Mac of AutoCAD Web: die kunnen deze plugin niet laden (AutoCAD
+- AutoCAD 2025, 2026 of 2027 voor Windows (ook Civil 3D of Map 3D). Niet AutoCAD LT, AutoCAD voor Mac of AutoCAD Web: die kunnen deze plugin niet laden (AutoCAD
   LT laadt geen .NET-plugins).
 - Installeren: download `VLEA-AutoCAD-Setup.exe` bij de nieuwste release, sluit AutoCAD, open het
   bestand en klik op **Installeren**. Verwijderen kan met hetzelfde programma. Alle stappen, ook die met
@@ -40,12 +39,15 @@ lint-tabblad **VLEA** op **Palet** (nog een keer = sluiten). Van boven naar bene
   de BRT (de standaard) en het kaartbeeld van de BGT komen als beeld in een map naast de tekening: in een tekening zonder naam staat daar
   "Sla de tekening eerst op" met een knop **Opslaan**. Beta-kaarten zijn zo gemarkeerd; een driehoekje
   toont de vaste waarschuwing van een kaart.
-- **Gereedschap** – een rij knoppen: AHN-punt (`VKAHNPUNT`), KLIC-levering (`VKKLIC`, met een
-  bestandskiezer), Naar Google Earth (`VKKMZ`; wat je al gekozen had, neemt het mee als er geen commando
+- **Gereedschap** – een rij knoppen: AHN-punt (`VKAHNPUNT`), NAP-referentie, NAP-leider en NAP herberekenen
+  (`VKNAPSET`, `VKNAPLEADER`, `VKNAPUPDATE`; in een lengteprofiel, zie 4), KLIC-levering (`VKKLIC`, met een
+  bestandskiezer), Eigen grondonderzoek (`VKGEF`, met een bestandskiezer voor een of meer GEF- of XML-bestanden,
+  zie 4), Naar Google Earth (`VKKMZ`; wat je al gekozen had, neemt het mee als er geen commando
   loopt, anders de VLEA-kaarten in het gebied zonder KLIC; één open lijn of polylijn wordt een
-  boortracé, zie 10), KML inlezen (`VKKMLIMPORT`), Info (`VKINFO`), Import wissen (`VKWISSEN`), Stijl
-  (`VKSTIJL`) en Bijwerken (`VKUPDATE`). Elke knop doet hetzelfde als het commando, met de keuzes uit de
-  instellingen; de uitleg bij de knop noemt het commando.
+  boortracé, zie 10), KML inlezen (`VKKMLIMPORT`), Punten inlezen (`VKPUNTEN`),
+  Geografische plek (`VKGEOPLEK`, zie 11), Info (`VKINFO`), Import wissen (`VKWISSEN`), Stijl (`VKSTIJL`) en
+  Bijwerken (`VKUPDATE`). Elke knop doet hetzelfde als het commando, met de keuzes uit de instellingen; de uitleg
+  bij de knop noemt het commando.
 - **Bekijk de plek** – vier knoppen: Google Maps, Street View, StreetSmart en DINOloket. Wijs daarna een
   punt aan (Enter = midden van het beeld); de plek opent in je browser (zie 11).
 - **Laatste keer geladen** – tijdens het laden staat er "wacht – zie opdrachtregel": een vraag (zoals
@@ -64,12 +66,13 @@ Meer kaarten in één keer laden kan met `VKLADEN` op de opdrachtregel (zie 4).
 De keuzes staan niet op het hoofdscherm maar in het instellingenvenster:
 
 - **Kaarten**: per kaart haar opties, bijvoorbeeld de BGT-groepen, de sondeerplots of snel/scherp bij
-  de luchtfoto. Bij de BRT staat onder de naam per keuze één zin wat je krijgt;
+  de luchtfoto. Bij de BRT staat onder de naam per keuze één zin wat je krijgt, bij AHN welke AHN-versie het is
+  en wat de rasterstap doet;
 - **Gereedschap**: hoogte op een punt (maaiveld of met gebouwen, label met de hoogte), de breedte van
   de contour (standaard 25 m aan weerszijden), "ook een los .kml-bestand" bij Google Earth, en de
   opties van de KLIC-levering;
 - **Stijl**: NLCS-kleuren of grijze onderlegger voor de kaarten (een KLIC-levering komt altijd in
-  NLCS-kleuren, de sonderingen blijven altijd in kleur), en of de bronvermelding als tekst in de tekening komt. De
+  NLCS-kleuren, de sonderingen, de boringen en de peilbuizen blijven altijd in kleur), en of de bronvermelding als tekst in de tekening komt. De
   grijze onderlegger maakt lagen grijs, geen beeld: de luchtfoto, het plaatje van de BRT en het kaartbeeld van de BGT
   blijven in hun eigen kleuren. Wil je de BRT grijs, kies dan bij de BRT **Plaatje grijs**;
 - **Algemeen**: één keer per dag kijken of er een nieuwe versie is, en of het palet de status van de bronnen toont
@@ -151,8 +154,9 @@ start. Het stelt geen vragen, dus het werkt ook in een script en in de AutoCAD-k
 - De lintknoppen **BGT**, **Kadaster**, **Luchtfoto** en **AHN** laden die ene kaart met de keuzes
   uit de instellingen (opties, stijl en bronvermelding) en vragen op de opdrachtregel het gebied;
   Enter = het opgeslagen gebied van de tekening. Zonder Civil 3D zegt **AHN** meteen "alleen Civil 3D",
-  zonder eerst een gebied te vragen. Het lintpaneel **Gereedschap** heeft **KLIC**, **Google Earth**,
-  **AHN-punt**, **Bijwerken** en **Help**, met dezelfde keuzes als het palet.
+  zonder eerst een gebied te vragen. Het lintpaneel **Gereedschap** heeft **KLIC**, **Eigen grondonderzoek**,
+  **Google Earth**, **AHN-punt**, **NAP-leider**, **NAP herberekenen**, **Punten**, **Bijwerken** en **Help**, met dezelfde keuzes als
+  het palet.
 - De kaartcommando's hieronder vragen zelf naar gebied en opties. Ze gebruiken de keuzes uit de
   instellingen niet: Enter bij de opties = de standaardopties van die kaart.
 
@@ -164,13 +168,15 @@ start. Het stelt geen vragen, dus het werkt ook in een script en in de AutoCAD-k
 | BRT (topografische kaart) | `VKBRT` | `soort` = `kleur` (plaatje in kleur, zoals het portaal; de standaardkeuze), `grijs` (plaatje grijs) of `lijnen` (TOP10NL, een overzichtskaart); groepen `wegen`, `water`, `gebouwen`, `grondgebruik` (standaard uit), `relief`, `inrichting`, `namen`, `vlakken` = `randen` (de standaardkeuze) of `omtrek` en `lijnkleur` = `portaal` (de standaardkeuze) of `wit` (alleen bij `lijnen`) | 16 km² | beta; het plaatje naast de tekening, eerst opslaan; volgens het Kadaster de lijnen niet voor een schaal groter dan 1:5.000 en het plaatje niet groter dan 1:750; zie hieronder |
 | Kadastrale kaart | `VKKADASTER` | `perceelnummers` | 5 km² | in een stad orde 50.000 objecten bij 5 km²: laden duurt dan langer |
 | Luchtfoto | `VKLUCHTFOTO` | `scherpte` = `snel` (25 cm) of `scherp` (8 cm) | 5 km² | foto naast de tekening; eerst opslaan; bij een groot gebied wordt de pixel grover (snel tot 50 cm bij 5 km²) |
-| AHN-hoogte | `VKAHN` | `model` = `dtm` (maaiveld) of `dsm` (met gebouwen en begroeiing) | 4 km² | alleen Civil 3D; een hoogtemodel per gebied ("VLEA AHN RD 154750-462750 500x500"); onder panden en water geen meetpunten (het model overbrugt die plekken) |
-| Wegen (NWB) | `VKNWB` | `hectometrering` | 25 km² | |
+| AHN-hoogte | `VKAHN` | `model` = `dtm` (maaiveld) of `dsm` (met gebouwen en begroeiing); `stap` = `fijnst` (de standaardkeuze), `1`, `2` of `5` (m) | 4 km² | alleen Civil 3D; AHN4 (2020-2022), de enige versie bij PDOK; een hoogtemodel per gebied ("VLEA AHN RD 154750-462750 500x500"); onder panden en water geen meetpunten (het model overbrugt die plekken); zie hieronder |
+| Wegen (NWB) | `VKNWB` | `hectometrering` | 25 km² | hectometerpaal als oranje bordje met het wegnummer; zie hieronder |
 | Spoorwegen | `VKSPOOR` | `kilometrering` | 100 km² | beta |
-| Riolering | `VKRIOOL` | `labels` (materiaal en diameter), `aansluitingen` | 4 km² | onvolledig; niet voor WIBON/KLIC; riool zonder laag in kleur 210, zoals in een KLIC-levering (zie 6, Kleur en lijndikte) |
+| Riolering | `VKRIOOL` | `labels` (materiaal en diameter), `hoogtes` (bob bij leidingen, putnaam en maaiveld bij putten), `aansluitingen` | 4 km² | onvolledig; niet voor WIBON/KLIC; riool zonder laag in kleur 210, zoals in een KLIC-levering (zie 6, Kleur en lijndikte); zie hieronder |
 | Natura 2000 | `VKNATURA2000` | | 100 km² | beta |
 | Zones langs waterkeringen | `VKZONERINGEN` | `kernzone`, `beschermingszone`, `vrijeruimte` (profiel van vrije ruimte), `rws` (ook de zones van Rijkswaterstaat) | 9 km² | beta; niet elk waterschap levert zijn zones aan; een ontbrekende zone betekent niet dat er geen zone is; de legger van de beheerder is leidend (dat staat ook na het laden op de opdrachtregel); `rws` haalt bij `geo.rijkswaterstaat.nl` |
 | Sonderingen (BRO) | `VKSONDERINGEN` | `sondeerplots`, `labels`, `xml`; `aantal` = `5`, `10`, `25` (de standaardkeuze), `50`, `100` of `alle` | 4 km² | beta; zonder keuze de 25 dichtstbijzijnde; zie hieronder |
+| Boringen (BRO) | `VKBORINGEN` | `boorprofielen`, `labels`, `xml`; `aantal` = `5`, `10`, `25` (de standaardkeuze), `50`, `100` of `alle` | 4 km² | beta; geotechnische en geologische boringen; zonder keuze de 25 dichtstbijzijnde; boorprofielen links naast het gebied; zie hieronder |
+| Peilbuizen (BRO) | `VKPEILBUIZEN` | `standen`, `labels`, `csv`, `zonderstanden`; `aantal` = `5`, `10`, `25` (de standaardkeuze), `50`, `100` of `alle` | 4 km² | beta; per filter de gemeten grondwaterstanden t.o.v. NAP; zonder keuze de 25 dichtstbijzijnde; zie hieronder |
 
 Aan/uit-opties staan standaard aan, behalve `grondgebruik` bij de BRT; in een script schrijf je `aan` of
 `uit`. Staan alle onderdelen van een kaart uit (bijvoorbeeld alle drie de zonesoorten, alle BGT-groepen of
@@ -178,8 +184,8 @@ bij de BRT als lijnen alle groepen), dan vraagt VLEA niets op, slaat die kaart o
 eerdere import van die kaart blijft dan staan, ook met `vervangen=ja`.
 
 **De grens bij een polygoon.** Bij een strook langs een tracé geldt de grens voor wat de kaart
-werkelijk ophaalt: bij BGT, BAG, BRT, kadaster, NWB en riolering de vakjes langs de polygoon; bij AHN en
-de sonderingen de rechthoek om het gebied (die worden op de rechthoek bevraagd). Een lange, schuine
+werkelijk ophaalt: bij BGT, BAG, BRT, kadaster, NWB en riolering de vakjes langs de polygoon; bij AHN, de
+sonderingen, de boringen en de peilbuizen de rechthoek om het gebied (die worden op de rechthoek bevraagd). Een lange, schuine
 strook kan dus voor AHN te groot zijn terwijl hij zelf klein is: het palet, `VKGEBIED` en `VKCONTOUR`
 zeggen dan al "te groot". Kies dan een kortere strook of laad AHN in delen.
 
@@ -382,6 +388,10 @@ Het palet zet ze onder **Grondonderzoek**.
   een hoogte die niet t.o.v. NAP is, krijgt geen plot en kost geen plek; de melding noemt haar.
 - De BRO-bestanden (XML) van de sonderingen met een plot komen in de map
   `<tekening>_kaarten\sonderingen` naast de tekening (optie `xml`; sla de tekening eerst op).
+- **Storing bij de BRO**: antwoordt de BRO niet, of met een foutmelding in plaats van een zoekantwoord, dan wordt er
+  niets getekend en zegt de melding dat het zoeken bij de BRO niet lukte, bijvoorbeeld "(het antwoord van de BRO was
+  onleesbaar)". "Er ligt geen sondering uit de BRO binnen dit gebied" komt alleen als de BRO dat echt antwoordt.
+  Probeer het later opnieuw; het bolletje achter de kaart zegt of de BRO weer werkt.
 - De sonderingen zijn informatief; controleer datum en kwaliteitsklasse (in de plot en in `VKINFO`)
   voordat je ze gebruikt. De dichtstbijzijnde sondering is niet vanzelf de beste: een diepere of nieuwere
   kan net buiten de keuze vallen. Kies dan een hoger aantal of een kleiner gebied.
@@ -411,6 +421,318 @@ sonderingen, en druk op Enter.
 
 Meer over `Selectie`, ook voor andere kaarten: zie 5.
 
+### Eigen grondonderzoek (`VKGEF`)
+Nieuw in 0.2.5. `VKGEF` (in het palet en op het lint de knop **Eigen grondonderzoek**, bij het gereedschap) zet je
+eigen sonderingen en boringen in de tekening: GEF-bestanden (`.gef`) van een sondeerbedrijf of uit je archief, of een
+sondering uit de BRO als XML (`.xml`, zoals de BRO haar levert, bijvoorbeeld uit DINOloket). De bestanden blijven op
+je eigen pc: VLEA leest ze van je schijf, maakt geen verbinding en stuurt niets naar VLEA. Er hoeft geen gebied
+gekozen te zijn: elk onderzoek komt op de plek uit het bestand. Laad je in dezelfde tekening ook kaarten, sonderingen
+of boringen uit de BRO, **kies dan eerst het gebied** en doe daarna `VKGEF`: alleen dan weet `VKGEF` waar die komen en
+houdt het die plek vrij (zie hieronder).
+- **Bestanden kiezen:** met schermen opent een venster waarin je meer bestanden tegelijk kiest (hoogstens 500 per
+  keer). In een script, met `FILEDIA` 0 of in de AutoCAD-kern vraagt `VKGEF` één pad op de opdrachtregel en daarna
+  de opties (zie hieronder). Een map kiezen kan niet; kies de bestanden zelf.
+- **Een sondering** (GEF-CPT) komt er precies zo uit als een sondering van `VKSONDERINGEN` (zie hierboven): het
+  schuine kruisje met label, en een sondeerplot in de rij rechts naast de punten, op dezelfde lagen en met dezelfde
+  kop, aanloopstrook, schalen, waterdruk en onderkant. Onder de plot staat `Bron: eigen grondonderzoek (GEF)`, bij
+  een XML `Bron: BRO (eigen XML-bestand)`. Is er een gebied gekozen, dan blijft rechts naast dat gebied een volle rij
+  vrij voor de sondeerplots van `VKSONDERINGEN` (175 m, vijf plots breed) en komen de plots van `VKGEF` daar rechts
+  naast. Ook het gebied zelf blijft vrij, en links ervan de rij voor de boorprofielen van `VKBORINGEN` (165 m): liggen
+  je punten buiten het gebied, dan komt een plot die in het gebied of in een van die stroken zou vallen ook rechts van
+  de strook voor de sondeerplots (dan staat hij verder van zijn punt; het volgnummer in het label zegt welke plot bij
+  welk punt hoort). Zo liggen de plots van `VKGEF` nooit over die van de BRO, nooit over een boorprofiel en nooit in
+  het gebied, in welke volgorde je ook inleest, zolang het gebied vóór `VKGEF` gekozen is. Laad je geen sonderingen
+  of boringen uit de BRO, dan blijven die stroken leeg. De volgnummers lopen van west naar oost, zoals bij de BRO; ze beginnen bij
+  elke keer `VKGEF` weer bij 1, los van de sonderingen uit de BRO in dezelfde tekening (het nummer onder de plot
+  zegt welke het is).
+  - Welke kolommen: VLEA zoekt ze op het grootheidnummer in de kop (`#COLUMNINFO`): 1 sondeerlengte,
+    2 conusweerstand, 3 wrijving, 4 wrijvingsgetal, 6 waterspanning u2 en 11 gecorrigeerde diepte; de volgorde van
+    de kolommen maakt niet uit. De diepte is de gecorrigeerde diepte, anders de sondeerlengte (dat staat dan onder
+    de plot). Ontbreekt het wrijvingsgetal, dan rekent VLEA het uit (wrijving / conusweerstand), en dat staat onder
+    de plot. Drukken in kPa of bar worden MPa.
+  - De datum is `#STARTDATE`. Staat die er niet in, dan blijft de datum leeg (in label, attribuut en plot) en zegt
+    de opdrachtregel dat; de datum van het bestand (`#FILEDATE`) gebruikt VLEA niet, want dat is vaak de dag van de
+    export, jaren na de sondering.
+  - Geen plot, wel een punt met label, als de hoogte van het maaiveld ontbreekt of niet t.o.v. NAP is (`#ZID` moet
+    31000 zijn), als er geen meetwaarden in staan, of als de diepte niet kan kloppen; de melding zegt waarom.
+- **Een boring** (GEF-BORE) komt als punt met label, precies zoals een boring van `VKBORINGEN` (zie Boringen
+  (BRO)): de cirkel (blok `VK_BORING`) op `B-WE-MO-ONDERZOEK_BORING-S` en het label (nummer en soort, maaiveld,
+  einddiepte en datum) op `B-WE-MO-ONDERZOEK_BORING-T35`. Zet je de laag van de boringen uit, dan gaan dus ook je
+  eigen boringen uit beeld. In het attribuut `BRO_ID` staat het nummer uit het bestand; `REGISTER` en `NR` blijven
+  leeg. Een boorprofiel tekent `VKGEF` nog niet.
+- **Een ander soort** GEF-bestand komt als punt met label: een cirkel met een rechtop staand kruis (blok
+  `VK_ONDERZOEKSPUNT`, even groot als het kruisje van een sondering, zodat je ze uit elkaar houdt), met het nummer en
+  de soort, het maaiveld, de einddiepte en de datum, op de lagen van de sonderingen.
+- **De plek** moet in RD staan: `#XYID` met code 31000 of 28992. Noemt het bestand geen stelsel (code 00000) en
+  vallen de coördinaten in Nederland, dan leest VLEA ze als RD, zegt dat per bestand en na het tekenen nog een keer
+  ("Controleer de plek"), en zet bij het punt `vk_ligging` (zie `VKINFO`). Elk ander stelsel wijst VLEA af. Een XML
+  zonder RD-positie wordt omgerekend uit ETRS89 (binnen een meter).
+- **Het nummer** is `#TESTID` (bij een XML het BRO-id), anders de naam van het bestand. In de tekening komt alleen
+  wat ook bij een sondering uit de BRO staat (nummer, soort, plek, maaiveld, dieptes, datum, klasse en de
+  meetwaarden): geen bedrijf, project of opdrachtgever, en de naam van het bestand alleen als die het nummer is
+  (het bestand heeft zelf geen `#TESTID`). In het logboek komen alleen aantallen.
+- **Per bestand** zegt de opdrachtregel of het is ingelezen, en anders waarom niet, bijvoorbeeld "niet ingelezen: de
+  plek staat niet in RD-coördinaten" of "het is een KLIC-levering; lees die in met VKKLIC". Daarna een samenvatting.
+- **Opnieuw inlezen:** staat een nummer al in de tekening, dan vraagt `VKGEF` één keer voor alle bestanden
+  [Vervangen/Erbij/Overslaan]. Vervangen wist de eerdere versie van precies dat nummer (punt, label en plot); een
+  ander nummer, een kaart of een KLIC-levering nooit. Erbij tekent het er nog een keer bij; Overslaan tekent alleen
+  wat er nog niet stond. Enter is Vervangen, behalve als al die nummers in de tekening op een andere plek staan
+  (meer dan een meter verderop): dan is het bijna altijd een ander onderzoek met hetzelfde nummer (S01 van een
+  andere opdracht) en is Enter Erbij. De vraag noemt die nummers; kies Vervangen als je de plek zelf hebt verbeterd.
+- **Weghalen:** `VKWISSEN` met `eigenonderzoek` wist alles wat `VKGEF` tekende, ook de bronvermelding. Met
+  `Selectie` gaan van een aangewezen onderzoek punt, label en plot samen weg.
+- **Bronvermelding:** "Bron: Eigen grondonderzoek (bestand van de gebruiker), ingelezen 09-10-2026", in de
+  tekeningeigenschappen en (optie `bronvermelding`) als tekst onder de punten.
+
+In een script, één regel per vraag, met `FILEDIA` op 0, zoals bij `VKKLIC` (zie 6). Staat er een spatie in het
+pad, zet het pad dan tussen aanhalingstekens. Per keer één bestand; voor meer bestanden herhaal je de drie regels
+vanaf `VKGEF`:
+
+```text
+FILEDIA
+0
+VKGEF
+C:\Grondonderzoek\S01.gef
+vervangen=ja
+FILEDIA
+1
+```
+
+### Boringen (BRO)
+`VKBORINGEN` haalt de boringen uit de Basisregistratie Ondergrond (BRO) in het gebied, met per boring een
+boorprofiel: een kolom met de grondsoorten, in kleur, met de code van elke laag en de diepte t.o.v. NAP. Het palet
+zet ze onder **Grondonderzoek**, net als de sonderingen.
+- **Welke boringen**: uit twee registers van de BRO: het geotechnisch booronderzoek (BHR-GT, boringen voor de
+  geotechniek) en het geologisch booronderzoek (BHR-G, met de oude boringen uit het archief van TNO). Dat zijn
+  dezelfde twee als de boringen in het portaal van VLEA. Het bodemkundig booronderzoek (BHR-P: ondiepe boringen
+  voor de bodemkaart, meestal tot 1,2 m) zit er niet in. Niet elke oude boring uit het archief van TNO staat al in
+  de BRO: staat een boring wel in DINOloket (`VKDINO`) maar niet in de BRO, dan tekent VLEA haar niet.
+- **Hoeveel boringen** (optie `aantal`): net als bij de sonderingen hoogstens **25**, de 25 het dichtst bij het
+  midden van het gebied (bij een strook van `VKCONTOUR`: bij de lijn), met dezelfde keuzes (5, 10, 25, 50, 100 of
+  alle) en dezelfde regel: bij gelijke afstand de diepste eerst, daarna het laagste BRO-id. Liggen er meer, dan
+  zegt de melding hoeveel er niet getekend zijn en hoe je meer krijgt.
+- Elke gekozen boring komt als symbool (een cirkel van 1,6 m doorsnede, blok `VK_BORING`) op
+  `B-WE-MO-ONDERZOEK_BORING-S`, met rechts ervan een label op `B-WE-MO-ONDERZOEK_BORING-T35` (oranje, kleur 30): het
+  volgnummer van het boorprofiel, het BRO-id, het maaiveld t.o.v. NAP, de einddiepte en de datum (optie `labels`).
+  Staan er meer boringen op (bijna) dezelfde plek, dan komen hun labels onder elkaar. De volgnummers lopen van west
+  naar oost, net als bij de sondeerplots.
+- **Boorprofielen** (optie `boorprofielen`): per boring een kolom van 2 m breed **links naast het gebied**, in rijen
+  van tien, nooit over de kaart. Links, zodat ze nooit over de sondeerplots vallen (die staan rechts). Het laatste
+  profiel van elke rij staat 25 m van het gebied; heb je minder dan tien boringen, dan staan ze dus direct naast het
+  gebied. Verticaal 1:1
+  in meters t.o.v. NAP, met links een as met een streepje en een getal op elke hele meter en de astitel `DIEPTE (m)
+  t.o.v. NAP`; de profielen in één rij hebben dezelfde NAP-schaal. Elke laag is gevuld in de kleur van de
+  hoofdgrondsoort, zoals de boringen in het portaal: **zand** geel (kleur 2), **klei** groen (3), **veen** bruin
+  (34), **grind** oranje (30), **leem en silt** olijf (42), en grijs (9) voor een laag zonder grondsoort of met een
+  andere hoofdnaam. Rechts van de kolom staat de code van de grondsoort volgens NEN 5104: de hoofdletter van de
+  hoofdnaam (Z zand, K klei, V veen, G grind, L leem) met de bijmengingen erachter (s siltig, z zandig, k kleiig, g
+  grindig, h humeus; 1 zwak, 2 matig, 3 sterk, 4 uiterst), bijvoorbeeld `Zs1` (zwak siltig zand), `Kz3` (sterk
+  zandige klei), `Vm` (mineraalarm veen). Beschrijft een boring haar lagen volgens NEN-EN-ISO 14688 (nieuwere
+  geotechnische boringen), dan volgt de code hetzelfde schema (`Si` is silt; zonder gradatie als de naam die niet
+  heeft); dat staat onder het profiel. Een naam met "met" (bijvoorbeeld kleiig zand met grind) is de grondsoort vóór
+  "met": zand, met een gele vulling, en wat na "met" komt staat zonder gradatie achter de code (`Zkg`; zwak zandige
+  klei met grind wordt `Kz1g`). Is een laag te dun voor een code die niet over de vorige valt, dan staat er
+  geen code (onder het profiel staat hoeveel); de vulling en `VKINFO` zeggen dan welke grondsoort het is. Boven de
+  kolom het maaiveld ("mv +1,21"); onder het profiel het volgnummer groot, het BRO-id, maaiveld en datum, "Bron: BRO
+  (BHR-GT)" of "(BHR-G)" en de opmerkingen. Een stuk zonder beschrijving (bijvoorbeeld de bovenste meter van een
+  oude boring) blijft wit en staat onder het profiel ("Niet beschreven: 0,00-0,60 m"): VLEA verzint niets.
+- Lagen van het profiel: de vullingen staan per hoofdgrondsoort op een eigen laag: `B-WE-MO-ONDERZOEK_BORING_ZAND-V`,
+  `…_KLEI-V`, `…_VEEN-V`, `…_GRIND-V`, `…_LEEM-V` en `…_OVERIG-V` (NLCS-element V, een vlakvulling; de kleur staat
+  op de laag, dus een grondsoort zet je apart aan of uit, of geef je in het lagenbeheer een andere kleur). De rand
+  van de kolom en de grenzen tussen de lagen staan op `…_KOLOM-GD` (kleur 7), de NAP-as en de maaiveldlijn op
+  `…_RASTER-GD` (grijs, kleur 253), alle teksten op `B-WE-MO-ONDERZOEK_BORING-T35`. Teksthoogtes zoals de sondeerplot:
+  bedoeld voor afdrukken op 1:200.
+- `VKINFO` op een vulling geeft de laag: boven- en ondergrens (m onder maaiveld), de naam van de BRO (NEN 5104
+  en/of NEN-EN-ISO 14688), de code, de omschrijving in gewone woorden, of de laag opgebracht is en een bijzonder
+  bestanddeel zoals puin.
+- De grijze onderlegger laat de boringen in kleur, net als de sonderingen. Grijs kan daarna met `VKSTIJL`, Grijs.
+- Hoogstens **25 boorprofielen per keer**, de dichtstbijzijnde eerst. Een boring zonder maaiveldhoogte, met een
+  hoogte die niet t.o.v. NAP is of zonder beschreven lagen krijgt geen profiel en kost geen plek; de melding noemt
+  haar.
+- De BRO-bestanden (XML) van de boringen met een profiel komen in de map `<tekening>_kaarten\boringen` naast de
+  tekening (optie `xml`; sla de tekening eerst op).
+- **Storing bij de BRO**: lukt het zoeken in een van de twee registers niet (de BRO antwoordt niet, of geeft een
+  foutmelding in plaats van een zoekantwoord), dan tekent VLEA de boringen uit het andere register en zegt een
+  waarschuwing dat er boringen kunnen ontbreken, bijvoorbeeld "zoeken lukte niet in 1 deel/delen (geologische
+  boringen: het antwoord van de BRO was onleesbaar)". Lukt het in geen van beide, dan wordt er niets getekend en zegt
+  de melding waarom. "Er ligt geen boring uit de BRO binnen dit gebied" komt alleen als de BRO dat echt antwoordt.
+  Probeer het later opnieuw; het bolletje achter de kaart zegt of de BRO weer werkt.
+- De boringen zijn informatief: controleer datum, beschrijving en kwaliteit (`VKINFO`) voordat je ze gebruikt. Een
+  oude boring uit het archief is vaak met de hand beschreven en minder precies dan een nieuwe.
+- Weghalen gaat zoals bij de sonderingen: `VKWISSEN`, keuze `Selectie`, een deel van de boring aanklikken (symbool,
+  label, een vulling of een tekst van het profiel); symbool, label en het hele boorprofiel gaan samen weg, de andere
+  profielen schuiven niet op. Alle boringen weg: `VKWISSEN` en dan `boringen`.
+
+Een script, één regel per vraag (een vak langs de A28 bij Amersfoort; daar lagen op 09-10-2026 twee geotechnische
+boringen):
+
+```text
+VKBORINGEN
+C
+158648,468978,159148,469478
+aantal=10,vervangen=ja
+```
+
+### Peilbuizen (BRO)
+`VKPEILBUIZEN` tekent de peilbuizen (grondwatermonitoringputten) uit de Basisregistratie Ondergrond (BRO) in het
+gebied, met per filter de grondwaterstanden die de BRO van dat filter heeft. Het palet zet ze onder
+**Grondonderzoek**, naast de sonderingen en boringen.
+- **Waar het vandaan komt**: VLEA zoekt de putten, hun filters en hun meetreeksen in de kengegevens van de BRO bij
+  PDOK (dezelfde dienst als het portaal van VLEA) en haalt daarna van elke meetreeks de metingen bij de BRO zelf
+  (`publiek.broservices.nl`). Een put met meer filters (buizen) heeft per filter een eigen reeks; een filter kan ook
+  meer reeksen hebben (bijvoorbeeld een oude en een nieuwe), die tellen dan samen.
+- **Hoeveel peilbuizen** (optie `aantal`): net als bij de sonderingen en boringen hoogstens **25**, de 25 het dichtst
+  bij het midden van het gebied (bij een strook van `VKCONTOUR`: bij de lijn), met dezelfde keuzes (5, 10, 25, 50,
+  100 of alle); bij gelijke afstand de diepste eerst. Ook een peilbuis zonder metingen in de BRO staat erop: een buis
+  in de grond, tot de diepte van het filter. Wil je alleen peilbuizen met metingen, zet dan de optie `zonderstanden`
+  uit.
+- **Verwijderde peilbuizen**: een put die volgens de BRO verwijderd is, staat er ook op, want zijn oude standen zeggen
+  iets over het grondwater. De buis staat er dan niet meer: het label zegt het direct onder het BRO-id
+  (`verwijderd 2021`), `VKINFO` geeft de datum, en de melding zegt hoeveel van de getekende peilbuizen verwijderd zijn.
+  In een stadscentrum kan dat de helft zijn (op 09-10-2026 in het centrum van Rotterdam 16 van de 25 dichtstbijzijnde).
+  Een put die de BRO uit de registratie heeft gehaald, staat er niet op (zoals bij de sonderingen en boringen); de
+  melding noemt hoeveel.
+- Elke gekozen peilbuis komt als symbool (twee cirkels, van 1,6 m en 0,6 m doorsnede, blok `VK_PEILBUIS`) op
+  `B-WE-MO-ONDERZOEK_PEILBUIS-S` (kleur 150), met rechts ervan een label op `B-WE-MO-ONDERZOEK_PEILBUIS-T35` (kleur
+  50, zoals NLCS teksten kleurt) (optie `labels`):
+
+  ```text
+  GMW000000009478
+  mv +3,42 m NAP
+  filter +0,23 tot -0,77 m NAP
+  GW gem. +0,87 m NAP (2022-2026)
+  hoogst +1,19 (2026), laagst +0,32 (2023)
+  laatst +1,04 (12-09-2026)
+  ```
+
+  Het BRO-id van de put (bij een verwijderde put met de regel `verwijderd` en het jaar eronder), het maaiveld, en per
+  filter de boven- en onderkant van het filter, het gemiddelde van de
+  gemeten standen met de jaren, de hoogste en de laagste gemeten stand met het jaar, en de laatste meting met de
+  datum. Alles in meters t.o.v. NAP, zoals de BRO het levert. Een put met meer filters noemt het buisnummer
+  (`buis 2: filter ...`). Was er op één dag gemeten, dan is het één regel (`GW +0,40 m NAP (03-07-2019)`). Staan
+  er meer peilbuizen op (bijna) dezelfde plek, dan komen hun labels onder elkaar.
+- **Wat meetelt**: alleen de gewone metingen van de reeks (geen controlemetingen met de hand), niet de metingen die
+  de bronhouder heeft afgekeurd of als onbeslist heeft gemarkeerd, en niet een meting zonder stand (bijvoorbeeld een
+  droge buis of water boven de bovenkant van de buis). Wel de recente metingen die nog niet zijn beoordeeld, en de oude
+  metingen uit het archief van TNO. Is een dag zowel voorlopig als beoordeeld geleverd, dan telt de beoordeelde. Het
+  gemiddelde is het gemiddelde van de daggemiddelden: een periode met een meting per uur weegt niet zwaarder dan een
+  periode met een meting per twee weken.
+- **Geen GHG of GLG**: de BRO levert die niet, alleen de metingen. VLEA rekent ze niet uit, want daarvoor zijn
+  acht jaar metingen op vaste dagen nodig en een vaste rekenregel; het label geeft daarom de gemeten uitersten met
+  het jaar. Voor een ontwerp: kijk naar de periode en het aantal metingen (`VKINFO`), en naar de filterdiepte (een
+  diep filter meet de stijghoogte van een dieper zandpakket, niet de freatische grondwaterstand).
+- **Grondwaterstanden** (optie `standen`): uit, dan haalt VLEA niets bij de BRO en noemt het label alleen de jaren
+  met metingen volgens de BRO (`metingen 2012-2026 in de BRO`). Hoogstens **50 meetreeksen per keer**, van de
+  dichtstbijzijnde peilbuizen eerst; voor de andere noemt het label ook alleen de jaren, en de melding zegt hoeveel.
+  Een reeks is 3 kB tot ruim 10 MB (een meting per uur over twintig jaar); voor 25 peilbuizen in een stad is dat samen
+  tientallen MB. Gemeten op 9 oktober 2026, de 25 dichtstbijzijnde: Rotterdam 1,5 MB in 7 seconden, Amsterdam 11 MB in
+  10 seconden, Groningen 45 MB in 14 seconden, met voortgang en Esc om te stoppen. Lukt een reeks niet, dan zegt de
+  melding welke en waarom.
+- **Storing bij PDOK**: lukt bij PDOK het zoeken naar de filters of de meetreeksen niet, dan staan de peilbuizen er
+  wel, maar weet VLEA niet of de BRO er grondwaterstanden van heeft. Het label zegt dan
+  `grondwaterstanden niet opgehaald (PDOK)` (zonder filters: `filter en grondwaterstanden niet opgehaald (PDOK)`), niet
+  `geen grondwaterstanden in de BRO`; `VKINFO` zegt `onbekend (niet opgehaald bij PDOK)`, en een waarschuwing zegt
+  hoeveel peilbuizen het zijn. Probeer het later opnieuw. Ook met de optie `zonderstanden` uit staan deze peilbuizen
+  erop: onbekend is niet hetzelfde als geen metingen.
+- De **meetreeksen** zelf komen als CSV van de BRO in de map `<tekening>_kaarten\peilbuizen` naast de tekening
+  (optie `csv`; sla de tekening eerst op). Zo kun je de hele reeks zelf bekijken of in een grafiek zetten. De melding
+  noemt hoeveel MB het is. `csv` staat standaard aan: in een stad komen er zo tientallen MB naast de tekening, ook op
+  een projectschijf. Zet `csv` uit als je de reeksen niet nodig hebt.
+- `VKINFO` op een peilbuis geeft per filter (`buis1_...`): filter boven en onder, status, de meetreeksen, het
+  gemiddelde, de hoogste, laagste en laatste stand met het tijdstip, de eerste en laatste dag, het aantal metingen
+  en dagen, hoeveel regels niet meetellen en de jaren volgens de BRO; voor de put het maaiveld, de putcode, de oude
+  code uit het archief van TNO, de datum van inrichting, de functie, de datum van verwijderen (`datum_verwijderd`,
+  alleen bij een verwijderde put) en of de BRO de put in onderzoek heeft (`in_onderzoek`, zoals bij de sonderingen en
+  boringen).
+- De grijze onderlegger laat de peilbuizen in kleur, net als de sonderingen en boringen.
+- De peilbuizen zijn informatief: de standen zijn metingen van de bronhouder, niet door VLEA gecontroleerd.
+  Controleer periode, filterdiepte en aantal metingen voordat je een stand gebruikt.
+- Weghalen: `VKWISSEN`, keuze `Selectie`, het symbool of een regel van het label aanklikken; symbool en label gaan
+  samen weg. Alle peilbuizen weg: `VKWISSEN` en dan `peilbuizen`. De CSV-bestanden in de map blijven staan.
+
+Een script, één regel per vraag (het stationsgebied in Amersfoort; daar stonden op 09-10-2026 drie peilbuizen, twee
+oude met metingen van 1952 tot 1996 en 2000):
+
+```text
+VKPEILBUIZEN
+C
+153944,462553,154444,463053
+aantal=10,vervangen=ja
+```
+
+### Wegen en hectometrering (`VKNWB`)
+`VKNWB` tekent de wegassen van het Nationaal Wegenbestand op `B-WE-AM-AS_WEG-G` en, met de optie
+`hectometrering` (standaard aan), een hectometerpaal op elk hectopunt in het gebied:
+- Een **oranje bordje** van 5,1 x 2,7 m op een paal van 1 m, met een cirkeltje op het hectopunt. Op het bordje
+  staat boven het wegnummer (`A28`, of een N-weg) en onder de hectometer (`31,7`, met de letter van een parallelbaan
+  erachter: `31,6 c`), 0,9 m hoog en in het midden, zoals op het bordje langs de weg en zoals de hectometrering die
+  het portaal in de tekening laadt. Heeft de weg geen nummer (bijvoorbeeld een gemeentelijke weg), dan staat alleen
+  de hectometer midden op het bordje.
+- Het bordje is het blok `VK_HECTOMETERPAAL_BORD` op `B-WE-VW-HECTOMETRERING-S`, met de onzichtbare attributen
+  `WEG` en `HM` (handig voor een gegevensextractie). De twee teksten staan op `B-WE-VW-HECTOMETRERING-T18`. Beide
+  lagen zijn oranje (kleur 30), een keuze van VLEA: de NLCS-objectentabel geeft het bordje kleur 7 en de tekst
+  kleur 10. Wil je die kleuren, zet de lagen dan zo in je sjabloon vóór het laden (zie 7).
+- Ligt een hectopunt vlak bij de rand van het gebied, dan steekt het bordje erover; de tekst blijft op het bordje.
+- Een hectometerpaal uit een eerdere versie (`VK_HECTOMETERPAAL`, een klein bordje met het label ernaast) blijft
+  zoals hij is. Laad opnieuw met Vervangen voor de nieuwe bordjes, en ruim de oude blokdefinitie op met `PURGE`.
+  Lagen die al in je tekening staan, houden hun kleur; `VKSTIJL` met de keuze `Nlcs` maakt ze oranje.
+
+### Riolering (`VKRIOOL`)
+`VKRIOOL` tekent de riolering die gemeenten aan GWSW leveren (niet elke gemeente doet dat) op de NLCS-lagen voor
+riolering: leidingen, putten (blok `VK_RIOOLPUT`), pompen, bouwwerken, lozingspunten en, met de optie `aansluitingen`,
+de huisaansluitingen. De laag volgt uit het soort object en het stelsel (gemengd, vuil water, hemelwater …). De
+teksten staan allemaal op `B-OI-RI-T18`:
+- **Materiaal en diameter** (optie `labels`): boven het midden van de leiding, kort: `PVC Ø315`, `Beton Ø400`,
+  `PP Ø300` (polypropyleen), `Gew. beton 2000x1200` (breedte x hoogte bij een niet-ronde buis). Ook PE, HDPE, GVK
+  en AC (asbestcement). "Onbekend" en "Anders" laat VLEA weg.
+- **Bob** (optie `hoogtes`): de binnenonderkant van de buis in m t.o.v. NAP, onder de lijn, bij het eind waar hij
+  geldt: 1 m van de put, de leiding in, `bob -3,23 m NAP`. Op een korte leiding (korter dan ruim 20 m) passen er geen
+  twee naast elkaar: dan staat er één label onder het midden met beide waarden, links de bob van het linker eind,
+  `bob +1,82 / +1,81 m NAP`. Een eind buiten het gebied krijgt geen bob, en een leiding met bob 0 aan beide kanten
+  ook niet: zo vullen sommige gemeenten "onbekend". Niet bij huisaansluitingen: daar is aan de kant van het pand
+  geen put, en in een stad zou elke gevel een label krijgen. De bob van een aansluitleiding zie je met `VKINFO`.
+- **Putnaam en maaiveld** (ook optie `hoogtes`): naast de put, boven de naam (`150152`) en onder het maaiveld
+  (`mv -1,97 m NAP`). Ze staan rechts van de put, of links als daar minder bob- en materiaallabels van de leidingen in
+  de weg staan; zo valt de bob van een leiding die naar rechtsboven loopt niet over de putnaam. Bij dichte groepen
+  putten en korte leidingen kan een tekst nog over een andere vallen: verschuif hem dan met de hand. Een lange code als
+  naam (meer dan 16 tekens) en een maaiveld van precies 0 laat VLEA weg; de onzichtbare attributen `PUT` en `MV` van
+  het blok houden de waarden zoals de gemeente ze levert.
+- Een put zonder stelsel krijgt het stelsel van de leidingen die erop aansluiten, als dat er één is; heeft geen van die
+  leidingen een stelsel, dan telt hun soort (een gemengd riool hoort bij een gemengd stelsel). VLEA meldt hoeveel
+  putten zo een stelsel kregen. Lukt het niet, dan staat de put op `B-OI-RI-OVERIG_RIOOLPUT-S` (magenta).
+- Nieuwere GWSW-begrippen die de NLCS-tabel voor riolering (5.0) niet kent, zoals een uitlaatconstructie of een
+  verbeterd hemelwaterstelsel, krijgen de laag van het begrip dat er het dichtst bij ligt (een HWA-uitlaatconstructie).
+  De lijst staat in de laagtabel; staat er toch "objecten zonder laagtoewijzing", meld het dan.
+
+### Het AHN-hoogtemodel (`VKAHN`)
+`VKAHN` maakt in Civil 3D van het AHN (Actueel Hoogtebestand Nederland) een hoogtemodel, één per gebied (zie 5). In
+AutoCAD zonder Civil 3D staat AHN in het palet grijs; de hoogte op een punt (`VKAHNPUNT`) werkt wel.
+
+**Welke AHN-versie.** VLEA haalt het AHN bij PDOK, en PDOK levert één versie: **AHN4**, ingewonnen in 2020, 2021 en
+2022, met pixels van 0,5 m (zo gemeten op 9 oktober 2026). Een versie kiezen kan daarom niet. Nieuwere metingen (AHN5
+en AHN6) bestaan wel, maar alleen bij het AHN zelf, voor een deel van het land en niet bij PDOK; VLEA haalt geen
+kaarten buiten PDOK (zie 9, Netwerk). Het instellingenvenster zegt het ook, onder **AHN hoogtemodel** en onder **Hoogte
+op een punt**. De versie staat in de bronvermelding ("AHN4 DTM 0,5 m"), op de opdrachtregel na het laden en in de
+gegevens van het model en van elk hoogtepunt (`VKINFO`: `vk_ahn_versie`). Zet PDOK er ooit een andere versie achter,
+dan staat dat in de wijzigingen van een nieuwe versie van VLEA.
+
+De keuzes (tandwiel, **Kaarten**, **AHN hoogtemodel**; getypt bij `VKAHN` als `model=dsm,stap=2`, in `VKLADEN` als
+`ahn.model` en `ahn.stap`):
+- **Model.** **Maaiveld (DTM 0,5 m)** (`model=dtm`, de standaardkeuze): het terrein, zonder gebouwen en begroeiing;
+  onder panden en op water heeft het geen hoogte. **Oppervlak met gebouwen en begroeiing (DSM 0,5 m)** (`model=dsm`):
+  de bovenkant van wat er staat, dus geen maaiveld en niet voor een terreinmodel. Het model heet dan "VLEA AHN DSM RD …".
+- **Rasterstap**: hoe dicht de punten van het model liggen. **Zo fijn als kan** (`stap=fijnst`, de standaardkeuze): een
+  punt per pixel van 0,5 m, bij een groter gebied vanzelf grover, zodat het model onder de 150.000 punten blijft
+  (0,25 km²: 1,5 m, 1 km²: 3 m, 4 km²: 5,5 m). **1 m**, **2 m** of **5 m** (`stap=1`, `stap=2`, `stap=5`): een lichter
+  model met minder punten, bijvoorbeeld voor een overzicht of een lang tracé. Vraagt het gebied al een grovere stap,
+  dan wint die; de opdrachtregel zegt dat dan.
+- Bij elke stap is elk punt de hoogte van één echte AHN-pixel, op het midden van die pixel: VLEA middelt en
+  interpoleert niets. Het ophalen bij PDOK blijft gelijk (altijd pixels van 0,5 m), dus een grovere stap laadt niet
+  sneller; alleen het model wordt lichter.
+- Na het laden staat er bijvoorbeeld: "AHN DTM: hoogtemodel 'VLEA AHN RD 154950-462950 100x100' uit AHN4 (ingewonnen
+  2020-2022) met 1.260 punten op een raster van 2,0 m." Een tweede model van hetzelfde gebied met een andere stap
+  krijgt dezelfde naam; je antwoord op de vraag Vervangen, Erbij of Overslaan beslist (zie 5).
+
 ### Tijdens en na het laden
 - Tijdens het ophalen zie je per kaart de voortgang (pagina's en objecten; PDOK geeft vooraf geen
   totaal). **Annuleren** of Esc stopt het ophalen binnen enkele seconden; er wordt dan niets half
@@ -423,7 +745,8 @@ Meer over `Selectie`, ook voor andere kaarten: zie 5.
   (gemeten in de AutoCAD-kern). Windows kan dan "reageert niet" tonen: wacht tot het klaar is. Esc
   tijdens het tekenen draait alles terug.
 - Staat er na het laden "N objecten zonder laagtoewijzing", dan heeft PDOK een waarde geleverd die
-  VLEA nog niet kent. Die objecten staan op een aparte laag. Meld het gerust als issue.
+  VLEA nog niet kent. Die objecten staan op een aparte laag (de terugvallaag van die kaart, bij riolering
+  `…OVERIG_RIOOLLEIDING-G` of `…OVERIG_RIOOLPUT-S`). Meld het gerust als issue.
 
 ### Op de opdrachtregel en in een script
 `VKLADEN` zonder palet vraagt achtereenvolgens: het gebied (`Opgeslagen`, `Rechthoek`, `Polylijn` of
@@ -466,7 +789,8 @@ op een kopie van je tekening.
 
 ### Hoogte op een punt (`VKAHNPUNT`)
 Wijs een of meer punten aan (of typ `x,y`); Enter of Esc stopt. Per punt haalt VLEA bij PDOK de
-AHN-hoogte van de pixel van 0,5 x 0,5 m waarin het punt valt (geen gemiddelde van buurpixels) en tekent:
+AHN-hoogte van de pixel van 0,5 x 0,5 m waarin het punt valt (geen gemiddelde van buurpixels; AHN4, de enige versie bij
+PDOK, zie 4, Het AHN-hoogtemodel) en tekent:
 
 - een punt op die hoogte (z) op de laag `B-WE-OG-HOOGTEPUNT-G`, en
 - een label "NAP +4,98 m" rechts van het punt op `B-WE-OG-T18` (0,9 m hoog).
@@ -501,6 +825,181 @@ Breedte
 Laatste
 ```
 
+### Punten uit Excel of CSV (`VKPUNTEN`)
+Zet punten uit een eigen lijst in de tekening: per rij een punt op zijn hoogte en een leider (multileader) met de
+naam en "NAP +1,23 m". Start met de knop **Punten inlezen** in het palet of op het lint, of typ `VKPUNTEN`. Werkt
+zonder internet en zonder Civil 3D; het bestand blijft op je eigen pc.
+
+- **Bestanden:** `.xlsx` en `.xlsm` (het eerste zichtbare werkblad; macro's leest VLEA niet), `.csv`, `.txt` en
+  `.tsv` (puntkomma, tab, komma, `|` of spaties; UTF-8, of zoals Nederlandse Excel een CSV opslaat). Een oud
+  Excel-bestand (`.xls`), een bestand met een wachtwoord, `.xlsb` en `.ods` leest VLEA niet: sla ze op als `.xlsx`
+  of `.csv`. Een bestand dat open staat in Excel, leest VLEA zoals het opgeslagen is. Hoogstens 50 MB en 200.000
+  rijen.
+- **Alleen RD:** X en Y zijn RD-coördinaten en de hoogte is in meters ten opzichte van NAP. VLEA rekent niets om.
+  Lengte- en breedtegraden en lokale coördinaten herkent VLEA en zegt dat in een zin.
+- **Kolommen:** met een kopregel herkent VLEA de kolommen aan de kop: `Nr`, `X`, `Y`, `NAP`, `Omschrijving`, maar
+  ook `x-coördinaat`, `oost`, `noord`, `maaiveld`, `hoogte`, `boring`, `opmerking`, Engelse koppen en de letters
+  `P;N;E;Z;C` van een landmeter. Zonder kopregel kijkt VLEA naar de waarden: twee kolommen naast elkaar in het bereik
+  van RD zijn X en Y (in welke volgorde ook), de eerstvolgende kolom met getallen tussen -50 en +400 is de hoogte, de
+  kolom ervoor de naam en de laatste kolom met tekst de omschrijving. Een kolom `diepte`, `lengte` of `dikte` wordt
+  nooit de hoogte. De andere kolommen komen als gegevens bij het punt (`VKINFO`).
+- **Wat je ziet:** wat er gelezen is, welke kolom wat is, het eerste punt (met de coördinaten die VLEA las) en het
+  bereik van de hoogtes. Komt de indeling (deels) uit de waarden, dan vraagt VLEA eerst **Zijn de kolommen goed?
+  [Ja/Kolommen/Annuleren]**, zonder standaard. Daarna: `4 punten tekenen (schaal 1:500, tekst naam en hoogte, met
+  leiders), Enter = tekenen [Tekenen/Schaal/Tekst/Leiders/Kolommen/Annuleren]`.
+
+| Trefwoord | Keuze | Standaard |
+|---|---|---|
+| `Schaal` | de schaal waarop je afdrukt, 1:50 tot 1:5000; de tekst wordt 1,8 mm op papier (0,9 m op 1:500, 0,45 m op 1:250, 0,36 m op 1:200) | 1:500 |
+| `Tekst` | `NaamHoogte`, `Naam`, `Hoogte` of `Alles` (ook de omschrijving) | `NaamHoogte` |
+| `Leiders` | `Aan`, of `Uit` voor alleen de punten | `Aan` |
+| `Kolommen` | zelf kiezen: VLEA toont per kolom het nummer, de kop en twee voorbeelden, vraagt of de eerste rij een kopregel is en per rol het kolomnummer (0 = geen) | |
+
+- **Bij twijfel geen standaard:** lijken X en Y verwisseld, dan vraagt VLEA `Verwisselen`; lijkt de hoogtekolom
+  geen meters NAP (bijvoorbeeld centimeters), dan `Negeren` (alle punten op z = 0); staan er decimale komma's én
+  punten in het bestand, dan `Komma` of `Punt`.
+- **In de tekening:** het punt op `X-XX-AL-REFERENTIE-G`, op zijn hoogte; zonder hoogte op z = 0 (de samenvatting
+  zegt hoeveel, `VKINFO` toont dan `vk_geen_hoogte`). Hoe een punt eruitziet, bepalen `PDMODE` en `PDSIZE` van je
+  tekening; VLEA verandert die niet. De leider op `X-XX-AL-REFERENTIE-T18` (rood, zoals NLCS), met een gevulde pijl
+  op het punt, een korte knik en de tekst op een masker in de kleur van de achtergrond, in de leiderstijl
+  `VK_LEIDER_500` (de schaal staat in de naam; staat er al een stijl met die naam, dan blijft die zoals hij is) en
+  de tekststijl `VLEA_ISO`. Dezelfde lagen als een KML-import: er is geen laagnaam bijgekomen.
+- **Plaatsing:** in de volgorde van het bestand, eerst rechtsboven het punt, en verder weg of in een andere richting
+  als de tekst anders een andere tekst of een ander punt uit het bestand raakt. Lukt dat niet, dan staat de leider
+  rechtsboven en zegt de samenvatting hoeveel leiders niet vrij staan; verschuif ze met de grip. VLEA kijkt alleen
+  naar de punten uit het bestand, niet naar de kaart eronder.
+- **Overgeslagen:** een rij zonder bruikbare X of Y, of buiten RD, slaat VLEA over; een hoogte buiten -50 tot +400 m
+  wordt "geen hoogte". VLEA noemt het aantal en de eerste tien regelnummers (bij Excel het rijnummer dat Excel
+  toont). Bij meer dan 1.000 punten stelt VLEA voor alleen de punten te tekenen (Enter = ja); meer dan 50.000 punten
+  tekent VLEA niet in één keer.
+- **Opnieuw inlezen:** lees je hetzelfde bestand (dezelfde naam) nog eens in, dan vraagt VLEA
+  **[Vervangen/Erbij/Overslaan]**. Enter = Vervangen: de punten en leiders van de vorige keer gaan weg, ook wat je
+  er zelf aan veranderde (zoals een verschoven leider). Een ander bestand wordt nooit gewist. Wissen en tekenen
+  gaan in één keer: `U` maakt alles ongedaan, en Esc tijdens het tekenen ook.
+- `VKWISSEN` met de sleutel `punten` wist alle ingelezen punten met hun leiders; met `Selectie` gaat een punt met zijn
+  leider weg. `VKINFO` toont bij punt en leider het bestand, de rij, naam, omschrijving, hoogte en de andere kolommen.
+- `VKKMZ` neemt het punt mee naar Google Earth (met bron en rij), de leider niet.
+
+Een script met `FILEDIA` op 0 (een lege regel is Enter). Komt de indeling uit de waarden, zet dan `Ja` op de regel
+na het pad:
+
+```text
+FILEDIA 0
+VKPUNTEN
+"C:\Werk\punten.csv"
+
+FILEDIA 1
+```
+
+### NAP-hoogte in een lengteprofiel (`VKNAPSET`, `VKNAPLEADER`, `VKNAPUPDATE`)
+Zet in een lengteprofiel bij een aangewezen punt een leider met de NAP-hoogte. VLEA rekent die hoogte uit met een
+referentie: een punt op een lijn waarvan je de hoogte weet, en de verticale schaal van het profiel. Dit doet wat het
+LISP-script NAPLEADER deed. Werkt zonder internet en zonder Civil 3D; VLEA haalt niets op.
+
+1. **NAP-referentie** (`VKNAPSET`, eenmaal per tekening of na een andere schaal): wijs het punt aan op de lijn met de
+   bekende hoogte (of typ `x,y`), typ de NAP-hoogte van dat punt in meters en het aantal tekeneenheden per
+   hoogtemeter (de verticale schaal, groter dan 0). Enter = de waarde van de vorige referentie (de eerste keer 0 en
+   1). Er komt een liggend driehoekje met de punt op het aangewezen punt en daarnaast "NAP-REFERENTIE" en de hoogte,
+   bijvoorbeeld "NAP +1,25 m". Trefwoord bij het aanwijzen: `Teksthoogte` (de hoogte van symbool en teksten in
+   tekeneenheden, standaard 0,5; hij geldt voor alle leiders die je daarna zet). Een vorige referentie, ook die van
+   het LISP-script, wordt vervangen, pas nadat de nieuwe er staat. Staan er in dezelfde ruimte al leiders, dan
+   vraagt VLEA **Hier staan al 3 NAP-leiders. Herberekenen met de nieuwe referentie [Ja/Nee] <Ja>**: met `Ja`
+   rekenen ze met de nieuwe referentie, met `Nee` houden ze die van toen ze getekend werden.
+2. **NAP-leider** (`VKNAPLEADER`): wijs het punt aan waarvan je de hoogte wilt weten. De opdrachtregel noemt de
+   hoogte, bijvoorbeeld "NAP +3,50 m. Wijs de plek van de tekst aan"; wijs die plek aan. Er komt een leider met een
+   pijl op het punt en de tekst in een kader met een masker. Dat herhaalt tot Enter; Enter bij de plek van de tekst
+   slaat dat ene punt over. Daarna "3 NAP-leiders geplaatst." De hele reeks is één keer `U`. Is er nog geen referentie
+   in de tekening, dan begint VLEA met stap 1.
+3. **NAP herberekenen** (`VKNAPUPDATE`): heb je een leider verschoven, dan klopt zijn tekst pas weer na herberekenen:
+   "NAP-leiders: 2 herberekend, 5 ongewijzigd." Elk NAP-commando rekent aan het eind ook de andere leiders na en zegt
+   het als er een veranderd is. Anders dan het LISP-script werkt een leider zich niet vanzelf bij na verschuiven.
+
+- **De berekening:** NAP = de hoogte van de referentie + (Y van het punt - Y van de referentie) / de verticale schaal.
+  VLEA rekent met de Y van het wereldstelsel, net als het LISP-script. Is het UCS gedraaid, dan zegt VLEA dat; zet het
+  UCS dan op Wereld (`UCS`, Enter). Elke leider bewaart de referentie waarmee hij getekend is (zie `VKINFO`), zodat
+  leiders van een ander profiel hun eigen hoogte houden.
+- **Eenheid en plek:** de eenheid van de tekening doet er niet toe, alleen de verticale schaal die je opgeeft; een
+  tekening in millimeters krijgt één regel uitleg. RD speelt geen rol. De referentie hoort bij de ruimte waarin hij
+  staat: de modelruimte of de papierruimte van een layout. Werk je in een andere ruimte, dan zegt VLEA waar de
+  referentie staat; stel daar zo nodig een nieuwe in.
+- **In de tekening:** symbool en tekst op `HDD-NAP-REFERENTIE` (kleur 7), de leiders op `HDD-NAP-LEADER` (kleur 1,
+  rood), allebei 0,25 mm: dezelfde lagen als het LISP-script, dus je laagfilters en plotstijlen blijven kloppen. Een
+  bestaande laag blijft zoals hij is; staat hij uit of bevroren, dan zegt VLEA dat de leider er wel staat maar niet te
+  zien is. Tekst in de tekststijl `VLEA_ISO`, leiders in de leiderstijl `VK_LEIDER_NAP` (een bestaande stijl met die
+  naam blijft zoals hij is; pijl, knik, kader en masker zet VLEA per leider). Kleur, lijntype en lijndikte
+  DOORLAAG.
+- **Tekeningen met het LISP-script:** VLEA leest de referentie en de leiders van het script en rekent ermee; de
+  opdrachtregel zegt dat. **NAP herberekenen**, en **NAP-referentie** met `Ja`, nemen de leiders van het script over:
+  daarna houdt alleen VLEA ze bij en heeft de tekst een komma ("NAP +1,25 m"; het script schreef "NAP +1.25 m"). Een
+  gewoon NAP-commando neemt niets over; het zegt alleen hoeveel leiders nog van het script zijn. Haal het script na
+  het overnemen uit je opstartset (`APPLOAD`), zodat er niet twee systemen naast elkaar werken.
+- Een leider met meer dan één leiderlijn, of zonder gewone tekst, rekent VLEA niet na; de melding zegt hoeveel.
+- `VKWISSEN` kent de sleutels `nap-referentie` en `nap-leader`; `VKINFO` toont bij een leider de referentie, de
+  verticale schaal en de laatst berekende hoogte. `VKKMZ` neemt de leiders niet mee naar Google Earth.
+
+Een script (getallen met een punt, een lege regel is Enter). Staan er al leiders, dan vraagt `VKNAPSET` of ze
+herberekend worden: zet dan `Ja` of `Nee` op de regel na de verticale schaal.
+
+```text
+VKNAPSET
+10,50
+1.25
+10
+VKNAPLEADER
+60,70
+65,75
+
+VKNAPUPDATE
+```
+
+### Maatlijnen langs een lijn (`VKMAAT`)
+Zet bij elk stuk van een lijn of polylijn een maat: de rechte afstand tussen de twee hoekpunten, op een maatlijn
+2 m van dat stuk. Dit doet wat het LISP-script VERTEXMAAT deed, met een paar verschillen (hieronder). Typ `VKMAAT`;
+er is geen knop in het palet. Werkt zonder internet.
+
+- **Kiezen:** "Kies een lijn of polylijn voor maatlijnen op 2 m (open lijn: rechts van de tekenrichting)
+  [Afstand/Kant/Laatste]". Eén klik op de lijn is genoeg. Een lijn, een polylijn (ook met bogen) en een oudere 2D- of
+  3D-polylijn kan VLEA bematen; een afgevlakte polylijn (spline of passende kromme), een boog, cirkel of spline niet:
+  dan zegt VLEA waarom en vraagt opnieuw.
+- **Meer lijnen tegelijk:** kies ze eerst (bijvoorbeeld met een venster) en typ dan `VKMAAT`. Alle lijnen en
+  polylijnen in die keuze krijgen maten, zonder vraag; andere objecten slaat VLEA over en telt het.
+- **Trefwoorden:** `Afstand` (van de maatlijn tot de lijn, 0,1 tot 100 m; typen of twee punten aanwijzen),
+  `Kant` (bij een open lijn `Rechts` of `Links` van de tekenrichting, standaard rechts) en `Laatste` (het laatst
+  getekende object, handig in een script).
+- **Gesloten polylijn:** de maten staan altijd buiten de vorm, ook bij een inspringende hoek (een L-vorm). Een
+  polylijn waarvan het laatste punt op het eerste ligt, telt ook als gesloten. Een gesloten lijn zonder oppervlak
+  (heen en terug over dezelfde lijn) bemaat VLEA niet; een lijn die zichzelf kruist wel, met een melding.
+- **Bogen:** de maat is de rechte afstand tussen de twee hoekpunten (de koorde), niet de lengte van de boog. Steekt
+  de boog naar de kant van de maat uit, dan komt de maatlijn 2 m buiten de boog. De melding zegt hoeveel stukken een
+  boog waren.
+- **In de tekening:** uitgelijnde maten op de laag `X-XX-AL-REFERENTIE-M` (kleur 7, 0,18 mm) met de maatstijl
+  `VK_MAAT`: tekst 1,0 m (2 mm op papier bij 1:500) boven de maatlijn en meelopend, met een masker zodat kaartlijnen
+  niet door de cijfers lopen; twee decimalen met een komma ("12,35"); pijlen van 1,0 m; kleur, dikte en lijntype van de
+  laag. Je actieve maatstijl en je eigen maatinstellingen blijven zoals ze waren. Een bestaande laag of maatstijl met
+  die naam blijft zoals hij is: pas je `VK_MAAT` aan, dan volgen de nieuwe maten jouw stijl.
+- **Daarna:** "Maatlijnen: 8 getekend op 2 m van de lijn (…). Terugdraaien: U; alle maatlijnen wissen: VKWISSEN,
+  maat." `U` haalt alles van die keer weg. Eén maat weghalen gaat gewoon met Delete. De maten zijn niet gekoppeld aan
+  de lijn: verplaats je de lijn, dan blijven de maten staan. Twee keer `VKMAAT` op dezelfde lijn geeft de maten dubbel.
+- Stukken korter dan 5 mm (ook een dubbel punt) krijgen geen maat; de melding zegt hoeveel. Hoogstens 500 maten per
+  keer: bij meer tekent VLEA niets en zegt het dat.
+- Alleen in een tekening in meters, en alleen voor lijnen in de modelruimte. De maat staat op z = 0.
+- `VKINFO` op een maat toont de lijn, het stuk, de lengte, de afstand en of het een boog was.
+- **Verschil met het LISP-script:** de maten komen op de vaste laag `X-XX-AL-REFERENTIE-M` in de stijl `VK_MAAT` (het
+  script tekende op de huidige laag met de huidige maatstijl); bij een L-vorm of een scheve vorm staan ze nu buiten,
+  op precies 2 m (het script zette ze vanuit het gemiddelde van de hoekpunten, soms binnen de vorm); bij een open
+  lijn kun je de kant kiezen; een boog wordt gemeld. Afstand, tekst, pijlen en hulplijnen zijn dezelfde.
+
+Een script dat de laatst getekende lijn bemaat, op 3 m en bij een open lijn links (getallen met een punt):
+
+```text
+VKMAAT
+Afstand
+3
+Kant
+Links
+Laatste
+```
+
 ## 5. Opnieuw laden en wissen
 - Laad je een kaart in een gebied waar die kaart al (deels) staat, dan vraagt VLEA op de
   opdrachtregel **[Vervangen/Erbij/Overslaan]**, ook als je vanuit het palet laadt:
@@ -527,7 +1026,8 @@ Laatste
   - Bij een KLIC-levering gaat dit per meldnummer, niet per plek: een andere levering wordt nooit
     gewist (zie 6).
 - `VKWISSEN` wist eigen imports, per kaart te kiezen (of `Alle`). Andere objecten in de tekening blijven
-  staan. Hoogtepunten staan erin als `ahn-punt`, contouren als `contour`.
+  staan. Hoogtepunten staan erin als `ahn-punt`, contouren als `contour`, punten uit een bestand (`VKPUNTEN`) als
+  `punten`, het NAP-gereedschap als `nap-referentie` en `nap-leader`, en maatlijnen (`VKMAAT`) als `maat`.
   - Typ de sleutel van een kaart voluit, ook als hij het begin is van een andere (`bgt` naast `bgtbeeld`,
     `ahn` naast `ahn-punt`); hoofdletters maken niet uit. Alleen `Alle` en `Selectie` mag je afkorten, tot `A`
     en `S`, zoals overal in AutoCAD. Een losse `s` is daarom altijd Selectie, ook als `sonderingen` of `spoor`
@@ -540,7 +1040,8 @@ Laatste
   zegt daarna per kaart wat er weg is.
   - Een label hoort bij zijn object: klik je het label aan, dan gaat het object mee. Een huisnummer van de
     BGT neemt het pand mee (met zijn andere huisnummers), een huisnummer van de BAG het adrespunt, het label
-    van een rioolleiding die leiding, de tekst bij een hectometerpaal het paaltje. Van een straatnaam gaan
+    van een rioolleiding die leiding, een tekst op een hectometerbordje het hele bordje (de paal en beide
+    teksten). Van een straatnaam gaan
     alle plekken waar die naam staat samen weg. Een perceelnummer en een kilometertekst van het spoor staan
     op zichzelf. Wil je alleen een tekst weg, gebruik dan het gewone `ERASE` van AutoCAD: dat haalt alleen
     weg wat je aanwijst.
@@ -689,6 +1190,46 @@ water, hemelwater). Op de lagen van kabels, leidingen en mantelbuizen loopt het 
 (lijntypegeneratie aan per polylijn): ook een kabel met veel korte stukken krijgt zijn streepjes en letters. Wil
 je dat voor een polylijn niet, zet het dan uit met `PEDIT` (optie Ltype gen) of in het eigenschappenvenster.
 
+**Symbolen.** Een put, kast, mast, toren, technisch gebouw of leidingelement wordt een blok op de symboollaag
+(`-S`) van zijn thema, met de draaiing uit de levering. Welk symbool het wordt, hangt af van de klasse, bij een
+leidingelement van de soort (`appurtenanceType`) en daarna van het thema. Staat de soort niet in de lijst, dan kijkt
+VLEA nog of "brandkraan" of "lichtmast" in het label staat; anders is het een cirkel. De bloknaam is de naam uit de NLCS
+5.02-symbooltabel met `VK_` ervoor (`VK_` staat voor elk blok van VLEA: een blok onder dezelfde naam van andere
+software in je tekening zou AutoCAD anders gebruiken in plaats van dat van VLEA). Heeft NLCS voor die soort in dat thema
+geen naam, dan heet het blok `VK_KLIC_…`. De vormen zijn van VLEA zelf. Elk blok heeft de onzichtbare attributen
+TYPE (de soort uit de levering, bij een put, kast, mast, toren of technisch gebouw de klasse), LABEL en OMSCHRIJVING
+(van de netbeheerder; leeg als de levering ze niet heeft). Je ziet ze met `ATTDISP`, `EATTEDIT` of een
+gegevensextractie. Grootte: de meeste symbolen 0,20 m (zoals in het portaal; nooit kleiner), een put 0,225 m, een kast
+0,40 x 0,20 m, een technisch gebouw en een hoogspanningsmast 0,40 m, een brandkraan 0,50 x 0,27 m.
+
+In de lijst is elektra laag-, midden- en hoogspanning en het landelijk hoogspanningsnet; "andere leidingen" zijn gas,
+water, warmte, petrochemie, gevaarlijke inhoud, overig, wees en een thema dat VLEA niet kent.
+
+| Symbool (soort in de levering) | Vorm | Bloknaam |
+|---|---|---|
+| leidingelement zonder eigen symbool | cirkel | `VK_KLIC_HULPSTUK` |
+| mof | cirkel met een streep dwars | elektra `VK_SKL-ET_HULP_MOF-SO`, datatransport `VK_SKL-DATA_HULP_MOF-SO`, anders `VK_KLIC_MOF` |
+| afsluiter | twee driehoeken punt aan punt | riool `VK_SRI-HULP_AFSLUITER-SO`, andere leidingen `VK_SKL-WTB_HULP_AFSLUITER-SO`, elektra en datatransport `VK_KLIC_AFSLUITER` |
+| verloopstuk (`verloop`, `verloopstuk`, `overgangsstuk`, `diameterovergang`) | trapezium | riool `VK_SRI-HULP_VERLOOPSTUK-SO`, andere leidingen `VK_SKL-WTB_HULP_VERLOOPSTUK-SO`, elektra en datatransport `VK_KLIC_VERLOOPSTUK` |
+| materiaalovergang | rechthoek in twee helften | andere leidingen `VK_SKL-WTB_HULP_MATERIAAL-SO`, anders `VK_KLIC_MATERIAALOVERGANG` |
+| aftakking (`tstuk`, `aftakzadel`, `aftakking`, `aftakmof`) | T | elektra `VK_SKL-ET_HULP_MOF_AFTAKMOF-SO`, anders `VK_KLIC_AFTAKKING` |
+| eindkap (`eindkap`, `eindmof`, `eindsluiting`, `blindflens`) | streep dwars op het eind | elektra `VK_SKL-ET_HULP_MOF_EINDMOF-SO`, riool `VK_SRI-HULP_EINDKAP-SO`, andere leidingen `VK_SKL-WTB_HULP_EINDKAP-SO`, datatransport `VK_KLIC_EINDKAP` |
+| aansluitpunt (`deliveryPoint`, `puntVanLevering`, `waterServicePoint`, `aansluitpunt`) | ruit | elektra `VK_SKL-ET_HULP_AANSLUITPUNT-SO`, andere leidingen `VK_SKL-WTB_HULP_AANSLUITPUNT-SO`, datatransport en riool `VK_KLIC_AANSLUITPUNT` |
+| meetpunt kathodische bescherming (`kbMeetpunt`, `controleelement`) | driehoek | andere leidingen `VK_SKL-WTB_HULP_METER_KATHODISCHE BESCHERMING-SO`, anders `VK_KLIC_MEETPUNT` |
+| aarding | steel met drie strepen | `VK_SKL-ET_AARDING-SO` |
+| meter | cirkel met een M | andere leidingen `VK_SKL-WTB_HULP_METER_HOEVEELHEID-SO`, anders `VK_KLIC_METER` |
+| overlengte (`overlengte`, `kabelrol`) | cirkel met een kleinere erin | elektra `VK_SKL-ET_KABELROL-SO`, datatransport `VK_SKL-DATA_KABELROL-SO`, anders `VK_KLIC_OVERLENGTE` |
+| brandkraan (`fireHydrant`, `brandkraan`, of in het label) | cirkel met twee uitlopen | `VK_SKL-WATER_BRANDHYDRANT-SO` |
+| lichtmast (`streetLight`, `lichtmast`, of in het label) | kleine cirkel met vier stralen | `VK_SIE-MEUBILAIR_PAAL_LICHTMAST-SO` |
+| put (klasse Mangat; `inspectieput`, `handhole`, `put`) | twee cirkels | riool `VK_SRI-PUT_INSPECTIE-SO`, gas `VK_SKL-GAS_PUT-SO`, water `VK_SKL-WATERLEIDINGPUT-SO`, warmte `VK_SKL-WTB_WARMTENET_PUT-SO`, andere leidingen `VK_SKL-WTB_PUT-SO`, elektra en datatransport `VK_SIE-MEUBILAIR_PUT-SO` |
+| kast (klasse Kast; `kast`) | rechthoek met een diagonaal | elektra `VK_SKL-ET_TERREINKAST-SO`, datatransport `VK_SKL-DATA_TERREINKAST-SO`, gas `VK_SKL-GAS_TERREINKAST-SO`, water `VK_SKL-WTB_HULP_TERREINKAST_WATER-SO`, riool `VK_SIE-MEUBILAIR_KAST_RIOOL-SO`, anders `VK_SIE-MEUBILAIR_KAST-SO` |
+| mast of toren (klasse Mast of Toren; `mast`) | hoogspanning: vierkant met kruis; anders cirkel met kruis | hoogspanning en landelijk hoogspanningsnet `VK_SKL-ET_HS_MAST-SO`, laagspanning `VK_SKL-ET_LS_MAST-SO`, datatransport `VK_SKL-DATA_ZENDMAST-SO`, anders `VK_SIE-MEUBILAIR_MAST-SO` |
+| technisch gebouw (klasse TechnischGebouw; `technischgebouw`, `substation`) | elektra: vierkant met bliksempijl; anders vierkant met een diagonaal | elektra `VK_SKL-ET_TRANSFORMATORSTATION-SO`, anders `VK_KLIC_TECHNISCH_GEBOUW` |
+
+Tot en met 0.2.4 was elk leidingelement dezelfde cirkel (`VK_KLIC_ELEMENT`, 0,30 m) en hadden put, kast, mast en
+gebouw elk één blok (`VK_KLIC_PUT`, `_KAST`, `_MAST`, `_GEBOUW`). Een tekening met die blokken houdt ze; zie de
+wijzigingen van 0.2.5 voor de weg terug.
+
 **Kleur en lijndikte.** De lagen hebben de kleur, het lijntype en de lijndikte van NLCS, met een paar
 bewuste afwijkingen, zodat mantelbuizen, leidingen met gevaarlijke inhoud en zones met een eis opvallen en
 bijzaken naar de achtergrond gaan:
@@ -813,6 +1354,11 @@ FILEDIA
   worden `<=` en `>=`, en het diameterteken (⌀) wordt Ø. Andere tekens die `isocp.shx` niet kent (bijvoorbeeld de
   meeste Griekse letters of ‰) worden een vraagteken. Staan die in je teksten, zet dan met `STYLE` het lettertype van
   `VLEA_ISO` op `isocpeur.ttf` (tot en met 0.2.3 het lettertype van VLEA; het geldt dan voor alle teksten in die stijl).
+- Het NAP-gereedschap in een lengteprofiel tekent op twee eigen lagen buiten NLCS: `HDD-NAP-REFERENTIE` (kleur 7) en
+  `HDD-NAP-LEADER` (kleur 1), dezelfde als het LISP-script NAPLEADER. `VKSTIJL` met `Grijs` laat die twee staan: een
+  NAP-leider hoort bij het profiel, niet bij de onderlegger. `Nlcs` en `Terug` gelden er wel voor.
+- De maatlijnen van `VKMAAT` staan op `X-XX-AL-REFERENTIE-M` (kleur 7, 0,18 mm). Ook die laag laat `VKSTIJL` met
+  `Grijs` staan: een maat is je eigen werk, geen onderlegger.
 - Stuur je een tekening naar iemand zonder VLEA: gebruik eTransmit, zodat `NLCS.shx` meegaat.
 
 ## 8. Bronvermelding
@@ -847,8 +1393,10 @@ staat het adres op de opdrachtregel. De lintknop **Help** doet hetzelfde als `VK
 ### Netwerk
 De kaarten komen van PDOK. Twee uitzonderingen: de zones langs waterkeringen van Rijkswaterstaat
 komen uit de legger van Rijkswaterstaat (`geo.rijkswaterstaat.nl`; zet de optie `rws` uit als je dat
-niet wilt), en voor de sonderingen praat VLEA met de openbare uitgifte van de BRO
-(`publiek.broservices.nl`): het zoekt daar sonderingen in je gebied en haalt ze op, verder niets.
+niet wilt), en voor de sonderingen en boringen praat VLEA met de openbare uitgifte van de BRO
+(`publiek.broservices.nl`): het zoekt daar sonderingen of boringen in je gebied en haalt ze op, verder niets. Voor
+de peilbuizen zoekt VLEA bij PDOK (de kengegevens van de BRO) en haalt het bij de BRO alleen de meetreeksen van de
+gekozen peilbuizen op (met de optie `standen` uit: niets bij de BRO).
 
 VLEA kijkt hoogstens één keer per dag bij GitHub (`api.github.com`) of er een nieuwere versie is en
 zet dan een regel onderaan het palet. GitHub ziet daarbij je IP-adres en het versienummer; verder
@@ -862,6 +1410,9 @@ enige verzoeken aan die bronnen waar je zelf niets voor doet. De bron ziet daarb
 Uitzetten kan in de instellingen (tandwiel, **Algemeen**), met het vinkje "Status van de bronnen tonen".
 `VKSTATUS` vraagt altijd alle bronnen, ook de legger van Rijkswaterstaat, ook als de optie `rws` of "Status van de
 bronnen tonen" uit staat: het is een commando dat je zelf start.
+
+Een KLIC-levering (`VKKLIC`) en eigen grondonderzoek (`VKGEF`) leest VLEA alleen van je eigen schijf; daarbij
+maakt VLEA geen verbinding.
 
 Alleen als je `VKUPDATE` start (typen, de knop **Bijwerken** in het palet of op het lint, of de regel
 "Nieuwe versie beschikbaar" onderaan het palet), maakt VLEA ook verbinding met `github.com` en
@@ -1032,6 +1583,37 @@ VKDINO
 
 ```
 
+### Geografische plek in AutoCAD (`VKGEOPLEK`)
+Met `VKGEOPLEK` (in het palet bij het gereedschap: **Geografische plek**) zet je de geografische plek van de
+tekening op RD (EPSG:28992; in AutoCAD heet dat coördinatensysteem `Amersfoort-RDNew`). Dan weet AutoCAD
+waar de tekening ligt: met `GEOMAP` zet je de online kaart van AutoCAD onder je tekening (daarvoor ben je
+aangemeld bij Autodesk), en `GEOMARKER` toont de markering van de plek. Er opent geen browser.
+
+- VLEA zet de plek zo dat de tekeningcoördinaten precies de RD-coördinaten zijn, in meters en met het
+  noorden langs de y-as: er verschuift, draait of schaalt niets. Dat klopt als je tekening in RD staat,
+  zoals alles wat VLEA tekent.
+- De markering komt in het midden van het gebied dat je koos (zie 3), en zonder gebied in het midden van
+  het beeld. Waar de markering staat, verandert niets aan de plek van je tekening.
+- Heeft de tekening al een andere geografische plek (een ander coördinatensysteem, of RD met een
+  verschoven of gedraaide tekening), dan noemt de opdrachtregel die plek en vraagt
+  [Vervangen/Overslaan]; Enter = Overslaan. Heeft de tekening deze plek al, dan verandert er niets en zegt
+  de opdrachtregel dat.
+- Staat de tekening al op RD onder een andere code van AutoCAD, bijvoorbeeld de oudere
+  `Netherlands-RDNew`, dan zegt de opdrachtregel dat het ook RD is, maar een andere definitie. Die rekent
+  anders om naar lengte- en breedtegraad, dus de online kaart kan iets anders vallen. Met Vervangen krijg je
+  `Amersfoort-RDNew`; met Overslaan blijft de tekening zoals ze was.
+- VLEA zet niets in een tekening die niet in meters staat (zie 1), in de papierruimte als de tekening nog
+  geen gebied heeft (ga naar de modelruimte of kies eerst een gebied), als het midden van het beeld buiten
+  het RD-stelsel ligt (lokale coördinaten), en als AutoCAD het coördinatensysteem `Amersfoort-RDNew` niet
+  kent.
+- De plek weer weghalen: `GEOREMOVE` van AutoCAD.
+- Civil 3D en Map 3D hebben ook een eigen instelling voor het coördinatensysteem van de tekening; kijk daar
+  na of die RD is.
+- VLEA maakt hierbij geen verbinding. De online kaart is van AutoCAD zelf: AutoCAD haalt de kaartbeelden
+  op bij Autodesk, en die ziet dan welk gebied je bekijkt.
+- In een script: `VKGEOPLEK` vraagt alleen iets als de tekening al een andere plek heeft; zet er dan een
+  regel `Vervangen` of `Overslaan` achter.
+
 ## 12. Problemen oplossen
 | Wat je ziet | Wat je doet |
 |---|---|
@@ -1060,10 +1642,17 @@ VKDINO
 | "… objecten uit een KLIC-levering niet meegenomen" bij `VKKMZ` | Enter neemt geen KLIC mee: KLIC-gegevens zijn vertrouwelijk (WIBON). Wil je ze toch delen, kies de objecten dan zelf (zie 10). |
 | Na `VKKMZ` opent Google Earth niet | Er is geen programma gekoppeld aan .kmz-bestanden. Installeer Google Earth Pro, of open het bestand zelf: het pad staat op de opdrachtregel. |
 | `VKKMLIMPORT` meldt "buiten Nederland" | De gegevens liggen niet in Nederland, of in het bestand zijn lengte en breedte verwisseld. |
+| "Dit is een oud Excel-bestand (.xls)" of "met een wachtwoord beveiligd" bij `VKPUNTEN` | Open het bestand in Excel en sla het op als `.xlsx` of als `.csv` (zonder wachtwoord), en kies dat bestand. |
+| `VKPUNTEN` zet de punten op een rare plek, of zegt dat X en Y verwisseld lijken | Kies `Kolommen` en wijs X (oost, in Nederland tussen 0 en 280.000) en Y (noord, tussen 300.000 en 620.000) zelf aan. Kijk naar het eerste punt dat VLEA laat zien. Staan de punten in graden of in een eigen stelsel, reken ze dan eerst om naar RD. |
+| `VKPUNTEN` vindt geen kolommen, of vraagt naar het decimaalteken | Sla het bestand in Excel op als `.xlsx` of als CSV. Staan er decimale komma's én punten in, kies dan het teken van de coördinaten. |
+| Een punt van `VKPUNTEN` is niet te zien | Hoe een punt eruitziet, bepalen `PDMODE` en `PDSIZE` van de tekening; zet bijvoorbeeld `PDMODE` op 3. De leider wijst het punt aan. |
+| Leiders van `VKPUNTEN` overlappen | De samenvatting zegt hoeveel leiders niet vrij staan. Verschuif ze met de grip, kies bij `Schaal` de schaal waarop je afdrukt, of kies `Tekst` en dan `Naam` voor kortere teksten. |
+| Een NAP-leider toont een hoogte die niet klopt | Heb je hem verschoven, klik dan **NAP herberekenen** (`VKNAPUPDATE`). Klopt het daarna nog niet: kijk of het UCS op Wereld staat (`UCS`, Enter) en of de referentie en de verticale schaal goed zijn; stel ze zo nodig opnieuw in met **NAP-referentie** en kies `Ja`. |
+| `VKNAPLEADER` zegt dat de referentie in de andere ruimte staat | De referentie hoort bij de modelruimte of bij één layout. Ga naar die ruimte, of stel in de ruimte waar je werkt een nieuwe referentie in (`VKNAPSET`); de vorige wordt dan vervangen. |
 | "Dit bestand is geen KLIC-levering" | Kies de zip van het Kadaster of de XML `GI_gebiedsinformatielevering_….xml`, niet een bijlage of een bestand van een KLIC-viewer. |
 | "Kies de XML van de levering … of de zip" direct na het pad | Je koos een ander bestand of een map. Met `FILEDIA` = 0 zet AutoCAD `.xml` achter een getypt pad met een andere extensie. Typ het volledige pad naar de zip of de XML. |
 | De vraag bij dezelfde KLIC-levering heeft Overslaan als standaard | De nieuwe levering is ouder, niet compleet of niet te vergelijken met die in de tekening; de vraag zegt welke. Typ `V` als je toch wilt vervangen. |
-| `VKKLIC` of `VKKMLIMPORT` vraagt het pad op de opdrachtregel in plaats van een venster | `FILEDIA` staat op 0 (bijvoorbeeld na een afgebroken script). Typ `~` voor het venster, of zet `FILEDIA` op 1. |
+| `VKKLIC`, `VKGEF` of `VKKMLIMPORT` vraagt het pad op de opdrachtregel in plaats van een venster | `FILEDIA` staat op 0 (bijvoorbeeld na een afgebroken script). Typ `~` voor het venster (bij `VKGEF` dan het venster van AutoCAD, voor één bestand), of zet `FILEDIA` op 1. |
 | AutoCAD reageert even niet na een grote KLIC-levering | Het tekenen van 100.000 objecten of meer duurt 10 tot 20 seconden en is niet af te lezen aan een voortgang; wacht tot het klaar is. Zie 4 ("Tijdens en na het laden"). |
 | "In de zip staan meerdere leveringen" | In de zip (of in een zip in de zip) staan twee of meer leveringen. Pak de zip uit en kies de XML of de zip van één levering. |
 | "VOLLEDIGHEIDSCONTROLE KLOPT NIET" | Werk met de levering zelf en meld het als issue (zonder de levering mee te sturen). |
@@ -1071,7 +1660,8 @@ VKDINO
 
 Het log staat in `%LOCALAPPDATA%\VLEA-AutoCAD\logs\` (één bestand per dag, 14 dagen). Mappen staan
 er niet in, bestandsnamen wel. Id's en coördinaten uit een KLIC-levering komen er niet in (bij
-niet-getekende objecten alleen klasse, thema en reden). Plak bij een foutmelding alleen het relevante
+niet-getekende objecten alleen klasse, thema en reden). Van `VKPUNTEN` komt er alleen een regel met aantallen in:
+geen bestandsnaam, namen of coördinaten. Plak bij een foutmelding alleen het relevante
 stuk, en haal eerst bestandsnamen en coördinaten weg die iets over een project zeggen.
 
 ## 13. Belangrijk

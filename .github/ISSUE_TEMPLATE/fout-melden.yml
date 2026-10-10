@@ -11,7 +11,7 @@ body:
         door en haal bestandsnamen en coördinaten weg die iets over een project zeggen, voordat je het plakt.
 
         Laden mislukt of duurt lang? De plugin praat alleen met PDOK (api.pdok.nl, service.pdok.nl),
-        de BRO voor de sonderingen (publiek.broservices.nl), de legger van Rijkswaterstaat voor de zones
+        de BRO voor de sonderingen, boringen en peilbuizen (publiek.broservices.nl), de legger van Rijkswaterstaat voor de zones
         (geo.rijkswaterstaat.nl) en GitHub (api.github.com; bij VKUPDATE ook github.com en
         release-assets.githubusercontent.com). Laat een proxy of firewall die door, of noem hieronder
         welke niet bereikbaar is.
