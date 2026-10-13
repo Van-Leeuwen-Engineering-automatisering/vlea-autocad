@@ -12,23 +12,31 @@ garanderen geen termijn.
 ## Binnen scope
 - De plugin, het installatieprogramma, de installatiescripts en de releasebestanden van deze
   repository.
-- Buiten scope: PDOK, de BRO, de legger van Rijkswaterstaat, GitHub en de kaartdata zelf, de website van
+- Buiten scope: PDOK, de BRO, de legger van Rijkswaterstaat, Digitaal Vlaanderen, GitHub en de kaartdata zelf, de website van
   VLEA, AutoCAD, en aangepaste versies van anderen.
 
 ## Wat de plugin doet en niet doet
 - Netwerkverkeer alleen naar `api.pdok.nl` en `service.pdok.nl` (kaarten), `publiek.broservices.nl`
   (sonderingen en boringen: per register alleen zoeken en één object ophalen; peilbuizen: alleen de meetreeks van één
-  filter als CSV;), één vast pad van
+  filter als CSV), één vast pad van
   `geo.rijkswaterstaat.nl` (de legger van Rijkswaterstaat, voor de zones langs waterkeringen; uit te
-  zetten), `api.github.com` (versiecheck, uit te zetten) en, alleen als je `VKUPDATE` start (typen of
+  zetten), voor kaarten in een tekening in Vlaanderen (Lambert 72 of Lambert 2008) `geo.api.vlaanderen.be`
+  (Digitaal Vlaanderen: alleen vier vaste adressen, voor het GRB als lijnen en vlakken en als kaartbeeld, de orthofoto
+  en het hoogtemodel DHMV, ook voor `VKAHNPUNT` in een tekening in Lambert 72, en
+  alleen met het stelsel van de tekening; een vraag in RD, zonder stelsel of met een datum weigert de plugin, omdat
+  de dienst daar stil een verkeerd of leeg antwoord op geeft), `api.github.com`
+  (versiecheck, uit te zetten) en, alleen als je `VKUPDATE` start (typen of
   de knop), `github.com` en `release-assets.githubusercontent.com` (de nieuwe versie downloaden). Geen
   telemetrie, geen account, geen sleutels, geen cookies.
 - De status van de bronnen (het bolletje per kaart in het palet, en `VKSTATUS`) gebruikt alleen die bronnen: per
   kaart een of twee kleine verzoeken aan dezelfde dienst als de kaart, altijd in een vast testgebied en nooit in het
   gebied van de gebruiker. Het palet doet dat bij het openen hoogstens één keer per tien minuten (uit te zetten; de
-  legger van Rijkswaterstaat alleen met de optie `rws` aan). `VKSTATUS` vraagt altijd alle bronnen, ook de legger van
-  Rijkswaterstaat, ook als de optie `rws` of "Status van de bronnen tonen" uit staat: het is een commando dat je zelf
-  start. Geen nieuwe bestemming, geen verzoek aan VLEA.
+  legger van Rijkswaterstaat alleen met de optie `rws` aan; Digitaal Vlaanderen alleen bij een tekening in Lambert 72
+  of Lambert 2008, zodat het palet bij een tekening in RD nooit iets aan `geo.api.vlaanderen.be` vraagt).
+  `VKSTATUS` vraagt altijd alle bronnen, ook de legger van Rijkswaterstaat, ook als de optie `rws` of "Status van de
+  bronnen tonen" uit staat: het is een commando dat je zelf start. Ook Digitaal Vlaanderen vraagt `VKSTATUS` altijd,
+  ook bij een tekening in RD.
+  Geen nieuwe bestemming, geen verzoek aan VLEA.
 - `VKHELP` en `VKWEBSITE` (en in het palet de link en "?") openen alleen je eigen browser, met een van
   twee vaste adressen (de handleiding op `github.com` en de website `vanleeuwenea.nl`); de plugin maakt
   daarbij zelf geen verbinding en opent nooit een ander adres.

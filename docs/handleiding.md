@@ -1,6 +1,6 @@
 # Handleiding – VLEA, kaarten voor AutoCAD
 
-> **Versie 0.2.5.** Voor AutoCAD 2025, 2026 en 2027. `VKHELP` opent deze pagina in je browser.
+> **Versie 0.2.6.** Voor AutoCAD 2025, 2026 en 2027. `VKHELP` opent deze pagina in je browser.
 
 ## 1. Voordat je begint
 - AutoCAD 2025, 2026 of 2027 voor Windows (ook Civil 3D of Map 3D). Niet AutoCAD LT, AutoCAD voor Mac of AutoCAD Web: die kunnen deze plugin niet laden (AutoCAD
@@ -9,14 +9,16 @@
   bestand en klik op **Installeren**. Verwijderen kan met hetzelfde programma. Alle stappen, ook die met
   de zip en `Installeer.bat`, en wat je doet als Windows waarschuwt: zie de
   [README](../README.md#installeren).
-- Je tekening staat in **meters, in RD** (Rijksdriehoekscoördinaten). Staat `INSUNITS` op een andere
+- Je tekening staat in **meters**: in RD (Rijksdriehoekscoördinaten), of in Vlaanderen in Lambert 72 of Lambert 2008
+  (zie 3, Een tekening in België). Staat `INSUNITS` op een andere
   eenheid, dan weigert VLEA te tekenen en legt uit waarom; in het palet staan de kaarten dan grijs, met
   de reden erboven. Staat hij op 0 ("geen eenheid"), dan waarschuwt VLEA één keer.
 - **Let op bij een nieuwe tekening:** een tekening uit het metrische standaardsjabloon staat in
   millimeters (`INSUNITS` 4). Zet de eenheid op meters: typ `UNITS` en kies bij **Insertion scale** (invoegschaal)
   "Meters" (of typ `INSUNITS` en dan `6`). Teken je zelf al in millimeters, dan passen RD-meters er
   niet bij: begin dan met een tekening in meters.
-- Sla je tekening op voordat je een luchtfoto, de BRT (standaard een plaatje) of het kaartbeeld van de BGT laadt: het beeld komt in een map naast de tekening.
+- Sla je tekening op voordat je een luchtfoto, de BRT (standaard een plaatje), het kaartbeeld van de BGT, of in
+  Vlaanderen het GRB als kaartbeeld of de orthofoto laadt: het beeld komt in een map naast de tekening.
 
 ## 2. Het palet
 Na de installatie opent het palet één keer vanzelf. Daarna: typ `VKPALET` of klik op het
@@ -33,10 +35,12 @@ lint-tabblad **VLEA** op **Palet** (nog een keer = sluiten). Van boven naar bene
   Elke kaart heeft een eigen knop **Laden**: die laadt alleen die kaart, in het gekozen gebied, met de
   opties uit de instellingen. Er is niets om vooraf aan te vinken. Een kaart die nu niet kan, staat
   grijs met de reden eronder: "te groot (max. … km²)" (de uitleg bij de knop zegt wat de kaart zou
-  ophalen, zie 4), "alleen Civil 3D", of "niets gekozen in de instellingen" (alle onderdelen van die
-  kaart staan uit). Zonder gebied staat erboven "Kies eerst een gebied"; staat de tekening niet in
+  ophalen, zie 4), "alleen Civil 3D", "niets gekozen in de instellingen" (alle onderdelen van die
+  kaart staan uit), of "alleen in Nederland", "alleen in België" of "alleen in Lambert 72 (EPSG:31370)" (de kaart
+  werkt niet in het stelsel van het gebied, zie 3). Zonder gebied staat erboven "Kies eerst een gebied"; staat de tekening niet in
   meters, dan staan alle kaarten grijs en staat erboven hoe je de eenheid goed zet (zie 1). De luchtfoto, het plaatje van
-  de BRT (de standaard) en het kaartbeeld van de BGT komen als beeld in een map naast de tekening: in een tekening zonder naam staat daar
+  de BRT (de standaard), het kaartbeeld van de BGT, het GRB als kaartbeeld en de orthofoto komen als beeld in een
+  map naast de tekening: in een tekening zonder naam staat daar
   "Sla de tekening eerst op" met een knop **Opslaan**. Beta-kaarten zijn zo gemarkeerd; een driehoekje
   toont de vaste waarschuwing van een kaart.
 - **Gereedschap** – een rij knoppen: AHN-punt (`VKAHNPUNT`), NAP-referentie, NAP-leider en NAP herberekenen
@@ -73,13 +77,13 @@ De keuzes staan niet op het hoofdscherm maar in het instellingenvenster:
   opties van de KLIC-levering;
 - **Stijl**: NLCS-kleuren of grijze onderlegger voor de kaarten (een KLIC-levering komt altijd in
   NLCS-kleuren, de sonderingen, de boringen en de peilbuizen blijven altijd in kleur), en of de bronvermelding als tekst in de tekening komt. De
-  grijze onderlegger maakt lagen grijs, geen beeld: de luchtfoto, het plaatje van de BRT en het kaartbeeld van de BGT
-  blijven in hun eigen kleuren. Wil je de BRT grijs, kies dan bij de BRT **Plaatje grijs**;
+  grijze onderlegger maakt lagen grijs, geen beeld: de luchtfoto, het plaatje van de BRT, het kaartbeeld van de BGT,
+  het GRB als kaartbeeld en de orthofoto blijven in hun eigen kleuren. Wil je de BRT grijs, kies dan bij de BRT **Plaatje grijs**;
 - **Algemeen**: één keer per dag kijken of er een nieuwe versie is, en of het palet de status van de bronnen toont
   (standaard aan; zie hieronder).
 
-Alle aan/uit-keuzes staan standaard aan, behalve maatvoering en annotaties van de KLIC-levering (zie 6) en
-grondgebruik bij de BRT (zie 4); zet uit wat je niet wilt. Een keuzelijst staat op de
+Alle aan/uit-keuzes staan standaard aan, behalve maatvoering en annotaties van de KLIC-levering (zie 6),
+grondgebruik bij de BRT (zie 4) en percelen, adrespunten en wegassen bij het GRB (zie 3); zet uit wat je niet wilt. Een keuzelijst staat op de
 standaard van de kaart of het commando (bijvoorbeeld maaiveld, het plaatje in kleur bij de BRT, NLCS-kleuren). **Opslaan**
 bewaart je keuzes (in `%LOCALAPPDATA%\VLEA-AutoCAD\instellingen.json`), **Annuleren** laat alles zoals
 het was en **Standaard herstellen** zet alles in het venster terug. De knoppen in het palet en op het
@@ -129,7 +133,8 @@ start. Het stelt geen vragen, dus het werkt ook in een script en in de AutoCAD-k
   straat met huisnummer en plaats en kies een suggestie. AutoCAD zoomt ernaartoe en VLEA stelt een
   gebied van 250 x 250 m rond dat punt voor.
 - **Rechthoek aanwijzen**, **polylijn kiezen** of **coördinaten typen** (`VKGEBIED`): twee
-  hoekpunten, een gesloten polylijn, of `xmin,ymin,xmax,ymax` in RD-meters.
+  hoekpunten, een gesloten polylijn, of `xmin,ymin,xmax,ymax` in RD-meters (in een Belgische tekening in
+  Lambert-meters, zie hieronder).
 - **Strook langs een lijn** (`VKCONTOUR`): kies een lijn, polylijn, boog, cirkel, ellips of spline (in
   Civil 3D ook een as) en geef de breedte aan weerszijden (Enter = 25 m; typen of twee punten
   aanwijzen). VLEA tekent de contour als gesloten polylijn op de laag `VLEA-KAART-GEBIED` en maakt hem
@@ -147,7 +152,111 @@ start. Het stelt geen vragen, dus het werkt ook in een script en in de AutoCAD-k
   polylijn zichzelf, dan knipt VLEA op de rechthoek en meldt dat.
 - Elke tekening onthoudt haar eigen gebied, ook na opslaan en opnieuw openen.
 - Het palet toont het oppervlak. Ligt het gebied buiten Nederland (buiten RD), dan zegt het palet
-  dat.
+  dat. Ligt het in België, in Lambert 72 of Lambert 2008, dan staat dat achter het oppervlak (zie hieronder).
+
+### Een tekening in België
+Teken je in **Lambert 72** (EPSG:31370) of **Lambert 2008** (EPSG:3812), zoals in Vlaanderen, dan herkent VLEA dat
+aan de getallen van je gebied. Er is geen knop of instelling voor, en VLEA rekent niets om. Kies het gebied zoals
+altijd: rechthoek, polylijn, coördinaten of een strook (`VKCONTOUR`). Het palet en `VKGEBIED` zetten het stelsel
+achter het oppervlak, bijvoorbeeld "Gekozen: 500 x 500 m (0,25 km²), in Lambert 72 (EPSG:31370)". Staat daar
+Lambert terwijl je tekening een eigen raster heeft, dan vallen je getallen toevallig in het bereik van Lambert;
+controleer dan je coördinaten.
+
+- **Wat werkt:** een gebied kiezen en bewaren; de kaarten van Vlaanderen (het GRB, ook als kaartbeeld, de orthofoto en
+  het hoogtemodel DHMV, zie hieronder); de hoogte op een punt (`VKAHNPUNT`, in Lambert 72 uit het DHMV) en het
+  NAP-gereedschap in TAW (zie Hoogte in Vlaanderen hieronder); en het gereedschap dat niet met een plek op de kaart
+  rekent: maatlijnen (`VKMAAT`), `VKINFO`, `VKWISSEN` en `VKSTIJL`.
+- **De kaarten van Nederland** staan in een Belgische tekening in het palet grijs met "alleen in Nederland", en
+  `VKLADEN` en de kaartcommando's slaan ze over met die reden. Andersom staat een kaart van Vlaanderen in een Nederlandse
+  tekening grijs met "alleen in België" (het DHMV met "alleen in Lambert 72 (EPSG:31370)"). Heeft je gebied lokale
+  coördinaten (geen RD en geen Lambert), dan weigert VLEA het al bij het kiezen, met de zin "Het gekozen gebied ligt
+  buiten het RD-stelsel (EPSG:28992). Kies een gebied in Nederland, in een tekening met RD-coördinaten." In een
+  Belgische tekening betekent dat: je getallen liggen niet in Lambert 72 of Lambert 2008; controleer je coördinaten.
+- **Weigert met uitleg** (er gebeurt niets, en de opdrachtregel of het palet zegt waarom): adres zoeken (`VKADRES` en
+  het zoekveld in het palet), `VKKMLIMPORT`, `VKKMZ`, `VKKLIC`, `VKGEF`, `VKPUNTEN` en `VKGEOPLEK` als het gebied van
+  de tekening in Lambert ligt; `VKGOOGLE`, `VKSTREETVIEW`, `VKSTREETSMART` en `VKDINO` op een punt in Lambert. Die
+  gereedschappen rekenen van of naar RD, zoeken in Nederland of lezen Nederlandse bestanden, en zouden in een
+  Belgische tekening op de verkeerde plek tekenen. `VKAHNPUNT` weigert alleen in Lambert 2008: het DHMV is er alleen in
+  Lambert 72.
+- **Kies in een Belgische tekening eerst een gebied.** Zonder gebied weet VLEA meestal niet dat de tekening in Lambert
+  staat; dan doen `VKKMZ`, `VKKLIC`, `VKGEF` en `VKPUNTEN` wat ze in een Nederlandse tekening doen, en zoeken `VKADRES`
+  en het zoekveld in het palet in Nederland: ze zetten dan een gebied in RD rond het adres, ver buiten je tekening (de
+  kaarten van Vlaanderen staan daarna grijs met "alleen in België"; kies dan opnieuw een gebied). Alleen
+  `VKKMLIMPORT` kijkt zonder gebied naar wat er al in de tekening staat (de grenzen van de tekening): ligt dat helemaal
+  in Lambert, dan weigert het ook ("De inhoud van deze tekening ligt in Lambert 72 …").
+- **Hoogtes in België zijn TAW**, niet NAP. VLEA rekent nooit om tussen NAP en TAW: het DHMV, `VKAHNPUNT` in Lambert 72
+  en het NAP-gereedschap met een TAW-referentie schrijven "TAW +…" (zie Hoogte in Vlaanderen hieronder).
+- **Wat (nog) niet kan:** Wallonië en Brussel (die hebben eigen diensten), adres zoeken in Vlaanderen, Google Maps,
+  Street View, StreetSmart, DINOloket en de geografische plek (`VKGEOPLEK`) in Lambert, een KLIP-levering inlezen, het
+  DHMV in Lambert 2008, en punten uit Excel of CSV (`VKPUNTEN`) in Lambert.
+
+#### Kaarten van Vlaanderen
+In een tekening in Lambert 72 of Lambert 2008 laadt VLEA kaarten van Digitaal Vlaanderen (`geo.api.vlaanderen.be`),
+in het stelsel van je tekening: VLEA rekent niets om, en een gebied in Lambert 2008 krijgt de kaart in Lambert 2008. In
+een Nederlandse tekening staan deze kaarten grijs met "alleen in België". Het palet vraagt de status van die bron ook
+alleen bij een tekening in Lambert. Neem de bronvermelding over op tekeningen die je deelt (de Modellicentie Gratis
+Hergebruik v1.0 vraagt naamsvermelding, zie 8); VLEA zet hem in de tekening, met vooraan de zin die Digitaal
+Vlaanderen voorschrijft: "Bron: Grootschalig Referentie Bestand Vlaanderen, Digitaal Vlaanderen (GRB), …", "… (GRB
+kaartbeeld), …" en "Bron: Luchtopnamen Digitaal Vlaanderen (Orthofoto Vlaanderen), …".
+
+- **GRB (topografie Vlaanderen), `VKGRB`** (beta): het Grootschalig Referentie Bestand als lijnen, vlakken, punten en
+  teksten, op dezelfde NLCS-lagen als de BGT (er komt geen nieuwe laagnaam bij): gebouwen, wegen, water, terrein,
+  kunstwerken, palen en putdeksels, huisnummers en straatnamen. Een gebouw dat het gebouwenregister alleen bij
+  benadering heeft ingetekend, staat op de laag van een BAG-pand, apart van de gemeten gebouwen. Extra, standaard uit:
+  `percelen` (administratieve percelen met perceelnummer), `adrespunten` (met huis- en busnummer) en `wegassen`.
+  Grootste gebied 1 km². Het GRB dekt alleen het Vlaams Gewest, niet Brussel en Wallonië.
+- Hoogten in het GRB (zoals bij een putdeksel, in de objectgegevens) zijn meter TAW, geen NAP.
+
+De twee beelden hieronder (het GRB als kaartbeeld en de orthofoto) werken alleen binnen een rechthoek om Vlaanderen:
+ligt het gebied daar niet helemaal binnen, dan haalt VLEA niets op en zegt dat (de diensten geven daarbuiten geen
+foutmelding maar een wit beeld). Vlak over de grens en in Brussel ligt een gebied wel binnen die rechthoek; daar kan het
+beeld wit zijn.
+
+**Het GRB als kaartbeeld (`VKGRBBEELD`, beta).** Het kaartbeeld dat Digitaal Vlaanderen van het GRB (Grootschalig
+Referentie Bestand) maakt, als afbeelding onder de tekening, op de laag `VLEA-KAART-GRB`, achter alle andere objecten.
+Het is een plaatje: je kunt er niet op vastklikken. Voor lijnen en vlakken op NLCS-lagen is er het GRB zelf (`VKGRB`).
+- **Kaartstijl** (in het instellingenvenster onder Kaarten, bij GRB als kaartbeeld, als "Stijl"; in een script
+  `kaartstijl`): `kleur` (de standaardkeuze) of `grijs`.
+- **Eerst opslaan.** Het beeld komt als PNG met world-file (`.pgw`) in de map `<tekening>_kaarten` naast de tekening,
+  als `grbbeeld_<stijl>_n<niveau>_<x>_<y>_<x>_<y>.png` (de getallen zijn Lambert-meters). Stuur die map mee als je de
+  tekening deelt.
+- **Niveau en pixel.** VLEA kiest het fijnste niveau waarop het gebied binnen 17 miljoen pixels blijft: 0,125 m per
+  pixel tot ongeveer 0,25 km², 0,25 m bij 1 km², 0,5 m bij 2 km² en 1 m bij 5 km² (de grens). Is het beeld grover dan
+  0,25 m, dan zegt VLEA dat; een kleiner gebied geeft een scherper beeld.
+- **Duur** (gemeten op 13-10-2026 in Gent, Brugge, Kortrijk en Leuven): 0,25 km² 6 tot 25 s, 1 km² 12 tot 43 s
+  (ongeveer 270 tot 290 kaarttegels), 5 km² 3 s. Een kaarttegel die Digitaal Vlaanderen nog niet klaar heeft, kan
+  langer duren of eerst mislukken; VLEA probeert dan nog twee keer. Esc annuleert.
+
+**De orthofoto van Vlaanderen (`VKORTHO`, beta).** De meest recente orthofoto van Digitaal Vlaanderen
+(winteropnamen, kleur), op dezelfde laag als de luchtfoto van Nederland (`VLEA-KAART-LUCHTFOTO`).
+- **Scherpte** (`scherpte`): `snel` (25 cm per pixel, de standaardkeuze) of `scherp` (15 cm: de foto zelf is 15 cm,
+  fijner opvragen maakt hem niet scherper). Bij een groot gebied wordt de pixel grover, en dat zegt VLEA: bij 5 km² (de
+  grens) 50 en 35 cm.
+- **Eerst opslaan.** De foto komt als JPEG met world-file (`.jgw`) in `<tekening>_kaarten`, als
+  `ortho_<scherpte>_<x>_<y>_<x>_<y>.jpg`.
+- **Gebruiksbeperking van Digitaal Vlaanderen** (het driehoekje in het palet): niet geschikt voor het karteren van
+  objecten die boven of onder het maaiveld liggen; buiten Vlaanderen is de foto minder nauwkeurig. Gemeten: de foto ligt
+  op 0,25 tot 0,5 m na op het GRB.
+- **Duur** (13-10-2026): 1 km² snel 3 tot 7 s, scherp 8 tot 12 s; 5 km² 3 tot 9 s.
+
+Opnieuw laden (Vervangen, Erbij of Overslaan), `VKINFO` en `VKWISSEN` werken zoals bij elke kaart (sleutels `grbbeeld`
+en `ortho`). `VKSTIJL` (grijze onderlegger) laat de beelden ongemoeid: een afbeelding heeft geen laagkleur.
+
+#### Hoogte in Vlaanderen (DHMV, TAW)
+- **Hoogtemodel:** `VKDHMV` (palet: **DHMV hoogtemodel (Vlaanderen)**, alleen Civil 3D, beta) maakt van het Digitaal
+  Hoogtemodel Vlaanderen (DHMV II, pixels van 1 m, Digitaal Vlaanderen) een hoogtemodel, zoals `VKAHN` met het AHN.
+  Alleen in een tekening in **Lambert 72**: Digitaal Vlaanderen levert het DHMV niet in Lambert 2008. Het gebied moet
+  helemaal in Vlaanderen liggen; anders haalt VLEA niets op en zegt waarom.
+- **De hoogtes zijn TAW** (Tweede Algemene Waterpassing, België), niet NAP. Het model heet bijvoorbeeld "VLEA DHMV TAW
+  L72 173200-174200 100x100". VLEA rekent nooit om tussen NAP en TAW: het verschil is niet overal gelijk.
+- **Let op het maaiveld:** onder panden heeft Digitaal Vlaanderen het maaiveld geïnterpoleerd uit de punten eromheen
+  (daar is het niet gemeten), en het DHMV II is ingewonnen in 2013-2015. Anders dan bij het AHN zijn er dus geen gaten
+  onder panden. Controleer het maaiveld op de plek van het werk.
+- **Hoogte op een punt:** `VKAHNPUNT` haalt in een tekening in Lambert 72 de hoogte uit het DHMV en schrijft het label
+  in TAW, bijvoorbeeld "TAW +24,48 m". In Lambert 2008 weigert het met uitleg.
+- **Lengteprofiel:** het NAP-gereedschap kan TAW. `VKNAPSET` heeft het trefwoord `Stelsel` (`Nap` of `Taw`); ligt het
+  gebied van de tekening in Lambert, dan is TAW de standaard. De referentie heet dan "TAW-REFERENTIE" en de leiders
+  krijgen "TAW +1,25 m". Zie 4, NAP-hoogte in een lengteprofiel.
 
 ## 4. Kaarten laden
 - In het palet laadt **Laden** achter een kaart alleen die kaart, met de opties uit de instellingen.
@@ -166,9 +275,13 @@ start. Het stelt geen vragen, dus het werkt ook in een script en in de AutoCAD-k
 | BGT | `VKBGT` | groepen `wegen`, `water`, `panden`, `terrein`, `namen` (straatnamen en huisnummers), `overig` | 1 km² | actuele versie |
 | BGT als kaartbeeld | `VKBGTBEELD` | `kaartstijl` = `achtergrond` (de standaardkeuze), `pastel`, `standaard` (felle kleuren; een van de vier waarden) of `omtrek`; in het instellingenvenster staat de keuze onder Kaarten, bij BGT als kaartbeeld, als "Stijl" | 5 km² | beta; een plaatje van de BGT naast de tekening, eerst opslaan; zie hieronder |
 | BRT (topografische kaart) | `VKBRT` | `soort` = `kleur` (plaatje in kleur, zoals het portaal; de standaardkeuze), `grijs` (plaatje grijs) of `lijnen` (TOP10NL, een overzichtskaart); groepen `wegen`, `water`, `gebouwen`, `grondgebruik` (standaard uit), `relief`, `inrichting`, `namen`, `vlakken` = `randen` (de standaardkeuze) of `omtrek` en `lijnkleur` = `portaal` (de standaardkeuze) of `wit` (alleen bij `lijnen`) | 16 km² | beta; het plaatje naast de tekening, eerst opslaan; volgens het Kadaster de lijnen niet voor een schaal groter dan 1:5.000 en het plaatje niet groter dan 1:750; zie hieronder |
-| Kadastrale kaart | `VKKADASTER` | `perceelnummers` | 5 km² | in een stad orde 50.000 objecten bij 5 km²: laden duurt dan langer |
+| GRB (topografie Vlaanderen) | `VKGRB` | groepen `wegen`, `water`, `panden`, `terrein`, `namen` (straatnamen en huisnummers), `overig`; standaard uit: `percelen`, `adrespunten`, `wegassen` | 1 km² | beta; alleen in een tekening in Lambert 72 of Lambert 2008 (Vlaanderen); zie hoofdstuk 3, "Een tekening in België" |
+| Kadastrale kaart | `VKKADASTER` | `perceelnummers`, `sectieletter` (de sectieletter voor het nummer, bijvoorbeeld `E 256`; alleen bij `perceelnummers`) | 5 km² | in een stad orde 50.000 objecten bij 5 km²: laden duurt dan langer |
 | Luchtfoto | `VKLUCHTFOTO` | `scherpte` = `snel` (25 cm) of `scherp` (8 cm) | 5 km² | foto naast de tekening; eerst opslaan; bij een groot gebied wordt de pixel grover (snel tot 50 cm bij 5 km²) |
+| GRB als kaartbeeld (Vlaanderen) | `VKGRBBEELD` | `kaartstijl` = `kleur` (de standaardkeuze) of `grijs` | 5 km² | beta; alleen in een tekening in Lambert 72 of Lambert 2008; een plaatje naast de tekening, eerst opslaan; zie 3, Kaarten van Vlaanderen |
+| Orthofoto Vlaanderen | `VKORTHO` | `scherpte` = `snel` (25 cm) of `scherp` (15 cm) | 5 km² | beta; alleen in een tekening in Lambert 72 of Lambert 2008; foto naast de tekening op de laag van de luchtfoto, eerst opslaan; zie 3, Kaarten van Vlaanderen |
 | AHN-hoogte | `VKAHN` | `model` = `dtm` (maaiveld) of `dsm` (met gebouwen en begroeiing); `stap` = `fijnst` (de standaardkeuze), `1`, `2` of `5` (m) | 4 km² | alleen Civil 3D; AHN4 (2020-2022), de enige versie bij PDOK; een hoogtemodel per gebied ("VLEA AHN RD 154750-462750 500x500"); onder panden en water geen meetpunten (het model overbrugt die plekken); zie hieronder |
+| DHMV-hoogte (Vlaanderen) | `VKDHMV` | `model` = `dtm` (maaiveld) of `dsm` (met gebouwen en begroeiing); `stap` = `fijnst` (1 m, bij een groter gebied vanzelf grover zodat het model onder de 150.000 punten blijft; de standaardkeuze), `2` of `5` (m) | 4 km² | alleen Civil 3D en alleen in een tekening in Lambert 72; beta; DHMV II (2013-2015), hoogtes in TAW; onder panden geïnterpoleerd; zie 3, Een tekening in België |
 | Wegen (NWB) | `VKNWB` | `hectometrering` | 25 km² | hectometerpaal als oranje bordje met het wegnummer; zie hieronder |
 | Spoorwegen | `VKSPOOR` | `kilometrering` | 100 km² | beta |
 | Riolering | `VKRIOOL` | `labels` (materiaal en diameter), `hoogtes` (bob bij leidingen, putnaam en maaiveld bij putten), `aansluitingen` | 4 km² | onvolledig; niet voor WIBON/KLIC; riool zonder laag in kleur 210, zoals in een KLIC-levering (zie 6, Kleur en lijndikte); zie hieronder |
@@ -178,7 +291,8 @@ start. Het stelt geen vragen, dus het werkt ook in een script en in de AutoCAD-k
 | Boringen (BRO) | `VKBORINGEN` | `boorprofielen`, `labels`, `xml`; `aantal` = `5`, `10`, `25` (de standaardkeuze), `50`, `100` of `alle` | 4 km² | beta; geotechnische en geologische boringen; zonder keuze de 25 dichtstbijzijnde; boorprofielen links naast het gebied; zie hieronder |
 | Peilbuizen (BRO) | `VKPEILBUIZEN` | `standen`, `labels`, `csv`, `zonderstanden`; `aantal` = `5`, `10`, `25` (de standaardkeuze), `50`, `100` of `alle` | 4 km² | beta; per filter de gemeten grondwaterstanden t.o.v. NAP; zonder keuze de 25 dichtstbijzijnde; zie hieronder |
 
-Aan/uit-opties staan standaard aan, behalve `grondgebruik` bij de BRT; in een script schrijf je `aan` of
+Aan/uit-opties staan standaard aan, behalve `grondgebruik` bij de BRT en `percelen`, `adrespunten` en `wegassen` bij
+het GRB; in een script schrijf je `aan` of
 `uit`. Staan alle onderdelen van een kaart uit (bijvoorbeeld alle drie de zonesoorten, alle BGT-groepen of
 bij de BRT als lijnen alle groepen), dan vraagt VLEA niets op, slaat die kaart over en zegt dat; een
 eerdere import van die kaart blijft dan staan, ook met `vervangen=ja`.
@@ -796,7 +910,13 @@ PDOK, zie 4, Het AHN-hoogtemodel) en tekent:
 - een label "NAP +4,98 m" rechts van het punt op `B-WE-OG-T18` (0,9 m hoog).
 
 Heeft AHN op die plek geen hoogte (meestal onder een pand of op water), dan komt er alleen het label
-"geen AHN-hoogte hier" en géén punt. Werkt ook zonder Civil 3D. Trefwoorden bij de vraag:
+"geen AHN-hoogte hier" en géén punt. Werkt ook zonder Civil 3D.
+
+In een tekening in **Lambert 72** (Vlaanderen) komt de hoogte uit het DHMV van Digitaal Vlaanderen (pixel van 1 m) en
+staat het label in **TAW**: "TAW +24,48 m". In Lambert 2008 weigert `VKAHNPUNT` met uitleg (Digitaal Vlaanderen levert
+het DHMV alleen in Lambert 72). Het stelsel komt van het gebied van de tekening, of zonder gebied van het punt zelf.
+
+Trefwoorden bij de vraag:
 
 | Trefwoord | Keuze | Standaard |
 |---|---|---|
@@ -934,6 +1054,19 @@ LISP-script NAPLEADER deed. Werkt zonder internet en zonder Civil 3D; VLEA haalt
   gewoon NAP-commando neemt niets over; het zegt alleen hoeveel leiders nog van het script zijn. Haal het script na
   het overnemen uit je opstartset (`APPLOAD`), zodat er niet twee systemen naast elkaar werken.
 - Een leider met meer dan één leiderlijn, of zonder gewone tekst, rekent VLEA niet na; de melding zegt hoeveel.
+- **TAW (België):** trefwoord `Stelsel` bij het aanwijzen van de referentie: `Nap` of `Taw`. Ligt het gebied van de
+  tekening in Lambert 72 of Lambert 2008, dan is TAW de standaard (de opdrachtregel zegt dat); anders het stelsel van
+  de vorige referentie, en anders NAP. In TAW vraagt VLEA naar de "bekende TAW-hoogte", heet het symbool
+  "TAW-REFERENTIE" en krijgen de leiders "TAW +1,25 m". Een leider in een ander stelsel dan de nieuwe referentie rekent
+  VLEA nooit om: met `Ja` worden alleen de leiders in hetzelfde stelsel herberekend, en de opdrachtregel zegt hoeveel
+  er zijn blijven staan ("3 leiders in NAP niet herberekend: de nieuwe referentie is TAW"). Bestaande referenties en
+  leiders, ook die van het LISP-script, zijn NAP. Lagen en leiderstijl zijn dezelfde. Heb je in een Belgisch profiel met
+  een eerdere versie leiders gezet, dan staat daar "NAP" bij een hoogte die TAW is; VLEA zet dat niet om. Wis die
+  leiders (`VKWISSEN`, sleutel `nap-leader`), stel een TAW-referentie in en zet ze opnieuw. Andersom kan VLEA 0.2.5 een
+  TAW-referentie en TAW-leiders niet lezen, zodat die versie er nooit "NAP" bij zet: werk een Belgisch profiel bij met
+  deze versie of nieuwer. Stelt iemand in 0.2.5 toch een nieuwe NAP-referentie in en kiest hij `Ja`, dan krijgen de
+  leiders in die ruimte een NAP-hoogte; die rekent VLEA daarna niet meer na (de opdrachtregel telt ze als niet
+  nagerekend). Wis ze en zet ze opnieuw.
 - `VKWISSEN` kent de sleutels `nap-referentie` en `nap-leader`; `VKINFO` toont bij een leider de referentie, de
   verticale schaal en de laatst berekende hoogte. `VKKMZ` neemt de leiders niet mee naar Google Earth.
 
@@ -1372,6 +1505,8 @@ de hele kaart de strengste licentie van de twee aan. Deel je die zones (of een b
 dan onder dezelfde of een compatibele licentie. De licentie spreekt van delen met het publiek; of een
 tekening aan één opdrachtgever daaronder valt, beoordeelt VLEA niet. Wat dat betekent, staat in de
 README. Wil je dat niet, wis de zones dan in de kopie die je verstuurt (`VKWISSEN`, kaart `zoneringen`).
+De kaarten van Digitaal Vlaanderen (`VKGRB`, `VKGRBBEELD`, `VKORTHO`, `VKDHMV`, en `VKAHNPUNT` in Lambert 72, dat de
+hoogte uit het DHMV haalt) vallen onder de Modellicentie Gratis Hergebruik v1.0: ook daar is naamsvermelding verplicht.
 
 ## 9. Over VLEA
 `VKOVER` toont de versie, de licenties (de licentie van de plugin, CC BY 4.0 voor NLCS), de regels
@@ -1391,12 +1526,16 @@ je browser, zonder commando: een commando waar je mee bezig bent, loopt door. Lu
 staat het adres op de opdrachtregel. De lintknop **Help** doet hetzelfde als `VKHELP`.
 
 ### Netwerk
-De kaarten komen van PDOK. Twee uitzonderingen: de zones langs waterkeringen van Rijkswaterstaat
+De kaarten komen van PDOK. Uitzonderingen: de zones langs waterkeringen van Rijkswaterstaat
 komen uit de legger van Rijkswaterstaat (`geo.rijkswaterstaat.nl`; zet de optie `rws` uit als je dat
 niet wilt), en voor de sonderingen en boringen praat VLEA met de openbare uitgifte van de BRO
 (`publiek.broservices.nl`): het zoekt daar sonderingen of boringen in je gebied en haalt ze op, verder niets. Voor
 de peilbuizen zoekt VLEA bij PDOK (de kengegevens van de BRO) en haalt het bij de BRO alleen de meetreeksen van de
-gekozen peilbuizen op (met de optie `standen` uit: niets bij de BRO).
+gekozen peilbuizen op (met de optie `standen` uit: niets bij de BRO). In een tekening in Lambert 72 of Lambert 2008
+komen de kaarten van Vlaanderen (het GRB, ook als kaartbeeld, en de orthofoto; het DHMV en de hoogte van `VKAHNPUNT`
+alleen in Lambert 72) van Digitaal Vlaanderen (`geo.api.vlaanderen.be`, alleen vier vaste adressen, altijd in het stelsel van de
+tekening; zie 3, Een tekening in België). In een tekening in RD maakt VLEA daar geen verbinding mee, behalve met
+`VKSTATUS` (hieronder).
 
 VLEA kijkt hoogstens één keer per dag bij GitHub (`api.github.com`) of er een nieuwere versie is en
 zet dan een regel onderaan het palet. GitHub ziet daarbij je IP-adres en het versienummer; verder
@@ -1404,12 +1543,14 @@ gaat er niets mee, en er wordt niets automatisch bijgewerkt. Uitzetten kan in de
 (tandwiel, **Algemeen**), met het vinkje "Eén keer per dag kijken of er een nieuwe versie is".
 
 Bij het openen van het palet kijkt VLEA hoe de bronnen ervoor staan (zie 2, Status van de bronnen): hoogstens één
-keer per tien minuten vanzelf, per kaart een of twee kleine verzoeken aan dezelfde bron (PDOK, de BRO en, met de
-optie `rws` aan, de legger van Rijkswaterstaat), altijd in een vast testgebied en nooit in jouw gebied. Dat zijn de
+keer per tien minuten vanzelf, per kaart een of twee kleine verzoeken aan dezelfde bron (PDOK, de BRO, met de
+optie `rws` aan de legger van Rijkswaterstaat en, alleen bij een tekening in Lambert 72 of Lambert 2008, Digitaal
+Vlaanderen), altijd in een vast testgebied en nooit in jouw gebied. Dat zijn de
 enige verzoeken aan die bronnen waar je zelf niets voor doet. De bron ziet daarbij je IP-adres en het versienummer.
 Uitzetten kan in de instellingen (tandwiel, **Algemeen**), met het vinkje "Status van de bronnen tonen".
 `VKSTATUS` vraagt altijd alle bronnen, ook de legger van Rijkswaterstaat, ook als de optie `rws` of "Status van de
-bronnen tonen" uit staat: het is een commando dat je zelf start.
+bronnen tonen" uit staat: het is een commando dat je zelf start. Ook Digitaal Vlaanderen vraagt `VKSTATUS` altijd, ook
+bij een tekening in RD.
 
 Een KLIC-levering (`VKKLIC`) en eigen grondonderzoek (`VKGEF`) leest VLEA alleen van je eigen schijf; daarbij
 maakt VLEA geen verbinding.

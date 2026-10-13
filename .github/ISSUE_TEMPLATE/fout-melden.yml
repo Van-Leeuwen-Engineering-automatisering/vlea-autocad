@@ -12,7 +12,8 @@ body:
 
         Laden mislukt of duurt lang? De plugin praat alleen met PDOK (api.pdok.nl, service.pdok.nl),
         de BRO voor de sonderingen, boringen en peilbuizen (publiek.broservices.nl), de legger van Rijkswaterstaat voor de zones
-        (geo.rijkswaterstaat.nl) en GitHub (api.github.com; bij VKUPDATE ook github.com en
+        (geo.rijkswaterstaat.nl), Digitaal Vlaanderen voor de kaarten van Vlaanderen en VKAHNPUNT in een tekening
+        in Lambert (geo.api.vlaanderen.be) en GitHub (api.github.com; bij VKUPDATE ook github.com en
         release-assets.githubusercontent.com). Laat een proxy of firewall die door, of noem hieronder
         welke niet bereikbaar is.
   - type: input
@@ -34,7 +35,7 @@ body:
     id: stappen
     attributes:
       label: Wat deed je?
-      description: Stappen om de fout te herhalen. Gebruik een openbare plek (bijv. een adres in het centrum van Amersfoort) als het kan.
+      description: Stappen om de fout te herhalen. Gebruik een openbare plek (bijv. een adres in het centrum van Amersfoort, of in Vlaanderen het centrum van Leuven) als het kan.
     validations:
       required: true
   - type: textarea
