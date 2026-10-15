@@ -1,6 +1,6 @@
 # Handleiding – VLEA, kaarten voor AutoCAD
 
-> **Versie 0.2.7.** Voor AutoCAD 2025, 2026 en 2027. `VKHELP` opent deze pagina in je browser.
+> **Versie 0.2.8.** Voor AutoCAD 2025, 2026 en 2027. `VKHELP` opent deze pagina in je browser.
 
 ## 1. Voordat je begint
 - AutoCAD 2025, 2026 of 2027 voor Windows (ook Civil 3D of Map 3D). Niet AutoCAD LT, AutoCAD voor Mac of AutoCAD Web: die kunnen deze plugin niet laden (AutoCAD
@@ -280,6 +280,10 @@ VLEA dat.
 - **Let op het maaiveld:** onder panden heeft Digitaal Vlaanderen het maaiveld geïnterpoleerd uit de punten eromheen
   (daar is het niet gemeten), en het DHMV II is ingewonnen in 2013-2015. Anders dan bij het AHN zijn er dus geen gaten
   onder panden. Controleer het maaiveld op de plek van het werk.
+- **Een plek zonder hoogte** (zeldzaam) overbrugt het model zoals bij het AHN, met een rechte lijn tussen de randen (zie
+  "Water en panden" hieronder voor wat aan de rand van je gebied leeg blijft), en
+  de opdrachtregel zegt hoeveel m² dat is ("Zonder DHMV-meting: 36 m², overbrugd met een rechte lijn tussen de randen; daar
+  is de hoogte geen meting."). Het model blijft binnen het gebied dat je koos en loopt nergens buiten de rand.
 - **Hoogte op een punt:** `VKAHNPUNT` haalt in een tekening in Lambert 72 de hoogte uit het DHMV en schrijft het label
   in TAW, bijvoorbeeld "TAW +24,48 m". In Lambert 2008 weigert het met uitleg.
 - **Lengteprofiel:** het NAP-gereedschap kan TAW. `VKNAPSET` heeft het trefwoord `Stelsel` (`Nap` of `Taw`); ligt het
@@ -347,7 +351,7 @@ keer). Grootste gebied 4 km², ook voor de omhullende rechthoek. In een Nederlan
 | Luchtfoto | `VKLUCHTFOTO` | `scherpte` = `snel` (25 cm) of `scherp` (8 cm) | 5 km² | foto naast de tekening; eerst opslaan; bij een groot gebied wordt de pixel grover (snel tot 50 cm bij 5 km²) |
 | GRB als kaartbeeld (Vlaanderen) | `VKGRBBEELD` | `kaartstijl` = `kleur` (de standaardkeuze) of `grijs` | 5 km² | beta; alleen in een tekening in Lambert 72 of Lambert 2008; een plaatje naast de tekening, eerst opslaan; zie 3, Kaarten van Vlaanderen |
 | Orthofoto Vlaanderen | `VKORTHO` | `scherpte` = `snel` (25 cm) of `scherp` (15 cm) | 5 km² | beta; alleen in een tekening in Lambert 72 of Lambert 2008; foto naast de tekening op de laag van de luchtfoto, eerst opslaan; zie 3, Kaarten van Vlaanderen |
-| AHN-hoogte | `VKAHN` | `model` = `dtm` (maaiveld) of `dsm` (met gebouwen en begroeiing); `stap` = `fijnst` (de standaardkeuze), `1`, `2` of `5` (m) | 4 km² | alleen Civil 3D; AHN4 (2020-2022), de enige versie bij PDOK; een hoogtemodel per gebied ("VLEA AHN RD 154750-462750 500x500"); onder panden en water geen meetpunten (het model overbrugt die plekken); zie hieronder |
+| AHN-hoogte | `VKAHN` | `model` = `dtm` (maaiveld) of `dsm` (met gebouwen en begroeiing); `stap` = `fijnst` (de standaardkeuze), `1`, `2` of `5` (m) | 4 km² | alleen Civil 3D; AHN4 (2020-2022), de enige versie bij PDOK; een hoogtemodel per gebied ("VLEA AHN RD 154750-462750 500x500"); onder panden en water geen meetpunten (het model overbrugt die plekken, ook water van rand tot rand, en zegt hoeveel m²); zie hieronder |
 | DHMV-hoogte (Vlaanderen) | `VKDHMV` | `model` = `dtm` (maaiveld) of `dsm` (met gebouwen en begroeiing); `stap` = `fijnst` (1 m, bij een groter gebied vanzelf grover zodat het model onder de 150.000 punten blijft; de standaardkeuze), `2` of `5` (m) | 4 km² | alleen Civil 3D en alleen in een tekening in Lambert 72; beta; DHMV II (2013-2015), hoogtes in TAW; onder panden geïnterpoleerd; zie 3, Een tekening in België |
 | Wegen (NWB) | `VKNWB` | `hectometrering` | 25 km² | hectometerpaal als oranje bordje met het wegnummer; zie hieronder |
 | Hectometerpaaltjes (AWV) | `VKREFPUNTEN` | | 25 km² | beta; alleen in een tekening in Lambert 72; hetzelfde oranje bordje met het wegnummer en het opschrift; zie 3, Hectometerpaaltjes in Vlaanderen |
@@ -917,6 +921,23 @@ De keuzes (tandwiel, **Kaarten**, **AHN hoogtemodel**; getypt bij `VKAHN` als `m
 - Na het laden staat er bijvoorbeeld: "AHN DTM: hoogtemodel 'VLEA AHN RD 154950-462950 100x100' uit AHN4 (ingewonnen
   2020-2022) met 1.260 punten op een raster van 2,0 m." Een tweede model van hetzelfde gebied met een andere stap
   krijgt dezelfde naam; je antwoord op de vraag Vervangen, Erbij of Overslaan beslist (zie 5).
+
+**Water en panden: het model blijft heel.** Onder panden en op water heeft het maaiveldmodel geen hoogte (het
+oppervlakmodel alleen op water). Het hoogtemodel overbrugt elke zo'n plek tussen de meetpunten, binnen het gebied, met een rechte lijn tussen de
+randen, ook als het water van rand tot rand door je gebied loopt, een sloot of een vaart bij een kruising: een profiel
+over het model, bijvoorbeeld een surface profile in Civil 3D, blijft daardoor één doorlopende lijn en
+je hoeft niets extra's te doen. Het model gaat nooit buiten het gebied dat je koos (rechthoek, gesloten polylijn of strook
+van `VKCONTOUR`), ook niet over de binnenbocht van een strook. Na het laden zegt de opdrachtregel hoeveel oppervlak dat is,
+bijvoorbeeld "Zonder AHN-meting (water, panden): 1.240 m², overbrugd met een rechte lijn tussen de randen; daar is de
+hoogte geen meting." (bij een grovere rasterstap dan 0,5 m met "ongeveer" erbij; bij 0 m² niets). **Let op:** over zo'n
+overbrugde plek is de lijn een rechte verbinding tussen de oevers en geen meting. Haal bij een kruising van water de bodem
+uit de legger of uit een peiling, niet uit dit model. **Water aan de rand van je gebied blijft leeg** als er buiten je
+gebied geen oever met meetpunten ligt: een hoogtemodel maakt geen driehoeken buiten de punten. Dat geldt voor een hoek,
+het eind van een strook of een hele randstrook, dus ook voor een boring die in een kanaal uitkomt. De opdrachtregel noemt
+dat oppervlak apart ("Nog 240 m² ligt aan de rand van je gebied, zonder meting erbuiten; dat blijft leeg in het
+hoogtemodel") en telt het niet als overbrugd; kies je gebied zo dat de oever aan beide kanten erbinnen valt. Lukt het
+begrenzen of het uitzetten van de maximale driehoekszijde of de maximale hoek in Civil 3D niet, dan staat er een melding en
+blijft het model zonder grens.
 
 ### Tijdens en na het laden
 - Tijdens het ophalen zie je per kaart de voortgang (pagina's en objecten; PDOK geeft vooraf geen
