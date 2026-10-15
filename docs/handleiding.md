@@ -1,6 +1,6 @@
 # Handleiding – VLEA, kaarten voor AutoCAD
 
-> **Versie 0.2.6.** Voor AutoCAD 2025, 2026 en 2027. `VKHELP` opent deze pagina in je browser.
+> **Versie 0.2.7.** Voor AutoCAD 2025, 2026 en 2027. `VKHELP` opent deze pagina in je browser.
 
 ## 1. Voordat je begint
 - AutoCAD 2025, 2026 of 2027 voor Windows (ook Civil 3D of Map 3D). Niet AutoCAD LT, AutoCAD voor Mac of AutoCAD Web: die kunnen deze plugin niet laden (AutoCAD
@@ -162,13 +162,15 @@ achter het oppervlak, bijvoorbeeld "Gekozen: 500 x 500 m (0,25 km²), in Lambert
 Lambert terwijl je tekening een eigen raster heeft, dan vallen je getallen toevallig in het bereik van Lambert;
 controleer dan je coördinaten.
 
-- **Wat werkt:** een gebied kiezen en bewaren; de kaarten van Vlaanderen (het GRB, ook als kaartbeeld, de orthofoto en
-  het hoogtemodel DHMV, zie hieronder); de hoogte op een punt (`VKAHNPUNT`, in Lambert 72 uit het DHMV) en het
-  NAP-gereedschap in TAW (zie Hoogte in Vlaanderen hieronder); en het gereedschap dat niet met een plek op de kaart
-  rekent: maatlijnen (`VKMAAT`), `VKINFO`, `VKWISSEN` en `VKSTIJL`.
+- **Wat werkt:** een gebied kiezen en bewaren; de kaarten van Vlaanderen (het GRB, ook als kaartbeeld, de orthofoto,
+  het hoogtemodel DHMV, de hectometerpaaltjes van AWV en de sonderingen uit DOV, zie hieronder); de hoogte op een punt
+  (`VKAHNPUNT`, in Lambert 72 uit het DHMV) en het NAP-gereedschap in TAW (zie Hoogte in Vlaanderen hieronder); en het
+  gereedschap dat niet met een plek op de kaart rekent: maatlijnen (`VKMAAT`), `VKINFO`, `VKWISSEN` en `VKSTIJL`.
 - **De kaarten van Nederland** staan in een Belgische tekening in het palet grijs met "alleen in Nederland", en
-  `VKLADEN` en de kaartcommando's slaan ze over met die reden. Andersom staat een kaart van Vlaanderen in een Nederlandse
-  tekening grijs met "alleen in België" (het DHMV met "alleen in Lambert 72 (EPSG:31370)"). Heeft je gebied lokale
+  `VKLADEN` en de kaartcommando's slaan ze over met die reden. Twee zeggen erachter waar het in Vlaanderen wel kan:
+  `VKNWB` dat je de hectometerpaaltjes van Vlaanderen met `VKREFPUNTEN` laadt, en `VKSONDERINGEN` "In Vlaanderen laad
+  je sonderingen uit DOV met VKSONDERINGENDOV." Andersom staat een kaart van Vlaanderen in een Nederlandse tekening
+  grijs met "alleen in België" (het DHMV en de hectometerpaaltjes met "alleen in Lambert 72 (EPSG:31370)"). Heeft je gebied lokale
   coördinaten (geen RD en geen Lambert), dan weigert VLEA het al bij het kiezen, met de zin "Het gekozen gebied ligt
   buiten het RD-stelsel (EPSG:28992). Kies een gebied in Nederland, in een tekening met RD-coördinaten." In een
   Belgische tekening betekent dat: je getallen liggen niet in Lambert 72 of Lambert 2008; controleer je coördinaten.
@@ -188,7 +190,7 @@ controleer dan je coördinaten.
   en het NAP-gereedschap met een TAW-referentie schrijven "TAW +…" (zie Hoogte in Vlaanderen hieronder).
 - **Wat (nog) niet kan:** Wallonië en Brussel (die hebben eigen diensten), adres zoeken in Vlaanderen, Google Maps,
   Street View, StreetSmart, DINOloket en de geografische plek (`VKGEOPLEK`) in Lambert, een KLIP-levering inlezen, het
-  DHMV in Lambert 2008, en punten uit Excel of CSV (`VKPUNTEN`) in Lambert.
+  DHMV en de hectometerpaaltjes in Lambert 2008, en punten uit Excel of CSV (`VKPUNTEN`) in Lambert.
 
 #### Kaarten van Vlaanderen
 In een tekening in Lambert 72 of Lambert 2008 laadt VLEA kaarten van Digitaal Vlaanderen (`geo.api.vlaanderen.be`),
@@ -242,6 +244,32 @@ Het is een plaatje: je kunt er niet op vastklikken. Voor lijnen en vlakken op NL
 Opnieuw laden (Vervangen, Erbij of Overslaan), `VKINFO` en `VKWISSEN` werken zoals bij elke kaart (sleutels `grbbeeld`
 en `ortho`). `VKSTIJL` (grijze onderlegger) laat de beelden ongemoeid: een afbeelding heeft geen laagkleur.
 
+#### Hectometerpaaltjes in Vlaanderen (`VKREFPUNTEN`, beta)
+`VKREFPUNTEN` (palet: **Hectometerpaaltjes (AWV)**, onder Infra) tekent de referentiepunten van het Agentschap Wegen en
+Verkeer (AWV, `opendata.apps.mow.vlaanderen.be`): de hectometerpaaltjes langs de autosnelwegen en gewestwegen in
+Vlaanderen, ongeveer om de 100 m. Gemeentewegen zitten er niet bij; ligt er in je gebied geen enkel paaltje, dan zegt
+VLEA dat.
+- **Hetzelfde oranje bordje als in Nederland** (`VK_HECTOMETERPAAL_BORD` op `B-WE-VW-HECTOMETRERING-S`, de tekst op
+  `B-WE-VW-HECTOMETRERING-T18`, zie 4, Wegen en hectometrering), rechtop. Boven staat het korte wegnummer uit de
+  ident8 van AWV (`N0020001` wordt "N2", `A0140001` "A14"), onder het opschrift van het paaltje met een komma en zonder
+  afronden ("16,2", "0,198"; een opschrift 0 wordt "0,0").
+- **Een op- of afrit** (een zijtak: een ident8 met iets anders dan `000` in het midden, zoals `A0145031`) heeft een
+  eigen kilometrering die bij 0 begint. Op zo'n bordje staat alleen het opschrift, in het midden: "A14" boven "0,2" zou
+  kilometer 0,2 van de A14 betekenen, en dat is een andere plek. De volledige ident8 staat in de objectgegevens
+  (`VKINFO`), met de andere gegevens van AWV.
+- **Twee keer hetzelfde paaltje.** AWV heeft een paaltje soms twee keer, één keer per rijrichting. Staan twee punten met
+  hetzelfde bordje (hetzelfde wegnummer en opschrift) binnen 0,5 m van elkaar, dan tekent VLEA één bordje en zet het
+  andere refpunt in de objectgegevens; de opdrachtregel zegt hoeveel. Punten met een ander opschrift tekent VLEA altijd,
+  ook als ze bijna samenvallen.
+- **Alleen in Lambert 72.** In Lambert 2008 liggen de paaltjes van AWV centimeters naast het GRB (AWV rekent anders om
+  dan Digitaal Vlaanderen), en VLEA rekent zelf niets om: in een tekening in Lambert 2008 weigert `VKREFPUNTEN` met die
+  uitleg. Grootste gebied 25 km², zoals het NWB.
+- **Een register.** AWV houdt de paaltjes bij als register: een paaltje dat er op straat (nog) niet staat of een ander
+  opschrift heeft, kan er toch in staan. VLEA tekent ze allemaal, zoals AWV ze geeft.
+- De bronvermelding: "Bron: AWV, Agentschap Wegen en Verkeer (Referentiepunten), Modellicentie Gratis Hergebruik v1.0
+  (…), bewerkt, opgehaald <datum>" (zie 8). Opnieuw laden, `VKINFO` en `VKWISSEN` werken zoals bij elke kaart (sleutel
+  `refpunten`).
+
 #### Hoogte in Vlaanderen (DHMV, TAW)
 - **Hoogtemodel:** `VKDHMV` (palet: **DHMV hoogtemodel (Vlaanderen)**, alleen Civil 3D, beta) maakt van het Digitaal
   Hoogtemodel Vlaanderen (DHMV II, pixels van 1 m, Digitaal Vlaanderen) een hoogtemodel, zoals `VKAHN` met het AHN.
@@ -257,6 +285,45 @@ en `ortho`). `VKSTIJL` (grijze onderlegger) laat de beelden ongemoeid: een afbee
 - **Lengteprofiel:** het NAP-gereedschap kan TAW. `VKNAPSET` heeft het trefwoord `Stelsel` (`Nap` of `Taw`); ligt het
   gebied van de tekening in Lambert, dan is TAW de standaard. De referentie heet dan "TAW-REFERENTIE" en de leiders
   krijgen "TAW +1,25 m". Zie 4, NAP-hoogte in een lengteprofiel.
+
+#### Sonderingen in Vlaanderen (DOV, `VKSONDERINGENDOV`)
+`VKSONDERINGENDOV` (palet: **Sonderingen (DOV)** onder Grondonderzoek, beta) haalt sonderingen uit de Databank
+Ondergrond Vlaanderen (DOV, `www.dov.vlaanderen.be`), in een tekening in Lambert 72 of Lambert 2008, in het stelsel van
+je tekening. Ze komen er net zo uit als de sonderingen uit de BRO (zie 4, Sonderingen (BRO)): hetzelfde kruisje, label,
+dezelfde sondeerplot rechts naast het gebied, dezelfde lagen en dezelfde keuzes (`aantal`, `sondeerplots`, `labels`,
+`xml`; zonder keuze de 25 dichtst bij het midden van het gebied of bij de lijn van de contour, en hoogstens 25 plots per
+keer). Grootste gebied 4 km², ook voor de omhullende rechthoek. In een Nederlandse tekening staat de kaart grijs met
+"alleen in België".
+- **Hoogtes in TAW, nooit NAP.** Het label zegt bijvoorbeeld "Z +23,80 m TAW", de plot "DIEPTE (m) t.o.v. TAW" en onder
+  de plot "Z=+23,80 TAW". **Z** is de hoogte waar de sondering begon (het aanvangspeil). DOV zegt bij geen enkele
+  sondering of dat het maaiveld is (als referentiepunt staat er steeds "Platform"), dus VLEA noemt het geen maaiveld.
+  Het blok heet `VK_SONDERING_KRUIS_TAW`, met Z in het attribuut `Z_TAW` (het blok van de BRO heeft `MV_NAP`, het
+  maaiveld in NAP).
+- **Mechanische sonderingen.** Ongeveer twee derde van DOV is mechanisch gesondeerd (conus M1, M2 of M4, vaak tientallen
+  jaren oud): alleen puntdruk, geen wrijving. Onder de plot staat de conus, bijvoorbeeld "conus M4 (mechanisch)", en
+  "Diepte = sondeerlengte". De schaalregels van wrijving en wrijvingsgetal blijven staan, zodat elke plot dezelfde vorm
+  heeft. DOV zelf noemt oude sonderingen eerder referentiedata; plek en hoogte zijn vaak van een topokaart gehaald (dat
+  staat bij `VKINFO`).
+- **Wrijvingsgetal.** DOV levert geen wrijvingsgetal; VLEA rekent het uit (wrijving / puntdruk). Daarom staat onder een
+  elektrische plot "Wrijvingsgetal deels berekend".
+- **Zoals DOV het geeft.** Een waterspanning die overal 0 is, staat als lijn op 0; een waarde die DOV met ">" geeft
+  (meetbereik overschreden), telt als dat getal.
+- **XML naast de tekening** (optie `xml`): in `<tekening>_kaarten/sonderingen-dov`, met de vaste sleutel van DOV als
+  naam (bijvoorbeeld `1984-065526.xml`; een sondeernummer als "GEO-84/128-SII" kan geen bestandsnaam zijn). De XML
+  staat er zoals DOV hem leverde, zonder de naam van wie sondeerde: bij recente sonderingen staat die in de XML van DOV,
+  en VLEA haalt hem eruit. Kan dat niet zeker (een vorm die VLEA niet kent), dan gebruikt VLEA die sondering niet en
+  zegt dat ("XML van DOV in een onbekende vorm"). Stuur die map mee als je de tekening deelt.
+- **`VKINFO`** toont de gegevens van DOV bij het kruisje: sondeernummer, conus, uitvoerder, Z, einddiepte, datum en de
+  link naar de fiche van DOV; bij een sondering met plot ook hoe plek en hoogte bepaald zijn en het referentiepunt zoals
+  DOV het opgeeft.
+- **Duur.** Eén sondering ophalen duurt bij DOV 0,6 tot 2,3 s (gemeten 13-10-2026); VLEA haalt er vier tegelijk. Esc
+  annuleert.
+- **Bronvermelding** in de vorm die DOV voorschrijft, met de beheerder en de geraadpleegde gegevens: "Bron: Databank
+  Ondergrond Vlaanderen - (MOW, Afdeling Geotechniek; sonderingen) - Geraadpleegd op 14/10/2026, op
+  https://www.dov.vlaanderen.be" (zie 8).
+- `VKWISSEN` met de keuze Selectie haalt symbool, label en plot van een sondering samen weg, zoals bij de BRO.
+- Eigen sonderingen van je opdrachtgever (een GEF-bestand of een XML van DOV) leest `VKGEF` in een Belgische tekening
+  nog niet: alleen wat al in DOV staat, komt via deze kaart.
 
 ## 4. Kaarten laden
 - In het palet laadt **Laden** achter een kaart alleen die kaart, met de opties uit de instellingen.
@@ -283,11 +350,13 @@ en `ortho`). `VKSTIJL` (grijze onderlegger) laat de beelden ongemoeid: een afbee
 | AHN-hoogte | `VKAHN` | `model` = `dtm` (maaiveld) of `dsm` (met gebouwen en begroeiing); `stap` = `fijnst` (de standaardkeuze), `1`, `2` of `5` (m) | 4 km² | alleen Civil 3D; AHN4 (2020-2022), de enige versie bij PDOK; een hoogtemodel per gebied ("VLEA AHN RD 154750-462750 500x500"); onder panden en water geen meetpunten (het model overbrugt die plekken); zie hieronder |
 | DHMV-hoogte (Vlaanderen) | `VKDHMV` | `model` = `dtm` (maaiveld) of `dsm` (met gebouwen en begroeiing); `stap` = `fijnst` (1 m, bij een groter gebied vanzelf grover zodat het model onder de 150.000 punten blijft; de standaardkeuze), `2` of `5` (m) | 4 km² | alleen Civil 3D en alleen in een tekening in Lambert 72; beta; DHMV II (2013-2015), hoogtes in TAW; onder panden geïnterpoleerd; zie 3, Een tekening in België |
 | Wegen (NWB) | `VKNWB` | `hectometrering` | 25 km² | hectometerpaal als oranje bordje met het wegnummer; zie hieronder |
+| Hectometerpaaltjes (AWV) | `VKREFPUNTEN` | | 25 km² | beta; alleen in een tekening in Lambert 72; hetzelfde oranje bordje met het wegnummer en het opschrift; zie 3, Hectometerpaaltjes in Vlaanderen |
 | Spoorwegen | `VKSPOOR` | `kilometrering` | 100 km² | beta |
 | Riolering | `VKRIOOL` | `labels` (materiaal en diameter), `hoogtes` (bob bij leidingen, putnaam en maaiveld bij putten), `aansluitingen` | 4 km² | onvolledig; niet voor WIBON/KLIC; riool zonder laag in kleur 210, zoals in een KLIC-levering (zie 6, Kleur en lijndikte); zie hieronder |
 | Natura 2000 | `VKNATURA2000` | | 100 km² | beta |
 | Zones langs waterkeringen | `VKZONERINGEN` | `kernzone`, `beschermingszone`, `vrijeruimte` (profiel van vrije ruimte), `rws` (ook de zones van Rijkswaterstaat) | 9 km² | beta; niet elk waterschap levert zijn zones aan; een ontbrekende zone betekent niet dat er geen zone is; de legger van de beheerder is leidend (dat staat ook na het laden op de opdrachtregel); `rws` haalt bij `geo.rijkswaterstaat.nl` |
 | Sonderingen (BRO) | `VKSONDERINGEN` | `sondeerplots`, `labels`, `xml`; `aantal` = `5`, `10`, `25` (de standaardkeuze), `50`, `100` of `alle` | 4 km² | beta; zonder keuze de 25 dichtstbijzijnde; zie hieronder |
+| Sonderingen (DOV) | `VKSONDERINGENDOV` | `sondeerplots`, `labels`, `xml`; `aantal` = `5`, `10`, `25` (de standaardkeuze), `50`, `100` of `alle` | 4 km² | beta; alleen in een tekening in Lambert 72 of Lambert 2008; hoogtes in TAW; zonder keuze de 25 dichtstbijzijnde; zie 3, Sonderingen in Vlaanderen |
 | Boringen (BRO) | `VKBORINGEN` | `boorprofielen`, `labels`, `xml`; `aantal` = `5`, `10`, `25` (de standaardkeuze), `50`, `100` of `alle` | 4 km² | beta; geotechnische en geologische boringen; zonder keuze de 25 dichtstbijzijnde; boorprofielen links naast het gebied; zie hieronder |
 | Peilbuizen (BRO) | `VKPEILBUIZEN` | `standen`, `labels`, `csv`, `zonderstanden`; `aantal` = `5`, `10`, `25` (de standaardkeuze), `50`, `100` of `alle` | 4 km² | beta; per filter de gemeten grondwaterstanden t.o.v. NAP; zonder keuze de 25 dichtstbijzijnde; zie hieronder |
 
@@ -790,6 +859,8 @@ aantal=10,vervangen=ja
 - Een hectometerpaal uit een eerdere versie (`VK_HECTOMETERPAAL`, een klein bordje met het label ernaast) blijft
   zoals hij is. Laad opnieuw met Vervangen voor de nieuwe bordjes, en ruim de oude blokdefinitie op met `PURGE`.
   Lagen die al in je tekening staan, houden hun kleur; `VKSTIJL` met de keuze `Nlcs` maakt ze oranje.
+- In een tekening in Lambert (België) weigert `VKNWB` en wijst het naar `VKREFPUNTEN`: de hectometerpaaltjes van
+  Vlaanderen, met hetzelfde bordje (zie 3, Hectometerpaaltjes in Vlaanderen).
 
 ### Riolering (`VKRIOOL`)
 `VKRIOOL` tekent de riolering die gemeenten aan GWSW leveren (niet elke gemeente doet dat) op de NLCS-lagen voor
@@ -1507,6 +1578,12 @@ tekening aan één opdrachtgever daaronder valt, beoordeelt VLEA niet. Wat dat b
 README. Wil je dat niet, wis de zones dan in de kopie die je verstuurt (`VKWISSEN`, kaart `zoneringen`).
 De kaarten van Digitaal Vlaanderen (`VKGRB`, `VKGRBBEELD`, `VKORTHO`, `VKDHMV`, en `VKAHNPUNT` in Lambert 72, dat de
 hoogte uit het DHMV haalt) vallen onder de Modellicentie Gratis Hergebruik v1.0: ook daar is naamsvermelding verplicht.
+Dat geldt ook voor de hectometerpaaltjes van het Agentschap Wegen en Verkeer (`VKREFPUNTEN`) en de sonderingen uit DOV
+(`VKSONDERINGENDOV`). AWV vraagt "Bron: AWV" en de datum van de laatste bijwerking; de bronvermelding van VLEA begint
+met "Bron: AWV", noemt AWV ook voluit en heeft de dag waarop je de paaltjes ophaalde (de dienst wordt dagelijks
+bijgewerkt). Bij de sonderingen uit DOV
+staat de bronvermelding in de vorm die DOV voorschrijft ("Databank Ondergrond Vlaanderen - (MOW, Afdeling
+Geotechniek; sonderingen) - Geraadpleegd op …, op https://www.dov.vlaanderen.be").
 
 ## 9. Over VLEA
 `VKOVER` toont de versie, de licenties (de licentie van de plugin, CC BY 4.0 voor NLCS), de regels
@@ -1534,8 +1611,11 @@ de peilbuizen zoekt VLEA bij PDOK (de kengegevens van de BRO) en haalt het bij d
 gekozen peilbuizen op (met de optie `standen` uit: niets bij de BRO). In een tekening in Lambert 72 of Lambert 2008
 komen de kaarten van Vlaanderen (het GRB, ook als kaartbeeld, en de orthofoto; het DHMV en de hoogte van `VKAHNPUNT`
 alleen in Lambert 72) van Digitaal Vlaanderen (`geo.api.vlaanderen.be`, alleen vier vaste adressen, altijd in het stelsel van de
-tekening; zie 3, Een tekening in België). In een tekening in RD maakt VLEA daar geen verbinding mee, behalve met
-`VKSTATUS` (hieronder).
+tekening; zie 3, Een tekening in België), de sonderingen van Vlaanderen (`VKSONDERINGENDOV`) van de Databank
+Ondergrond Vlaanderen (DOV, `www.dov.vlaanderen.be`: zoeken in je gebied en per sondering de meetwaarden, alleen vaste
+adressen, altijd in het stelsel van de tekening) en de hectometerpaaltjes van Vlaanderen (`VKREFPUNTEN`, alleen in
+Lambert 72) van het Agentschap Wegen en Verkeer (AWV, `opendata.apps.mow.vlaanderen.be`, één vast adres). In een
+tekening in RD maakt VLEA met die drie geen verbinding, behalve met `VKSTATUS` (hieronder).
 
 VLEA kijkt hoogstens één keer per dag bij GitHub (`api.github.com`) of er een nieuwere versie is en
 zet dan een regel onderaan het palet. GitHub ziet daarbij je IP-adres en het versienummer; verder
@@ -1545,12 +1625,12 @@ gaat er niets mee, en er wordt niets automatisch bijgewerkt. Uitzetten kan in de
 Bij het openen van het palet kijkt VLEA hoe de bronnen ervoor staan (zie 2, Status van de bronnen): hoogstens één
 keer per tien minuten vanzelf, per kaart een of twee kleine verzoeken aan dezelfde bron (PDOK, de BRO, met de
 optie `rws` aan de legger van Rijkswaterstaat en, alleen bij een tekening in Lambert 72 of Lambert 2008, Digitaal
-Vlaanderen), altijd in een vast testgebied en nooit in jouw gebied. Dat zijn de
+Vlaanderen, DOV en AWV), altijd in een vast testgebied en nooit in jouw gebied. Dat zijn de
 enige verzoeken aan die bronnen waar je zelf niets voor doet. De bron ziet daarbij je IP-adres en het versienummer.
 Uitzetten kan in de instellingen (tandwiel, **Algemeen**), met het vinkje "Status van de bronnen tonen".
 `VKSTATUS` vraagt altijd alle bronnen, ook de legger van Rijkswaterstaat, ook als de optie `rws` of "Status van de
-bronnen tonen" uit staat: het is een commando dat je zelf start. Ook Digitaal Vlaanderen vraagt `VKSTATUS` altijd, ook
-bij een tekening in RD.
+bronnen tonen" uit staat: het is een commando dat je zelf start. Ook Digitaal Vlaanderen, DOV en AWV vraagt `VKSTATUS`
+altijd, ook bij een tekening in RD.
 
 Een KLIC-levering (`VKKLIC`) en eigen grondonderzoek (`VKGEF`) leest VLEA alleen van je eigen schijf; daarbij
 maakt VLEA geen verbinding.

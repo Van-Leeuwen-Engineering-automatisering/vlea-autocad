@@ -12,7 +12,7 @@ garanderen geen termijn.
 ## Binnen scope
 - De plugin, het installatieprogramma, de installatiescripts en de releasebestanden van deze
   repository.
-- Buiten scope: PDOK, de BRO, de legger van Rijkswaterstaat, Digitaal Vlaanderen, GitHub en de kaartdata zelf, de website van
+- Buiten scope: PDOK, de BRO, de legger van Rijkswaterstaat, Digitaal Vlaanderen, DOV, AWV, GitHub en de kaartdata zelf, de website van
   VLEA, AutoCAD, en aangepaste versies van anderen.
 
 ## Wat de plugin doet en niet doet
@@ -24,18 +24,26 @@ garanderen geen termijn.
   (Digitaal Vlaanderen: alleen vier vaste adressen, voor het GRB als lijnen en vlakken en als kaartbeeld, de orthofoto
   en het hoogtemodel DHMV, ook voor `VKAHNPUNT` in een tekening in Lambert 72, en
   alleen met het stelsel van de tekening; een vraag in RD, zonder stelsel of met een datum weigert de plugin, omdat
-  de dienst daar stil een verkeerd of leeg antwoord op geeft), `api.github.com`
+  de dienst daar stil een verkeerd of leeg antwoord op geeft), voor de sonderingen in een
+  tekening in Vlaanderen `www.dov.vlaanderen.be` (DOV, de Databank Ondergrond Vlaanderen: alleen de WFS met één
+  volledige vraag per tegel en één sondering als XML, met als enige doorverwijzing die naar de export van dezelfde
+  sondering), voor de hectometerpaaltjes in een tekening in Lambert 72
+  `opendata.apps.mow.vlaanderen.be` (AWV, het Agentschap Wegen en Verkeer: alleen de WFS met de referentiepunten, in
+  Lambert 72, zonder doorverwijzing; bij beide weigert de plugin een vraag zonder stelsel, met een
+  filter of sortering of zonder vaste grens, omdat de dienst daar stil een verkeerd, leeg of afgekapt antwoord op geeft,
+  en volgt hij nooit een link naar een volgende pagina), `api.github.com`
   (versiecheck, uit te zetten) en, alleen als je `VKUPDATE` start (typen of
   de knop), `github.com` en `release-assets.githubusercontent.com` (de nieuwe versie downloaden). Geen
   telemetrie, geen account, geen sleutels, geen cookies.
 - De status van de bronnen (het bolletje per kaart in het palet, en `VKSTATUS`) gebruikt alleen die bronnen: per
   kaart een of twee kleine verzoeken aan dezelfde dienst als de kaart, altijd in een vast testgebied en nooit in het
   gebied van de gebruiker. Het palet doet dat bij het openen hoogstens één keer per tien minuten (uit te zetten; de
-  legger van Rijkswaterstaat alleen met de optie `rws` aan; Digitaal Vlaanderen alleen bij een tekening in Lambert 72
-  of Lambert 2008, zodat het palet bij een tekening in RD nooit iets aan `geo.api.vlaanderen.be` vraagt).
+  legger van Rijkswaterstaat alleen met de optie `rws` aan; Digitaal Vlaanderen, DOV en AWV alleen bij een tekening in
+  Lambert 72 of Lambert 2008, zodat het palet bij een tekening in RD nooit iets aan `geo.api.vlaanderen.be`,
+  `www.dov.vlaanderen.be` of `opendata.apps.mow.vlaanderen.be` vraagt).
   `VKSTATUS` vraagt altijd alle bronnen, ook de legger van Rijkswaterstaat, ook als de optie `rws` of "Status van de
-  bronnen tonen" uit staat: het is een commando dat je zelf start. Ook Digitaal Vlaanderen vraagt `VKSTATUS` altijd,
-  ook bij een tekening in RD.
+  bronnen tonen" uit staat: het is een commando dat je zelf start. Ook Digitaal Vlaanderen, DOV en AWV vraagt
+  `VKSTATUS` altijd, ook bij een tekening in RD.
   Geen nieuwe bestemming, geen verzoek aan VLEA.
 - `VKHELP` en `VKWEBSITE` (en in het palet de link en "?") openen alleen je eigen browser, met een van
   twee vaste adressen (de handleiding op `github.com` en de website `vanleeuwenea.nl`); de plugin maakt

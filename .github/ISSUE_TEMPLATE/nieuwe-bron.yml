@@ -9,7 +9,9 @@ body:
         Alleen open data. De plugin praat alleen met deze netwerkbestemmingen: PDOK (api.pdok.nl en
         service.pdok.nl), de BRO voor de sonderingen, boringen en peilbuizen (publiek.broservices.nl), de legger van
         Rijkswaterstaat (één vast pad op geo.rijkswaterstaat.nl), Digitaal Vlaanderen voor de kaarten van Vlaanderen
-        (vier vaste adressen op geo.api.vlaanderen.be, alleen in Lambert) en GitHub (versiecheck en VKUPDATE).
+        (vier vaste adressen op geo.api.vlaanderen.be, alleen in Lambert), DOV voor de sonderingen van Vlaanderen
+        (vaste adressen op www.dov.vlaanderen.be, alleen in Lambert), AWV voor de hectometerpaaltjes van Vlaanderen
+        (één vast adres op opendata.apps.mow.vlaanderen.be, alleen in Lambert 72) en GitHub (versiecheck en VKUPDATE).
         Een bron die daar niet staat, is een nieuwe netwerkbestemming: dat vraagt eerst een besluit
         van beheer. Zet hier geen tekeningen, klantnamen of projectlocaties in.
   - type: input

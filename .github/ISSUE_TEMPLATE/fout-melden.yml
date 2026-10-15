@@ -13,8 +13,9 @@ body:
         Laden mislukt of duurt lang? De plugin praat alleen met PDOK (api.pdok.nl, service.pdok.nl),
         de BRO voor de sonderingen, boringen en peilbuizen (publiek.broservices.nl), de legger van Rijkswaterstaat voor de zones
         (geo.rijkswaterstaat.nl), Digitaal Vlaanderen voor de kaarten van Vlaanderen en VKAHNPUNT in een tekening
-        in Lambert (geo.api.vlaanderen.be) en GitHub (api.github.com; bij VKUPDATE ook github.com en
-        release-assets.githubusercontent.com). Laat een proxy of firewall die door, of noem hieronder
+        in Lambert (geo.api.vlaanderen.be), DOV voor de sonderingen van Vlaanderen (www.dov.vlaanderen.be), AWV
+        voor de hectometerpaaltjes van Vlaanderen (opendata.apps.mow.vlaanderen.be) en GitHub (api.github.com; bij
+        VKUPDATE ook github.com en release-assets.githubusercontent.com). Laat een proxy of firewall die door, of noem hieronder
         welke niet bereikbaar is.
   - type: input
     id: autocad
