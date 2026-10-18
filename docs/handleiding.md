@@ -1,6 +1,6 @@
 # Handleiding – VLEA, kaarten voor AutoCAD
 
-> **Versie 0.2.8.** Voor AutoCAD 2025, 2026 en 2027. `VKHELP` opent deze pagina in je browser.
+> **Versie 0.2.9.** Voor AutoCAD 2025, 2026 en 2027. `VKHELP` opent deze pagina in je browser.
 
 ## 1. Voordat je begint
 - AutoCAD 2025, 2026 of 2027 voor Windows (ook Civil 3D of Map 3D). Niet AutoCAD LT, AutoCAD voor Mac of AutoCAD Web: die kunnen deze plugin niet laden (AutoCAD
@@ -71,7 +71,8 @@ De keuzes staan niet op het hoofdscherm maar in het instellingenvenster:
 
 - **Kaarten**: per kaart haar opties, bijvoorbeeld de BGT-groepen, de sondeerplots of snel/scherp bij
   de luchtfoto. Bij de BRT staat onder de naam per keuze één zin wat je krijgt, bij AHN welke AHN-versie het is
-  en wat de rasterstap doet;
+  en wat de rasterstap doet; bij AHN en DHMV kies je ook de stijl van het hoogtemodel (hoogtelijnen om de 0,25 m, 0,5 m of
+  1 m, alleen de rand of de stijl van je tekening) en of de laag na het laden bevroren wordt;
 - **Gereedschap**: hoogte op een punt (maaiveld of met gebouwen, label met de hoogte), de breedte van
   de contour (standaard 25 m aan weerszijden), "ook een los .kml-bestand" bij Google Earth, en de
   opties van de KLIC-levering;
@@ -275,6 +276,12 @@ VLEA dat.
   Hoogtemodel Vlaanderen (DHMV II, pixels van 1 m, Digitaal Vlaanderen) een hoogtemodel, zoals `VKAHN` met het AHN.
   Alleen in een tekening in **Lambert 72**: Digitaal Vlaanderen levert het DHMV niet in Lambert 2008. Het gebied moet
   helemaal in Vlaanderen liggen; anders haalt VLEA niets op en zegt waarom.
+- **Stijl en bevroren laag:** net als bij het AHN krijgt het model een eigen stijl van VLEA (standaard hoogtelijnen om de
+  0,25 m, elke 1,25 m dikker; de keuzes `hoogtelijnen=25cm`, `50cm`, `1m`, `rand` of `tekening`, in `VKLADEN` als
+  `dhmv.hoogtelijnen`) en bevriest VLEA de laag `B-WE-OG-DTM-G` na het laden (`bevriezen=aan`, uit te zetten met
+  `bevriezen=uit`). Een profiel over het bevroren model werkt, net als bij het AHN (getest in de AutoCAD-kern van Civil 3D
+  2026, zonder scherm). Zie 4, Het AHN-hoogtemodel, voor de stijlen, de meldingen over de bevroren laag en wat er gebeurt
+  als een stijl al in je tekening staat.
 - **De hoogtes zijn TAW** (Tweede Algemene Waterpassing, België), niet NAP. Het model heet bijvoorbeeld "VLEA DHMV TAW
   L72 173200-174200 100x100". VLEA rekent nooit om tussen NAP en TAW: het verschil is niet overal gelijk.
 - **Let op het maaiveld:** onder panden heeft Digitaal Vlaanderen het maaiveld geïnterpoleerd uit de punten eromheen
@@ -351,8 +358,8 @@ keer). Grootste gebied 4 km², ook voor de omhullende rechthoek. In een Nederlan
 | Luchtfoto | `VKLUCHTFOTO` | `scherpte` = `snel` (25 cm) of `scherp` (8 cm) | 5 km² | foto naast de tekening; eerst opslaan; bij een groot gebied wordt de pixel grover (snel tot 50 cm bij 5 km²) |
 | GRB als kaartbeeld (Vlaanderen) | `VKGRBBEELD` | `kaartstijl` = `kleur` (de standaardkeuze) of `grijs` | 5 km² | beta; alleen in een tekening in Lambert 72 of Lambert 2008; een plaatje naast de tekening, eerst opslaan; zie 3, Kaarten van Vlaanderen |
 | Orthofoto Vlaanderen | `VKORTHO` | `scherpte` = `snel` (25 cm) of `scherp` (15 cm) | 5 km² | beta; alleen in een tekening in Lambert 72 of Lambert 2008; foto naast de tekening op de laag van de luchtfoto, eerst opslaan; zie 3, Kaarten van Vlaanderen |
-| AHN-hoogte | `VKAHN` | `model` = `dtm` (maaiveld) of `dsm` (met gebouwen en begroeiing); `stap` = `fijnst` (de standaardkeuze), `1`, `2` of `5` (m) | 4 km² | alleen Civil 3D; AHN4 (2020-2022), de enige versie bij PDOK; een hoogtemodel per gebied ("VLEA AHN RD 154750-462750 500x500"); onder panden en water geen meetpunten (het model overbrugt die plekken, ook water van rand tot rand, en zegt hoeveel m²); zie hieronder |
-| DHMV-hoogte (Vlaanderen) | `VKDHMV` | `model` = `dtm` (maaiveld) of `dsm` (met gebouwen en begroeiing); `stap` = `fijnst` (1 m, bij een groter gebied vanzelf grover zodat het model onder de 150.000 punten blijft; de standaardkeuze), `2` of `5` (m) | 4 km² | alleen Civil 3D en alleen in een tekening in Lambert 72; beta; DHMV II (2013-2015), hoogtes in TAW; onder panden geïnterpoleerd; zie 3, Een tekening in België |
+| AHN-hoogte | `VKAHN` | `model` = `dtm` (maaiveld) of `dsm` (met gebouwen en begroeiing); `stap` = `fijnst` (de standaardkeuze), `1`, `2` of `5` (m); `hoogtelijnen` = `25cm` (de standaardkeuze), `50cm`, `1m`, `rand` of `tekening`; `bevriezen` = `aan` (de standaardkeuze) of `uit` | 4 km² | alleen Civil 3D; eigen stijl met rand en hoogtelijnen, en de laag na het laden bevroren; AHN4 (2020-2022), de enige versie bij PDOK; een hoogtemodel per gebied ("VLEA AHN RD 154750-462750 500x500"); onder panden en water geen meetpunten (het model overbrugt die plekken, ook water van rand tot rand, en zegt hoeveel m²); zie hieronder |
+| DHMV-hoogte (Vlaanderen) | `VKDHMV` | `model` = `dtm` (maaiveld) of `dsm` (met gebouwen en begroeiing); `stap` = `fijnst` (1 m, bij een groter gebied vanzelf grover zodat het model onder de 150.000 punten blijft; de standaardkeuze), `2` of `5` (m); `hoogtelijnen` en `bevriezen` zoals bij AHN-hoogte | 4 km² | alleen Civil 3D en alleen in een tekening in Lambert 72; beta; eigen stijl en de laag na het laden bevroren; DHMV II (2013-2015), hoogtes in TAW; onder panden geïnterpoleerd; zie 3, Een tekening in België |
 | Wegen (NWB) | `VKNWB` | `hectometrering` | 25 km² | hectometerpaal als oranje bordje met het wegnummer; zie hieronder |
 | Hectometerpaaltjes (AWV) | `VKREFPUNTEN` | | 25 km² | beta; alleen in een tekening in Lambert 72; hetzelfde oranje bordje met het wegnummer en het opschrift; zie 3, Hectometerpaaltjes in Vlaanderen |
 | Spoorwegen | `VKSPOOR` | `kilometrering` | 100 km² | beta |
@@ -906,7 +913,7 @@ gegevens van het model en van elk hoogtepunt (`VKINFO`: `vk_ahn_versie`). Zet PD
 dan staat dat in de wijzigingen van een nieuwe versie van VLEA.
 
 De keuzes (tandwiel, **Kaarten**, **AHN hoogtemodel**; getypt bij `VKAHN` als `model=dsm,stap=2`, in `VKLADEN` als
-`ahn.model` en `ahn.stap`):
+`ahn.model`, `ahn.stap`, `ahn.hoogtelijnen` en `ahn.bevriezen`):
 - **Model.** **Maaiveld (DTM 0,5 m)** (`model=dtm`, de standaardkeuze): het terrein, zonder gebouwen en begroeiing;
   onder panden en op water heeft het geen hoogte. **Oppervlak met gebouwen en begroeiing (DSM 0,5 m)** (`model=dsm`):
   de bovenkant van wat er staat, dus geen maaiveld en niet voor een terreinmodel. Het model heet dan "VLEA AHN DSM RD …".
@@ -915,6 +922,35 @@ De keuzes (tandwiel, **Kaarten**, **AHN hoogtemodel**; getypt bij `VKAHN` als `m
   (0,25 km²: 1,5 m, 1 km²: 3 m, 4 km²: 5,5 m). **1 m**, **2 m** of **5 m** (`stap=1`, `stap=2`, `stap=5`): een lichter
   model met minder punten, bijvoorbeeld voor een overzicht of een lang tracé. Vraagt het gebied al een grovere stap,
   dan wint die; de opdrachtregel zegt dat dan.
+- **Stijl van het hoogtemodel** (`hoogtelijnen=25cm`, de standaardkeuze; in `VKLADEN` als `ahn.hoogtelijnen=25cm`): het model krijgt een eigen
+  oppervlakstijl van VLEA, zodat het niet het groene vlak van de standaardstijl van je tekening wordt, met elke driehoek
+  getekend. De stijl tekent de rand van het model en de hoogtelijnen, niets anders (geen driehoeken, punten of vlakken),
+  in het bovenaanzicht en in het 3D-aanzicht, op de laag van het model zelf. Je kiest uit **Hoogtelijnen om de 0,25 m,
+  elke 1,25 m dikker** (`25cm`), **om de 0,5 m, elke 2,5 m dikker** (`50cm`), **om de 1 m, elke 5 m dikker** (`1m`),
+  **Alleen de rand** (`rand`) en **Stijl van mijn tekening** (`tekening`: VLEA zet geen stijl en het model krijgt de
+  standaardstijl van je tekening of sjabloon; let op: de laag wordt dan toch bevroren, tenzij je `bevriezen=uit` zet).
+  Bij de eerste drie is elke vijfde hoogtelijn dik. VLEA maakt per keuze één stijl in je tekening, met de naam
+  "VLEA hoogtelijnen 25 cm", "VLEA hoogtelijnen 50 cm", "VLEA hoogtelijnen 1 m" of "VLEA alleen de rand", alleen als die
+  er nog niet is. **Staat er al een stijl met die naam, dan gebruikt VLEA hem zoals hij is**, ook als je hem hebt aangepast:
+  VLEA overschrijft of wist nooit een stijl. Wil je zelf andere kleuren of dikten, pas dan die stijl aan in Civil 3D. Lukt
+  het maken van de stijl niet, dan staat er een melding en krijgt het model de standaardstijl van je tekening.
+- **Laag na het laden bevriezen** (`bevriezen=aan`, de standaardkeuze): na het maken van het model bevriest VLEA de laag van
+  het model (`B-WE-OG-DTM-G`). Bij een stijl van VLEA is het model er dan wel, maar zie je het pas als je de laag ontdooit; zo
+  blijft je tekening leeg en snel, en gebruik je het model voor hoogtes. De opdrachtregel zegt het altijd: "De laag
+  B-WE-OG-DTM-G is bevroren (instelling): het model is er, maar je ziet het pas als je de laag ontdooit." Heb je **Stijl
+  van mijn tekening** gekozen, dan tekent die stijl onderdelen soms op andere lagen (bijvoorbeeld de rand en de
+  hoogtelijnen in het sjabloon waarmee VLEA is getest), en die lagen bevriest VLEA niet. Of die onderdelen dan ook echt
+  zichtbaar blijven, is niet op een scherm gezien; gemeten is alleen welke lagen bevroren zijn. De opdrachtregel zegt dan:
+  "De laag B-WE-OG-DTM-G is bevroren (instelling). Onderdelen die de stijl van je eigen tekening op andere lagen tekent,
+  blijven zichtbaar." Is die laag de huidige laag, dan bevriest VLEA hem niet
+  (AutoCAD staat dat niet toe) en zegt: "De laag B-WE-OG-DTM-G is de huidige laag en daarom niet bevroren. Zet een andere
+  laag actief en bevries hem zelf als je het model niet wilt zien." Zet je de keuze uit (`bevriezen=uit`), dan blijft de
+  laag zoals hij was: VLEA ontdooit nooit een laag.
+- **Het model weer zien.** Zet je de laag `B-WE-OG-DTM-G` weer aan (ontdooien in het laagbeheer van AutoCAD),
+  dan staat het model er met de rand en de hoogtelijnen van de gekozen stijl. **Een profiel over het bevroren model werkt**:
+  getest met een profiel dat uit het model is gemaakt, in de AutoCAD-kern van Civil 3D 2025 en 2026 (zonder scherm); op een scherm
+  en in een ontwerpprogramma is het niet geprobeerd. `VKAHNPUNT` heeft het model niet nodig. Modellen die je met 0.2.8 of eerder laadde
+  blijven zoals ze zijn; de stijl en het bevriezen gelden voor wat je nu laadt.
 - Bij elke stap is elk punt de hoogte van één echte AHN-pixel, op het midden van die pixel: VLEA middelt en
   interpoleert niets. Het ophalen bij PDOK blijft gelijk (altijd pixels van 0,5 m), dus een grovere stap laadt niet
   sneller; alleen het model wordt lichter.
