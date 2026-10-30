@@ -1,6 +1,6 @@
 # Handleiding – VLEA, kaarten voor AutoCAD
 
-> **Versie 0.2.9.** Voor AutoCAD 2025, 2026 en 2027. `VKHELP` opent deze pagina in je browser.
+> **Versie 0.2.10.** Voor AutoCAD 2025, 2026 en 2027. `VKHELP` opent deze pagina in je browser.
 
 ## 1. Voordat je begint
 - AutoCAD 2025, 2026 of 2027 voor Windows (ook Civil 3D of Map 3D). Niet AutoCAD LT, AutoCAD voor Mac of AutoCAD Web: die kunnen deze plugin niet laden (AutoCAD
@@ -44,8 +44,9 @@ lint-tabblad **VLEA** op **Palet** (nog een keer = sluiten). Van boven naar bene
   "Sla de tekening eerst op" met een knop **Opslaan**. Beta-kaarten zijn zo gemarkeerd; een driehoekje
   toont de vaste waarschuwing van een kaart.
 - **Gereedschap** – een rij knoppen: AHN-punt (`VKAHNPUNT`), NAP-referentie, NAP-leider en NAP herberekenen
-  (`VKNAPSET`, `VKNAPLEADER`, `VKNAPUPDATE`; in een lengteprofiel, zie 4), KLIC-levering (`VKKLIC`, met een
-  bestandskiezer), Eigen grondonderzoek (`VKGEF`, met een bestandskiezer voor een of meer GEF- of XML-bestanden,
+  (`VKNAPSET`, `VKNAPLEADER`, `VKNAPUPDATE`; in een lengteprofiel, zie 4), Coördinaat (`VKCOORDINAAT`, sinds 0.2.10;
+  zie 4), Profielschets openen (`VKSCHETS`, sinds 0.2.10; zie 6), KLIC-levering (`VKKLIC`, met een bestandskiezer),
+  Eigen grondonderzoek (`VKGEF`, met een bestandskiezer voor een of meer GEF- of XML-bestanden,
   zie 4), Naar Google Earth (`VKKMZ`; wat je al gekozen had, neemt het mee als er geen commando
   loopt, anders de VLEA-kaarten in het gebied zonder KLIC; één open lijn of polylijn wordt een
   boortracé, zie 10), KML inlezen (`VKKMLIMPORT`), Punten inlezen (`VKPUNTEN`),
@@ -67,24 +68,30 @@ lint-tabblad **VLEA** op **Palet** (nog een keer = sluiten). Van boven naar bene
 Meer kaarten in één keer laden kan met `VKLADEN` op de opdrachtregel (zie 4).
 
 ### Instellingen (tandwiel)
-De keuzes staan niet op het hoofdscherm maar in het instellingenvenster:
+De keuzes staan niet op het hoofdscherm maar in het instellingenvenster. Dat heeft twee tabbladen: **Opties** (hieronder)
+en **Weergave** (welke kaarten en knoppen je ziet, zie verderop). Alles wat er in 0.2.10 bij kwam, staat op het tabblad
+**Opties** in het hoofdstuk waar het bij hoort; er is geen apart tabblad per onderwerp. Op het tabblad **Opties**:
 
 - **Kaarten**: per kaart haar opties, bijvoorbeeld de BGT-groepen, de sondeerplots of snel/scherp bij
   de luchtfoto. Bij de BRT staat onder de naam per keuze één zin wat je krijgt, bij AHN welke AHN-versie het is
   en wat de rasterstap doet; bij AHN en DHMV kies je ook de stijl van het hoogtemodel (hoogtelijnen om de 0,25 m, 0,5 m of
   1 m, alleen de rand of de stijl van je tekening) en of de laag na het laden bevroren wordt;
 - **Gereedschap**: hoogte op een punt (maaiveld of met gebouwen, label met de hoogte), de breedte van
-  de contour (standaard 25 m aan weerszijden), "ook een los .kml-bestand" bij Google Earth, en de
-  opties van de KLIC-levering;
+  de contour (standaard 25 m aan weerszijden), "ook een los .kml-bestand" bij Google Earth, de
+  opties van de KLIC-levering, sinds 0.2.10 het **Venster bij aanwijzen (KLIC)** (zie 6), en bij de coördinaat het
+  aantal decimalen en of de Z erbij komt;
 - **Stijl**: NLCS-kleuren of grijze onderlegger voor de kaarten (een KLIC-levering komt altijd in
   NLCS-kleuren, de sonderingen, de boringen en de peilbuizen blijven altijd in kleur), en of de bronvermelding als tekst in de tekening komt. De
   grijze onderlegger maakt lagen grijs, geen beeld: de luchtfoto, het plaatje van de BRT, het kaartbeeld van de BGT,
-  het GRB als kaartbeeld en de orthofoto blijven in hun eigen kleuren. Wil je de BRT grijs, kies dan bij de BRT **Plaatje grijs**;
+  het GRB als kaartbeeld en de orthofoto blijven in hun eigen kleuren. Wil je de BRT grijs, kies dan bij de BRT **Plaatje grijs**.
+  Daaronder het blok **Tekst en aanwijslijnen**: laag, tekststijl, aanwijslijnstijl en teksthoogte van de tekst die je zelf
+  plaatst met de knoppen Coördinaat, NAP-leider en Punten (zie 7);
 - **Algemeen**: één keer per dag kijken of er een nieuwe versie is, en of het palet de status van de bronnen toont
   (standaard aan; zie hieronder).
 
 Alle aan/uit-keuzes staan standaard aan, behalve maatvoering en annotaties van de KLIC-levering (zie 6),
-grondgebruik bij de BRT (zie 4) en percelen, adrespunten en wegassen bij het GRB (zie 3); zet uit wat je niet wilt. Een keuzelijst staat op de
+grondgebruik bij de BRT (zie 4), percelen, adrespunten en wegassen bij het GRB (zie 3) en de Z bij de coördinaat (zie 4,
+Coördinaat op een punt); zet uit wat je niet wilt. Een keuzelijst staat op de
 standaard van de kaart of het commando (bijvoorbeeld maaiveld, het plaatje in kleur bij de BRT, NLCS-kleuren). **Opslaan**
 bewaart je keuzes (in `%LOCALAPPDATA%\VLEA-AutoCAD\instellingen.json`), **Annuleren** laat alles zoals
 het was en **Standaard herstellen** zet alles in het venster terug. De knoppen in het palet en op het
@@ -94,6 +101,32 @@ andere standaard, dan krijg je die vanzelf, behalve als je die keuze zelf anders
 oude gedrag terug, zet de keuze dan opnieuw; de wijzigingen bij elke versie zeggen welke keuze een
 nieuwe standaard kreeg. Een keuze die niet meer in het venster staat, vervalt: bij de BRT van 0.2.3 Kaartbeeld,
 de stijl van het kaartbeeld en Terrein en reliëf (zie 4, De BRT).
+
+### Weergave: kiezen wat je ziet
+Op het tabblad **Weergave** van het instellingenvenster kies je welke kaarten en knoppen je in het palet en op het lint
+ziet. Standaard staat alles aan: stel je niets in, dan zie je alles wat 0.2.9 toonde, plus de nieuwe knoppen
+**Profielschets openen** en **Coördinaat**.
+
+- **Kaarten**: per kaart een vinkje, per soort zoals in het palet (ondergrond, hoogte, grondonderzoek, infra, natuur,
+  beperkingen).
+- **Knoppen**: per knop een vinkje, in groepen: **KLIC** (KLIC-levering, Profielschets openen), **Tekenhulpen**
+  (AHN-punt, NAP-referentie, NAP-leider, NAP herberekenen, Coördinaat, Punten inlezen), **Bestanden** (Eigen
+  grondonderzoek, Naar Google Earth, KML inlezen), **Tekening** (Geografische plek, Info, Import wissen, Stijl) en
+  **Bekijk de plek** (Google Maps, Street View, StreetSmart, DINOloket).
+- Vink uit wat je niet gebruikt en klik **Opslaan**: het verdwijnt meteen uit het palet en van het lint. Staan alle
+  kaarten van een soort uit, dan verdwijnt ook de kop van die soort; staan alle kaarten uit, dan de hele groep
+  **Kaarten**. Zo gaat het ook met **Bekijk de plek**, en op het lint met een paneel zonder knoppen.
+- **Verbergen is niet uitzetten.** Elk commando werkt nog als je het typt (bijvoorbeeld `VKKLIC`), en een verborgen kaart
+  laad je met haar commando (bijvoorbeeld `VKBGT`) of met `VKLADEN`.
+- **Altijd te zien**, en niet uit te zetten: het gebied, het tandwiel, de **?**, **Over VLEA** en **Bijwerken**, en op het
+  lint **Palet**, **Adres** en **Help**. Zo kom je altijd terug bij de instellingen.
+- **Alles weer tonen** zet alle vinkjes van dit tabblad weer aan. **Standaard herstellen** onderaan doet dat ook, samen met
+  de rest van het venster. Bewaard wordt pas bij **Opslaan**.
+- Je keuze staat bij je andere instellingen in `%LOCALAPPDATA%\VLEA-AutoCAD\instellingen.json` en blijft staan bij
+  `VKUPDATE` en bij een nieuwe installatie. VLEA onthoudt wat je verborgen hebt, niet wat je ziet: komt er in een
+  nieuwe versie een kaart of knop bij, dan zie je die gewoon.
+
+Dit tabblad is nieuw in 0.2.10 en is nog niet op een scherm getest; zie je iets wat niet klopt, meld het (zie 12).
 
 ### Status van de bronnen (het bolletje, `VKSTATUS`)
 Achter elke kaart staat een klein bolletje, en ook bij het zoeken van een adres. Het zegt of de bron van die kaart
@@ -341,9 +374,9 @@ keer). Grootste gebied 4 km², ook voor de omhullende rechthoek. In een Nederlan
 - De lintknoppen **BGT**, **Kadaster**, **Luchtfoto** en **AHN** laden die ene kaart met de keuzes
   uit de instellingen (opties, stijl en bronvermelding) en vragen op de opdrachtregel het gebied;
   Enter = het opgeslagen gebied van de tekening. Zonder Civil 3D zegt **AHN** meteen "alleen Civil 3D",
-  zonder eerst een gebied te vragen. Het lintpaneel **Gereedschap** heeft **KLIC**, **Eigen grondonderzoek**,
-  **Google Earth**, **AHN-punt**, **NAP-leider**, **NAP herberekenen**, **Punten**, **Bijwerken** en **Help**, met dezelfde keuzes als
-  het palet.
+  zonder eerst een gebied te vragen. Het lintpaneel **Gereedschap** heeft **Profielschets**, **KLIC**, **Eigen
+  grondonderzoek**, **Google Earth**, **AHN-punt**, **NAP-leider**, **NAP herberekenen**, **Coördinaat**, **Punten**,
+  **Bijwerken** en **Help**, met dezelfde keuzes als het palet.
 - De kaartcommando's hieronder vragen zelf naar gebied en opties. Ze gebruiken de keuzes uit de
   instellingen niet: Enter bij de opties = de standaardopties van die kaart.
 
@@ -1225,8 +1258,8 @@ er is geen knop in het palet. Werkt zonder internet.
 - **Meer lijnen tegelijk:** kies ze eerst (bijvoorbeeld met een venster) en typ dan `VKMAAT`. Alle lijnen en
   polylijnen in die keuze krijgen maten, zonder vraag; andere objecten slaat VLEA over en telt het.
 - **Trefwoorden:** `Afstand` (van de maatlijn tot de lijn, 0,1 tot 100 m; typen of twee punten aanwijzen),
-  `Kant` (bij een open lijn `Rechts` of `Links` van de tekenrichting, standaard rechts) en `Laatste` (het laatst
-  getekende object, handig in een script).
+  `Kant` (bij een open lijn `Rechts` of `Links` van de tekenrichting, standaard rechts), `Laatste` (het laatst
+  getekende object, handig in een script) en `Opmaak` (een andere laag, tekststijl of teksthoogte, zie 7).
 - **Gesloten polylijn:** de maten staan altijd buiten de vorm, ook bij een inspringende hoek (een L-vorm). Een
   polylijn waarvan het laatste punt op het eerste ligt, telt ook als gesloten. Een gesloten lijn zonder oppervlak
   (heen en terug over dezelfde lijn) bemaat VLEA niet; een lijn die zichzelf kruist wel, met een melding.
@@ -1259,6 +1292,45 @@ Afstand
 Kant
 Links
 Laatste
+```
+
+### Coördinaat op een punt (`VKCOORDINAAT`)
+Zet bij een punt een aanwijslijn met de X en Y van dat punt, bijvoorbeeld bij de hoekpunten van een proefsleuf. Klik op
+**Coördinaat** bij het gereedschap in het palet of op het lint, of typ `VKCOORDINAAT`. Werkt zonder internet.
+
+- **Punt:** "Wijs een punt aan voor de coördinaat (2 decimalen, zonder Z, schaal 1:500), Enter = klaar
+  [Decimalen/Z/Schaal/Opmaak]". Snappen mag (een hoek van een polylijn, het eind van een lijn). Daarna de plek van de
+  tekst; **Enter** zet de tekst rechtsboven het punt. Dan het volgende punt, tot je Enter geeft. "Rechtsboven" en de kant
+  van de aanwijslijn rekent VLEA in de richting van de tekening (WCS), ook als je UCS of je weergave gedraaid is: wijs de
+  plek van de tekst dan zelf aan.
+- **In de tekening:** "X = 155 000,00" en "Y = 463 000,00", met een spatie tussen de duizendtallen en een komma voor de
+  decimalen. Het zijn de coördinaten van je tekening: RD, of in een tekening in Lambert 72 of Lambert 2008 die van
+  Lambert. VLEA rekent niets om; de opdrachtregel noemt het stelsel, of zegt dat het geen RD of Lambert is.
+- **Trefwoorden:** `Decimalen` (0 tot en met 3), `Z` (`Aan` of `Uit`: de hoogte van het punt in je tekening, zonder NAP
+  of TAW erbij, want VLEA weet niet in welk stelsel die hoogte staat), `Schaal` (de schaal van je tekening; de tekst is
+  1,8 mm op papier, op 1:500 dus 0,9 m) en `Opmaak` (laag, tekststijl, aanwijslijnstijl en teksthoogte, zie 7). De knop
+  in het palet neemt decimalen en Z uit de instellingen (**Gereedschap**) en de opmaak uit het blok **Tekst en
+  aanwijslijnen**; getypt begint het commando met twee decimalen, zonder Z, op 1:500 en met de standaard opmaak.
+- **Laag en stijl:** standaard de laag `X-XX-AL-REFERENTIE-T18` en de stijl van de leiders van `VKPUNTEN` (tekst
+  `VLEA_ISO`, een masker achter de tekst). `VKINFO` op het label toont de getallen zoals gemeten en het stelsel;
+  `VKWISSEN` kent ze als `coordinaat`. `U` na het commando haalt de labels van die keer weg.
+- Alleen in de modelruimte (ook in een viewport die op model staat) en in een tekening in meters.
+- In de AutoCAD-kern van 2025 en 2026 (zonder scherm, met scripts) gedraaid: de labels in RD, Lambert 72 en Lambert
+  2008, de decimalen, de Z, `Opmaak` en de weigering in de papierruimte. Nog niet op een scherm gezien: de knop, het
+  aanwijzen met de muis en het snappen, en `U` na het commando.
+
+Een script dat twee hoekpunten van een proefsleuf benoemt, met drie decimalen en de tekst rechtsboven het punt (getallen
+met een punt, een lege regel is Enter):
+
+```text
+VKCOORDINAAT
+Decimalen
+3
+154900,462900
+
+154910,462900
+
+
 ```
 
 ## 5. Opnieuw laden en wissen
@@ -1338,7 +1410,12 @@ Laatste
   - Wiste je beelden met 0.2.3 of eerder, dan staan hun koppelingen nog in External References, zonder beeld in de
     tekening (zie 12).
 - `VKINFO` toont bij een object waar het vandaan komt (bron, id, datum) en de gegevens van PDOK, ook
-  bij het AHN-model in Civil 3D. Wissen of vervangen van dat model haalt het uit profielen die erop
+  bij het AHN-model in Civil 3D. Sinds 0.2.10 kun je ook een object aanwijzen dat in een blok of in een XREF staat:
+  VLEA toont dan de gegevens van dat object (tot en met 0.2.9 zei `VKINFO` bij een XREF "niet door VLEA getekend").
+  Heeft het object een bijlage (een infolaag of een eis van de KLIC, zie 6), dan volgen de bijlagen en de vraag
+  **[Openen/Klaar]** (Enter = Klaar: zoals tot en met 0.2.9 opent Enter niets; typ `O` om te openen). In een script
+  vraagt `VKINFO` dat niet; dan staat er dat `VKSCHETS` de bijlage
+  opent. Wissen of vervangen van dat model haalt het uit profielen die erop
   gebaseerd zijn; koppel ze daarna opnieuw.
 - Elk AHN-gebied wordt een eigen hoogtemodel, met het gebied in de naam: "VLEA AHN RD
   154750-462750 500x500" is het gebied met linksonder RD 154750, 462750 en 500 x 500 m (DSM: "VLEA
@@ -1381,6 +1458,7 @@ bronvermelding zegt daarom "(WIBON, vertrouwelijk)", en `VKKMZ` neemt KLIC met E
 | `diepte` | dieptes t.o.v. maaiveld en NAP, als label | aan |
 | `eigentopografie` | eigen topografie van de netbeheerders | aan |
 | `detailinfo` | plekken met extra detailinformatie (profielschets, aansluiting) | aan |
+| `uitroeptekens` | een uitroepteken bij elke infolaag met een bijlage en bij elke eis voorzorgsmaatregel (sinds 0.2.10) | aan |
 
 Kabels en leidingen, mantelbuizen, putten, kasten en andere netobjecten, zones met een eis
 voorzorgsmaatregel en het aanvraaggebied tekent VLEA altijd; dat is geen optie.
@@ -1551,9 +1629,92 @@ label dat iets anders zegt dan de waarde, dan staan beide in het label ("0,00 m-
 VLEA rekent nooit een hoogte van een kabel of leiding uit.
 
 **Bijlagen** (de PDF's van de netbeheerders, zoals profielschetsen en de eisen voorzorgsmaatregel)
-tekent VLEA niet. Open ze uit de levering; de opdrachtregel en de verantwoording noemen hoeveel er zijn,
-en de plek van extra detailinformatie staat in de tekening (met `detailinfo=uit` niet, en dat staat
-erbij).
+tekent VLEA niet. De opdrachtregel en de verantwoording noemen hoeveel er zijn, en de plek van extra
+detailinformatie (de "infolaag") staat in de tekening (met `detailinfo=uit` niet, en dat staat erbij). Sinds 0.2.10
+open je een bijlage vanuit de tekening (hieronder).
+
+**Uitroeptekens (sinds 0.2.10).** Bij elke infolaag met een bijlage (profielschets, huisaansluitschets, overige
+detailinformatie) en bij elke zone met een eis voorzorgsmaatregel zet VLEA een uitroepteken: een driehoek
+met een "!" erin (het blok `VK_KLIC_UITROEP`, 1,125 m breed, op de laag van de symbolen van de detailinformatie
+`X-XX-AL-VERWIJZING_DETAIL-S`). Eén per object: bij een lijn op het midden, bij een vlak erbinnen (bij een zone boven
+de tekst van de eis), bij een punt ernaast. Zo zie je na het inlezen meteen waar iets aan de hand is. Wat er al was,
+blijft: de lijn of het vlak van de infolaag, de tekst "Detail: …", de zone met haar vulling en de tekst met de eis.
+- Geen tekens: zet in de instellingen (Gereedschap, KLIC-levering) **Uitroeptekens** uit, of typ `uitroeptekens=uit`.
+  De bijlagen blijven dan aan de objecten gekoppeld. Of zet de laag `X-XX-AL-VERWIJZING_DETAIL-S` uit; dan zie je
+  ook de symbolen van de detailinformatie niet meer.
+- Een infolaag zonder bijlage, of met een bijlage op een plek die VLEA niet opent (buiten de levering, geen pdf),
+  krijgt geen teken; het laatste staat als waarschuwing op de opdrachtregel.
+- Het teken hoort bij zijn object: **Vervangen** en `VKWISSEN` halen het mee weg.
+- Een levering die al in je tekening staat, krijgt de tekens pas als je hem opnieuw inleest.
+
+**Een profielschets openen (`VKSCHETS`, sinds 0.2.10).** Klik op **Profielschets openen** in het palet of
+**Profielschets** op het lint (bij de KLIC-levering), of typ `VKSCHETS`. Wijs de infolaag aan: de lijn of het vlak,
+het symbool, de tekst "Detail: …", of het uitroepteken. Dat mag ook als de KLIC in een XREF staat, en bij een zone met
+een eis voorzorgsmaatregel opent het de bijlage met de eis. Op de opdrachtregel staan de soort, het thema, de
+netbeheerder (als code), de levering en de bijlage(n); heeft het object er meer, dan vraagt VLEA welke (Enter = 1).
+- **Waar VLEA de levering zoekt.** Bij het inlezen onthoudt VKKLIC bij elke infolaag de naam van de map of zip van de
+  levering en het meldnummer, en, als de tekening al opgeslagen was, de map van de levering vanaf de tekening (nooit
+  een volledig pad: ook bij een collega met een ander pad naar dezelfde projectmap klopt het). Bij het openen zoekt
+  VLEA in deze volgorde: (1) vanaf de tekening met de KLIC (bij een XREF de XREF zelf), (2) op meldnummer in de mappen
+  rond de tekening, tot drie mappen hoger, (3) in je eerdere keuzes op deze pc, (4) pas als dat niets geeft, vraagt
+  VLEA je één keer de levering te kiezen: de zip, of de XML `GI_gebiedsinformatielevering_….xml` in de uitgepakte map.
+  Daarna onthoudt VLEA die keuze. Een zip hoeft niet uitgepakt te zijn.
+- **Openen.** VLEA kopieert het ene bestand naar `%LOCALAPPDATA%\VLEA-AutoCAD\detail\` en opent die kopie met je
+  pdf-lezer; het origineel in de levering blijft onaangeroerd. Kopieën ouder dan een dag gaan weg. Een levering in een
+  gesynchroniseerde map die "alleen online" staat, wordt eerst opgehaald: dat kan even duren (Esc stopt).
+- **Wat VLEA niet doet.** Een kabel of leiding draagt zelf geen bijlage: wijs je die aan, dan zegt VLEA dat je de
+  infolaag moet aanwijzen. VLEA gokt nooit welke schets bij een kabel hoort. Het opent alleen een pdf, en alleen uit de
+  levering: een tekening die van iemand anders komt, kan VLEA niet naar een netwerkschijf, een andere schijf of een
+  ander soort bestand sturen. (De map van de levering mag wel boven de map van de tekening liggen, op dezelfde schijf.
+  Een XREF telt alleen op de schijf van je eigen tekening. Staat je tekening zelf op een netwerkschijf, dan zoekt VLEA
+  daar wel: die plek koos je zelf.)
+- **Oudere tekeningen.** Is de KLIC ingelezen met 0.2.9 of eerder (of met een andere omzetter), dan zegt VLEA: "Deze
+  KLIC is ingelezen met een oudere versie van VLEA (0.2.9 of eerder). Lees de levering opnieuw in met VKKLIC". Staat
+  de plek van de bijlage wel bij het object (de meeste leveringen die met VKKLIC zijn ingelezen), dan zoekt VLEA toch,
+  op meldnummer, in je eerdere keuzes of door je te laten kiezen.
+- **In een script** of in de AutoCAD-kern: `VKSCHETS`, `O` (Opties), `openen=nee`, dan een punt op de infolaag. VLEA
+  zoekt, maakt de kopie en zet het pad van de kopie op de opdrachtregel, zonder iets te openen. In een script vraagt
+  VLEA de levering niet (stap 4): open hem dan één keer zonder script. Zonder schermen opent VLEA nooit iets.
+- Wijs de infolaag aan in de modelruimte of in een actieve viewport. Een bevroren of uitgezette laag kun je niet
+  aanwijzen.
+- `VKINFO` op een infolaag toont de bijlagen ook en vraagt [Openen/Klaar], met Enter = Klaar (zie 5).
+
+**Venster bij aanwijzen (sinds 0.2.10).** Houd je de muis even stil (ongeveer een halve seconde) op een infolaag of
+een uitroepteken van de KLIC, dan verschijnt naast de cursor een klein venster. Bij een zone met een eis
+voorzorgsmaatregel is dat alleen het uitroepteken van de zone, niet de rand, de vulling of de tekst: de vulling is het
+hele vlak, en anders kwam er overal in de zone een venster. Bovenaan staan de soort (bijvoorbeeld "Profielschets",
+"Huisaansluitschets" of "Detailinformatie"), het thema en de netbeheerder (als code); ligt er ook een kabel of
+leiding onder de cursor, dan staan ook die gegevens erbij (thema, netbeheerder, diameter, materiaal, spanning of druk,
+diepte, voor zover de levering ze geeft). Daaronder staat per bijlage een knop, bijvoorbeeld **Open profielschets**:
+die doet hetzelfde als `VKSCHETS` op dat object, zonder dat je nog iets hoeft aan te wijzen.
+- Het venster blijft staan zolang de muis op het object of op het venster zelf staat. Beweeg je weg, dan verdwijnt
+  het na een halve seconde; zo heb je tijd om naar de knop te gaan. Dat geldt ook als je de muis meteen van het object
+  naar het palet, het lint, de opdrachtregel of een ander programma beweegt. Opent AutoCAD een venster (ook het
+  instellingenvenster) of kies je een ander programma, dan verdwijnt het meteen. Staat de muis een minuut stil naast
+  het venster, dan verdwijnt het ook.
+- Het verschijnt alleen als er geen commando loopt: nooit tijdens tekenen, kiezen of slepen. Begint er een commando,
+  dan verdwijnt het. Het venster neemt de toetsen niet over: wat je typt, gaat naar de opdrachtregel.
+- Het werkt ook als de KLIC in een XREF staat, en ook bij een KLIC die met een oudere versie is ingelezen (dan staat
+  de melding uit `VKSCHETS` in het venster).
+- Kiezen in de instellingen (Gereedschap, **Venster bij aanwijzen (KLIC)**): **Bij infolagen** (standaard: alleen
+  infolagen en uitroeptekens), **Ook bij kabels en leidingen** (ook een venster met de gegevens van een kabel of
+  leiding, zonder knop: een kabel draagt zelf geen bijlage; en ook in de zone van een eis, waar een kabel voorgaat), of
+  **Uit**.
+- Het venster leest alleen de gegevens van het object in de tekening. Pas als je op een knop klikt, zoekt VLEA de
+  levering, zoals bij `VKSCHETS`.
+- Gaat er in een sessie drie keer iets mis met het venster, dan zet het zichzelf uit tot je AutoCAD opnieuw start,
+  met één regel op de opdrachtregel. `VKSCHETS` werkt dan gewoon.
+- In een tekening zonder KLIC van VLEA (ook niet in een XREF) doet het venster niets, ook niet als er andere kaarten
+  van VLEA in staan. Een KLIC die met 0.2.3 of eerder is ingelezen, krijgt geen venster.
+- Niet op een scherm getest: het venster is gebouwd en de beslissingen (welk object, wat erin staat, wanneer het
+  verschijnt en verdwijnt) zijn met tests gecontroleerd, maar in 0.2.10 heeft nog niemand het in AutoCAD gezien. Hoe
+  snel het is in een zware tekening, waar het precies staat bij een schermschaal van 125 of 150 % of op een tweede
+  scherm, of het in een XREF het object onder de cursor vindt, en of het weggaat als je de muis meteen uit de
+  tekening beweegt of een ander programma kiest, is dus nog niet bekeken. Hindert het je, zet het dan op **Uit**.
+
+Niet op een scherm getest: het palet, het lint, het icoon, het openen in de pdf-lezer en het aanwijzen in een XREF
+zijn gebouwd en met de tests van de kern en de broncode gecontroleerd, maar in 0.2.10 nog niet door iemand in AutoCAD
+met schermen gezien.
 
 **Opnieuw inlezen gaat per meldnummer.** VLEA onthoudt bij elk getekend object het meldnummer.
 - Staat **dezelfde levering** (hetzelfde meldnummer) al in de tekening, dan vraagt VLEA
@@ -1620,6 +1781,39 @@ FILEDIA
   NAP-leider hoort bij het profiel, niet bij de onderlegger. `Nlcs` en `Terug` gelden er wel voor.
 - De maatlijnen van `VKMAAT` staan op `X-XX-AL-REFERENTIE-M` (kleur 7, 0,18 mm). Ook die laag laat `VKSTIJL` met
   `Grijs` staan: een maat is je eigen werk, geen onderlegger.
+- **Tekst en aanwijslijnen** (instellingen, hoofdstuk **Stijl**): de laag, de tekststijl, de aanwijslijnstijl en de
+  teksthoogte van wat je zelf plaatst. Het blok geldt voor de knoppen **Coördinaat**, **NAP-leider** en **Punten** in
+  palet en lint. Een getypt commando, `VKMAAT` en een script beginnen met de standaard; typ daar het trefwoord `Opmaak`
+  (zie hieronder). De labels van een kaart blijven op hun NLCS-laag. Laat je alles op de standaard staan, dan blijft
+  alles zoals het was.
+  - **Laag:** de laag van VLEA (per commando, zoals hierboven), de huidige laag, een NLCS-annotatielaag uit de lijst, of
+    een eigen naam in het veld eronder (dat gaat voor de lijst). Staat de laag nog niet in je tekening, dan maakt VLEA
+    hem aan: een NLCS-laag met de NLCS-stijl, een eigen naam in kleur 7, doorgetrokken. Een eigen laag krijgt geen
+    kenmerk van VLEA: `VKSTIJL` laat hem staan. Een laag die uit staat, bevroren of vergrendeld is, laat VLEA zo, met
+    een melding.
+    Bij `VKPUNTEN` geldt de laag voor de leiders; de punten zelf blijven op `X-XX-AL-REFERENTIE-G`.
+  - **Tekststijl en aanwijslijnstijl:** de naam van een stijl uit je tekening (leeg = die van VLEA). Staat de stijl niet
+    in de tekening waarin je werkt, dan gebruikt VLEA zijn eigen stijl en zegt dat. Met een eigen aanwijslijnstijl
+    bepaalt die stijl de pijl, de lijn, de knik en het kader; VLEA zet de tekst, de tekststijl (zonder gekozen
+    tekststijl die van de aanwijslijnstijl) en de teksthoogte. Heeft je aanwijslijnstijl een schaal (bijvoorbeeld 500),
+    dan rekent VLEA de teksthoogte daarmee om, zodat de tekst de gekozen hoogte krijgt; pijl en knik houden de schaal van
+    de stijl. Bij een annotatieve aanwijslijnstijl zet VLEA geen teksthoogte: die komt uit de stijl en de annotatieschaal
+    (met een melding). Bij `VKMAAT` telt alleen de tekststijl; heeft die een vaste hoogte, dan gaat die bij een maat voor
+    de teksthoogte, en zegt VLEA dat.
+  - **Teksthoogte op papier** (1,8, 2,5, 3,5, 5 of 7 mm) en de **schaal van de tekening**: op 1:500 is 2,5 mm een tekst
+    van 1,25 m. `VKPUNTEN` rekent met zijn eigen schaal (trefwoord `Schaal`); de knop geeft de schaal van het blok mee als
+    begin. Bij `VKMAAT` komt er met een andere tekststijl of teksthoogte een eigen maatstijl naast `VK_MAAT`, met de hoogte
+    en de stijl in de naam (bijvoorbeeld `VK_MAAT_1.25` of `VK_MAAT_Standard`), zodat `VK_MAAT` nooit verandert. De
+    NAP-leider houdt de teksthoogte van zijn referentie (`VKNAPSET`, trefwoord `Teksthoogte`).
+  - **Getypt en in een script:** het commando begint met de standaard. Het trefwoord `Opmaak` vraagt
+    `laag=standaard|huidig|<naam>, stijl=vlea|<naam>, leiderstijl=vlea|<naam>, hoogte=standaard|1.8|2.5|3.5|5|7,
+    schaal=<n>`, gescheiden door komma's; een naam mag spaties hebben (alleen Enter sluit af). Bij `VKCOORDINAAT`,
+    `VKNAPLEADER` en `VKMAAT` staat `Opmaak` bij de eerste vraag, bij `VKPUNTEN` bij de laatste vraag voor het tekenen.
+    `VKMAAT` heeft geen knop, dus daar geldt het blok nooit: gebruik `Opmaak`.
+  - **Niet op een scherm gezien:** het blok in het instellingenvenster en hoe een eigen aanwijslijnstijl (ook een
+    annotatieve) of tekststijl er in de tekening uitziet. Met de standaard tekent VLEA zoals in 0.2.9: in de
+    AutoCAD-kern van 2025 en 2026 gaven `VKPUNTEN`, de NAP-leider en `VKMAAT` zonder `Opmaak` dezelfde lagen, stijlen,
+    teksten en hoogtes als 0.2.9.
 - Stuur je een tekening naar iemand zonder VLEA: gebruik eTransmit, zodat `NLCS.shx` meegaat.
 
 ## 8. Bronvermelding
@@ -1899,6 +2093,10 @@ aangemeld bij Autodesk), en `GEOMARKER` toont de markering van de plek. Er opent
 | Windows zegt dat Smart App Control het installatieprogramma (of `Installeer.bat`) heeft geblokkeerd | Smart App Control van Windows 11 laat niet-ondertekende programma's en scripts van internet niet toe, en heeft geen knop om door te gaan. VLEA is niet ondertekend; op die pc lukt installeren zo niet. Meld het via de issues, dan weten we voor hoeveel gebruikers dit speelt. |
 | Het installatieprogramma zegt "AutoCAD draait nog" | Sluit alle AutoCAD-vensters en klik op **Opnieuw proberen**. Er is niets gewijzigd. |
 | Het installatieprogramma zegt "Het is niet gelukt" | De zin eronder zegt wat er wel en niet gewijzigd is; vaak helpt even wachten en **Opnieuw proberen** (een virusscanner kan nieuwe bestanden kort vasthouden). De technische melding staat in `%LOCALAPPDATA%\VLEA-AutoCAD\logs\setup.log`, zonder je Windows-naam; zet dat bestand bij je melding. |
+| Een kaart, een knop of een hele groep staat niet meer in het palet of op het lint | Je hebt hem verborgen (tandwiel, tabblad **Weergave**). Zet het vinkje weer aan, of klik **Alles weer tonen**, en **Opslaan**. Het commando werkt intussen gewoon als je het typt. |
+| `VKSCHETS` (Profielschets openen) vindt de levering niet, of opent niets | Kies de zip of de XML `GI_gebiedsinformatielevering_….xml` van de levering één keer als VLEA erom vraagt; daarna onthoudt VLEA hem. Is de KLIC ingelezen met 0.2.9 of eerder, lees de levering dan opnieuw in met `VKKLIC`. Opent er geen pdf-lezer, dan staat de kopie in `%LOCALAPPDATA%\VLEA-AutoCAD\detail\` (het pad staat op de opdrachtregel). |
+| Een klein venster naast de cursor bij de KLIC staat in de weg | Dat is het venster bij aanwijzen. Zet het uit in de instellingen (tandwiel, **Gereedschap**, **Venster bij aanwijzen (KLIC)**: **Uit**). |
+| Na een update staan de uitroeptekens bij de KLIC weer aan, terwijl je ze had uitgezet | Ben je tussendoor terug geweest naar een oudere versie en heb je daar de instellingen opgeslagen, dan is die keuze weg (de oudere versie kent hem niet). Zet **Uitroeptekens** opnieuw uit. |
 | AutoCAD vraagt of de plugin geladen mag worden (venster "Security - Unsigned Executable File", want de DLL's zijn niet ondertekend, of "File Loading - Security Concern") | Kies **Load** of **Load Once** (AutoCAD heeft geen Nederlandse knoppen). Installeer opnieuw (met het installatieprogramma of `Installeer.bat`) als AutoCAD het elke keer vraagt. |
 | Geen lint-tabblad VLEA en geen `VKPALET` | Controleer met `APPAUTOLOAD` dat de waarde 14 is; start AutoCAD opnieuw. |
 | "De tekeningeenheid is millimeters" (of een andere eenheid), of alle kaarten in het palet grijs | Typ `UNITS` en kies bij **Insertion scale** (invoegschaal) "Meters" (of typ `INSUNITS` en dan `6`). Een nieuwe tekening uit het metrische standaardsjabloon staat in millimeters. Teken je zelf al in millimeters, begin dan met een tekening in meters. |

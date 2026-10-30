@@ -58,10 +58,12 @@ garanderen geen termijn.
   adres: dat deel stuurt je browser niet mee met het eerste verzoek, maar de pagina leest het en vraagt dan
   zelf de kaart voor die plek op bij TNO en de achtergrondkaart bij PDOK (`service.pdok.nl`); TNO en PDOK
   zien dus die plek. De plugin maakt daarbij zelf geen verbinding.
-- Een ander programma starten doet de plugin op één plek, voor vier doelen: het Google
+- Een ander programma starten doet de plugin op één plek, voor vijf doelen: het Google
   Earth-bestand openen (`VKKMZ`), de map met een nieuwe versie in Verkenner (`VKUPDATE`), een van die
-  twee adressen in de browser en de plek in de browser volgens die sjablonen; alleen in AutoCAD met
-  schermen, nooit in de AutoCAD-kern zonder schermen.
+  twee adressen in de browser, de plek in de browser volgens die sjablonen, en sinds 0.2.10 de kopie van een
+  bijlage uit een KLIC-levering (`VKSCHETS`, `VKINFO`): alleen een pdf die VLEA zelf naar
+  `%LOCALAPPDATA%\VLEA-AutoCAD\detail\` kopieerde, nooit een bestand in de levering of een plek die een tekening
+  noemt; alleen in AutoCAD met schermen, nooit in de AutoCAD-kern zonder schermen.
   Geen opdrachtregel (cmd), geen script, geen PowerShell, geen installatie.
 - Instellingen, log en de versies die `VKUPDATE` ophaalt alleen in `%LOCALAPPDATA%\VLEA-AutoCAD\`.
 - Geen automatische updater: `VKUPDATE` downloadt op jouw verzoek, controleert de SHA-256 tegen
