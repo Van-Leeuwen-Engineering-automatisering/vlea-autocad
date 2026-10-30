@@ -11,7 +11,8 @@ body:
         Rijkswaterstaat (één vast pad op geo.rijkswaterstaat.nl), Digitaal Vlaanderen voor de kaarten van Vlaanderen
         (vier vaste adressen op geo.api.vlaanderen.be, alleen in Lambert), DOV voor de sonderingen van Vlaanderen
         (vaste adressen op www.dov.vlaanderen.be, alleen in Lambert), AWV voor de hectometerpaaltjes van Vlaanderen
-        (één vast adres op opendata.apps.mow.vlaanderen.be, alleen in Lambert 72) en GitHub (versiecheck en VKUPDATE).
+        (één vast adres op opendata.apps.mow.vlaanderen.be, alleen in Lambert 72), de dienst die het AHN aanwijst voor
+        AHN5 en AHN6 (zes vaste adressen op api.ellipsis-drive.com) en GitHub (versiecheck en VKUPDATE).
         Een bron die daar niet staat, is een nieuwe netwerkbestemming: dat vraagt eerst een besluit
         van beheer. Zet hier geen tekeningen, klantnamen of projectlocaties in.
   - type: input

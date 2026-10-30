@@ -1,6 +1,6 @@
 # Handleiding – VLEA, kaarten voor AutoCAD
 
-> **Versie 0.2.10.** Voor AutoCAD 2025, 2026 en 2027. `VKHELP` opent deze pagina in je browser.
+> **Versie 0.2.11.** Voor AutoCAD 2025, 2026 en 2027. `VKHELP` opent deze pagina in je browser.
 
 ## 1. Voordat je begint
 - AutoCAD 2025, 2026 of 2027 voor Windows (ook Civil 3D of Map 3D). Niet AutoCAD LT, AutoCAD voor Mac of AutoCAD Web: die kunnen deze plugin niet laden (AutoCAD
@@ -73,10 +73,10 @@ en **Weergave** (welke kaarten en knoppen je ziet, zie verderop). Alles wat er i
 **Opties** in het hoofdstuk waar het bij hoort; er is geen apart tabblad per onderwerp. Op het tabblad **Opties**:
 
 - **Kaarten**: per kaart haar opties, bijvoorbeeld de BGT-groepen, de sondeerplots of snel/scherp bij
-  de luchtfoto. Bij de BRT staat onder de naam per keuze één zin wat je krijgt, bij AHN welke AHN-versie het is
-  en wat de rasterstap doet; bij AHN en DHMV kies je ook de stijl van het hoogtemodel (hoogtelijnen om de 0,25 m, 0,5 m of
+  de luchtfoto. Bij de BRT staat onder de naam per keuze één zin wat je krijgt, bij AHN waar elke AHN-versie
+  vandaan komt en wat de rasterstap doet, met de keuze van de versie (AHN4, AHN5, AHN6 of de nieuwste per plek); bij AHN en DHMV kies je ook de stijl van het hoogtemodel (hoogtelijnen om de 0,25 m, 0,5 m of
   1 m, alleen de rand of de stijl van je tekening) en of de laag na het laden bevroren wordt;
-- **Gereedschap**: hoogte op een punt (maaiveld of met gebouwen, label met de hoogte), de breedte van
+- **Gereedschap**: hoogte op een punt (AHN-versie, maaiveld of met gebouwen, label met de hoogte), de breedte van
   de contour (standaard 25 m aan weerszijden), "ook een los .kml-bestand" bij Google Earth, de
   opties van de KLIC-levering, sinds 0.2.10 het **Venster bij aanwijzen (KLIC)** (zie 6), en bij de coördinaat het
   aantal decimalen en of de Z erbij komt;
@@ -152,7 +152,9 @@ kleine verzoeken (twee bij BRT en bij de zones) aan dezelfde bron als de kaart z
 kaarttegel of één klein beeld, altijd in een vast testgebied
 (de binnenstad van Amersfoort en een paar andere vaste, openbare plekken), nooit in jouw gebied. De bron ziet dus
 niet waar je werkt. Staat bij de zones langs waterkeringen de optie `rws` uit, dan vraagt het palet de legger van
-Rijkswaterstaat ook voor de status niet.
+Rijkswaterstaat ook voor de status niet. De dienst van AHN5 en AHN6 vraagt het palet alleen als bij **AHN hoogtemodel** een
+andere versie dan AHN4 staat (een klein stuk maaiveld van AHN6 in het testvak); het bolletje van AHN wordt dan rood als die
+dienst niet werkt, ook al werkt AHN4 bij PDOK.
 
 Uitzetten: instellingenvenster (tandwiel), **Algemeen**, "Status van de bronnen tonen". Dan zijn de bolletjes en de
 knop weg en doet het palet deze verzoeken niet.
@@ -160,7 +162,9 @@ knop weg en doet het palet deze verzoeken niet.
 `VKSTATUS` doet dezelfde controle vanaf de opdrachtregel, altijd vers, en zet per kaart één regel op de
 opdrachtregel, met onderaan hoeveel er werken. `VKSTATUS` vraagt altijd alle bronnen, ook de legger van
 Rijkswaterstaat, ook als de optie `rws` of "Status van de bronnen tonen" uit staat: het is een commando dat je zelf
-start. Het stelt geen vragen, dus het werkt ook in een script en in de AutoCAD-kern zonder schermen. Esc stopt het.
+start. Alleen de dienst van AHN5 en AHN6 vraagt `VKSTATUS` niet: een getypt commando leest geen instellingen, en die
+dienst vraagt alleen het palet, als bij **AHN hoogtemodel** een andere versie dan AHN4 staat. Dat zegt `VKSTATUS` ook in
+een regel onder de uitkomst: de regel van AHN gaat over AHN4 bij PDOK. Het stelt geen vragen, dus het werkt ook in een script en in de AutoCAD-kern zonder schermen. Esc stopt het.
 
 ## 3. Een gebied kiezen
 - **Adres, postcode of perceel** (`VKADRES`, of het zoekveld in het palet): typ bijvoorbeeld een
@@ -391,7 +395,7 @@ keer). Grootste gebied 4 km², ook voor de omhullende rechthoek. In een Nederlan
 | Luchtfoto | `VKLUCHTFOTO` | `scherpte` = `snel` (25 cm) of `scherp` (8 cm) | 5 km² | foto naast de tekening; eerst opslaan; bij een groot gebied wordt de pixel grover (snel tot 50 cm bij 5 km²) |
 | GRB als kaartbeeld (Vlaanderen) | `VKGRBBEELD` | `kaartstijl` = `kleur` (de standaardkeuze) of `grijs` | 5 km² | beta; alleen in een tekening in Lambert 72 of Lambert 2008; een plaatje naast de tekening, eerst opslaan; zie 3, Kaarten van Vlaanderen |
 | Orthofoto Vlaanderen | `VKORTHO` | `scherpte` = `snel` (25 cm) of `scherp` (15 cm) | 5 km² | beta; alleen in een tekening in Lambert 72 of Lambert 2008; foto naast de tekening op de laag van de luchtfoto, eerst opslaan; zie 3, Kaarten van Vlaanderen |
-| AHN-hoogte | `VKAHN` | `model` = `dtm` (maaiveld) of `dsm` (met gebouwen en begroeiing); `stap` = `fijnst` (de standaardkeuze), `1`, `2` of `5` (m); `hoogtelijnen` = `25cm` (de standaardkeuze), `50cm`, `1m`, `rand` of `tekening`; `bevriezen` = `aan` (de standaardkeuze) of `uit` | 4 km² | alleen Civil 3D; eigen stijl met rand en hoogtelijnen, en de laag na het laden bevroren; AHN4 (2020-2022), de enige versie bij PDOK; een hoogtemodel per gebied ("VLEA AHN RD 154750-462750 500x500"); onder panden en water geen meetpunten (het model overbrugt die plekken, ook water van rand tot rand, en zegt hoeveel m²); zie hieronder |
+| AHN-hoogte | `VKAHN` | `model` = `dtm` (maaiveld) of `dsm` (met gebouwen en begroeiing); `stap` = `fijnst` (de standaardkeuze), `1`, `2` of `5` (m); `hoogtelijnen` = `25cm` (de standaardkeuze), `50cm`, `1m`, `rand` of `tekening`; `bevriezen` = `aan` (de standaardkeuze) of `uit` | 4 km² | alleen Civil 3D; eigen stijl met rand en hoogtelijnen, en de laag na het laden bevroren; standaard AHN4 (2020-2022, PDOK), met `versie` = `ahn5`, `ahn6` of `nieuwste` een nieuwere versie (met `aanvullen` en `grens`); een hoogtemodel per gebied ("VLEA AHN RD 154750-462750 500x500"); onder panden en water geen meetpunten (het model overbrugt die plekken, ook water van rand tot rand, en zegt hoeveel m²); zie hieronder |
 | DHMV-hoogte (Vlaanderen) | `VKDHMV` | `model` = `dtm` (maaiveld) of `dsm` (met gebouwen en begroeiing); `stap` = `fijnst` (1 m, bij een groter gebied vanzelf grover zodat het model onder de 150.000 punten blijft; de standaardkeuze), `2` of `5` (m); `hoogtelijnen` en `bevriezen` zoals bij AHN-hoogte | 4 km² | alleen Civil 3D en alleen in een tekening in Lambert 72; beta; eigen stijl en de laag na het laden bevroren; DHMV II (2013-2015), hoogtes in TAW; onder panden geïnterpoleerd; zie 3, Een tekening in België |
 | Wegen (NWB) | `VKNWB` | `hectometrering` | 25 km² | hectometerpaal als oranje bordje met het wegnummer; zie hieronder |
 | Hectometerpaaltjes (AWV) | `VKREFPUNTEN` | | 25 km² | beta; alleen in een tekening in Lambert 72; hetzelfde oranje bordje met het wegnummer en het opschrift; zie 3, Hectometerpaaltjes in Vlaanderen |
@@ -937,16 +941,101 @@ teksten staan allemaal op `B-OI-RI-T18`:
 `VKAHN` maakt in Civil 3D van het AHN (Actueel Hoogtebestand Nederland) een hoogtemodel, één per gebied (zie 5). In
 AutoCAD zonder Civil 3D staat AHN in het palet grijs; de hoogte op een punt (`VKAHNPUNT`) werkt wel.
 
-**Welke AHN-versie.** VLEA haalt het AHN bij PDOK, en PDOK levert één versie: **AHN4**, ingewonnen in 2020, 2021 en
-2022, met pixels van 0,5 m (zo gemeten op 9 oktober 2026). Een versie kiezen kan daarom niet. Nieuwere metingen (AHN5
-en AHN6) bestaan wel, maar alleen bij het AHN zelf, voor een deel van het land en niet bij PDOK; VLEA haalt geen
-kaarten buiten PDOK (zie 9, Netwerk). Het instellingenvenster zegt het ook, onder **AHN hoogtemodel** en onder **Hoogte
-op een punt**. De versie staat in de bronvermelding ("AHN4 DTM 0,5 m"), op de opdrachtregel na het laden en in de
-gegevens van het model en van elk hoogtepunt (`VKINFO`: `vk_ahn_versie`). Zet PDOK er ooit een andere versie achter,
-dan staat dat in de wijzigingen van een nieuwe versie van VLEA.
+**Welke AHN-versie.** Standaard haalt VLEA het AHN bij PDOK: **AHN4**, ingewonnen in 2020, 2021 en 2022, voor het hele
+land, met pixels van 0,5 m. Dat deden 0.2.9 en 0.2.10 ook: wie niets instelt, krijgt hetzelfde model als in zijn eerdere
+tekeningen. Sinds 0.2.11 kun je ook een nieuwere versie kiezen: **AHN5** (ingewonnen in 2023 en 2024, een deel van het land;
+het AHN maakt hem niet af) en **AHN6** (vanaf 2025, nog bezig; op 29 oktober 2026 al een groot deel van het noorden, het
+westen en het midden, ook het testvak in Amersfoort). Die staan niet bij PDOK, maar bij de dienst die het AHN daarvoor zelf
+aanwijst (zie 9, Netwerk). De keuze staat onder **AHN hoogtemodel** bij **AHN-versie** (getypt `versie=`): **AHN4** (`ahn4`,
+de standaardkeuze), **AHN5** (`ahn5`), **AHN6** (`ahn6`) of **Nieuwste per plek** (`nieuwste`: AHN6, waar die er niet is
+AHN5, en anders AHN4). De versie staat in de bronvermelding ("AHN6 DTM 0,5 m"), op de opdrachtregel na het laden en in de
+gegevens van het model en van elk hoogtepunt (`VKINFO`: `vk_ahn_versie`). `AHN4` blijft de standaard. Kies je in het
+instellingenvenster een andere versie, dan gebruiken palet en lint die tot je hem terugzet; getypt (en in een script)
+geldt `versie=`, zonder `versie=` AHN4.
+
+**Niet ingewonnen is iets anders dan geen meetpunt.** Onder een pand en op water heeft elke versie geen hoogte; die plekken
+overbrugt het model zoals altijd (hieronder). Maar AHN5 en AHN6 zijn op veel plekken nog helemaal niet ingewonnen. Welke
+delen wel, leest VLEA in de bladwijzer van het AHN (bij AHN6 per kilometervak, bij AHN5 per kaartblad van 5 bij 6,25 km),
+niet uit de hoogtes: daarin zien "niet ingewonnen" en "een pand" er hetzelfde uit. De bladwijzer van AHN5 is niet altijd
+precies: op de rand van AHN5 noemt hij een heel kaartblad ingewonnen terwijl maar een deel gemeten is (gemeten op
+30 oktober 2026). Daarom kijkt VLEA bij AHN5 ook in de andere richting, per blok van 125 bij 125 m: heeft AHN5 in zo'n blok
+geen enkele hoogte en AHN4 wel, dan telt dat blok als niet ingewonnen (de melding na het laden zegt hoeveel m²). Heeft ook
+AHN4 er niets, dan is het water en blijft het een plek zonder meetpunt. Dat kost een kleine extra vraag aan de dienst van
+AHN5 (een grof beeld van het gebied) en, alleen voor blokken zonder hoogte van AHN5, een smalle strook van AHN4 bij PDOK.
+Een blok dat maar voor een deel gemeten is, telt als ingewonnen: op de rand kan het model dus tot ongeveer 125 m overbruggen
+waar AHN5 niet gemeten is. Dekt de gekozen versie je gebied maar voor een deel, dan vraagt VLEA vóór het ophalen wat het met
+de rest doet, bijvoorbeeld:
+
+```text
+AHN6 (2026) dekt 75 % van dit gebied. Aanvullen = de rest uit de nieuwste versie die er wel is (AHN5 25 %), Leeg = alleen AHN6, de rest blijft leeg, Hele = het hele gebied in AHN4, Stoppen = AHN niet laden [Aanvullen/Leeg/Hele/Stoppen] <Aanvullen>:
+```
+
+- **Aanvullen** (Enter, `aanvullen=ja`): waar de gekozen versie er niet is, de nieuwste die er wel is (AHN6, AHN5, anders
+  AHN4).
+- **Leeg** (`aanvullen=nee`): alleen de gekozen versie. Waar die niet is ingewonnen, blijft het model leeg: VLEA geeft die
+  delen aan Civil 3D als verbergrand, zodat het model er geen driehoeken overheen trekt. Lukt dat niet, dan zegt de
+  opdrachtregel dat het model daar niet gemeten is.
+- **Hele** (`aanvullen=ahn4`): het hele gebied in AHN4, precies het model van altijd, met de reden erbij.
+- **Stoppen**: het AHN niet laden. Laad je in één `VKLADEN` meer kaarten, dan komen de andere nog wel.
+- **Esc**: niets laden, ook de andere kaarten niet.
+
+Bij Stoppen en Esc is er van het AHN niets gewist (wissen bij Vervangen gebeurt pas bij het tekenen).
+
+Kies je in het instellingenvenster bij **Als de gekozen versie een deel niet dekt** iets anders dan **Vragen**, dan vraagt
+VLEA niets. **In een script** geef je `aanvullen=` mee (bij `VKAHN` als `versie=ahn6,aanvullen=ja`, in `VKLADEN` als
+`ahn.aanvullen=ja`): of de vraag komt, hangt van het gebied af, dus een script kan er niet op rekenen. Een lege regel uit
+een script is bij die vraag geen Enter: dan stopt het commando met één regel en is er niets geladen. Een antwoord dat niet
+past, stopt het commando ook (zoals bij de vraag over eerdere imports). Dekt de gekozen versie het hele gebied, of koos je **Nieuwste per
+plek**, dan komt er geen vraag. Bij AHN4 vraagt VLEA nooit iets en maakt het geen verbinding met de dienst van AHN5 en AHN6.
+
+**Een gemengd model zegt dat.** Komen er meer versies in één model, dan staan ze allemaal in de naam ("VLEA AHN6+AHN4 RD
+154950-462950 100x100"), in de gegevens (`vk_ahn_versie` = `AHN6+AHN4`, `vk_ahn_m2` met de m² per versie, `vk_ahn_jaren`
+met de jaren van inwinning), in de bronvermelding ("AHN6 DTM 0,5 m + AHN4 DTM 0,5 m") en in de melding na het laden, met de
+m² en de jaren per versie. Ook een model van alleen AHN6 heeft een eigen naam ("VLEA AHN6 RD …"), dus het kan naast een
+model van AHN4 van hetzelfde gebied staan. Een model van AHN6 en een van AHN4 zijn wel dezelfde kaart: laad je AHN6 waar
+al AHN4 staat, dan vraagt VLEA Vervangen, Erbij of Overslaan (zie 5); kies **Erbij** om ze naast elkaar te houden.
+
+**Let op de grens tussen twee versies.** Daar kan een trede in de hoogte zitten. Op vlak terrein dat niet veranderde, is
+die gemeten op enkele centimeters, tot ongeveer 8 cm (AHN5 en AHN6 lagen op de gemeten plekken 1,6 tot 7,6 cm lager dan
+AHN4; waarom, is niet gemeten), en meer waar het terrein tussen de inwinningen veranderde. In een profiel zie je zo'n trede. De melding na het
+laden zegt het, en standaard tekent VLEA de grens tussen de versies als lijn op de laag van het gebied
+(`VLEA-KAART-GEBIED`), precies op de kilometerlijn of de rand van het kaartblad. Zet **Grens tussen AHN-versies als lijn**
+uit als je die lijn niet wilt (`grens=uit`).
+
+**Bij AHN5 en AHN6 is een cel niet gegarandeerd één echte pixel.** De dienst van AHN5 en AHN6 deelt het raster zelf
+opnieuw in (gemeten: blokjes van ongeveer 0,42 m die niet op het RD-raster van 0,5 m liggen). VLEA vraagt op het raster van
+0,5 m en krijgt per cel de waarde van die dienst op het midden van de cel; dat is niet altijd precies één pixel van het
+AHN-bestand, en de ligging kan tot ongeveer 0,2 m afwijken (vermoed, niet nagemeten). Bij AHN4 blijft elke cel één echte
+pixel. Bij `VKAHNPUNT` met AHN5 of AHN6 vraagt VLEA een vak van 32,5 bij 32,5 m met het punt in het midden en leest de cel
+van het punt (een heel klein vak geeft die dienst naast water of een pand soms met een rand die VLEA niet kan lezen). Omdat
+de dienst zelf opnieuw indeelt, kan de hoogte op een punt naast water of een pand een paar centimeter verschillen van die
+in een model van hetzelfde gebied, of daar ontbreken waar het model er wel een heeft (gemeten).
+
+**Als de dienst niet meewerkt.** De dienst van AHN5 en AHN6 kan zonder aankondiging veranderen. Geeft hij geen antwoord,
+een ander formaat dan VLEA kent (ook een beschadigd stuk in een raster), geen enkele hoogte in het hele deel waar de
+bladwijzer een versie ingewonnen noemt, of spreken de bladwijzer en de hoogtes elkaar tegen (een hoogte op een plek die de
+bladwijzer niet ingewonnen noemt), dan laadt VLEA niets met die versie, zegt waarom en stelt voor AHN4 te kiezen. Dat geldt
+ook als een andere versie de rest van het gebied wel vult. VLEA neemt nooit stil AHN4 in plaats van AHN6. Ligt het deel van
+een versie helemaal op water, dan krijg je dezelfde melding: kies dan AHN4.
+
+**Licentie van AHN5 en AHN6.** Bronhouder is ook dan het Actueel Hoogtebestand Nederland (uitgevoerd door Het
+Waterschapshuis). Het AHN noemt voor AHN5 en AHN6 geen licentie bij naam (AHN4 bij PDOK: CC0 1.0). Het zegt: "De overheid
+heeft het AHN volledig en zonder enige voorwaarden openbaar gedeeld in de vorm van open data, om hergebruik van de
+beschikbare gegevens te stimuleren." (https://www.ahn.nl/over-het-programma-ahn). De bronvermelding zegt "open data, zonder
+voorwaarden gedeeld" met die pagina.
+
+**Wat op een scherm niet gezien is.** De keuze van de versie, de vraag bij gedeeltelijke dekking (op echte randen van AHN5
+en AHN6, met elk antwoord), de grenslijn en het lege deel bij **Leeg** zijn getest zonder AutoCAD (op vastgelegde
+antwoorden van de dienst in het testvak), live tegen de dienst en met scripts in de AutoCAD-kern van Civil 3D 2025 en
+2026. Op een scherm zijn ze niet gezien: het instellingenvenster, het bolletje van AHN in het palet, Enter en Esc bij de
+vraag en het aanklikken van de keuzes op de opdrachtregel; in AutoCAD 2027 heeft het niet gedraaid. In Civil 3D 2025 kan
+bij **Leeg** de waarschuwing komen dat de delen waar de versie niet is ingewonnen niet verborgen konden worden, terwijl
+het model daar wel leeg is; in 2026 komt die waarschuwing niet.
 
 De keuzes (tandwiel, **Kaarten**, **AHN hoogtemodel**; getypt bij `VKAHN` als `model=dsm,stap=2`, in `VKLADEN` als
-`ahn.model`, `ahn.stap`, `ahn.hoogtelijnen` en `ahn.bevriezen`):
+`ahn.versie`, `ahn.model`, `ahn.stap`, `ahn.aanvullen`, `ahn.grens`, `ahn.hoogtelijnen` en `ahn.bevriezen`):
+- **AHN-versie** (`versie=ahn4`, de standaardkeuze), **Als de gekozen versie een deel niet dekt** (`aanvullen=vragen`, de
+  standaardkeuze) en **Grens tussen AHN-versies als lijn** (`grens=aan`, de standaardkeuze): zie hierboven.
 - **Model.** **Maaiveld (DTM 0,5 m)** (`model=dtm`, de standaardkeuze): het terrein, zonder gebouwen en begroeiing;
   onder panden en op water heeft het geen hoogte. **Oppervlak met gebouwen en begroeiing (DSM 0,5 m)** (`model=dsm`):
   de bovenkant van wat er staat, dus geen maaiveld en niet voor een terreinmodel. Het model heet dan "VLEA AHN DSM RD …".
@@ -984,8 +1073,8 @@ De keuzes (tandwiel, **Kaarten**, **AHN hoogtemodel**; getypt bij `VKAHN` als `m
   getest met een profiel dat uit het model is gemaakt, in de AutoCAD-kern van Civil 3D 2025 en 2026 (zonder scherm); op een scherm
   en in een ontwerpprogramma is het niet geprobeerd. `VKAHNPUNT` heeft het model niet nodig. Modellen die je met 0.2.8 of eerder laadde
   blijven zoals ze zijn; de stijl en het bevriezen gelden voor wat je nu laadt.
-- Bij elke stap is elk punt de hoogte van één echte AHN-pixel, op het midden van die pixel: VLEA middelt en
-  interpoleert niets. Het ophalen bij PDOK blijft gelijk (altijd pixels van 0,5 m), dus een grovere stap laadt niet
+- Bij AHN4 is bij elke stap elk punt de hoogte van één echte AHN-pixel, op het midden van die pixel: VLEA middelt en
+  interpoleert niets (bij AHN5 en AHN6: zie hierboven). Het ophalen bij PDOK blijft gelijk (altijd pixels van 0,5 m), dus een grovere stap laadt niet
   sneller; alleen het model wordt lichter.
 - Na het laden staat er bijvoorbeeld: "AHN DTM: hoogtemodel 'VLEA AHN RD 154950-462950 100x100' uit AHN4 (ingewonnen
   2020-2022) met 1.260 punten op een raster van 2,0 m." Een tweede model van hetzelfde gebied met een andere stap
@@ -1063,9 +1152,10 @@ sleutel, een coördinaat), dan zegt AutoCAD "Unknown command" en stopt het scrip
 op een kopie van je tekening.
 
 ### Hoogte op een punt (`VKAHNPUNT`)
-Wijs een of meer punten aan (of typ `x,y`); Enter of Esc stopt. Per punt haalt VLEA bij PDOK de
-AHN-hoogte van de pixel van 0,5 x 0,5 m waarin het punt valt (geen gemiddelde van buurpixels; AHN4, de enige versie bij
-PDOK, zie 4, Het AHN-hoogtemodel) en tekent:
+Wijs een of meer punten aan (of typ `x,y`); Enter of Esc stopt. Per punt haalt VLEA standaard (AHN4) bij PDOK de
+AHN-hoogte van de pixel van 0,5 x 0,5 m waarin het punt valt (geen gemiddelde van buurpixels; zie 4, Het AHN-hoogtemodel);
+bij AHN5 of AHN6 (trefwoord `Versie`, hieronder) de waarde die de dienst van die versie in de cel van 0,5 m geeft. Daarna
+tekent VLEA:
 
 - een punt op die hoogte (z) op de laag `B-WE-OG-HOOGTEPUNT-G`, en
 - een label "NAP +4,98 m" rechts van het punt op `B-WE-OG-T18` (0,9 m hoog).
@@ -1083,12 +1173,35 @@ Trefwoorden bij de vraag:
 |---|---|---|
 | `Model` | `Dtm` (maaiveld) of `Dsm` (met gebouwen en begroeiing; geen maaiveld) | `Dtm` |
 | `Label` | `Aan` of `Uit` (alleen het punt) | `Aan` |
+| `Versie` | `Ahn4`, `Ahn5`, `Ahn6` of `Nieuwste` (de nieuwste op het punt) | `Ahn4` |
+
+Met `Ahn5`, `Ahn6` of `Nieuwste` (sinds 0.2.11; ook in het instellingenvenster onder **Hoogte op een punt**, bij
+**AHN-versie**) vraagt VLEA per punt aan de bladwijzer van het AHN welke versie daar is ingewonnen; een tweede punt in
+hetzelfde kilometervak of kaartblad vraagt niets opnieuw zolang het commando loopt. Is de gekozen versie op het punt niet
+ingewonnen, dan neemt VLEA zonder vraag de nieuwste die er wel is en zegt dat: "Punt 155030,30 463030,30: AHN6 is hier niet
+ingewonnen; de hoogte komt uit AHN5 (de nieuwste die er wel is)." De gegevens van het punt noemen de versie die het werd
+(`vk_ahn_versie`), het jaar van inwinning (`vk_ahn_jaar`) en, als het een andere werd, de versie die je koos
+(`vk_ahn_gekozen`). Een punt onder een pand of op water in de gekozen versie is geen reden om te wisselen: dan "geen
+AHN-hoogte hier". Heeft AHN5 op het punt geen hoogte, dan kijkt VLEA naar het blok van 125 bij 125 m eromheen (zie 4): geen
+enkele hoogte van AHN5 en wel van AHN4 is de rand van AHN5, en dan geldt "niet ingewonnen". Bij AHN5 en AHN6 zeggen de gegevens ook dat de dienst het raster zelf indeelt (zie 4). Werkt de
+bladwijzer of de dienst niet, dan tekent VLEA niets voor dat punt en stelt voor AHN4 te kiezen. In een tekening in Lambert 72
+(het DHMV) doet de versie niets.
 
 Een script, één regel per vraag (de lege regel stopt):
 
 ```text
 VKAHNPUNT
 154910.3,462920.4
+154950.25,462950.25
+
+```
+
+Met een versie: eerst het trefwoord `Versie`, dan de versie, dan de punten:
+
+```text
+VKAHNPUNT
+Versie
+Ahn6
 154950.25,462950.25
 
 ```
@@ -1868,6 +1981,18 @@ adressen, altijd in het stelsel van de tekening) en de hectometerpaaltjes van Vl
 Lambert 72) van het Agentschap Wegen en Verkeer (AWV, `opendata.apps.mow.vlaanderen.be`, één vast adres). In een
 tekening in RD maakt VLEA met die drie geen verbinding, behalve met `VKSTATUS` (hieronder).
 
+AHN5 en AHN6 (sinds 0.2.11) komen niet van PDOK maar van de dienst die het AHN daarvoor zelf aanwijst
+(`api.ellipsis-drive.com`): alleen als je bij **AHN hoogtemodel** of bij `VKAHNPUNT` AHN5, AHN6 of de nieuwste kiest (de
+status van de bronnen in het palet alleen als bij **AHN hoogtemodel** een andere versie dan AHN4 staat, `VKSTATUS` nooit;
+hieronder). VLEA
+vraagt daar alleen zes vaste adressen: per versie het maaiveld en het oppervlak (in RD, hoogstens 2048 bij 2048 pixels per
+verzoek) en de bladwijzer die zegt welke delen zijn ingewonnen. De bladwijzer zoekt alleen in graden; VLEA rondt je gebied
+af op hele kilometers (bij een klein vak geeft de bladwijzer stil te weinig terug, gemeten), rekent dat zelf om en vraagt
+niets anders. Bij `VKAHNPUNT` krijgt die dienst een vak van 32,5 m rond het punt (aan de rand van AHN5 soms ook het blok
+van 125 m waarin het punt ligt) en de bladwijzer het kilometervak van het punt: de plek van het punt gaat dus mee. Een
+doorverwijzing van die dienst volgt VLEA niet. Bij AHN4, de standaard,
+maakt VLEA met die dienst geen verbinding.
+
 VLEA kijkt hoogstens één keer per dag bij GitHub (`api.github.com`) of er een nieuwere versie is en
 zet dan een regel onderaan het palet. GitHub ziet daarbij je IP-adres en het versienummer; verder
 gaat er niets mee, en er wordt niets automatisch bijgewerkt. Uitzetten kan in de instellingen
@@ -1876,12 +2001,15 @@ gaat er niets mee, en er wordt niets automatisch bijgewerkt. Uitzetten kan in de
 Bij het openen van het palet kijkt VLEA hoe de bronnen ervoor staan (zie 2, Status van de bronnen): hoogstens één
 keer per tien minuten vanzelf, per kaart een of twee kleine verzoeken aan dezelfde bron (PDOK, de BRO, met de
 optie `rws` aan de legger van Rijkswaterstaat en, alleen bij een tekening in Lambert 72 of Lambert 2008, Digitaal
-Vlaanderen, DOV en AWV), altijd in een vast testgebied en nooit in jouw gebied. Dat zijn de
+Vlaanderen, DOV en AWV; de dienst van AHN5 en AHN6 alleen als bij **AHN hoogtemodel** een andere versie dan AHN4 staat),
+altijd in een vast testgebied en nooit in jouw gebied. Dat zijn de
 enige verzoeken aan die bronnen waar je zelf niets voor doet. De bron ziet daarbij je IP-adres en het versienummer.
 Uitzetten kan in de instellingen (tandwiel, **Algemeen**), met het vinkje "Status van de bronnen tonen".
 `VKSTATUS` vraagt altijd alle bronnen, ook de legger van Rijkswaterstaat, ook als de optie `rws` of "Status van de
 bronnen tonen" uit staat: het is een commando dat je zelf start. Ook Digitaal Vlaanderen, DOV en AWV vraagt `VKSTATUS`
-altijd, ook bij een tekening in RD.
+altijd, ook bij een tekening in RD. De dienst van AHN5 en AHN6 vraagt `VKSTATUS` niet (die vraagt alleen het palet, als
+bij **AHN hoogtemodel** een andere versie dan AHN4 staat); wie niets instelt, maakt ook met `VKSTATUS` geen verbinding
+met `api.ellipsis-drive.com`.
 
 Een KLIC-levering (`VKKLIC`) en eigen grondonderzoek (`VKGEF`) leest VLEA alleen van je eigen schijf; daarbij
 maakt VLEA geen verbinding.

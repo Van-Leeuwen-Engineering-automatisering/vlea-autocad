@@ -2,7 +2,7 @@
 
 Dit bestand wordt gemaakt uit het bronregister van de plugin; bewerk het niet met de hand.
 
-VLEA – kaarten voor AutoCAD haalt open data bij PDOK (api.pdok.nl en service.pdok.nl), voor de sonderingen, boringen en grondwaterstanden van peilbuizen bij de openbare uitgifte van de Basisregistratie Ondergrond (publiek.broservices.nl), voor de zones langs waterkeringen van Rijkswaterstaat uit de legger van Rijkswaterstaat (geo.rijkswaterstaat.nl) en, voor kaarten in een tekening in Vlaanderen, bij Digitaal Vlaanderen (geo.api.vlaanderen.be), voor de sonderingen bij de Databank Ondergrond Vlaanderen (www.dov.vlaanderen.be) en voor de hectometerpaaltjes bij het Agentschap Wegen en Verkeer (opendata.apps.mow.vlaanderen.be). De data is van de bronhouders hieronder. VLEA neemt een uitsnede van het gekozen gebied en zet die om naar AutoCAD-objecten op NLCS-lagen: de data wordt dus bewerkt.
+VLEA – kaarten voor AutoCAD haalt open data bij PDOK (api.pdok.nl en service.pdok.nl), voor de sonderingen, boringen en grondwaterstanden van peilbuizen bij de openbare uitgifte van de Basisregistratie Ondergrond (publiek.broservices.nl), voor de zones langs waterkeringen van Rijkswaterstaat uit de legger van Rijkswaterstaat (geo.rijkswaterstaat.nl) en, voor kaarten in een tekening in Vlaanderen, bij Digitaal Vlaanderen (geo.api.vlaanderen.be), voor de sonderingen bij de Databank Ondergrond Vlaanderen (www.dov.vlaanderen.be) en voor de hectometerpaaltjes bij het Agentschap Wegen en Verkeer (opendata.apps.mow.vlaanderen.be), en alleen als je AHN5, AHN6 of de nieuwste kiest bij de dienst die het AHN daarvoor aanwijst (api.ellipsis-drive.com). De data is van de bronhouders hieronder. VLEA neemt een uitsnede van het gekozen gebied en zet die om naar AutoCAD-objecten op NLCS-lagen: de data wordt dus bewerkt.
 
 VLEA zet per kaart een bronvermelding in de tekeningeigenschappen ("Bronvermelding <kaart>") en, als die optie aan staat, als tekst onder het gebied. **Neem de bronvermelding over op tekeningen die je deelt of publiceert.**
 
@@ -29,6 +29,8 @@ VLEA zet per kaart een bronvermelding in de tekeningeigenschappen ("Bronvermeldi
 | Sonderingen (DOV) | VKSONDERINGENDOV | Databank Ondergrond Vlaanderen (MOW, Afdeling Geotechniek) | [Modellicentie Gratis Hergebruik v1.0](https://data.vlaanderen.be/id/licentie/modellicentie-gratis-hergebruik/v1.0) |
 | Spoorwegen (ProRail) | VKSPOOR | ProRail | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/deed.nl) |
 | Zones langs waterkeringen | VKZONERINGEN | Het Waterschapshuis en Rijkswaterstaat | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.nl) |
+
+Kies je bij AHN hoogtemodel of bij de hoogte op een punt AHN5 of AHN6, dan komen die van de dienst die het AHN daarvoor aanwijst (api.ellipsis-drive.com). Bronhouder is ook dan het Actueel Hoogtebestand Nederland (uitgevoerd door Het Waterschapshuis). Het AHN noemt voor AHN5 en AHN6 geen licentie bij naam; het zegt: "De overheid heeft het AHN volledig en zonder enige voorwaarden openbaar gedeeld in de vorm van open data, om hergebruik van de beschikbare gegevens te stimuleren." (https://www.ahn.nl/over-het-programma-ahn). De bronvermelding zegt dan "open data, zonder voorwaarden gedeeld", met die pagina.
 
 Adressen zoeken gaat via de PDOK Locatieserver.
 

@@ -12,7 +12,8 @@ garanderen geen termijn.
 ## Binnen scope
 - De plugin, het installatieprogramma, de installatiescripts en de releasebestanden van deze
   repository.
-- Buiten scope: PDOK, de BRO, de legger van Rijkswaterstaat, Digitaal Vlaanderen, DOV, AWV, GitHub en de kaartdata zelf, de website van
+- Buiten scope: PDOK, de BRO, de legger van Rijkswaterstaat, Digitaal Vlaanderen, DOV, AWV, de dienst van AHN5 en AHN6, GitHub en de
+  kaartdata zelf, de website van
   VLEA, AutoCAD, en aangepaste versies van anderen.
 
 ## Wat de plugin doet en niet doet
@@ -31,7 +32,11 @@ garanderen geen termijn.
   `opendata.apps.mow.vlaanderen.be` (AWV, het Agentschap Wegen en Verkeer: alleen de WFS met de referentiepunten, in
   Lambert 72, zonder doorverwijzing; bij beide weigert de plugin een vraag zonder stelsel, met een
   filter of sortering of zonder vaste grens, omdat de dienst daar stil een verkeerd, leeg of afgekapt antwoord op geeft,
-  en volgt hij nooit een link naar een volgende pagina), `api.github.com`
+  en volgt hij nooit een link naar een volgende pagina), alleen als de gebruiker AHN5, AHN6 of de nieuwste kiest (de status
+  van de bronnen alleen als bij het AHN-hoogtemodel een andere versie dan AHN4 staat, zie hieronder) `api.ellipsis-drive.com`
+  (de dienst die het AHN daarvoor aanwijst: alleen zes vaste adressen, het hoogtemodel als WCS 1.0.0 in RD
+  met hoogstens 2048 pixels per zijde, de bladwijzer met een vak in graden en een grens op het aantal; geen doorverwijzing,
+  geen volgende pagina, geen filter), `api.github.com`
   (versiecheck, uit te zetten) en, alleen als je `VKUPDATE` start (typen of
   de knop), `github.com` en `release-assets.githubusercontent.com` (de nieuwe versie downloaden). Geen
   telemetrie, geen account, geen sleutels, geen cookies.
@@ -40,10 +45,14 @@ garanderen geen termijn.
   gebied van de gebruiker. Het palet doet dat bij het openen hoogstens één keer per tien minuten (uit te zetten; de
   legger van Rijkswaterstaat alleen met de optie `rws` aan; Digitaal Vlaanderen, DOV en AWV alleen bij een tekening in
   Lambert 72 of Lambert 2008, zodat het palet bij een tekening in RD nooit iets aan `geo.api.vlaanderen.be`,
-  `www.dov.vlaanderen.be` of `opendata.apps.mow.vlaanderen.be` vraagt).
+  `www.dov.vlaanderen.be` of `opendata.apps.mow.vlaanderen.be` vraagt; de dienst van AHN5 en AHN6 alleen als bij het
+  AHN-hoogtemodel een andere versie dan AHN4 gekozen is).
   `VKSTATUS` vraagt altijd alle bronnen, ook de legger van Rijkswaterstaat, ook als de optie `rws` of "Status van de
   bronnen tonen" uit staat: het is een commando dat je zelf start. Ook Digitaal Vlaanderen, DOV en AWV vraagt
-  `VKSTATUS` altijd, ook bij een tekening in RD.
+  `VKSTATUS` altijd, ook bij een tekening in RD. De dienst van AHN5 en AHN6 vraagt `VKSTATUS` niet: een getypt commando
+  leest geen instellingen, en wie niets instelt maakt zo ook met `VKSTATUS` geen verbinding met `api.ellipsis-drive.com`.
+  Die dienst vraagt alleen het palet, als bij het AHN-hoogtemodel een andere versie dan
+  AHN4 gekozen is.
   Geen nieuwe bestemming, geen verzoek aan VLEA.
 - `VKHELP` en `VKWEBSITE` (en in het palet de link en "?") openen alleen je eigen browser, met een van
   twee vaste adressen (de handleiding op `github.com` en de website `vanleeuwenea.nl`); de plugin maakt
