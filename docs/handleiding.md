@@ -1,6 +1,6 @@
 # Handleiding – VLEA, kaarten voor AutoCAD
 
-> **Versie 0.2.11.** Voor AutoCAD 2025, 2026 en 2027. `VKHELP` opent deze pagina in je browser.
+> **Versie 1.0.0.** Voor AutoCAD 2025, 2026 en 2027. `VKHELP` opent deze pagina in je browser.
 
 ## 1. Voordat je begint
 - AutoCAD 2025, 2026 of 2027 voor Windows (ook Civil 3D of Map 3D). Niet AutoCAD LT, AutoCAD voor Mac of AutoCAD Web: die kunnen deze plugin niet laden (AutoCAD
@@ -960,11 +960,19 @@ niet uit de hoogtes: daarin zien "niet ingewonnen" en "een pand" er hetzelfde ui
 precies: op de rand van AHN5 noemt hij een heel kaartblad ingewonnen terwijl maar een deel gemeten is (gemeten op
 30 oktober 2026). Daarom kijkt VLEA bij AHN5 ook in de andere richting, per blok van 125 bij 125 m: heeft AHN5 in zo'n blok
 geen enkele hoogte en AHN4 wel, dan telt dat blok als niet ingewonnen (de melding na het laden zegt hoeveel m²). Heeft ook
-AHN4 er niets, dan is het water en blijft het een plek zonder meetpunt. Dat kost een kleine extra vraag aan de dienst van
-AHN5 (een grof beeld van het gebied) en, alleen voor blokken zonder hoogte van AHN5, een smalle strook van AHN4 bij PDOK.
-Een blok dat maar voor een deel gemeten is, telt als ingewonnen: op de rand kan het model dus tot ongeveer 125 m overbruggen
-waar AHN5 niet gemeten is. Dekt de gekozen versie je gebied maar voor een deel, dan vraagt VLEA vóór het ophalen wat het met
-de rest doet, bijvoorbeeld:
+AHN4 er niets, dan is het water en blijft het een plek zonder meetpunt. De rand loopt vaak schuin door de blokken. Sinds 1.0.0
+kijkt VLEA daarom in een blok met hoogtes dat naast een leeg blok ligt fijner, per vak van 25 bij 25 m: een vak zonder één
+hoogte van AHN5, met AHN4, dat aan het lege blok vastzit, telt ook als niet ingewonnen. Een los gat midden in het gemeten deel
+(een groot pand, nieuw water) blijft een plek zonder meetpunt, en water waar ook AHN4 niets heeft is nooit een rand. Dat
+kost een kleine extra vraag aan de dienst van AHN5 (een grof beeld van het gebied) en, alleen voor blokken zonder hoogte van
+AHN5, een smalle strook van AHN4 bij PDOK. Ligt een vak zonder hoogte van AHN5 (op de rand van AHN5, of water of een groot
+pand) aan de rand van je gebied, dan ook een grof beeld van de blokken eromheen en, voor een buurblok zonder hoogte, een
+smalle strook van AHN4. Alleen op de rand van AHN5 zelf komt daarna per rij randblokken een stuk AHN4 van de lege vakken.
+Water of een pand midden in een groot gebied kost niets extra. Een vak van 25 m dat maar voor een deel gemeten is, telt als
+ingewonnen, net als een vak dat de dienst naast gemeten pixels als gemeten ziet (VLEA beslist op een grof beeld van 5 m): op
+de rand kan het model dus nog een strook tot ongeveer 25 m overbruggen waar AHN5 niet gemeten is (in 0.2.11 tot ongeveer
+125 m); de melding na het laden zegt dat. Dekt de gekozen versie je gebied maar voor een deel, dan vraagt VLEA vóór het
+ophalen wat het met de rest doet, bijvoorbeeld:
 
 ```text
 AHN6 (2026) dekt 75 % van dit gebied. Aanvullen = de rest uit de nieuwste versie die er wel is (AHN5 25 %), Leeg = alleen AHN6, de rest blijft leeg, Hele = het hele gebied in AHN4, Stoppen = AHN niet laden [Aanvullen/Leeg/Hele/Stoppen] <Aanvullen>:
@@ -973,8 +981,9 @@ AHN6 (2026) dekt 75 % van dit gebied. Aanvullen = de rest uit de nieuwste versie
 - **Aanvullen** (Enter, `aanvullen=ja`): waar de gekozen versie er niet is, de nieuwste die er wel is (AHN6, AHN5, anders
   AHN4).
 - **Leeg** (`aanvullen=nee`): alleen de gekozen versie. Waar die niet is ingewonnen, blijft het model leeg: VLEA geeft die
-  delen aan Civil 3D als verbergrand, zodat het model er geen driehoeken overheen trekt. Lukt dat niet, dan zegt de
-  opdrachtregel dat het model daar niet gemeten is.
+  delen aan Civil 3D als verbergrand, zodat het model er geen driehoeken overheen trekt. Ligt zo'n deel helemaal naast de
+  punten (aan een rechte rand), dan trekt het model er toch geen driehoeken en is er niets te verbergen. Lukt het verbergen
+  ergens niet, dan zegt de opdrachtregel dat het model daar niet gemeten is.
 - **Hele** (`aanvullen=ahn4`): het hele gebied in AHN4, precies het model van altijd, met de reden erbij.
 - **Stoppen**: het AHN niet laden. Laad je in één `VKLADEN` meer kaarten, dan komen de andere nog wel.
 - **Esc**: niets laden, ook de andere kaarten niet.
@@ -1101,7 +1110,9 @@ blijft het model zonder grens.
 - Tijdens het ophalen zie je per kaart de voortgang (pagina's en objecten; PDOK geeft vooraf geen
   totaal). **Annuleren** of Esc stopt het ophalen binnen enkele seconden; er wordt dan niets half
   getekend. De opdrachtregel zegt waar het werk gebeurt: "Kaart ophalen bij PDOK", "… bij de BRO" of
-  "… bij PDOK en Rijkswaterstaat"; bij een KLIC-levering "Levering omzetten en tekenen". Wissel je
+  "… bij PDOK en Rijkswaterstaat"; bij een KLIC-levering "Levering omzetten en tekenen". Bij **AHN hoogtemodel** met AHN5 of
+  AHN6 staat er "… bij de dienst die het AHN aanwijst", en "… bij PDOK en de dienst die het AHN aanwijst" als AHN4 in het
+  model kan komen (Aanvullen, Hele, Nieuwste per plek) of als VLEA bij AHN5 de rand controleert met een strook van AHN4. Wissel je
   intussen van tekening, dan tekent VLEA niet in de verkeerde.
 - Tijdens het ophalen blijft AutoCAD reageren, maar je kunt niet tekenen. Daarna tekent VLEA alles in
   één keer; dan is AutoCAD bezet (geen voortgang). Bij een kaart duurt dat meestal een paar seconden;
@@ -1183,7 +1194,9 @@ ingewonnen; de hoogte komt uit AHN5 (de nieuwste die er wel is)." De gegevens va
 (`vk_ahn_versie`), het jaar van inwinning (`vk_ahn_jaar`) en, als het een andere werd, de versie die je koos
 (`vk_ahn_gekozen`). Een punt onder een pand of op water in de gekozen versie is geen reden om te wisselen: dan "geen
 AHN-hoogte hier". Heeft AHN5 op het punt geen hoogte, dan kijkt VLEA naar het blok van 125 bij 125 m eromheen (zie 4): geen
-enkele hoogte van AHN5 en wel van AHN4 is de rand van AHN5, en dan geldt "niet ingewonnen". Bij AHN5 en AHN6 zeggen de gegevens ook dat de dienst het raster zelf indeelt (zie 4). Werkt de
+enkele hoogte van AHN5 en wel van AHN4 is de rand van AHN5, en dan geldt "niet ingewonnen". Heeft dat blok wel hoogtes,
+dan kijkt VLEA (sinds 1.0.0) ook naar het vak van 25 m om het punt en de blokken eromheen: is het vak leeg, met AHN4, en zit
+het aan een niet ingewonnen blok vast (geen AHN5, wel AHN4), dan ook. Bij AHN5 en AHN6 zeggen de gegevens ook dat de dienst het raster zelf indeelt (zie 4). Werkt de
 bladwijzer of de dienst niet, dan tekent VLEA niets voor dat punt en stelt voor AHN4 te kiezen. In een tekening in Lambert 72
 (het DHMV) doet de versie niets.
 
@@ -1988,8 +2001,11 @@ hieronder). VLEA
 vraagt daar alleen zes vaste adressen: per versie het maaiveld en het oppervlak (in RD, hoogstens 2048 bij 2048 pixels per
 verzoek) en de bladwijzer die zegt welke delen zijn ingewonnen. De bladwijzer zoekt alleen in graden; VLEA rondt je gebied
 af op hele kilometers (bij een klein vak geeft de bladwijzer stil te weinig terug, gemeten), rekent dat zelf om en vraagt
-niets anders. Bij `VKAHNPUNT` krijgt die dienst een vak van 32,5 m rond het punt (aan de rand van AHN5 soms ook het blok
-van 125 m waarin het punt ligt) en de bladwijzer het kilometervak van het punt: de plek van het punt gaat dus mee. Een
+niets anders, op één ding na: waar AHN5 in het gebied geen hoogte heeft (op de rand van AHN5, of bij water of een groot
+pand) soms ook de blokken van 125 m rond het gebied, als grof beeld. Bij `VKAHNPUNT` krijgt die dienst een vak van
+32,5 m rond het punt (heeft AHN5 op het punt geen hoogte, op de rand van AHN5 of bij water of een pand, dan ook het blok
+van 125 m waarin het punt ligt en soms de blokken eromheen, samen 375 m) en de bladwijzer het kilometervak van het punt:
+de plek van het punt gaat dus mee. Een
 doorverwijzing van die dienst volgt VLEA niet. Bij AHN4, de standaard,
 maakt VLEA met die dienst geen verbinding.
 
