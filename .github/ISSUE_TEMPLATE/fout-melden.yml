@@ -15,7 +15,10 @@ body:
         (geo.rijkswaterstaat.nl), Digitaal Vlaanderen voor de kaarten van Vlaanderen en VKAHNPUNT in een tekening
         in Lambert (geo.api.vlaanderen.be), DOV voor de sonderingen van Vlaanderen (www.dov.vlaanderen.be), AWV
         voor de hectometerpaaltjes van Vlaanderen (opendata.apps.mow.vlaanderen.be), bij AHN5 en AHN6 de dienst die het AHN
-        daarvoor aanwijst (api.ellipsis-drive.com) en GitHub (api.github.com; bij
+        daarvoor aanwijst (api.ellipsis-drive.com), voor de riolering in en bij Eindhoven en Papendrecht de kaartdienst van
+        de gemeente (gisservice.eindhoven.nl en services8.arcgis.com), voor de zones van De Stichtse Rijnlanden, Zuiderzeeland,
+        Scheldestromen, Hunze en Aa's, Vechtstromen en Wetterskip Fryslân de kaartdienst van het waterschap
+        (services1.arcgis.com, services.arcgis.com, geo.scheldestromen.nl en opendata.hunzeenaas.nl) en GitHub (api.github.com; bij
         VKUPDATE ook github.com en release-assets.githubusercontent.com). Laat een proxy of firewall die door, of noem hieronder
         welke niet bereikbaar is.
   - type: input

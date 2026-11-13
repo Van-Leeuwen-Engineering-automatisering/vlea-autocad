@@ -3,7 +3,9 @@
 Gratis plugin voor AutoCAD die open kaarten van [PDOK](https://www.pdok.nl) in je tekening zet: in
 RD-coördinaten (meters), op NLCS-lagen, met bronvermelding. Zonder account, zonder eigen server:
 de plugin haalt de kaarten rechtstreeks bij PDOK op (de sonderingen, boringen en grondwaterstanden van peilbuizen bij de
-openbare uitgifte van de Basisregistratie Ondergrond, de zones van Rijkswaterstaat uit de legger van Rijkswaterstaat).
+openbare uitgifte van de Basisregistratie Ondergrond, de zones van Rijkswaterstaat uit de legger van Rijkswaterstaat, de
+riolering van Eindhoven en Papendrecht bij de kaartdienst van de gemeente, en de zones van zes waterschappen waarvan PDOK
+ze niet of niet goed heeft bij de kaartdienst van het waterschap).
 In een tekening in Lambert 72 of Lambert 2008 (Vlaanderen) zet hij ook open kaarten van Digitaal Vlaanderen in je
 tekening, in het stelsel van die tekening: het GRB, ook als kaartbeeld, en de orthofoto, en in Lambert 72 ook het
 hoogtemodel DHMV, en daarnaast de sonderingen uit de Databank Ondergrond Vlaanderen (DOV) en, in Lambert 72, de
@@ -15,7 +17,7 @@ hectometerpaaltjes van het Agentschap Wegen en Verkeer (AWV). De kaarten van Vla
 > versie veranderd is, staat bij de [releases](https://github.com/Van-Leeuwen-Engineering-automatisering/vlea-autocad/releases). De handleiding staat in
 > [`docs/handleiding.md`](docs/handleiding.md). Meer over de plugin: https://vanleeuwenea.nl/autocad-kaarten.
 
-## Wat kan het (versie 0.2)
+## Wat kan het
 
 | Onderdeel | Commando | Wat |
 |---|---|---|
@@ -41,15 +43,15 @@ hectometerpaaltjes van het Agentschap Wegen en Verkeer (AWV). De kaarten van Vla
 | | `VKGEF` | Eigen grondonderzoek van je eigen schijf (nieuw in 0.2.5): GEF-bestanden of een sondering uit de BRO als XML. Een sondering krijgt hetzelfde kruisje, label en dezelfde sondeerplot als bij `VKSONDERINGEN` (ook de waterdruk), met de eigen herkomst onder de plot; een boring een punt met label. In het palet de knop "Eigen grondonderzoek" bij het gereedschap. Werkt zonder internet. |
 | Infra | `VKNWB` | Wegassen en hectometrering (Nationaal Wegenbestand). |
 | | `VKSPOOR` | Sporen, wissels, kilometrering, overwegen (beta). |
-| | `VKRIOOL` | Gemeentelijke riolering. Gedeeltelijke dekking; niet voor WIBON/KLIC. |
+| | `VKRIOOL` | Gemeentelijke riolering uit GWSW (PDOK). PDOK heeft geen riolering van Eindhoven en Papendrecht: daar komt de riolering van de kaartdienst van de gemeente zelf, op dezelfde lagen (sinds 1.1.0; in Eindhoven strengen en putten zonder bob, maat, materiaal en maaiveld). Gedeeltelijke dekking; niet voor WIBON/KLIC. |
 | Natuur | `VKNATURA2000` | Natura 2000-gebieden (beta). |
-| Beperkingen | `VKZONERINGEN` | Zones langs waterkeringen: kernzone, beschermingszone en profiel van vrije ruimte (beta). Niet elk waterschap levert zijn zones aan; een ontbrekende zone betekent niet dat er geen zone is; de legger van de beheerder is leidend. |
+| Beperkingen | `VKZONERINGEN` | Zones langs waterkeringen: kernzone, beschermingszone en profiel van vrije ruimte (beta). Van De Stichtse Rijnlanden, Zuiderzeeland, Scheldestromen, Hunze en Aa's, Vechtstromen en Wetterskip Fryslân, waarvan PDOK de zones niet of niet goed heeft, komen die zones van de kaartdienst van het waterschap zelf, op dezelfde lagen (sinds 1.1.0). Toch kan overal een zone ontbreken: een ontbrekende zone betekent niet dat er geen zone is; de legger van de beheerder is leidend. |
 | KLIC | `VKKLIC` | Een KLIC-levering (de IMKL-XML of de zip van het Kadaster) inlezen en op NLCS-lagen tekenen, met een telling per thema en bij elk object dat niet getekend kan worden de reden. Opnieuw inlezen gaat per meldnummer: een andere levering wordt nooit gewist. Werkt zonder internet. |
 | Profielschets | `VKSCHETS` | De profielschets of een andere bijlage van een infolaag van de KLIC openen, ook als de KLIC in een XREF staat: VLEA zoekt de levering en opent een kopie van de pdf. Bij het inlezen zet VKKLIC een uitroepteken bij elke infolaag met een bijlage en bij elke eis voorzorgsmaatregel; houd je de muis stil op een infolaag, dan verschijnt een venster met een knop die de schets opent. Sinds 0.2.10. |
 | Google Earth | `VKKMZ`, `VKKMLIMPORT` | Objecten als KMZ (en standaard ook als los .kml-bestand) naar Google Earth (één open lijn: boortracé met begin, eind en lengte; Enter = alle VLEA-kaarten in het gebied, zonder KLIC-levering); een KML of KMZ inlezen op vaste lagen. |
 | Punten | `VKPUNTEN` | Punten uit een Excel- of CSV-bestand met RD-coördinaten: per rij een punt op zijn hoogte en een leider met naam en "NAP +1,23 m". VLEA herkent de kolommen (met of zonder kopregel), laat het eerste punt zien, controleert RD en hoogte en vraagt bij twijfel. Hetzelfde bestand opnieuw inlezen vraagt Vervangen/Erbij/Overslaan. Werkt zonder internet. |
 | Lengteprofiel | `VKNAPSET`, `VKNAPLEADER`, `VKNAPUPDATE` | NAP-hoogte in een lengteprofiel: een referentie (punt met een bekende NAP-hoogte en de verticale schaal), dan per aangewezen punt een leider met "NAP +1,25 m"; herberekenen na het verschuiven. In België in TAW (trefwoord `Stelsel`, "TAW +1,25 m"); VLEA rekent nooit om tussen NAP en TAW. Rekent zonder internet, ook in een tekening die niet in meters staat. Neemt de leiders van het LISP-script NAPLEADER over op verzoek. |
-| Maatlijnen | `VKMAAT` | Bij elk stuk van een lijn of polylijn een maat op 2 m: bij een gesloten vorm altijd buiten, bij een open lijn rechts (of links) van de tekenrichting; bij een boog de koorde. Op de laag `X-XX-AL-REFERENTIE-M` met de maatstijl `VK_MAAT`; je eigen maatstijl blijft zoals hij was. Eerst lijnen kiezen en dan `VKMAAT` bemaat ze allemaal. Werkt zonder internet. |
+| Maatlijnen | `VKMAAT` | Bij elk stuk van een lijn of polylijn een maat op 2 m: bij een gesloten vorm altijd buiten, bij een open lijn rechts (of links) van de tekenrichting; bij een boog de koorde. Op de laag `VLEA-GEREEDSCHAP-MAAT` (oranje) met de maatstijl `VK_MAAT`; je eigen maatstijl blijft zoals hij was. Eerst lijnen kiezen en dan `VKMAAT` bemaat ze allemaal. Werkt zonder internet. |
 | Coördinaat | `VKCOORDINAAT` | Een punt aanwijzen (snappen mag) en er een aanwijslijn bij zetten met de X en Y van dat punt, bijvoorbeeld bij de hoekpunten van een proefsleuf ("X = 155 000,00", "Y = 463 000,00"). Het zijn de coördinaten van je tekening (RD, of in België Lambert); VLEA rekent niets om. Decimalen (0 tot en met 3) en de Z erbij kies je in het instellingenvenster of met een trefwoord. Herhalen tot Enter. In het palet en op het lint de knop "Coördinaat". Werkt zonder internet. |
 | Bekijk de plek | `VKGOOGLE`, `VKSTREETVIEW`, `VKSTREETSMART`, `VKDINO` | Een punt aanwijzen (Enter = midden van het beeld) en die plek in je browser openen: Google Maps met een speld, Street View (het dichtstbijzijnde panorama; met een tweede punt ook de kijkrichting), StreetSmart van Cyclomedia (daarvoor heb je een eigen account van Cyclomedia nodig) of DINOloket van TNO. DINOloket opent ingezoomd op de plek, die in het midden van de kaart ligt; zet in DINOloket zelf "Bodem- en grondonderzoek" aan om sonderingen en boringen te zien. In het palet en op het lint: "Bekijk de plek". |
 | Geografische plek | `VKGEOPLEK` | De geografische plek van de tekening op RD (EPSG:28992) zetten, zodat AutoCAD weet waar de tekening ligt, bijvoorbeeld voor de online kaart van AutoCAD (`GEOMAP`). De tekeningcoördinaten blijven de RD-coördinaten; heeft de tekening al een andere plek, dan vraagt VLEA eerst. In het palet bij het gereedschap. |
@@ -64,7 +66,7 @@ kaartcommando's (`VKBGT` enz.) in de AutoCAD-kern zonder schermen.
 Ligt er in het gekozen gebied niets van een kaart, dan zegt VLEA dat in een zin (bijvoorbeeld "Er ligt
 geen sondering uit de BRO binnen dit gebied.") in plaats van "0 objecten".
 
-**Niet in versie 0.2:** DTB (PDOK stopt ermee op 31-12-2026) en waterschapsriolering.
+**Niet in deze versie:** DTB (PDOK stopt ermee op 31-12-2026) en waterschapsriolering.
 
 ### Laagnamen
 
@@ -107,7 +109,11 @@ geen sondering uit de BRO binnen dit gebied.") in plaats van "0 objecten".
   `rws`); voor de kaarten van Vlaanderen en `VKAHNPUNT` in een tekening in Lambert naar `geo.api.vlaanderen.be`
   (Digitaal Vlaanderen), voor de sonderingen van Vlaanderen naar `www.dov.vlaanderen.be` (DOV) en voor de
   hectometerpaaltjes van Vlaanderen naar `opendata.apps.mow.vlaanderen.be` (AWV); alleen als je AHN5, AHN6 of de nieuwste kiest
-  naar `api.ellipsis-drive.com` (de dienst die het AHN daarvoor aanwijst); voor `VKUPDATE` ook naar GitHub
+  naar `api.ellipsis-drive.com` (de dienst die het AHN daarvoor aanwijst); voor de riolering in en bij Eindhoven en
+  Papendrecht naar `gisservice.eindhoven.nl` en `services8.arcgis.com` (de kaartdienst van de gemeente); voor de zones
+  langs waterkeringen van De Stichtse Rijnlanden, Zuiderzeeland, Scheldestromen, Hunze en Aa's, Vechtstromen en Wetterskip
+  Fryslân naar `services1.arcgis.com`, `services.arcgis.com`, `geo.scheldestromen.nl` en `opendata.hunzeenaas.nl` (de
+  kaartdienst van het waterschap); voor `VKUPDATE` ook naar GitHub
   (zie [Privacy](#privacy)). `VKKLIC` en `VKGEF` hebben geen
   internet nodig.
   `VKHELP`, `VKWEBSITE` en de commando's onder "Bekijk de plek" openen je eigen browser.
@@ -115,9 +121,12 @@ geen sondering uit de BRO binnen dit gebied.") in plaats van "0 objecten".
   weigert VLEA, zonder iets te tekenen.
 - Voor de luchtfoto en de kaartbeelden van de BRT en de BGT (`VKBGTBEELD`), en in Vlaanderen het GRB als kaartbeeld
   (`VKGRBBEELD`) en de orthofoto (`VKORTHO`), moet de tekening zijn
-  opgeslagen: de beelden komen als losse bestanden in de map `<tekening>_kaarten` naast de tekening
-  (een kaartbeeld van de BGT is ongeveer 2 MB bij 0,25 km², 3 tot 4 MB bij 1 km² en 6 tot 7 MB bij 5 km², hoogstens
-  ongeveer 10 MB; het laden duurt tot ongeveer een minuut). Stuur die map mee als je de tekening deelt.
+  opgeslagen: de beelden komen als losse bestanden naast de tekening (een kaartbeeld van de BGT is ongeveer 2 MB bij
+  0,25 km², 3 tot 4 MB bij 1 km² en 6 tot 7 MB bij 5 km², hoogstens ongeveer 10 MB; het laden duurt tot ongeveer een
+  minuut). Standaard staan ze in de map `<tekening>_kaarten`; sinds 1.1.0 kun je ze ook direct in de map van de tekening
+  zetten (in de instellingen, of getypt `kaartenmap=tekening`). Kan het pad van een beeld in de eigen map langer worden
+  dan 255 tekens (dat opent AutoCAD niet op elke pc), dan zet VLEA de beelden vanzelf direct in de map van de tekening;
+  kan ook dat te lang worden, dan haalt VLEA niets op en zegt waarom. Stuur de beelden mee als je de tekening deelt.
 
 ## Installeren
 
@@ -211,8 +220,10 @@ geen sleutels. Hij maakt alleen deze verbindingen, allemaal via https:
 | Sonderingen van Vlaanderen laden (`VKSONDERINGENDOV`), in een tekening in Lambert 72 of Lambert 2008 | DOV, de Databank Ondergrond Vlaanderen: `www.dov.vlaanderen.be` (alleen zoeken in het gebied en één sondering als XML ophalen, en altijd met het stelsel van de tekening) | het gebied, welke sonderingen je bekijkt, en de versie van de plugin |
 | Hectometerpaaltjes van Vlaanderen laden (`VKREFPUNTEN`), in een tekening in Lambert 72 | AWV, het Agentschap Wegen en Verkeer: `opendata.apps.mow.vlaanderen.be` (alleen zoeken in het gebied, en altijd in Lambert 72) | het gebied, en de versie van de plugin |
 | Het AHN-hoogtemodel (`VKAHN`) of `VKAHNPUNT` met AHN5, AHN6 of Nieuwste (de standaard AHN4 komt van PDOK) | de dienst die het AHN daarvoor aanwijst: `api.ellipsis-drive.com` (alleen zes vaste adressen: per versie het maaiveld en het oppervlak, en de bladwijzer die zegt welke delen zijn ingewonnen; het hoogtemodel in RD, de bladwijzer in graden; geen doorverwijzingen) | het gebied (bij de bladwijzer afgerond op hele kilometers, als vak in graden; waar AHN5 in het gebied geen hoogte heeft (op de rand van AHN5, of bij water of een groot pand) soms ook de blokken van 125 m rond het gebied); bij `VKAHNPUNT` een vak van 32,5 m rond het punt (heeft AHN5 op het punt geen hoogte, op de rand van AHN5 of bij water of een pand, dan ook het blok van 125 m waarin het punt ligt, en soms de blokken eromheen, samen 375 m) en voor de bladwijzer het kilometervak van het punt; en de versie van de plugin |
-| Bij het openen van het palet, hoogstens één keer per tien minuten vanzelf, en met de knop "Status vernieuwen" (de status van de bronnen; uit te zetten in de instellingen van het palet, onder "Algemeen") | dezelfde bronnen als de kaarten: PDOK (`api.pdok.nl`, `service.pdok.nl`), de BRO (`publiek.broservices.nl`, zoeken en, met de optie `standen` van de peilbuizen aan, één vaste meetreeks), met de optie `rws` aan de legger van Rijkswaterstaat (`geo.rijkswaterstaat.nl`) en, alleen als het gebied van de tekening in Lambert 72 of Lambert 2008 ligt, Digitaal Vlaanderen (`geo.api.vlaanderen.be`), DOV (`www.dov.vlaanderen.be`) en AWV (`opendata.apps.mow.vlaanderen.be`) (bij een tekening in RD nooit), en de dienst van AHN5 en AHN6 (`api.ellipsis-drive.com`) alleen als bij het AHN-hoogtemodel een andere versie dan AHN4 gekozen is | per kaart een of twee kleine verzoeken in een vast testgebied (nooit jouw gebied), en de versie van de plugin |
-| Alleen als je `VKSTATUS` start (typen of in een script) | dezelfde bronnen: PDOK (`api.pdok.nl`, `service.pdok.nl`), de BRO (`publiek.broservices.nl`, zoeken en één vaste meetreeks), de legger van Rijkswaterstaat (`geo.rijkswaterstaat.nl`), Digitaal Vlaanderen (`geo.api.vlaanderen.be`, ook bij een tekening in RD), DOV (`www.dov.vlaanderen.be`, ook bij een tekening in RD) en AWV (`opendata.apps.mow.vlaanderen.be`, ook bij een tekening in RD). `VKSTATUS` vraagt altijd alle bronnen, ook de legger van Rijkswaterstaat, ook als de optie `rws` of "Status van de bronnen tonen" uit staat: het is een commando dat je zelf start. De dienst van AHN5 en AHN6 (`api.ellipsis-drive.com`) vraagt `VKSTATUS` niet: die vraagt alleen het palet, als bij het AHN-hoogtemodel een andere versie dan AHN4 gekozen is; wie niets instelt, maakt ook met `VKSTATUS` geen verbinding met die dienst | per kaart een of twee kleine verzoeken in een vast testgebied (nooit jouw gebied), en de versie van de plugin |
+| Riolering laden (`VKRIOOL`) met een gebied in of bij Eindhoven of Papendrecht, waarvan PDOK geen riolering heeft: als het gebied een vaste rechthoek om die gemeente raakt (de rechthoek om de gemeentegrens plus 100 m, dus ook met stukken van de buurgemeenten; Eindhoven RD x 152.700-166.400, y 378.800-389.900, Papendrecht x 105.400-110.800, y 425.800-429.300) en PDOK in het gebied nog geen riolering van die gemeente geeft | de kaartdienst van de gemeente: `gisservice.eindhoven.nl` (Eindhoven, één vaste laag) en `services8.arcgis.com` (alleen de twee vaste lagen van de gemeente Papendrecht: de leidingen, en de putten en kolken); alleen een vraag met vaste parameters, in RD; de volgende pagina zet de plugin zelf in de vraag (hoogstens 15 pagina's van 2.000 objecten per laag en per tegel); geen doorverwijzingen, en geen link uit het antwoord | het deel van het gebied binnen die rechthoek, als rechthoek in RD (bij een strook per vak langs de lijn), en de versie van de plugin |
+| Zones langs waterkeringen laden (`VKZONERINGEN`) met een gebied in of bij De Stichtse Rijnlanden, Zuiderzeeland, Scheldestromen, Hunze en Aa's, Vechtstromen of Wetterskip Fryslân, waarvan PDOK de zones niet of niet goed heeft: als het gebied een vaste rechthoek om de zones van een laag van dat waterschap raakt (de rechthoek om de data van die laag plus 100 m, dus ook met stukken van de buren), ook met de optie `rws` uit | de kaartdienst van het waterschap: `services1.arcgis.com` (alleen de negen vaste lagen van De Stichtse Rijnlanden en de vaste laag van Vechtstromen en van Wetterskip Fryslân), `services.arcgis.com` (alleen de vaste laag van Zuiderzeeland), `geo.scheldestromen.nl` (alleen de vaste laag van Scheldestromen) en `opendata.hunzeenaas.nl` (alleen de vaste collectie van Hunze en Aa's); alleen een vraag met vaste parameters, in RD; bij de lagen zet de plugin de volgende pagina zelf in de vraag (hoogstens 15 pagina's van 2.000 objecten per laag en per vraag, bij Zuiderzeeland van 1.000), bij Hunze en Aa's één pagina van hoogstens 1.000 objecten; geen doorverwijzingen, en geen link uit het antwoord | per laag de rechthoek om het deel van het gebied binnen die rechthoek, in RD (bij een lange strook per blok van 3 km; bij De Stichtse Rijnlanden altijd één rechthoek per laag), en de versie van de plugin |
+| Bij het openen van het palet, hoogstens één keer per tien minuten vanzelf, en met de knop "Status vernieuwen" (de status van de bronnen; uit te zetten in de instellingen van het palet, onder "Algemeen") | dezelfde bronnen als de kaarten: PDOK (`api.pdok.nl`, `service.pdok.nl`), de BRO (`publiek.broservices.nl`, zoeken en, met de optie `standen` van de peilbuizen aan, één vaste meetreeks), met de optie `rws` aan de legger van Rijkswaterstaat (`geo.rijkswaterstaat.nl`) en, alleen als het gebied van de tekening in Lambert 72 of Lambert 2008 ligt, Digitaal Vlaanderen (`geo.api.vlaanderen.be`), DOV (`www.dov.vlaanderen.be`) en AWV (`opendata.apps.mow.vlaanderen.be`) (bij een tekening in RD nooit), en de dienst van AHN5 en AHN6 (`api.ellipsis-drive.com`) alleen als bij het AHN-hoogtemodel een andere versie dan AHN4 gekozen is; de kaartdiensten van de gemeenten en van de waterschappen nooit | per kaart een of twee kleine verzoeken in een vast testgebied (nooit jouw gebied), en de versie van de plugin |
+| Alleen als je `VKSTATUS` start (typen of in een script) | dezelfde bronnen: PDOK (`api.pdok.nl`, `service.pdok.nl`), de BRO (`publiek.broservices.nl`, zoeken en één vaste meetreeks), de legger van Rijkswaterstaat (`geo.rijkswaterstaat.nl`), Digitaal Vlaanderen (`geo.api.vlaanderen.be`, ook bij een tekening in RD), DOV (`www.dov.vlaanderen.be`, ook bij een tekening in RD) en AWV (`opendata.apps.mow.vlaanderen.be`, ook bij een tekening in RD). `VKSTATUS` vraagt altijd alle bronnen, ook de legger van Rijkswaterstaat, ook als de optie `rws` of "Status van de bronnen tonen" uit staat: het is een commando dat je zelf start. De dienst van AHN5 en AHN6 (`api.ellipsis-drive.com`) vraagt `VKSTATUS` niet: die vraagt alleen het palet, als bij het AHN-hoogtemodel een andere versie dan AHN4 gekozen is; wie niets instelt, maakt ook met `VKSTATUS` geen verbinding met die dienst. Het palet en `VKSTATUS` vragen de kaartdiensten van de gemeenten (`gisservice.eindhoven.nl`, `services8.arcgis.com`) nooit: alleen het laden van de riolering vraagt ze. Het palet en `VKSTATUS` vragen de kaartdiensten van de waterschappen (`services1.arcgis.com`, `services.arcgis.com`, `geo.scheldestromen.nl`, `opendata.hunzeenaas.nl`) nooit: alleen het laden van de zones vraagt ze | per kaart een of twee kleine verzoeken in een vast testgebied (nooit jouw gebied), en de versie van de plugin |
 | Eén keer per dag (uit te zetten in de instellingen van het palet, onder "Algemeen") | GitHub: `api.github.com` | alleen de versie van de plugin |
 | Alleen als je `VKUPDATE` start (typen, de knop Bijwerken in het palet of op het lint, of de regel "Nieuwe versie beschikbaar" onderaan het palet) | GitHub: `api.github.com`, `github.com` en `release-assets.githubusercontent.com` (daar laat GitHub de downloads vandaan komen) | alleen de versie van de plugin |
 | Alleen als je `VKHELP` of `VKWEBSITE` typt, Help op het lint kiest, of in het palet de link vanleeuwenea.nl of de knop "?" gebruikt | je eigen browser opent de handleiding op `github.com` of de website `vanleeuwenea.nl`; de plugin maakt zelf geen verbinding | wat je browser altijd meestuurt; de plugin geeft alleen het vaste adres door |
@@ -255,9 +266,13 @@ netbeheerder in een vrije tekst of een label zet, komt verder ongewijzigd mee in
 ## Bronnen en licenties van de kaarten
 
 De data is van de bronhouders; PDOK stelt haar beschikbaar (de sonderingen, boringen en grondwaterstanden de BRO, de zones van
-Rijkswaterstaat de legger van Rijkswaterstaat). Bij CC BY-bronnen is naamsvermelding
-verplicht: VLEA zet de bronvermelding in de tekeningeigenschappen en kan haar als tekst in de
-tekening plaatsen. **Neem de bronvermelding over op tekeningen die je deelt of publiceert.**
+Rijkswaterstaat de legger van Rijkswaterstaat). De riolering van Eindhoven en Papendrecht, die PDOK niet heeft, komt
+van de kaartdienst van de gemeente zelf; de bronvermelding noemt dan ook de gemeente. Zo ook de zones van zes
+waterschappen die PDOK niet of niet goed heeft: die komen van de kaartdienst van het waterschap zelf, en de
+bronvermelding noemt dan ook dat waterschap (zie onder de tabel). Bij CC BY-bronnen is naamsvermelding
+verplicht: VLEA zet de bronvermelding op de opdrachtregel en in de tekeningeigenschappen, en als tekst in de tekening als
+je **Bronvermelding in de tekening** aanzet (sinds 1.1.0 standaard uit). **Neem de bronvermelding over op tekeningen die
+je deelt of publiceert.**
 
 Per kaart de bronhouder en de licentie: zie [`docs/BRONNEN.md`](docs/BRONNEN.md). Dat bestand
 wordt gemaakt uit het bronregister in de code (een test bewaakt dat), zit als `BRONNEN.md` in de zip
@@ -267,19 +282,36 @@ In het kort, wat de licenties vragen als je een tekening of export met de kaartd
 
 | Licentie | Kaarten | Wat het betekent voor wie de data verder verspreidt |
 |---|---|---|
-| CC0 1.0, Public Domain Mark 1.0 | AHN, NWB, spoor, riolering, sonderingen, boringen, Natura 2000, BAG | geen voorwaarden; een bronvermelding is netjes, maar niet verplicht |
-| CC BY 4.0 | BGT (ook als kaartbeeld), BRT, kadaster, luchtfoto | naam van de bronhouder en de licentie noemen, en zeggen dat de data bewerkt is: de bronvermelding van VLEA doet dat |
-| **CC BY-SA 4.0** ("gelijk delen") | de **zones langs waterkeringen** (`VKZONERINGEN`): Het Waterschapshuis en Rijkswaterstaat | als bij CC BY, en daarbij: wie de zones (of een bewerking ervan, bijvoorbeeld de uitgesneden zones in een DWG, KMZ of export) verder verspreidt, moet die bewerking onder dezelfde of een compatibele licentie delen en mag er geen extra beperkingen op leggen. De licentie spreekt van delen met het publiek; of een tekening aan één opdrachtgever daaronder valt, beoordeelt VLEA niet. Of het ook voor de rest van een tekening geldt, hangt af van hoe de zones erin gebruikt zijn; ook daarover geeft VLEA geen juridisch oordeel. Wil je dat vermijden, deel de zones dan niet mee: wis ze in de kopie die je verstuurt (`VKWISSEN`, kaart `zoneringen`). Een bevroren of uitgezette laag zit nog in het bestand. |
+| CC0 1.0, Public Domain Mark 1.0 | AHN, NWB, spoor, riolering (uit GWSW: Stichting RIONED, CC0 1.0; van de gemeente Eindhoven: Public Domain Mark 1.0), sonderingen, boringen, Natura 2000, BAG, en bij `VKZONERINGEN` de Zonering waterkering van Hunze en Aa's van de kaartdienst van het waterschap (Public Domain Mark 1.0) | geen voorwaarden; een bronvermelding is netjes, maar niet verplicht |
+| geen licentie genoemd | de riolering van Papendrecht (`VKRIOOL`, van de kaartdienst van de gemeente), en de zones van de waterschappen Scheldestromen, Vechtstromen, Wetterskip Fryslân en Zuiderzeeland van hun eigen kaartdienst (`VKZONERINGEN`) | de gemeente Papendrecht deelt haar rioolkaart openbaar, maar noemt geen licentie; VLEA maakt er zelf geen licentie van. De bronvermelding zegt "Gemeente Papendrecht (Rioolviewer Papendrecht), openbaar gedeeld, geen licentie genoemd": neem die over. Wat je verder met die data mag, zegt de gemeente niet. Zo ook bij Scheldestromen, Vechtstromen en Wetterskip Fryslân: ze delen hun zones openbaar en noemen geen licentie. Zuiderzeeland noemt geen licentie bij naam, wel "geen gebruiksbeperking" (zie onder de tabel) |
+| CC BY 4.0 | BGT (ook als kaartbeeld), BRT, kadaster, luchtfoto, en de zones van De Stichtse Rijnlanden van de kaartdienst van het waterschap (`VKZONERINGEN`) | naam van de bronhouder en de licentie noemen, en zeggen dat de data bewerkt is. De bronvermelding van VLEA zegt dat, maar komt sinds 1.1.0 niet meer vanzelf in de tekening: neem haar direct na het laden over van de opdrachtregel, onderaan het palet of uit de tekeningeigenschappen (`DWGPROPS`, die per kaart alleen de bronvermelding van de laatste keer laden houden), of zet **Bronvermelding in de tekening** aan (getypt `bronvermelding=aan`), dan zet VLEA haar als tekst onder het gebied |
+| **CC BY-SA 4.0** ("gelijk delen") | de **zones langs waterkeringen** (`VKZONERINGEN`) van PDOK en Rijkswaterstaat: Het Waterschapshuis en Rijkswaterstaat | als bij CC BY, en daarbij: wie de zones (of een bewerking ervan, bijvoorbeeld de uitgesneden zones in een DWG, KMZ of export) verder verspreidt, moet die bewerking onder dezelfde of een compatibele licentie delen en mag er geen extra beperkingen op leggen. De licentie spreekt van delen met het publiek; of een tekening aan één opdrachtgever daaronder valt, beoordeelt VLEA niet. Of het ook voor de rest van een tekening geldt, hangt af van hoe de zones erin gebruikt zijn; ook daarover geeft VLEA geen juridisch oordeel. Wil je dat vermijden, deel de zones dan niet mee: wis ze in de kopie die je verstuurt (`VKWISSEN`, kaart `zoneringen`). Een bevroren of uitgezette laag zit nog in het bestand. |
 
-Voor de zones houdt VLEA de strengste licentie van de twee aan: de zones van de waterschappen zijn
-CC BY-SA 4.0, de legger van Rijkswaterstaat is CC0 1.0. De bronvermelding, `BRONNEN.md` en `VKOVER`
-noemen daarom voor de hele kaart CC BY-SA 4.0.
+Voor de zones van PDOK en Rijkswaterstaat houdt VLEA de strengste licentie van de twee aan: de zones van de
+waterschappen bij PDOK zijn CC BY-SA 4.0, de legger van Rijkswaterstaat is CC0 1.0. De bronvermelding, `BRONNEN.md`
+en `VKOVER` noemen daarom voor de hele kaart CC BY-SA 4.0.
+
+Sinds 1.1.0 komen de zones van zes waterschappen die PDOK niet of niet goed heeft, van de kaartdienst van het waterschap
+zelf. Komen er zones van zo'n waterschap in je tekening, dan noemt de bronvermelding van de zones dat waterschap erbij,
+met wat het waterschap zelf over het gebruik zegt: "Hoogheemraadschap De Stichtse Rijnlanden (Waterschapsverordening),
+CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/deed.nl)", "Waterschap Zuiderzeeland (Zonering waterkering),
+geen gebruiksbeperking", "Waterschap Scheldestromen (zoneringen waterkeringen), openbaar gedeeld, geen licentie genoemd",
+"Waterschap Hunze en Aa's (Zonering waterkering), Public Domain Mark 1.0
+(https://creativecommons.org/publicdomain/mark/1.0/deed.nl)", "Waterschap Vechtstromen (legger, vastgesteld), openbaar
+gedeeld, geen licentie genoemd" en "Wetterskip Fryslân (Waterkering, open data), openbaar gedeeld, geen licentie
+genoemd". Zuiderzeeland noemt geen licentie bij naam, wel "geen gebruiksbeperking". Scheldestromen, Vechtstromen en
+Wetterskip Fryslân delen hun zones openbaar, maar noemen geen licentie; VLEA maakt er zelf geen licentie van, en wat je
+verder met die zones mag, zeggen die waterschappen niet. CC BY-SA 4.0 geldt voor de zones van PDOK en Rijkswaterstaat;
+voor de zones van de kaartdienst van een waterschap geldt wat dat waterschap zelf zegt (hierboven).
 
 Een **KLIC-levering** (`VKKLIC`) is geen open data maar een levering volgens de WIBON, en
 **vertrouwelijk** (WIBON art. 4 lid 2): je mag de gegevens alleen aan anderen geven voor zover dat
 noodzakelijk is om graafschade te voorkomen, of voor de oriëntatie op een verzoek tot medegebruik of
 coördinatie. Dat geldt ook voor een tekening, export of Google Earth-bestand met de levering erin; de
-bronvermelding van VLEA zegt daarom "(WIBON, vertrouwelijk)", en `VKKMZ` neemt KLIC met Enter niet mee.
+bronvermelding van VLEA zegt daarom "(WIBON, vertrouwelijk)", en `VKKMZ` neemt KLIC met Enter niet mee. Sinds 1.1.0
+komt de bronvermelding standaard niet meer als tekst in de tekening: op de tekening en op een plot staat dan niet dat de
+levering vertrouwelijk is. Geef je die tekening door, zet het er dan zelf bij, of zet **Bronvermelding in de tekening**
+aan vóór het inlezen.
 
 De exacte voorwaarden staan in de licentieteksten (de link staat bij elke kaart in `BRONNEN.md`).
 

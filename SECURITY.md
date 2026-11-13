@@ -12,8 +12,9 @@ garanderen geen termijn.
 ## Binnen scope
 - De plugin, het installatieprogramma, de installatiescripts en de releasebestanden van deze
   repository.
-- Buiten scope: PDOK, de BRO, de legger van Rijkswaterstaat, Digitaal Vlaanderen, DOV, AWV, de dienst van AHN5 en AHN6, GitHub en de
-  kaartdata zelf, de website van
+- Buiten scope: PDOK, de BRO, de legger van Rijkswaterstaat, Digitaal Vlaanderen, DOV, AWV, de dienst van AHN5 en AHN6, de
+  kaartdiensten van de gemeenten Eindhoven en Papendrecht, de kaartdiensten van de waterschappen De Stichtse Rijnlanden,
+  Zuiderzeeland, Scheldestromen, Hunze en Aa's, Vechtstromen en Wetterskip Fryslân, GitHub en de kaartdata zelf, de website van
   VLEA, AutoCAD, en aangepaste versies van anderen.
 
 ## Wat de plugin doet en niet doet
@@ -36,7 +37,23 @@ garanderen geen termijn.
   van de bronnen alleen als bij het AHN-hoogtemodel een andere versie dan AHN4 staat, zie hieronder) `api.ellipsis-drive.com`
   (de dienst die het AHN daarvoor aanwijst: alleen zes vaste adressen, het hoogtemodel als WCS 1.0.0 in RD
   met hoogstens 2048 pixels per zijde, de bladwijzer met een vak in graden en een grens op het aantal; geen doorverwijzing,
-  geen volgende pagina, geen filter), `api.github.com`
+  geen volgende pagina, geen filter), voor de riolering van de gemeenten waarvan PDOK geen riolering heeft `gisservice.eindhoven.nl`
+  en `services8.arcgis.com` (de kaartdienst van de gemeente Eindhoven en die van de gemeente Papendrecht: alleen GET op de
+  `query` van drie vaste lagen, met precies de parameters van de plugin: een rechthoek in RD binnen
+  een vaste rechthoek om de gemeente, uitvoer in RD, een vaste volgorde, en een pagina die de plugin zelf in de vraag zet,
+  hoogstens 15 pagina's van 2.000 objecten per laag en per tegel; geen doorverwijzing, geen link uit het antwoord, geen
+  filter; alleen bij het laden van de riolering (`VKRIOOL`, `VKLADEN` of de knop Laden) met een gebied dat die rechthoek
+  raakt, en niet als PDOK daar al riolering van die gemeente geeft), voor de zones langs waterkeringen van de zes waterschappen waarvan PDOK de zones niet of niet goed heeft
+  `services1.arcgis.com`, `services.arcgis.com`, `geo.scheldestromen.nl` en `opendata.hunzeenaas.nl` (de kaartdiensten van De
+  Stichtse Rijnlanden, Vechtstromen en Wetterskip Fryslân, van Zuiderzeeland, van Scheldestromen en van Hunze en Aa's, met
+  dezelfde regel als de gemeenten, alleen op 14 vaste lagen: bij 13
+  lagen alleen GET op de `query` van de laag, met precies dezelfde parameters als bij de gemeenten, binnen een vaste
+  rechthoek om de data van die laag, hoogstens 15 pagina's van 2.000 objecten (bij Zuiderzeeland 1.000) per laag en per
+  vraag; bij Hunze en Aa's alleen GET op de items van één vaste collectie (OGC API Features) met precies `f=json`, `crs` en
+  `bbox-crs` in RD, een `bbox` binnen de rechthoek van de collectie en `limit` hoogstens 1.000, één pagina, nooit een
+  volgende; geen doorverwijzing, geen link uit het antwoord, geen filter; alleen bij het laden van de zones
+  (`VKZONERINGEN`, `VKLADEN` of de knop Laden) met een gebied dat de rechthoek van een laag raakt),
+  `api.github.com`
   (versiecheck, uit te zetten) en, alleen als je `VKUPDATE` start (typen of
   de knop), `github.com` en `release-assets.githubusercontent.com` (de nieuwe versie downloaden). Geen
   telemetrie, geen account, geen sleutels, geen cookies.
@@ -52,7 +69,11 @@ garanderen geen termijn.
   `VKSTATUS` altijd, ook bij een tekening in RD. De dienst van AHN5 en AHN6 vraagt `VKSTATUS` niet: een getypt commando
   leest geen instellingen, en wie niets instelt maakt zo ook met `VKSTATUS` geen verbinding met `api.ellipsis-drive.com`.
   Die dienst vraagt alleen het palet, als bij het AHN-hoogtemodel een andere versie dan
-  AHN4 gekozen is.
+  AHN4 gekozen is. Het palet en `VKSTATUS` vragen de kaartdiensten van de gemeenten (`gisservice.eindhoven.nl`,
+  `services8.arcgis.com`) nooit: daar is geen proef voor (besluit van beheer, 12-11-2026); alleen het laden van de riolering
+  vraagt ze. Het palet en `VKSTATUS` vragen de kaartdiensten van de waterschappen (`services1.arcgis.com`,
+  `services.arcgis.com`, `geo.scheldestromen.nl`, `opendata.hunzeenaas.nl`) nooit: ook daar is geen proef voor (dezelfde
+  keuze als bij de gemeenten); alleen het laden van de zones vraagt ze.
   Geen nieuwe bestemming, geen verzoek aan VLEA.
 - `VKHELP` en `VKWEBSITE` (en in het palet de link en "?") openen alleen je eigen browser, met een van
   twee vaste adressen (de handleiding op `github.com` en de website `vanleeuwenea.nl`); de plugin maakt

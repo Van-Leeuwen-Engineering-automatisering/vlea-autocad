@@ -1,6 +1,6 @@
 # Handleiding – VLEA, kaarten voor AutoCAD
 
-> **Versie 1.0.0.** Voor AutoCAD 2025, 2026 en 2027. `VKHELP` opent deze pagina in je browser.
+> **Versie 1.1.0.** Voor AutoCAD 2025, 2026 en 2027. `VKHELP` opent deze pagina in je browser.
 
 ## 1. Voordat je begint
 - AutoCAD 2025, 2026 of 2027 voor Windows (ook Civil 3D of Map 3D). Niet AutoCAD LT, AutoCAD voor Mac of AutoCAD Web: die kunnen deze plugin niet laden (AutoCAD
@@ -18,7 +18,8 @@
   "Meters" (of typ `INSUNITS` en dan `6`). Teken je zelf al in millimeters, dan passen RD-meters er
   niet bij: begin dan met een tekening in meters.
 - Sla je tekening op voordat je een luchtfoto, de BRT (standaard een plaatje), het kaartbeeld van de BGT, of in
-  Vlaanderen het GRB als kaartbeeld of de orthofoto laadt: het beeld komt in een map naast de tekening.
+  Vlaanderen het GRB als kaartbeeld of de orthofoto laadt: het beeld komt als los bestand naast de tekening (zie 4,
+  Waar de beelden komen).
 
 ## 2. Het palet
 Na de installatie opent het palet één keer vanzelf. Daarna: typ `VKPALET` of klik op het
@@ -40,7 +41,8 @@ lint-tabblad **VLEA** op **Palet** (nog een keer = sluiten). Van boven naar bene
   werkt niet in het stelsel van het gebied, zie 3). Zonder gebied staat erboven "Kies eerst een gebied"; staat de tekening niet in
   meters, dan staan alle kaarten grijs en staat erboven hoe je de eenheid goed zet (zie 1). De luchtfoto, het plaatje van
   de BRT (de standaard), het kaartbeeld van de BGT, het GRB als kaartbeeld en de orthofoto komen als beeld in een
-  map naast de tekening: in een tekening zonder naam staat daar
+  map naast de tekening (of direct in de map van de tekening, zie 4, Waar de beelden komen): in een tekening zonder naam
+  staat daar
   "Sla de tekening eerst op" met een knop **Opslaan**. Beta-kaarten zijn zo gemarkeerd; een driehoekje
   toont de vaste waarschuwing van een kaart.
 - **Gereedschap** – een rij knoppen: AHN-punt (`VKAHNPUNT`), NAP-referentie, NAP-leider en NAP herberekenen
@@ -55,13 +57,17 @@ lint-tabblad **VLEA** op **Palet** (nog een keer = sluiten). Van boven naar bene
   bij de knop noemt het commando.
 - **Bekijk de plek** – vier knoppen: Google Maps, Street View, StreetSmart en DINOloket. Wijs daarna een
   punt aan (Enter = midden van het beeld); de plek opent in je browser (zie 11).
-- **Laatste keer geladen** – tijdens het laden staat er "wacht – zie opdrachtregel": een vraag (zoals
-  [Vervangen/Erbij/Overslaan] als de kaart al in de tekening staat) komt op de opdrachtregel. Daarna per
-  kaart het aantal objecten, of hoe het afliep (overgeslagen, geweigerd, mislukt, geannuleerd), met
-  hoogstens tien meldingen; zijn het er meer, dan eerst de waarschuwingen, dan de rest, en "... en N
-  meer (zie de opdrachtregel)". Ligt er in het gebied niets van die kaart, dan staat er "niets getekend"
-  met een zin die dat zegt (bijvoorbeeld "Er liggen geen BAG-panden of -adressen binnen dit gebied."),
-  geen "0".
+- **Laatste keer geladen** – sinds 1.1.0 één zin: wat je laadde en hoe het afliep. Tijdens het laden staat er
+  bijvoorbeeld "BGT (topografie) wordt geladen – zie de opdrachtregel.": een vraag (zoals [Vervangen/Erbij/Overslaan]
+  als de kaart al in de tekening staat) komt op de opdrachtregel. Daarna het aantal objecten ("BGT (topografie): 3.185
+  objecten getekend."). Ging er iets mis, dan zegt de zin dat en verwijst hij naar de opdrachtregel, in de kleur van een
+  waarschuwing: "niet compleet" (de kaart is afgekapt), "met 2 waarschuwingen", of hoe het afliep (mislukt,
+  overgeslagen, geweigerd, geannuleerd, niet geladen). Ligt er in het gebied niets van die kaart, dan staat er de zin van
+  de kaart (bijvoorbeeld "Er liggen geen BAG-panden of -adressen binnen dit gebied."), geen "0"; heeft die zin een
+  kanttekening (zoals bij de zones langs waterkeringen, of bij de BGT en de BAG een gebied dat helemaal binnen één vlak
+  ligt, zie 4), dan "niets getekend – zie de opdrachtregel.". Laad je met
+  `VKLADEN` meer kaarten tegelijk, dan blijft het één zin, met de namen of het aantal kaarten en wat er mis was. Alle
+  meldingen zelf staan op de opdrachtregel (tot en met 1.0.0 stonden er hier tot tien per kaart).
 - **Onderaan** – de bronvermelding van wat je net laadde, de disclaimer, zo nodig "Nieuwe versie
   beschikbaar" (klik = `VKUPDATE`), de versie en **Over VLEA**.
 
@@ -73,7 +79,8 @@ en **Weergave** (welke kaarten en knoppen je ziet, zie verderop). Alles wat er i
 **Opties** in het hoofdstuk waar het bij hoort; er is geen apart tabblad per onderwerp. Op het tabblad **Opties**:
 
 - **Kaarten**: per kaart haar opties, bijvoorbeeld de BGT-groepen, de sondeerplots of snel/scherp bij
-  de luchtfoto. Bij de BRT staat onder de naam per keuze één zin wat je krijgt, bij AHN waar elke AHN-versie
+  de luchtfoto. Bij de BGT en de BAG kies je met **Vlakken** of een vlak dat op de rand van het gebied is geknipt die rand
+  meekrijgt (sinds 1.1.0; zie 4, Vlakken op de rand van het gebied). Bij de BRT staat onder de naam per keuze één zin wat je krijgt, bij AHN waar elke AHN-versie
   vandaan komt en wat de rasterstap doet, met de keuze van de versie (AHN4, AHN5, AHN6 of de nieuwste per plek); bij AHN en DHMV kies je ook de stijl van het hoogtemodel (hoogtelijnen om de 0,25 m, 0,5 m of
   1 m, alleen de rand of de stijl van je tekening) en of de laag na het laden bevroren wordt;
 - **Gereedschap**: hoogte op een punt (AHN-versie, maaiveld of met gebouwen, label met de hoogte), de breedte van
@@ -81,17 +88,20 @@ en **Weergave** (welke kaarten en knoppen je ziet, zie verderop). Alles wat er i
   opties van de KLIC-levering, sinds 0.2.10 het **Venster bij aanwijzen (KLIC)** (zie 6), en bij de coördinaat het
   aantal decimalen en of de Z erbij komt;
 - **Stijl**: NLCS-kleuren of grijze onderlegger voor de kaarten (een KLIC-levering komt altijd in
-  NLCS-kleuren, de sonderingen, de boringen en de peilbuizen blijven altijd in kleur), en of de bronvermelding als tekst in de tekening komt. De
+  NLCS-kleuren, de sonderingen, de boringen en de peilbuizen blijven altijd in kleur), en **Bronvermelding in de tekening**:
+  of de bronvermelding als tekst onder het gebied komt (sinds 1.1.0 standaard uit; zie 8). De
   grijze onderlegger maakt lagen grijs, geen beeld: de luchtfoto, het plaatje van de BRT, het kaartbeeld van de BGT,
   het GRB als kaartbeeld en de orthofoto blijven in hun eigen kleuren. Wil je de BRT grijs, kies dan bij de BRT **Plaatje grijs**.
   Daaronder het blok **Tekst en aanwijslijnen**: laag, tekststijl, aanwijslijnstijl en teksthoogte van de tekst die je zelf
   plaatst met de knoppen Coördinaat, NAP-leider en Punten (zie 7);
-- **Algemeen**: één keer per dag kijken of er een nieuwe versie is, en of het palet de status van de bronnen toont
-  (standaard aan; zie hieronder).
+- **Algemeen**: één keer per dag kijken of er een nieuwe versie is, of het palet de status van de bronnen toont
+  (standaard aan; zie hieronder), en sinds 1.1.0 bij **Luchtfoto's en kaartbeelden** waar die bestanden komen
+  (**Bestanden opslaan**: in een eigen map per tekening, de standaard, of direct in de map van de tekening; zie 4, Waar de
+  beelden komen).
 
 Alle aan/uit-keuzes staan standaard aan, behalve maatvoering en annotaties van de KLIC-levering (zie 6),
-grondgebruik bij de BRT (zie 4), percelen, adrespunten en wegassen bij het GRB (zie 3) en de Z bij de coördinaat (zie 4,
-Coördinaat op een punt); zet uit wat je niet wilt. Een keuzelijst staat op de
+grondgebruik bij de BRT (zie 4), percelen, adrespunten en wegassen bij het GRB (zie 3), de Z bij de coördinaat (zie 4,
+Coördinaat op een punt) en sinds 1.1.0 de bronvermelding in de tekening (zie 8); zet uit wat je niet wilt. Een keuzelijst staat op de
 standaard van de kaart of het commando (bijvoorbeeld maaiveld, het plaatje in kleur bij de BRT, NLCS-kleuren). **Opslaan**
 bewaart je keuzes (in `%LOCALAPPDATA%\VLEA-AutoCAD\instellingen.json`), **Annuleren** laat alles zoals
 het was en **Standaard herstellen** zet alles in het venster terug. De knoppen in het palet en op het
@@ -141,7 +151,7 @@ nu antwoordt:
 
 Wijs het bolletje aan voor de uitleg, per bron één regel, bijvoorbeeld "PDOK BGT werkt (0,4 s)" of "legger
 Rijkswaterstaat reageert niet: geen antwoord binnen 8 s". Een kaart met twee bronnen (BRT: TOP10NL en de
-achtergrondkaart; de zones: de waterschappen en de legger van Rijkswaterstaat) krijgt de kleur van de bron die het
+achtergrondkaart; de zones: de zones van de waterschappen bij PDOK en de legger van Rijkswaterstaat) krijgt de kleur van de bron die het
 slechtst gaat. Het bolletje is alleen informatie: **Laden** kan altijd, ook bij rood. Ligt een bron eruit, dan kun je
 niets anders doen dan het later opnieuw proberen; je krijgt geen meldingen.
 
@@ -162,9 +172,13 @@ knop weg en doet het palet deze verzoeken niet.
 `VKSTATUS` doet dezelfde controle vanaf de opdrachtregel, altijd vers, en zet per kaart één regel op de
 opdrachtregel, met onderaan hoeveel er werken. `VKSTATUS` vraagt altijd alle bronnen, ook de legger van
 Rijkswaterstaat, ook als de optie `rws` of "Status van de bronnen tonen" uit staat: het is een commando dat je zelf
-start. Alleen de dienst van AHN5 en AHN6 vraagt `VKSTATUS` niet: een getypt commando leest geen instellingen, en die
+start. De dienst van AHN5 en AHN6 vraagt `VKSTATUS` niet: een getypt commando leest geen instellingen, en die
 dienst vraagt alleen het palet, als bij **AHN hoogtemodel** een andere versie dan AHN4 staat. Dat zegt `VKSTATUS` ook in
-een regel onder de uitkomst: de regel van AHN gaat over AHN4 bij PDOK. Het stelt geen vragen, dus het werkt ook in een script en in de AutoCAD-kern zonder schermen. Esc stopt het.
+een regel onder de uitkomst: de regel van AHN gaat over AHN4 bij PDOK. Het palet en `VKSTATUS` vragen de kaartdiensten
+van de gemeenten Eindhoven en Papendrecht (zie 4, Riolering) nooit: het bolletje en de regel van de riolering gaan over
+GWSW bij PDOK. Zo ook de kaartdiensten van de zes waterschappen waarvan VLEA de zones zelf vraagt (zie 4, Zones langs
+waterkeringen): het palet en `VKSTATUS` vragen ze nooit, en het bolletje en de regel van de zones gaan over PDOK en de
+legger van Rijkswaterstaat. `VKSTATUS` stelt geen vragen, dus het werkt ook in een script en in de AutoCAD-kern zonder schermen. Esc stopt het.
 
 ## 3. Een gebied kiezen
 - **Adres, postcode of perceel** (`VKADRES`, of het zoekveld in het palet): typ bijvoorbeeld een
@@ -257,9 +271,9 @@ Referentie Bestand) maakt, als afbeelding onder de tekening, op de laag `VLEA-KA
 Het is een plaatje: je kunt er niet op vastklikken. Voor lijnen en vlakken op NLCS-lagen is er het GRB zelf (`VKGRB`).
 - **Kaartstijl** (in het instellingenvenster onder Kaarten, bij GRB als kaartbeeld, als "Stijl"; in een script
   `kaartstijl`): `kleur` (de standaardkeuze) of `grijs`.
-- **Eerst opslaan.** Het beeld komt als PNG met world-file (`.pgw`) in de map `<tekening>_kaarten` naast de tekening,
-  als `grbbeeld_<stijl>_n<niveau>_<x>_<y>_<x>_<y>.png` (de getallen zijn Lambert-meters). Stuur die map mee als je de
-  tekening deelt.
+- **Eerst opslaan.** Het beeld komt als PNG naast de tekening, standaard in de map `<tekening>_kaarten` met een
+  world-file (`.pgw`), als `grbbeeld_<stijl>_<x>_<y>_<kenmerk>.png` (de linkeronderhoek in hele Lambert-meters; zie 4,
+  Waar de beelden komen). Stuur de beelden mee als je de tekening deelt.
 - **Niveau en pixel.** VLEA kiest het fijnste niveau waarop het gebied binnen 17 miljoen pixels blijft: 0,125 m per
   pixel tot ongeveer 0,25 km², 0,25 m bij 1 km², 0,5 m bij 2 km² en 1 m bij 5 km² (de grens). Is het beeld grover dan
   0,25 m, dan zegt VLEA dat; een kleiner gebied geeft een scherper beeld.
@@ -272,8 +286,8 @@ Het is een plaatje: je kunt er niet op vastklikken. Voor lijnen en vlakken op NL
 - **Scherpte** (`scherpte`): `snel` (25 cm per pixel, de standaardkeuze) of `scherp` (15 cm: de foto zelf is 15 cm,
   fijner opvragen maakt hem niet scherper). Bij een groot gebied wordt de pixel grover, en dat zegt VLEA: bij 5 km² (de
   grens) 50 en 35 cm.
-- **Eerst opslaan.** De foto komt als JPEG met world-file (`.jgw`) in `<tekening>_kaarten`, als
-  `ortho_<scherpte>_<x>_<y>_<x>_<y>.jpg`.
+- **Eerst opslaan.** De foto komt als JPEG naast de tekening, standaard in `<tekening>_kaarten` met een world-file
+  (`.jgw`), als `ortho_<scherpte>_<x>_<y>_<kenmerk>.jpg` (zie 4, Waar de beelden komen).
 - **Gebruiksbeperking van Digitaal Vlaanderen** (het driehoekje in het palet): niet geschikt voor het karteren van
   objecten die boven of onder het maaiveld liggen; buiten Vlaanderen is de foto minder nauwkeurig. Gemeten: de foto ligt
   op 0,25 tot 0,5 m na op het GRB.
@@ -386,8 +400,8 @@ keer). Grootste gebied 4 km², ook voor de omhullende rechthoek. In een Nederlan
 
 | Kaart | Commando | Opties (sleutel in een script) | Max. gebied | Let op |
 |---|---|---|---|---|
-| BAG (panden en adressen) | `VKBAG` | `verblijfsobjecten` (adressen met huisnummer) | 1 km² | alleen bestaande en vergunde objecten; gesloopt en ingetrokken niet (wel gemeld) |
-| BGT | `VKBGT` | groepen `wegen`, `water`, `panden`, `terrein`, `namen` (straatnamen en huisnummers), `overig` | 1 km² | actuele versie |
+| BAG (panden en adressen) | `VKBAG` | `verblijfsobjecten` (adressen met huisnummer); `vlakken` = `randen` (zonder de rand van het gebied; de standaardkeuze) of `omtrek` (gesloten omtrek per pand) | 1 km² | alleen bestaande en vergunde objecten; gesloopt en ingetrokken niet (wel gemeld); een geknipt pand zonder de rand van het gebied, zie hieronder |
+| BGT | `VKBGT` | groepen `wegen`, `water`, `panden`, `terrein`, `namen` (straatnamen en huisnummers), `overig`; `vlakken` = `randen` (zonder de rand van het gebied; de standaardkeuze) of `omtrek` (gesloten omtrek per vlak) | 1 km² | actuele versie; een geknipt vlak zonder de rand van het gebied, zie hieronder |
 | BGT als kaartbeeld | `VKBGTBEELD` | `kaartstijl` = `achtergrond` (de standaardkeuze), `pastel`, `standaard` (felle kleuren; een van de vier waarden) of `omtrek`; in het instellingenvenster staat de keuze onder Kaarten, bij BGT als kaartbeeld, als "Stijl" | 5 km² | beta; een plaatje van de BGT naast de tekening, eerst opslaan; zie hieronder |
 | BRT (topografische kaart) | `VKBRT` | `soort` = `kleur` (plaatje in kleur, zoals het portaal; de standaardkeuze), `grijs` (plaatje grijs) of `lijnen` (TOP10NL, een overzichtskaart); groepen `wegen`, `water`, `gebouwen`, `grondgebruik` (standaard uit), `relief`, `inrichting`, `namen`, `vlakken` = `randen` (de standaardkeuze) of `omtrek` en `lijnkleur` = `portaal` (de standaardkeuze) of `wit` (alleen bij `lijnen`) | 16 km² | beta; het plaatje naast de tekening, eerst opslaan; volgens het Kadaster de lijnen niet voor een schaal groter dan 1:5.000 en het plaatje niet groter dan 1:750; zie hieronder |
 | GRB (topografie Vlaanderen) | `VKGRB` | groepen `wegen`, `water`, `panden`, `terrein`, `namen` (straatnamen en huisnummers), `overig`; standaard uit: `percelen`, `adrespunten`, `wegassen` | 1 km² | beta; alleen in een tekening in Lambert 72 of Lambert 2008 (Vlaanderen); zie hoofdstuk 3, "Een tekening in België" |
@@ -400,9 +414,9 @@ keer). Grootste gebied 4 km², ook voor de omhullende rechthoek. In een Nederlan
 | Wegen (NWB) | `VKNWB` | `hectometrering` | 25 km² | hectometerpaal als oranje bordje met het wegnummer; zie hieronder |
 | Hectometerpaaltjes (AWV) | `VKREFPUNTEN` | | 25 km² | beta; alleen in een tekening in Lambert 72; hetzelfde oranje bordje met het wegnummer en het opschrift; zie 3, Hectometerpaaltjes in Vlaanderen |
 | Spoorwegen | `VKSPOOR` | `kilometrering` | 100 km² | beta |
-| Riolering | `VKRIOOL` | `labels` (materiaal en diameter), `hoogtes` (bob bij leidingen, putnaam en maaiveld bij putten), `aansluitingen` | 4 km² | onvolledig; niet voor WIBON/KLIC; riool zonder laag in kleur 210, zoals in een KLIC-levering (zie 6, Kleur en lijndikte); zie hieronder |
+| Riolering | `VKRIOOL` | `labels` (materiaal en diameter), `hoogtes` (bob bij leidingen, putnaam en maaiveld bij putten), `aansluitingen` | 4 km² | onvolledig; niet voor WIBON/KLIC; riool zonder laag in kleur 210, zoals in een KLIC-levering (zie 6, Kleur en lijndikte); in en bij Eindhoven en Papendrecht van de kaartdienst van de gemeente; zie hieronder |
 | Natura 2000 | `VKNATURA2000` | | 100 km² | beta |
-| Zones langs waterkeringen | `VKZONERINGEN` | `kernzone`, `beschermingszone`, `vrijeruimte` (profiel van vrije ruimte), `rws` (ook de zones van Rijkswaterstaat) | 9 km² | beta; niet elk waterschap levert zijn zones aan; een ontbrekende zone betekent niet dat er geen zone is; de legger van de beheerder is leidend (dat staat ook na het laden op de opdrachtregel); `rws` haalt bij `geo.rijkswaterstaat.nl` |
+| Zones langs waterkeringen | `VKZONERINGEN` | `kernzone`, `beschermingszone`, `vrijeruimte` (profiel van vrije ruimte), `rws` (ook de zones van Rijkswaterstaat) | 9 km² | beta; van zes waterschappen de zones die PDOK niet of niet goed heeft van de kaartdienst van het waterschap zelf; toch kan overal een zone ontbreken: een ontbrekende zone betekent niet dat er geen zone is; de legger van de beheerder is leidend (dat staat ook na het laden op de opdrachtregel); `rws` haalt bij `geo.rijkswaterstaat.nl`; zie hieronder |
 | Sonderingen (BRO) | `VKSONDERINGEN` | `sondeerplots`, `labels`, `xml`; `aantal` = `5`, `10`, `25` (de standaardkeuze), `50`, `100` of `alle` | 4 km² | beta; zonder keuze de 25 dichtstbijzijnde; zie hieronder |
 | Sonderingen (DOV) | `VKSONDERINGENDOV` | `sondeerplots`, `labels`, `xml`; `aantal` = `5`, `10`, `25` (de standaardkeuze), `50`, `100` of `alle` | 4 km² | beta; alleen in een tekening in Lambert 72 of Lambert 2008; hoogtes in TAW; zonder keuze de 25 dichtstbijzijnde; zie 3, Sonderingen in Vlaanderen |
 | Boringen (BRO) | `VKBORINGEN` | `boorprofielen`, `labels`, `xml`; `aantal` = `5`, `10`, `25` (de standaardkeuze), `50`, `100` of `alle` | 4 km² | beta; geotechnische en geologische boringen; zonder keuze de 25 dichtstbijzijnde; boorprofielen links naast het gebied; zie hieronder |
@@ -426,6 +440,42 @@ zeggen dan al "te groot". Kies dan een kortere strook of laad AHN in delen.
 geen bronvermelding. Mislukt het ophalen, dan staat de reden er, niet deze zin; is er daardoor niets
 getekend, dan staat die reden op de opdrachtregel bovenaan, in plaats van "0 objecten getekend".
 
+### Vlakken op de rand van het gebied (BGT en BAG)
+Een vlak van de BGT (een wegdeel, een stuk gras, water, een pand) of een pand van de BAG dat over de rand van je gebied
+loopt, knipt VLEA af op die rand. Hoe het daarna in de tekening komt, kies je zelf: in het palet het tandwiel,
+**Opties**, Kaarten, bij BGT (topografie) of BAG (panden en adressen) **Vlakken**; in een script `vlakken`.
+- **Zonder de rand van het gebied** (`vlakken=randen`, de standaardkeuze, nieuw in 1.1.0): alleen de echte rand van het
+  vlak die binnen je gebied ligt, als open polylijn. Langs de rand van je gebied (de rechthoek, de gekozen polylijn of de
+  strook van `VKCONTOUR`) komt geen lijn. Laad je langs een lang tracé gebied na gebied, dan staat er dus geen lijn waar
+  twee gebieden tegen elkaar liggen. Ook op de grens van de vakjes waarin VLEA een strook ophaalt, komt nooit een lijn.
+  De contour die `VKCONTOUR` zelf tekent, blijft wel staan: die staat bewust op de laag `VLEA-KAART-GEBIED`; zet die laag
+  uit of bevries hem als je hem niet wilt zien.
+  - Een vlak dat helemaal binnen je gebied ligt, blijft een gesloten polylijn, zoals altijd.
+  - Een gat in een vlak (bijvoorbeeld een binnenplaats) dat binnen het gebied ligt, wordt een eigen gesloten polylijn.
+  - Loopt een vlak meer keer over de rand, dan worden het meer lijnen. Ze hebben allemaal hetzelfde id: `VKINFO` toont bij
+    elk stuk dezelfde gegevens, met `vk_geknipt = ja`, en `VKWISSEN` met **Selectie** haalt alle stukken samen weg.
+    **Vervangen** en wissen per kaart werken zoals altijd.
+  - Ligt een echte zijde van een vlak precies op de rand van je gebied, dan blijft die staan. Alleen het stuk rand dat VLEA
+    zelf afknipt, komt er niet in.
+  - Ligt een vlak om je hele gebied heen (zijn rand ligt helemaal erbuiten, bijvoorbeeld een groot weiland om een klein
+    gebied), dan komt er van dat vlak niets in de tekening. Dat gebeurt niet stil: de melding na het laden noemt het vlak,
+    bijvoorbeeld "BGT: het hele gebied ligt binnen één vlak (begroeidterreindeel, grasland agrarisch).", en is er verder
+    niets getekend, dan is ze op de opdrachtregel de eerste regel in plaats van "niets gevonden", en zegt de zin onderaan
+    het palet "niets getekend – zie de opdrachtregel.". Wil je zo'n vlak toch zien, kies dan **Gesloten omtrek per vlak**.
+  - Een geknipt vlak is geen gesloten polylijn meer. Oppervlak aflezen (`AREA`, `LIST`) of arceren met een aanwijspunt
+    gaat op die stukken niet, en in Google Earth (`VKKMZ`) wordt het een lijn in plaats van een vlak (zie 10).
+  - Na het laden telt "N objecten getekend" elke lijn, dus iets meer dan met gesloten vlakken. In het testvak in
+    Amersfoort (0,25 km²) tekent de BGT 3.301 objecten in plaats van 3.215, de BAG 4.472 in plaats van 4.467.
+  - Wat je eerder laadde (met 1.0.0 of met **Gesloten omtrek per vlak**), verandert niet. Wil je ook daar de lijn langs de
+    rand kwijt, laad die gebieden dan opnieuw met **Vervangen**.
+- **Gesloten omtrek per vlak** (`vlakken=omtrek`): elk vlak als gesloten polylijn, ook langs de rand van het gebied,
+  precies zoals tot en met 1.0.0. Kies dit als je oppervlakken afleest of vlakken arceert.
+
+In een script met meer kaarten zet je de keuze per kaart: `bgt.vlakken=omtrek,bag.vlakken=omtrek`. De BRT als lijnen
+kent dezelfde keuze, daar sinds 0.2.4 (zie De BRT). De kadastrale kaart heeft deze lijn nooit gehad: haar grenzen zijn
+lijnen, geen vlakken. Zie je op de rand van je gebied toch een rechte lijn, klik hem dan aan met `VKINFO`: de bron en
+`vk_collectie` zeggen van welke kaart hij is.
+
 ### De BRT (`VKBRT`)
 `VKBRT` zet de BRT, de topografische kaart van het Kadaster, onder je tekening. Je kiest één van drie (in het palet
 het tandwiel, Kaarten, BRT (topografische kaart), **Soort**; in een script `soort`):
@@ -437,8 +487,8 @@ het tandwiel, Kaarten, BRT (topografische kaart), **Soort**; in een script `soor
   overzichtskaart, voor detailwerk is er de BGT (`VKBGT`).
 
 Meer over elke keuze:
-- **Het plaatje** komt als PNG met world-file (`.pgw`) in de map `<tekening>_kaarten` naast de tekening (sla de
-  tekening eerst op), achter de rest, op de eigen laag `VLEA-KAART-BRT` (zoals in 0.2.3). Het is dezelfde kaart van
+- **Het plaatje** komt als PNG naast de tekening, standaard in de map `<tekening>_kaarten` met een world-file (`.pgw`;
+  sla de tekening eerst op; zie Waar de beelden komen, hieronder), achter de rest, op de eigen laag `VLEA-KAART-BRT` (zoals in 0.2.3). Het is dezelfde kaart van
   PDOK als in het portaal, maar scherper: VLEA kiest het fijnste niveau dat binnen 16 miljoen pixels past (0,21 m per
   pixel bij 0,25 km², 0,42 m bij 1 km², 0,84 m bij 4 tot 9 km², 1,68 m bij 16 km²). De namen in het beeld zijn
   daardoor kleiner dan in het portaal. Het is een plaatje: je kunt er niet op vastklikken.
@@ -539,8 +589,9 @@ kaartbeeld van de BRT in kleur krijg je met `VKBRT` (de standaardkeuze, zie hier
   `omtrek` (alleen lijnen, bedoeld op een doorzichtige achtergrond, bijvoorbeeld boven een luchtfoto: laad de
   luchtfoto eerst; de bedoeling is dat een later geladen beeld boven een eerder geladen beeld komt. Ligt de omtrek
   toch onder de foto, zet hem dan met `DRAWORDER` bovenaan).
-- **Eerst opslaan.** Het beeld komt als PNG met world-file (`.pgw`) in de map `<tekening>_kaarten` naast de
-  tekening, als `bgtbeeld_<stijl>_n<niveau>_<x>_<y>_<x>_<y>.png`. Stuur die map mee als je de tekening deelt.
+- **Eerst opslaan.** Het beeld komt als PNG naast de tekening, standaard in de map `<tekening>_kaarten` met een
+  world-file (`.pgw`), als `bgtbeeld_<stijl>_<x>_<y>_<kenmerk>.png` (zie Waar de beelden komen, hieronder). Stuur de
+  beelden mee als je de tekening deelt.
 - **Niveau en pixel.** VLEA kiest het fijnste niveau waarop het gebied binnen 16 miljoen pixels blijft: bij 0,25 km²
   0,21 m per pixel, bij 1 km² 0,42 m, bij 5 km² (de grens) 0,84 m, en bij een klein gebied tot 0,05 m. Is het beeld
   grover dan 0,21 m, dan zegt VLEA dat; een kleiner gebied geeft een scherper beeld. Grover dan 0,84 m kan niet: PDOK
@@ -712,8 +763,9 @@ houdt het die plek vrij (zie hieronder).
   andere opdracht) en is Enter Erbij. De vraag noemt die nummers; kies Vervangen als je de plek zelf hebt verbeterd.
 - **Weghalen:** `VKWISSEN` met `eigenonderzoek` wist alles wat `VKGEF` tekende, ook de bronvermelding. Met
   `Selectie` gaan van een aangewezen onderzoek punt, label en plot samen weg.
-- **Bronvermelding:** "Bron: Eigen grondonderzoek (bestand van de gebruiker), ingelezen 09-10-2026", in de
-  tekeningeigenschappen en (optie `bronvermelding`) als tekst onder de punten.
+- **Bronvermelding:** "Bron: Eigen grondonderzoek (bestand van de gebruiker), ingelezen 09-10-2026", op de
+  opdrachtregel, in het palet en in de tekeningeigenschappen, en als tekst onder de punten alleen met **Bronvermelding in
+  de tekening** aan (sinds 1.1.0 standaard uit; getypt `bronvermelding=aan`, zie 8).
 
 In een script, één regel per vraag, met `FILEDIA` op 0, zoals bij `VKKLIC` (zie 6). Staat er een spatie in het
 pad, zet het pad dan tussen aanhalingstekens. Per keer één bestand; voor meer bestanden herhaal je de drie regels
@@ -937,6 +989,124 @@ teksten staan allemaal op `B-OI-RI-T18`:
   verbeterd hemelwaterstelsel, krijgen de laag van het begrip dat er het dichtst bij ligt (een HWA-uitlaatconstructie).
   De lijst staat in de laagtabel; staat er toch "objecten zonder laagtoewijzing", meld het dan.
 
+**Eindhoven en Papendrecht** (sinds 1.1.0). Van deze twee gemeenten staat geen riolering in GWSW bij PDOK (gemeten 12
+november 2026).
+Ligt je gebied in of bij een van beide, dan haalt `VKRIOOL` de riolering ook bij de kaartdienst van de gemeente zelf en
+tekent die op dezelfde lagen, met dezelfde labels en opties als hierboven. Dat gaat vanzelf: er is geen eigen knop of
+commando. VLEA vraagt de gemeente alleen het deel van je gebied dat in een vaste rechthoek om de gemeente ligt. Die
+rechthoek is de rechthoek om de gemeentegrens plus 100 m, dus er liggen ook stukken van de buurgemeenten in. Geeft PDOK in
+je gebied al riolering van die gemeente, dan vraagt VLEA de gemeente niet; dat zegt een regel na het laden. Na het laden
+zegt ook een regel hoeveel objecten van de gemeente kwamen. Die regels staan op de opdrachtregel; onderaan het palet staat
+één zin (zie 2), die bij een laag van de gemeente die ontbreekt of onvolledig is "niet compleet" of "niets getekend" zegt
+en naar de opdrachtregel verwijst.
+- **Eindhoven** geeft van een rioolstreng alleen de ligging en het soort water (gemengd, regenwater of vuil water), en van
+  een put alleen de naam. Geen bob, geen maat, geen materiaal en geen maaiveld: op een streng staat dus geen label, en bij
+  een put alleen de naam. VLEA verzint die waarden niet. Een put krijgt het stelsel van de strengen die erop uitkomen (een
+  put binnen 1 m van het eind van een streng); lukt dat niet, dan staat hij op `B-OI-RI-OVERIG_RIOOLPUT-S`. Van een
+  huisaansluiting geeft Eindhoven wel het stelsel, en vaak het materiaal en de diameter (`PVC Ø125`).
+- **Papendrecht** geeft bob, maat, materiaal en maaiveld: die labels komen er zoals bij PDOK. Het materiaal staat kort:
+  PVC-U wordt `PVC`, vezelversterkte kunststoffen `GVK` (de gemeente zegt vezelversterkt; dat hoeft geen glasvezel te
+  zijn). De putnaam is de code van de gemeente; een code zonder cijfer (zoals `?` of `K`) is een plaatshouder en komt niet
+  op de tekening. Noemt een leiding een putcode die bij meer dan één put hoort, dan koppelt VLEA daar geen put aan; een
+  regel na het laden zegt bij hoeveel uiteinden.
+- **Verlaten leidingen van Papendrecht.** Een leiding die buiten gebruik of vervallen is, of die de gemeente een
+  weesleiding noemt, komt op `B-OI-RI-OVERIG_WEESLEIDING-G`, niet op de laag van een werkend riool: voor een boring blijft
+  een verlaten buis een obstakel. Hij krijgt boblabels, net als elke andere leiding.
+- **Kolken van Papendrecht** (met de optie `aansluitingen`). Noemt de gemeente het stelsel van een kolk, dan geldt dat.
+  Anders kijkt VLEA naar de hoofdleidingen binnen 30 m: zijn die allemaal gemengd, dan gemengd; zijn het alleen
+  hemelwater- of vuilwaterleidingen, dan hemelwater. Ligt er geen hoofdleiding binnen 30 m, of liggen er gemengde en andere
+  door elkaar, dan neemt VLEA hemelwater aan. Een regel na het laden zegt hoeveel kolken hun stelsel van de leidingen
+  kregen en bij hoeveel VLEA het aannam. Een uitlaat zonder stelsel krijgt het stelsel van de leidingen die erop uitkomen,
+  als dat er één is.
+- **Niet getekend**, wel geteld in een regel na het laden: in Eindhoven de inlaten en de algemene hulpstukken (het zijn
+  geen putten), in Papendrecht de beregeningsleidingen, grindkoffers en een put die als lijn getekend is, en uit de laag met
+  putten wat geen put of kolk is (hulpstukken, peilbuizen, een meter).
+- Zonder de optie `aansluitingen` blijven ook hier de huisaansluitingen, de kolken en (in Eindhoven) de hulpstukken weg.
+- Antwoordt de kaartdienst van de gemeente niet op tijd (ook als er binnen 20 seconden geen verbinding komt), is hij niet
+  bereikbaar, heeft hij een storing of is hij afgeschermd, dan vraagt VLEA de rest van je gebied voor die laag niet meer. Een regel na het laden zegt dat de laag
+  ontbreekt of onvolledig is, en waarom. Laad later opnieuw.
+- `VKINFO` toont bij zo'n object van welke gemeente het komt (`vk_bron`) en de velden van de gemeente (met `bron_`
+  ervoor; bij Eindhoven alle gevulde velden, bij Papendrecht hoogstens 26 vaste velden van de ruim honderd die de gemeente
+  heeft). Een regel "Bronvermelding" staat bij de riolering niet bij `VKINFO` (zie 8).
+  De bronvermelding noemt de gemeente erbij (zie 8).
+- Ook deze riolering is informatief en onvolledig. Ze vervangt geen KLIC-melding.
+
+### Zones langs waterkeringen (`VKZONERINGEN`)
+`VKZONERINGEN` tekent de zones langs waterkeringen: de kernzone, de beschermingszone en het profiel van vrije ruimte, elk
+op een eigen laag en gearceerd, geknipt op je gebied. Waar een zone op de rand van je gebied is geknipt, staat op die rand
+geen lijn. De zones komen van de landelijke dataset van de waterschappen bij PDOK en, met de optie `rws` (standaard aan),
+van de legger van Rijkswaterstaat.
+
+**Zes waterschappen van hun eigen kaartdienst** (sinds 1.1.0). Zes van de 21 waterschappen leveren hun zones niet of niet
+helemaal aan PDOK (gemeten 12 november 2026). Ligt je gebied in of bij een van die zes, dan haalt `VKZONERINGEN` de zones
+die PDOK niet of niet goed heeft bij de kaartdienst van het waterschap zelf, en tekent ze op dezelfde lagen, met dezelfde
+arcering. Dat gaat vanzelf: er is geen eigen knop of commando, en het gebeurt ook met de optie `rws` uit. VLEA vraagt een laag van een
+waterschap alleen het deel van je gebied in een vaste rechthoek om de zones van die laag (de rechthoek om de zones plus
+100 m, dus er liggen ook stukken van de buren in).
+
+| Waterschap | Van de kaartdienst van het waterschap | Van PDOK |
+|---|---|---|
+| De Stichtse Rijnlanden | alle zones: de kernzone en de beschermingszone van de primaire keringen, de regionale keringen, de overige keringen en de zomerkaden, en het profiel van vrije ruimte van de primaire keringen | niets: PDOK heeft geen zone van dit waterschap |
+| Zuiderzeeland | alle zones, met de echte soort (een buitenbeschermingszone op de laag van het profiel van vrije ruimte) | niets: PDOK heeft dezelfde zones, maar allemaal als beschermingszone; die tekent VLEA niet |
+| Scheldestromen | alle zones: het waterstaatswerk (kernzone) en beschermingszone A en B, van de primaire en de regionale keringen | niets: PDOK heeft geen zone van dit waterschap |
+| Hunze en Aa's | alle zones langs keringen: kernzone, beschermingszone en profiel van vrije ruimte (ook de twee bebouwingscontouren, op die laag, zoals PDOK ze heeft) | alleen de beschermingszones langs oppervlaktewater: die staan niet in de dienst van het waterschap |
+| Vechtstromen | de beschermingszones | de kernzones |
+| Wetterskip Fryslân | de zones van de regionale en de lokale keringen | de zones van de primaire en de secundaire keringen |
+
+Zo komt geen zone dubbel: van PDOK vallen de zones weg die VLEA van het waterschap tekent, en van het waterschap de zones
+die van PDOK komen (de kernzones van Vechtstromen, de zones van de primaire en secundaire keringen van Fryslân). Na het
+laden zeggen regels op de opdrachtregel wat er gebeurde; onderaan het palet staat één zin (zie 2), die bij een waterschap
+dat niet antwoordt "niet compleet" of "niets getekend" zegt en naar de opdrachtregel verwijst. Voorbeelden van die regels:
+- "Zoneringen: 17 zone(s) van waterschap Scheldestromen uit de kaartdienst van het waterschap zelf (PDOK heeft niet alle
+  zones van dat waterschap, of niet met de juiste soort)." Het aantal telt de zones die getekend zijn: zet je een soort zone
+  uit, dan telt die niet mee.
+- "Zoneringen: 12 zone(s) van PDOK van waterschap Zuiderzeeland niet getekend: het waterschap gaf ze zelf, zo komen ze niet
+  dubbel."
+- "Zoneringen/Vechtstromen: 4 zone(s) niet getekend (kernzone van een waterkering; die komen van PDOK)."
+- Kent VLEA de soort van een zone niet, dan staat die zone op de laag van de beschermingszone (bij De Stichtse Rijnlanden,
+  waar elke laag één soort heeft, op de laag van die soort), met een regel als "Zoneringen/Fryslân: 1 zone(s) met een soort
+  die VLEA niet kent (…); getekend op de laag van de beschermingszone."
+- En altijd de vaste waarschuwing: "Niet elk waterschap levert al zijn zones aan PDOK. … Toch kan overal een zone
+  ontbreken: een ontbrekende zone betekent niet dat er geen zone is; de legger van de beheerder is leidend."
+
+**Als een waterschap niet antwoordt.** Antwoordt de kaartdienst van een waterschap niet op tijd (ook als er binnen 20
+seconden geen verbinding komt), is hij niet bereikbaar, heeft hij ook na een tweede poging een storing, is hij afgeschermd
+of klopt het antwoord niet, dan tekent VLEA daar de zones die PDOK van dat waterschap heeft, zoals in 1.0.0, en niet de
+zones van het waterschap. Zo krijg je nooit minder zones dan in 1.0.0, en nooit dubbel. Een regel zegt dat, en dat de
+soort zone daar kan afwijken en het beeld onvolledig kan zijn. Geeft het waterschap in je gebied geen enkele zone terwijl
+PDOK er wel heeft, dan ook. Heeft PDOK daar die zones van dat waterschap niet (altijd bij De Stichtse Rijnlanden en
+Scheldestromen, bij de regionale en lokale keringen van Fryslân en bij de beschermingszones van Vechtstromen), dan blijft
+staan wat het waterschap wel gaf, en zegt de regel dat het beeld van de zones van dat waterschap onvolledig kan zijn. Faalt de
+dienst zelf, dan vraagt VLEA de andere lagen van dat waterschap niet meer, met één regel. Laad later opnieuw. Een regel
+noemt de dienst ("de kaartdienst van waterschap Vechtstromen"), nooit het adres van de server.
+
+**De legger blijft leidend.** De zones van de kaartdienst van een waterschap zijn wat dat waterschap openbaar deelt, en ze
+zijn informatief. De vastgestelde legger van de waterbeheerder is leidend; vraag bij twijfel de legger op bij het
+waterschap. Bekende zwakke plekken:
+- De diensten van De Stichtse Rijnlanden dragen een jaartal in de naam (Waterschapsverordening 2024 en 2025). Maakt het
+  waterschap bij een nieuwe verordening een nieuwe dienst, dan kan de oude een fout of oude zones geven. Een fout zie je
+  in een regel na het laden; oude zones niet.
+- Bij De Stichtse Rijnlanden is elke laag één groot vlak voor het hele waterschap (tot bijna 4 MB). De dienst knipt niet;
+  VLEA knipt zelf. Laden duurt daar daarom wat langer (gemeten 13 november 2026: 5 tot 9 seconden voor een vak van 500 m).
+- Scheldestromen, Vechtstromen en Wetterskip Fryslân noemen geen licentie (zie 8).
+- Wetterskip Fryslân: de open data heeft de beschermingszone van de lokale keringen niet (in de verordening een strook van
+  5 m langs de kernzone), en is van 20 augustus 2024.
+- Vechtstromen: de wijziging van de legger van 2026 staat nog niet in de vastgestelde laag die VLEA vraagt. De kernzones
+  komen van PDOK; één kernzone van het waterschap staat niet bij PDOK en ontbreekt daarom.
+- Hunze en Aa's: of de zones van de dienst de vastgestelde legger zijn, is niet nagegaan.
+- Bij een lange strook vraagt VLEA een waterschap per blok van 3 km (behalve De Stichtse Rijnlanden: daar is elke laag één
+  vlak, dat VLEA één keer vraagt). Een groot vlak dat over meer blokken ligt (Scheldestromen, Fryslân), komt dan meer keer
+  binnen: dat kost tijd, maar het wordt één keer getekend.
+- De Stichtse Rijnlanden: drie lagen van het waterschap vraagt VLEA niet, omdat ze grotendeels samenvallen met lagen die
+  VLEA wel vraagt (anders kwamen die zones dubbel). Wat daarbuiten valt, ontbreekt: ongeveer 1,6 ha kernzone langs de
+  Gekanaliseerde Hollandsche IJssel en 1,0 ha beschermingszone van niet verheelde overige keringen (gemeten 13 november
+  2026).
+
+`VKINFO` toont bij zo'n zone van welk waterschap ze komt (`vk_bron`), de soort die VLEA koos (`vk_zonesoort`; bij een soort
+die VLEA niet kent ook `vk_zonesoort_onbekend` met de waarde van het waterschap), de code van de zone bij het waterschap en
+de velden van het waterschap (met `bron_` ervoor). Een regel "Bronvermelding" staat bij de zones niet bij `VKINFO` (zie 8).
+De bronvermelding noemt het waterschap erbij (zie 8).
+
 ### Het AHN-hoogtemodel (`VKAHN`)
 `VKAHN` maakt in Civil 3D van het AHN (Actueel Hoogtebestand Nederland) een hoogtemodel, één per gebied (zie 5). In
 AutoCAD zonder Civil 3D staat AHN in het palet grijs; de hoogte op een punt (`VKAHNPUNT`) werkt wel.
@@ -1112,7 +1282,11 @@ blijft het model zonder grens.
   getekend. De opdrachtregel zegt waar het werk gebeurt: "Kaart ophalen bij PDOK", "… bij de BRO" of
   "… bij PDOK en Rijkswaterstaat"; bij een KLIC-levering "Levering omzetten en tekenen". Bij **AHN hoogtemodel** met AHN5 of
   AHN6 staat er "… bij de dienst die het AHN aanwijst", en "… bij PDOK en de dienst die het AHN aanwijst" als AHN4 in het
-  model kan komen (Aanvullen, Hele, Nieuwste per plek) of als VLEA bij AHN5 de rand controleert met een strook van AHN4. Wissel je
+  model kan komen (Aanvullen, Hele, Nieuwste per plek) of als VLEA bij AHN5 de rand controleert met een strook van AHN4. Bij
+  `VKRIOOL` staat er "… bij PDOK en de kaartdienst van de gemeente in en bij Eindhoven en Papendrecht", ook als je gebied daar
+  ver vandaan ligt (de regel kent je gebied nog niet; zie 4, Riolering). Zo ook bij `VKZONERINGEN`: "… bij PDOK,
+  Rijkswaterstaat en de kaartdienst van het waterschap waar PDOK niet alle zones heeft" (met de optie `rws` uit zonder
+  Rijkswaterstaat), ook als je gebied bij geen van die waterschappen ligt (zie 4, Zones langs waterkeringen). Wissel je
   intussen van tekening, dan tekent VLEA niet in de verkeerde.
 - Tijdens het ophalen blijft AutoCAD reageren, maar je kunt niet tekenen. Daarna tekent VLEA alles in
   één keer; dan is AutoCAD bezet (geen voortgang). Bij een kaart duurt dat meestal een paar seconden;
@@ -1123,14 +1297,65 @@ blijft het model zonder grens.
   VLEA nog niet kent. Die objecten staan op een aparte laag (de terugvallaag van die kaart, bij riolering
   `…OVERIG_RIOOLLEIDING-G` of `…OVERIG_RIOOLPUT-S`). Meld het gerust als issue.
 
+### Waar de beelden komen
+Een luchtfoto, het plaatje van de BRT, het kaartbeeld van de BGT, het GRB als kaartbeeld en de orthofoto staan niet in de
+tekening zelf: elk beeld is een los bestand naast de tekening, en de tekening verwijst ernaar met een relatief pad. Waar
+die bestanden komen, kies je sinds 1.1.0 in de instellingen (tandwiel, **Algemeen**, **Luchtfoto's en kaartbeelden**,
+**Bestanden opslaan**):
+- **In een eigen map per tekening** (de standaard, zoals tot en met 1.0.0): in de map `<tekening>_kaarten` naast de
+  tekening, met bij elk beeld een world-file (`.jgw` of `.pgw`).
+- **Direct in de map van de tekening**: zo min mogelijk losse bestanden, dus zonder world-file. VLEA leest de world-file
+  nooit: de plek in de tekening zet VLEA zelf.
+
+Getypt en in een script geldt de eigen map, wat er in de instellingen ook gekozen is; `kaartenmap=tekening` zet de beelden
+direct in de map van de tekening (zie Op de opdrachtregel en in een script, hieronder). De XML van de sonderingen en
+boringen, de CSV van de peilbuizen en het bestand voor Google Earth blijven altijd in `<tekening>_kaarten`.
+
+**Een lang pad.** Een beeld met een pad van meer dan 255 tekens opent AutoCAD niet op elke pc. Op een pc waar Windows
+lange paden toestaat, laadde AutoCAD 2026 zo'n beeld wel (gemeten tot 280 tekens); met de standaard van Windows ligt de
+grens rond 260, en de tekening moet ook daar werken. In een diepe gesynchroniseerde projectmap met een
+lange tekeningnaam wordt het pad in `<tekening>_kaarten` al snel te lang. VLEA rekent dat uit voordat het iets ophaalt,
+met de langste naam die een beeld kan krijgen (51 tekens):
+- Kan het pad in de eigen map te lang worden, dan zet VLEA de beelden vanzelf direct in de map van de tekening, zonder
+  world-file, en zegt dat in één regel op de opdrachtregel ("De beelden staan direct in de map van de tekening: …").
+  De zin onderaan het palet blijft gewoon "… getekend". Het getal in die regel geldt voor de langste naam; het pad van
+  het beeld zelf is vaak wat korter.
+- Kan het ook daar te lang worden, dan haalt die kaart niets op en zegt VLEA hoe lang het pad kan worden ("… het pad van
+  een beeld kan te lang worden, ook direct in de map van de tekening (tot 262 tekens) … Er is niets opgehaald."). Sla de
+  tekening dan op in een map met een korter pad (minder of kortere mappen); een kortere naam van de tekening helpt dan
+  niet, want die zit niet in het pad van een beeld direct naast de tekening.
+- Dat geldt ook getypt en in een script, en ook als je **Direct in de map van de tekening** kiest.
+- Opent een collega de tekening in een map met een langer pad, dan kan het pad daar alsnog te lang zijn.
+
+**De namen.** Een beeld heet `<kaart>_<keuze>_<x>_<y>_<kenmerk>`, bijvoorbeeld `luchtfoto_snel_154750_462750_1f3197cb.jpg`:
+de kaart, de keuze of stijl, de linkeronderhoek in hele meters en 8 tekens die voor elk ander beeld anders zijn (tot en met
+1.0.0 stonden alle vier de hoeken erin, met decimalen: `luchtfoto_snel_154750_462750_154850_462850.jpg`). Hetzelfde gebied
+met dezelfde keuze geeft hetzelfde bestand, en opnieuw laden vervangt het. Staan de beelden direct in de map van de
+tekening en laadt een tweede tekening in die map hetzelfde gebied, dan gebruiken de twee tekeningen hetzelfde bestand: laad
+je het in de ene opnieuw, dan krijgt de andere ook de nieuwe versie. Verplaats je een van die tekeningen naar een andere
+map, kopieer de beelden dan mee in plaats van ze te verplaatsen: de andere tekening in de map gebruikt ze nog. Kan een
+bestand niet vervangen worden (een ander programma of een andere open tekening heeft het open), dan komt er `_2` tot en met
+`_9` achter de naam.
+
+**Beelden van 1.0.0.** Mappen, bestanden en tekeningen van 1.0.0 blijven zoals ze zijn: een nieuw beeld krijgt nooit de naam
+van een beeld van 1.0.0, VLEA hernoemt of verplaatst geen beeld, wist geen beeld van een eerdere import en verandert de
+koppeling in een bestaande tekening niet. Laad je een gebied van 1.0.0 opnieuw met
+Vervangen, dan krijgen de nieuwe beelden de nieuwe namen en blijven de oude bestanden staan; ruim ze zelf op als geen
+tekening ze meer gebruikt.
+
+**Delen.** Stuur de beelden mee als je de tekening deelt: de map `<tekening>_kaarten`, of de beeldbestanden naast de
+tekening. eTransmit neemt ze mee.
+
 ### Op de opdrachtregel en in een script
 `VKLADEN` zonder palet vraagt achtereenvolgens: het gebied (`Opgeslagen`, `Rechthoek`, `Polylijn` of
 `Coördinaten`), de kaarten (sleutels gescheiden door komma's, bijvoorbeeld `bgt`, of `alle` voor alle
 kaarten) en de opties (`kaart.optie=waarde`, gescheiden door komma's; Enter = standaard). Er is geen
 standaardkaart: typ je bij de kaarten niets, dan noemt VLEA de beschikbare sleutels en laadt niets.
-Algemene opties: `vervangen=ja`, `vervangen=erbij`, `vervangen=nee` (zie 5), `stijl=grijs` en
-`bronvermelding=uit`. Zonder die opties geldt NLCS, bronvermelding aan en vragen bij een eerdere import,
-wat er in de instellingen ook gekozen is. Een script, één regel per vraag:
+Algemene opties: `vervangen=ja`, `vervangen=erbij`, `vervangen=nee` (zie 5), `stijl=grijs`,
+`bronvermelding=aan` (de bronvermelding ook als tekst onder het gebied, zie 8) en sinds 1.1.0 `kaartenmap=tekening`
+(luchtfoto's en kaartbeelden direct in de map van de tekening, zie Waar de beelden komen). Zonder die opties geldt NLCS, geen
+bronvermelding als tekst in de tekening (sinds 1.1.0; tot en met 1.0.0 wel), vragen bij een eerdere import en de eigen map
+`<tekening>_kaarten` voor de beelden, wat er in de instellingen ook gekozen is. Een script, één regel per vraag:
 
 ```text
 VKLADEN
@@ -1168,8 +1393,11 @@ AHN-hoogte van de pixel van 0,5 x 0,5 m waarin het punt valt (geen gemiddelde va
 bij AHN5 of AHN6 (trefwoord `Versie`, hieronder) de waarde die de dienst van die versie in de cel van 0,5 m geeft. Daarna
 tekent VLEA:
 
-- een punt op die hoogte (z) op de laag `B-WE-OG-HOOGTEPUNT-G`, en
-- een label "NAP +4,98 m" rechts van het punt op `B-WE-OG-T18` (0,9 m hoog).
+- een punt op die hoogte (z), en
+- een label "NAP +4,98 m" rechts van het punt (0,9 m hoog),
+
+allebei op de laag `VLEA-GEREEDSCHAP-AHNPUNT`, in oranje (sinds 1.1.0; tot en met 1.0.0 het punt op `B-WE-OG-HOOGTEPUNT-G`
+en het label in rood op `B-WE-OG-T18`, zie 7).
 
 Heeft AHN op die plek geen hoogte (meestal onder een pand of op water), dan komt er alleen het label
 "geen AHN-hoogte hier" en géén punt. Werkt ook zonder Civil 3D.
@@ -1265,12 +1493,13 @@ zonder internet en zonder Civil 3D; het bestand blijft op je eigen pc.
 - **Bij twijfel geen standaard:** lijken X en Y verwisseld, dan vraagt VLEA `Verwisselen`; lijkt de hoogtekolom
   geen meters NAP (bijvoorbeeld centimeters), dan `Negeren` (alle punten op z = 0); staan er decimale komma's én
   punten in het bestand, dan `Komma` of `Punt`.
-- **In de tekening:** het punt op `X-XX-AL-REFERENTIE-G`, op zijn hoogte; zonder hoogte op z = 0 (de samenvatting
+- **In de tekening:** het punt op zijn hoogte; zonder hoogte op z = 0 (de samenvatting
   zegt hoeveel, `VKINFO` toont dan `vk_geen_hoogte`). Hoe een punt eruitziet, bepalen `PDMODE` en `PDSIZE` van je
-  tekening; VLEA verandert die niet. De leider op `X-XX-AL-REFERENTIE-T18` (rood, zoals NLCS), met een gevulde pijl
+  tekening; VLEA verandert die niet. De leider met een gevulde pijl
   op het punt, een korte knik en de tekst op een masker in de kleur van de achtergrond, in de leiderstijl
   `VK_LEIDER_500` (de schaal staat in de naam; staat er al een stijl met die naam, dan blijft die zoals hij is) en
-  de tekststijl `VLEA_ISO`. Dezelfde lagen als een KML-import: er is geen laagnaam bijgekomen.
+  de tekststijl `VLEA_ISO`. Punt en leider staan op de laag `VLEA-GEREEDSCHAP-PUNTEN`, in oranje (sinds 1.1.0; tot en
+  met 1.0.0 op de lagen van een KML-import, `X-XX-AL-REFERENTIE-G` en in rood `-T18`, zie 7).
 - **Plaatsing:** in de volgorde van het bestand, eerst rechtsboven het punt, en verder weg of in een andere richting
   als de tekst anders een andere tekst of een ander punt uit het bestand raakt. Lukt dat niet, dan staat de leider
   rechtsboven en zegt de samenvatting hoeveel leiders niet vrij staan; verschuif ze met de grip. VLEA kijkt alleen
@@ -1329,10 +1558,11 @@ LISP-script NAPLEADER deed. Werkt zonder internet en zonder Civil 3D; VLEA haalt
   tekening in millimeters krijgt één regel uitleg. RD speelt geen rol. De referentie hoort bij de ruimte waarin hij
   staat: de modelruimte of de papierruimte van een layout. Werk je in een andere ruimte, dan zegt VLEA waar de
   referentie staat; stel daar zo nodig een nieuwe in.
-- **In de tekening:** symbool en tekst op `HDD-NAP-REFERENTIE` (kleur 7), de leiders op `HDD-NAP-LEADER` (kleur 1,
-  rood), allebei 0,25 mm: dezelfde lagen als het LISP-script, dus je laagfilters en plotstijlen blijven kloppen. Een
-  bestaande laag blijft zoals hij is; staat hij uit of bevroren, dan zegt VLEA dat de leider er wel staat maar niet te
-  zien is. Tekst in de tekststijl `VLEA_ISO`, leiders in de leiderstijl `VK_LEIDER_NAP` (een bestaande stijl met die
+- **In de tekening:** symbool en tekst op `HDD-NAP-REFERENTIE`, de leiders op `HDD-NAP-LEADER`, allebei 0,25 mm:
+  dezelfde laagnamen als het LISP-script, dus je laagfilters blijven kloppen. Maakt VLEA de laag aan, dan sinds 1.1.0 in
+  oranje (kleur 30), zoals al het gereedschap; het script en VLEA tot en met 1.0.0 maakten de referentie wit (7) en de
+  leider rood (1). Een bestaande laag blijft zoals hij is (ook zijn kleur); staat hij uit of bevroren, dan zegt VLEA dat
+  de leider er wel staat maar niet te zien is. Tekst in de tekststijl `VLEA_ISO`, leiders in de leiderstijl `VK_LEIDER_NAP` (een bestaande stijl met die
   naam blijft zoals hij is; pijl, knik, kader en masker zet VLEA per leider). Kleur, lijntype en lijndikte
   DOORLAAG.
 - **Tekeningen met het LISP-script:** VLEA leest de referentie en de leiders van het script en rekent ermee; de
@@ -1392,7 +1622,8 @@ er is geen knop in het palet. Werkt zonder internet.
 - **Bogen:** de maat is de rechte afstand tussen de twee hoekpunten (de koorde), niet de lengte van de boog. Steekt
   de boog naar de kant van de maat uit, dan komt de maatlijn 2 m buiten de boog. De melding zegt hoeveel stukken een
   boog waren.
-- **In de tekening:** uitgelijnde maten op de laag `X-XX-AL-REFERENTIE-M` (kleur 7, 0,18 mm) met de maatstijl
+- **In de tekening:** uitgelijnde maten op de laag `VLEA-GEREEDSCHAP-MAAT` (oranje, kleur 30, 0,18 mm; tot en met 1.0.0
+  `X-XX-AL-REFERENTIE-M` in kleur 7, zie 7) met de maatstijl
   `VK_MAAT`: tekst 1,0 m (2 mm op papier bij 1:500) boven de maatlijn en meelopend, met een masker zodat kaartlijnen
   niet door de cijfers lopen; twee decimalen met een komma ("12,35"); pijlen van 1,0 m; kleur, dikte en lijntype van de
   laag. Je actieve maatstijl en je eigen maatinstellingen blijven zoals ze waren. Een bestaande laag of maatstijl met
@@ -1404,7 +1635,7 @@ er is geen knop in het palet. Werkt zonder internet.
   keer: bij meer tekent VLEA niets en zegt het dat.
 - Alleen in een tekening in meters, en alleen voor lijnen in de modelruimte. De maat staat op z = 0.
 - `VKINFO` op een maat toont de lijn, het stuk, de lengte, de afstand en of het een boog was.
-- **Verschil met het LISP-script:** de maten komen op de vaste laag `X-XX-AL-REFERENTIE-M` in de stijl `VK_MAAT` (het
+- **Verschil met het LISP-script:** de maten komen op de vaste laag `VLEA-GEREEDSCHAP-MAAT` in de stijl `VK_MAAT` (het
   script tekende op de huidige laag met de huidige maatstijl); bij een L-vorm of een scheve vorm staan ze nu buiten,
   op precies 2 m (het script zette ze vanuit het gemiddelde van de hoekpunten, soms binnen de vorm); bij een open
   lijn kun je de kant kiezen; een boog wordt gemeld. Afstand, tekst, pijlen en hulplijnen zijn dezelfde.
@@ -1437,7 +1668,8 @@ Zet bij een punt een aanwijslijn met de X en Y van dat punt, bijvoorbeeld bij de
   1,8 mm op papier, op 1:500 dus 0,9 m) en `Opmaak` (laag, tekststijl, aanwijslijnstijl en teksthoogte, zie 7). De knop
   in het palet neemt decimalen en Z uit de instellingen (**Gereedschap**) en de opmaak uit het blok **Tekst en
   aanwijslijnen**; getypt begint het commando met twee decimalen, zonder Z, op 1:500 en met de standaard opmaak.
-- **Laag en stijl:** standaard de laag `X-XX-AL-REFERENTIE-T18` en de stijl van de leiders van `VKPUNTEN` (tekst
+- **Laag en stijl:** standaard de laag `VLEA-GEREEDSCHAP-COORDINAAT`, in oranje (sinds 1.1.0; tot en met 1.0.0 in rood op
+  `X-XX-AL-REFERENTIE-T18`, de laag van de leiders van `VKPUNTEN`, zie 7) en de stijl van de leiders van `VKPUNTEN` (tekst
   `VLEA_ISO`, een masker achter de tekst). `VKINFO` op het label toont de getallen zoals gemeten en het stelsel;
   `VKWISSEN` kent ze als `coordinaat`. `U` na het commando haalt de labels van die keer weg.
 - Alleen in de modelruimte (ook in een viewport die op model staat) en in een tekening in meters.
@@ -1472,7 +1704,9 @@ Decimalen
     gebied een polygoon, dan kan VLEA niet zeker zeggen dat het de eerdere import omvat en is er ook
     geen standaard.
   - Een eerdere import in een gebied dat het nieuwe niet raakt (ook: alleen een rand gemeen), blijft
-    staan; dan vraagt VLEA niets.
+    staan; dan vraagt VLEA niets. Laad je zo gebied na gebied langs een tracé, dan komt er bij de BGT en de BAG
+    (standaard) en bij de BRT als lijnen geen lijn op de grens van twee gebieden (zie 4, Vlakken op de rand van het
+    gebied).
   - **Let op:** wijzigingen die je zelf aan gewiste objecten hebt gedaan, verdwijnen. AHN DTM en DSM
     zijn één kaart: laad je DSM waar al een DTM-model staat, kies dan **Erbij**.
   - Ligt er in het nieuwe gebied niets meer van die kaart (PDOK levert niets en er ging niets mis), dan
@@ -1530,14 +1764,16 @@ Decimalen
   Selectie of met Vervangen), dan gaat ook de koppeling naar het beeldbestand weg, de rij in het palet External
   References (`XREF`). Gebruikt een ander beeld hetzelfde bestand nog, bijvoorbeeld een beeld dat je zelf met dat
   bestand invoegde of een beeld in een blok, dan blijft de koppeling staan.
-  - Het bestand zelf blijft staan in de map `<tekening>_kaarten`: `U` direct na het wissen zet het beeld meteen
-    terug, en een andere tekening kan dezelfde map gebruiken. Gebruikt geen tekening de beelden nog, ruim die map
-    dan zelf op.
+  - Het bestand zelf blijft staan, in de map `<tekening>_kaarten` of direct naast de tekening (zie 4, Waar de beelden
+    komen): `U` direct na het wissen zet het beeld meteen terug, en een andere tekening kan hetzelfde bestand gebruiken.
+    Gebruikt geen tekening de beelden nog, ruim die bestanden dan zelf op.
   - Wiste je beelden met 0.2.3 of eerder, dan staan hun koppelingen nog in External References, zonder beeld in de
     tekening (zie 12).
 - `VKINFO` toont bij een object waar het vandaan komt (bron, id, datum) en de gegevens van PDOK, ook
-  bij het AHN-model in Civil 3D. Sinds 0.2.10 kun je ook een object aanwijzen dat in een blok of in een XREF staat:
-  VLEA toont dan de gegevens van dat object (tot en met 0.2.9 zei `VKINFO` bij een XREF "niet door VLEA getekend").
+  bij het AHN-model in Civil 3D. Bij een object van een kaart staat sinds 1.1.0 ook de bronvermelding erbij
+  ("Bronvermelding: Kadaster (Kadastrale kaart), CC BY 4.0 (…), bewerkt, opgehaald 28-09-2026"), behalve bij het
+  AHN-model, het DHMV, de BRT, de riolering en de zones langs waterkeringen (zie 8). Sinds 0.2.10 kun je ook een object aanwijzen dat in een blok of
+  in een XREF staat: VLEA toont dan de gegevens van dat object (tot en met 0.2.9 zei `VKINFO` bij een XREF "niet door VLEA getekend").
   Heeft het object een bijlage (een infolaag of een eis van de KLIC, zie 6), dan volgen de bijlagen en de vraag
   **[Openen/Klaar]** (Enter = Klaar: zoals tot en met 0.2.9 opent Enter niets; typ `O` om te openen). In een script
   vraagt `VKINFO` dat niet; dan staat er dat `VKSCHETS` de bijlage
@@ -1561,7 +1797,11 @@ getypt met `stijl=grijs`.
 **Vertrouwelijk.** Een KLIC-levering is vertrouwelijk (WIBON art. 4 lid 2): je mag de gegevens, ook in
 een tekening of een Google Earth-bestand, alleen aan anderen geven voor zover dat noodzakelijk is om
 graafschade te voorkomen, of voor de oriëntatie op een verzoek tot medegebruik of coördinatie. De
-bronvermelding zegt daarom "(WIBON, vertrouwelijk)", en `VKKMZ` neemt KLIC met Enter niet mee (zie 10).
+bronvermelding zegt daarom "(WIBON, vertrouwelijk)", en `VKKMZ` neemt KLIC met Enter niet mee (zie 10). Sinds 1.1.0 komt
+de bronvermelding standaard niet meer als tekst in de tekening (zie 8), en de verantwoording zegt het niet: op de tekening
+en op een plot staat dan niet dat de levering vertrouwelijk is, alleen op de opdrachtregel, onderaan het palet en in de
+tekeningeigenschappen. Geef je een tekening met een KLIC-levering door, zet het er dan zelf bij, of zet **Bronvermelding
+in de tekening** aan vóór het inlezen.
 
 1. **Bestand kiezen.** Kies de zip die je van het Kadaster kreeg, of uit de uitgepakte levering de
    XML `GI_gebiedsinformatielevering_….xml`. Een zip in een zip mag ook. Staat `FILEDIA` op 0 (of
@@ -1573,7 +1813,8 @@ bronvermelding zegt daarom "(WIBON, vertrouwelijk)", en `VKKMZ` neemt KLIC met E
 2. **Opties.** Enter = de standaard: maatvoering en annotaties uit, de rest aan (zie de tabel). Iets aan- of
    uitzetten: bijvoorbeeld `maatvoering=aan,annotatie=aan` (alles zoals tot en met 0.2.3) of `diepte=uit`. De
    algemene opties werken zoals bij de kaarten: `vervangen=ja|erbij|nee`, `stijl=grijs` en
-   `bronvermelding=uit`.
+   `bronvermelding=aan` (de regel "Bron: KLIC-levering …" ook als tekst onder de levering; sinds 1.1.0 standaard uit). De
+   verantwoording linksboven de levering komt er altijd, los van deze keuze.
 3. **Inlezen en tekenen.** VLEA leest de levering (voortgang; Esc stopt) en tekent hem op zijn eigen
    plek in RD. Je kiest geen gebied: de levering bepaalt waar hij komt.
 
@@ -1585,9 +1826,18 @@ bronvermelding zegt daarom "(WIBON, vertrouwelijk)", en `VKKMZ` neemt KLIC met E
 | `eigentopografie` | eigen topografie van de netbeheerders | aan |
 | `detailinfo` | plekken met extra detailinformatie (profielschets, aansluiting) | aan |
 | `uitroeptekens` | een uitroepteken bij elke infolaag met een bijlage en bij elke eis voorzorgsmaatregel (sinds 0.2.10) | aan |
+| `aanvraaggebied` | het aanvraaggebied: informatie-, oriëntatie- en graafpolygoon (sinds 1.1.0) | aan |
 
-Kabels en leidingen, mantelbuizen, putten, kasten en andere netobjecten, zones met een eis
-voorzorgsmaatregel en het aanvraaggebied tekent VLEA altijd; dat is geen optie.
+Kabels en leidingen, mantelbuizen, putten, kasten en andere netobjecten en zones met een eis
+voorzorgsmaatregel tekent VLEA altijd; dat is geen optie. Ook de verantwoording (hieronder) komt er altijd.
+
+**Het aanvraaggebied (sinds 1.1.0 een optie).** Tot en met 1.0.0 tekende VLEA de informatie-, oriëntatie- en
+graafpolygoon altijd. Nu kun je ze uitzetten: in de instellingen (Gereedschap, KLIC-levering) het vinkje
+**Aanvraaggebied** uit, of getypt `aanvraaggebied=uit`. Standaard staat het aan. Zet je het uit, dan staat op de
+opdrachtregel "Uitgezet (aanvraaggebied=uit): …" en in de verantwoording "Uitgezet, wel in de levering: …
+aanvraaggebied …". Let op: zonder de grens van het aanvraaggebied zie je niet meer tot waar de levering iets zegt. Een
+leeg stuk buiten dat gebied betekent niet dat daar geen kabels liggen. Wil je de grens alleen even niet zien, bevries
+dan de lagen `B-OI-ZZ-GRENS_ONDERZOEKSGEBIED-G` en `B-OI-ZZ-GRENS_WERK-G`; dan blijft hij in de tekening.
 
 Maatvoering en annotaties staan standaard uit: in een gewone levering zijn de maatlijnen, pijlen, maten en
 labels van de netbeheerders samen meer dan de helft van wat er getekend wordt, en de kabels en leidingen
@@ -1634,8 +1884,22 @@ de verantwoording in de tekening ("Uitgezet, wel in de levering: maatvoering 2.1
   hoeveel er getekend is (samen precies het aantal getekend, met de objecten zonder thema erbij, zoals
   het aanvraaggebied), bij niet-getekende objecten waar de reden staat (per object op de opdrachtregel,
   per soort in het logboek), wat een optie uitzette ("Uitgezet, wel in de levering: …"), de regel over de
-  bijlagen en de zin "Informatief; de levering zelf blijft leidend bij graafwerk." De bronvermelding onder de levering en in de tekeningeigenschappen noemt
-  dezelfde zin.
+  bijlagen en de zin "Informatief; de levering zelf blijft leidend bij graafwerk." De bronvermelding in de
+  tekeningeigenschappen (en, met **Bronvermelding in de tekening** aan, onder de levering) noemt dezelfde zin. De
+  verantwoording staat er altijd, ook nu de bronvermelding standaard niet meer als tekst in de tekening komt.
+- **De verantwoording op een eigen laag (sinds 1.1.0).** De verantwoording staat op de laag
+  `VLEA-KLIC-VERANTWOORDING` (rood, kleur 10, 0,18 mm, zoals voorheen). Tot en met 1.0.0 stond ze op
+  `X-XX-AL-TEKENBLAD_VERKLARING-T18`, de laag van de bronvermelding van alle kaarten. Wil je de verantwoording niet
+  zien, zet dan de laag `VLEA-KLIC-VERANTWOORDING` uit of bevries hem. De bronvermelding van de andere kaarten en de ene
+  regel "Bron: KLIC-levering …" onder de levering (met "WIBON, vertrouwelijk") raak je daarmee niet: die staan, alleen
+  met **Bronvermelding in de tekening** aan, op de laag van de bronvermelding. De verantwoording zelf tekent VLEA
+  altijd: bij opnieuw inlezen vergelijkt VLEA de levering met die in de tekening aan de hand van de verantwoording. Wis
+  haar dus niet; uitzetten of bevriezen kan
+  gewoon. Een levering die je met 1.0.0 of eerder inlas, houdt haar verantwoording op de oude laag tot je hem opnieuw
+  inleest (**Vervangen**); opnieuw inlezen en Vervangen werken daar gewoon. Wil je de verantwoording weer op de oude
+  laag, zoals tot en met 1.0.0: voeg na het inlezen in AutoCAD met `LAYMRG` de laag `VLEA-KLIC-VERANTWOORDING` samen
+  met `X-XX-AL-TEKENBLAD_VERKLARING-T18`. Dat moet na elke keer inlezen opnieuw: VLEA tekent de verantwoording altijd op
+  haar eigen laag.
 - **Administratief** zijn de gegevens van de levering zelf, de netbeheerders en belanghebbenden, de
   bijlagen, en de netten en netdelen waaruit VLEA de kabels en leidingen samenstelt. Die horen niet
   als object in een tekening. De contactvelden uit de levering (contactpersoon, naam, telefoon, e-mail,
@@ -1809,10 +2073,23 @@ netbeheerder (als code), de levering en de bijlage(n); heeft het object er meer,
 een uitroepteken van de KLIC, dan verschijnt naast de cursor een klein venster. Bij een zone met een eis
 voorzorgsmaatregel is dat alleen het uitroepteken van de zone, niet de rand, de vulling of de tekst: de vulling is het
 hele vlak, en anders kwam er overal in de zone een venster. Bovenaan staan de soort (bijvoorbeeld "Profielschets",
-"Huisaansluitschets" of "Detailinformatie"), het thema en de netbeheerder (als code); ligt er ook een kabel of
-leiding onder de cursor, dan staan ook die gegevens erbij (thema, netbeheerder, diameter, materiaal, spanning of druk,
-diepte, voor zover de levering ze geeft). Daaronder staat per bijlage een knop, bijvoorbeeld **Open profielschets**:
-die doet hetzelfde als `VKSCHETS` op dat object, zonder dat je nog iets hoeft aan te wijzen.
+"Huisaansluitschets" of "Detailinformatie"), het thema, de netbeheerder (als code), en sinds 1.1.0 de KLIC-melding
+(het meldnummer, zodat je weet in welke KLIC-map je de levering vindt) en het id uit de levering; ligt er ook een kabel
+of leiding onder de cursor, dan staan ook die gegevens erbij (thema, soort, netbeheerder, diameter, materiaal, spanning
+of druk, diepte, status, ligging en of hij bovengronds zichtbaar is, voor zover de levering ze geeft). De KLIC-melding
+in dit venster hoort bij de infolaag; de kabel onder de cursor kan uit een andere levering komen. Daaronder staat
+per bijlage een knop, bijvoorbeeld **Open profielschets**: die doet hetzelfde als `VKSCHETS` op dat object, zonder dat
+je nog iets hoeft aan te wijzen.
+- **Bij een kabel of leiding** (alleen met **Ook bij kabels en leidingen**, hieronder) toont het venster sinds 1.1.0:
+  de KLIC-melding, de soort zoals de levering hem noemt (bijvoorbeeld `Elektriciteitskabel`, `Mantelbuis`, `Kabelbed`;
+  `Duct` en `Appurtenance` met het Nederlandse woord ervoor: "kabelgoot (Duct)", "leidingelement (Appurtenance)"), de
+  netbeheerder, de diameter, het materiaal, de spanning of druk, de diepte, de status ("in gebruik", "gepland", "in
+  aanleg", "buiten gebruik", "buiten dienst gesteld"), de ligging ("ondergronds", "op maaiveld", "opgehangen of
+  verhoogd"), of hij bovengronds zichtbaar is (ja of nee) en het id uit de levering. Alleen wat de levering geeft; een
+  code die VLEA niet kent, staat er zoals geleverd. Elke waarde is hoogstens 60 tekens: een heel lang id eindigt dan op
+  "...". Het volledige id staat bij `VKINFO`. De gegevens staan al in de tekening: elke levering die een venster krijgt
+  (ingelezen met 0.2.4 of later), toont ze zonder opnieuw in te lezen. Het venster staat standaard nog steeds op
+  **Bij infolagen**: wil je dit bij elke kabel zien, kies dan **Ook bij kabels en leidingen**.
 - Het venster blijft staan zolang de muis op het object of op het venster zelf staat. Beweeg je weg, dan verdwijnt
   het na een halve seconde; zo heb je tijd om naar de knop te gaan. Dat geldt ook als je de muis meteen van het object
   naar het palet, het lint, de opdrachtregel of een ander programma beweegt. Opent AutoCAD een venster (ook het
@@ -1836,7 +2113,9 @@ die doet hetzelfde als `VKSCHETS` op dat object, zonder dat je nog iets hoeft aa
   verschijnt en verdwijnt) zijn met tests gecontroleerd, maar in 0.2.10 heeft nog niemand het in AutoCAD gezien. Hoe
   snel het is in een zware tekening, waar het precies staat bij een schermschaal van 125 of 150 % of op een tweede
   scherm, of het in een XREF het object onder de cursor vindt, en of het weggaat als je de muis meteen uit de
-  tekening beweegt of een ander programma kiest, is dus nog niet bekeken. Hindert het je, zet het dan op **Uit**.
+  tekening beweegt of een ander programma kiest, is dus nog niet bekeken. Hindert het je, zet het dan op **Uit**. Ook
+  de regels die er in 1.1.0 bij kwamen (KLIC-melding, soort, status, ligging, bovengronds zichtbaar, id) zijn alleen
+  met tests gecontroleerd; hoe groot het venster daarmee wordt, heeft nog niemand gezien.
 
 Niet op een scherm getest: het palet, het lint, het icoon, het openen in de pdf-lezer en het aanwijzen in een XREF
 zijn gebouwd en met de tests van de kern en de broncode gecontroleerd, maar in 0.2.10 nog niet door iemand in AutoCAD
@@ -1902,22 +2181,53 @@ FILEDIA
   worden `<=` en `>=`, en het diameterteken (⌀) wordt Ø. Andere tekens die `isocp.shx` niet kent (bijvoorbeeld de
   meeste Griekse letters of ‰) worden een vraagteken. Staan die in je teksten, zet dan met `STYLE` het lettertype van
   `VLEA_ISO` op `isocpeur.ttf` (tot en met 0.2.3 het lettertype van VLEA; het geldt dan voor alle teksten in die stijl).
-- Het NAP-gereedschap in een lengteprofiel tekent op twee eigen lagen buiten NLCS: `HDD-NAP-REFERENTIE` (kleur 7) en
-  `HDD-NAP-LEADER` (kleur 1), dezelfde als het LISP-script NAPLEADER. `VKSTIJL` met `Grijs` laat die twee staan: een
-  NAP-leider hoort bij het profiel, niet bij de onderlegger. `Nlcs` en `Terug` gelden er wel voor.
-- De maatlijnen van `VKMAAT` staan op `X-XX-AL-REFERENTIE-M` (kleur 7, 0,18 mm). Ook die laag laat `VKSTIJL` met
-  `Grijs` staan: een maat is je eigen werk, geen onderlegger.
+- **Het gereedschap in oranje** (sinds 1.1.0). Wat het gereedschap tekent, komt op een eigen laag van VLEA in oranje
+  (kleur 30), alles DoorLaag; de kaarten en hun labels houden hun NLCS-lagen en -kleuren, en wat al oranje was (de
+  sondeerplots, de hectometerbordjes) blijft zoals het was. Per gereedschap:
+
+  | Gereedschap | Laag sinds 1.1.0 (oranje) | Tot en met 1.0.0 |
+  |---|---|---|
+  | Hoogte op een punt (`VKAHNPUNT`): punt en label | `VLEA-GEREEDSCHAP-AHNPUNT` | punt `B-WE-OG-HOOGTEPUNT-G` (wit), label `B-WE-OG-T18` (rood) |
+  | Coördinaat (`VKCOORDINAAT`) | `VLEA-GEREEDSCHAP-COORDINAAT` | `X-XX-AL-REFERENTIE-T18` (rood) |
+  | Punten inlezen (`VKPUNTEN`): punt en leider | `VLEA-GEREEDSCHAP-PUNTEN` | `X-XX-AL-REFERENTIE-G` (wit) en `-T18` (rood) |
+  | Maatlijnen (`VKMAAT`) | `VLEA-GEREEDSCHAP-MAAT` | `X-XX-AL-REFERENTIE-M` (wit) |
+  | KML inlezen (`VKKMLIMPORT`): lijnen, vlakken, punten, namen | `VLEA-GEREEDSCHAP-KML` | `X-XX-AL-REFERENTIE-G`, `-S` (wit) en `-T18` (rood) |
+  | NAP-referentie en NAP-leider (`VKNAPSET`, `VKNAPLEADER`) | `HDD-NAP-REFERENTIE` en `HDD-NAP-LEADER` (zelfde namen) | dezelfde lagen in wit (7) en rood (1) |
+
+  De contour (`VKCONTOUR`) blijft magenta op `VLEA-KAART-GEBIED`: dat is de grens van het gebied, geen tekenhulp.
+- **In een tekening van 1.0.0** verandert er niets aan wat er al staat: oude AHN-punten, coördinaten, punten, maten en
+  KML blijven op hun oude laag in hun oude kleur, ook met `VKSTIJL` (`Nlcs` zet een oude laag terug op zijn NLCS-kleur,
+  nooit stil op oranje). Wat je nu tekent, komt op de nieuwe oranje laag. `VKWISSEN` en `VKINFO` vinden oude en nieuwe
+  objecten gewoon (ze zoeken op het kenmerk van VLEA, niet op de laag). De NAP-lagen houden hun naam: staat
+  `HDD-NAP-LEADER` al in de tekening (van het LISP-script of van 1.0.0), dan blijft hij rood en komen nieuwe leiders daar
+  ook in rood; `VKSTIJL` met `Nlcs` zet een NAP-laag die VLEA maakte op oranje, een laag van het LISP-script nooit.
+- **Het oude gedrag terug:** voor Coördinaat en Punten kies je bij **Tekst en aanwijslijnen**
+  (hieronder) of met `Opmaak` de oude laag, bijvoorbeeld `laag=X-XX-AL-REFERENTIE-T18`, voor `VKMAAT` alleen met
+  `Opmaak` (`VKMAAT` heeft geen knop): VLEA maakt hem dan aan zoals in 1.0.0. Voor de rest (en voor alles in één
+  keer): zet de oranje laag op de kleur die je wilt (`LAYER`), of voeg hem samen
+  met de oude laag (`LAYMRG`, de nieuwe laag naar de oude). Het label bij `VKAHNPUNT` kun je ook weglaten (trefwoord
+  `Label`).
+- **NAP-referentie en NAP-leider:** de laag heet hetzelfde als in 1.0.0, dus een andere laag kiezen geeft het oude rood
+  (of wit) niet terug. Zet daar de kleur van de laag zelf (`LAYER`). Een NAP-laag die al rood in je tekening staat, blijft
+  rood.
+- Het NAP-gereedschap tekent op twee eigen lagen buiten NLCS, met de namen van het LISP-script NAPLEADER. `VKSTIJL` met
+  `Grijs` laat die twee staan: een NAP-leider hoort bij het profiel, niet bij de onderlegger. `Nlcs` en `Terug` gelden
+  er wel voor.
+- De maatlijnen van `VKMAAT` laat `VKSTIJL` met `Grijs` ook staan (op de nieuwe laag en op `X-XX-AL-REFERENTIE-M` van
+  1.0.0): een maat is je eigen werk, geen onderlegger.
 - **Tekst en aanwijslijnen** (instellingen, hoofdstuk **Stijl**): de laag, de tekststijl, de aanwijslijnstijl en de
   teksthoogte van wat je zelf plaatst. Het blok geldt voor de knoppen **Coördinaat**, **NAP-leider** en **Punten** in
   palet en lint. Een getypt commando, `VKMAAT` en een script beginnen met de standaard; typ daar het trefwoord `Opmaak`
   (zie hieronder). De labels van een kaart blijven op hun NLCS-laag. Laat je alles op de standaard staan, dan blijft
-  alles zoals het was.
-  - **Laag:** de laag van VLEA (per commando, zoals hierboven), de huidige laag, een NLCS-annotatielaag uit de lijst, of
+  alles zoals het was, behalve de laag: die is sinds 1.1.0 de oranje laag van het gereedschap.
+  - **Laag:** de laag van VLEA (per commando, zoals hierboven; sinds 1.1.0 de oranje laag van dat gereedschap), de
+    huidige laag, een NLCS-annotatielaag uit de lijst, of
     een eigen naam in het veld eronder (dat gaat voor de lijst). Staat de laag nog niet in je tekening, dan maakt VLEA
     hem aan: een NLCS-laag met de NLCS-stijl, een eigen naam in kleur 7, doorgetrokken. Een eigen laag krijgt geen
     kenmerk van VLEA: `VKSTIJL` laat hem staan. Een laag die uit staat, bevroren of vergrendeld is, laat VLEA zo, met
-    een melding.
-    Bij `VKPUNTEN` geldt de laag voor de leiders; de punten zelf blijven op `X-XX-AL-REFERENTIE-G`.
+    een melding. Een keuze die je hier al had (de huidige laag, een laag uit de lijst of een eigen naam), blijft precies
+    zoals hij was; de lagen van 1.0.0 (`X-XX-AL-REFERENTIE-T18`, `-M`, `B-WE-OG-T18`) staan nog in de lijst.
+    Bij `VKPUNTEN` geldt de laag voor de leiders; de punten zelf blijven op `VLEA-GEREEDSCHAP-PUNTEN`.
   - **Tekststijl en aanwijslijnstijl:** de naam van een stijl uit je tekening (leeg = die van VLEA). Staat de stijl niet
     in de tekening waarin je werkt, dan gebruikt VLEA zijn eigen stijl en zegt dat. Met een eigen aanwijslijnstijl
     bepaalt die stijl de pijl, de lijn, de knik en het kader; VLEA zet de tekst, de tekststijl (zonder gekozen
@@ -1937,19 +2247,41 @@ FILEDIA
     `VKNAPLEADER` en `VKMAAT` staat `Opmaak` bij de eerste vraag, bij `VKPUNTEN` bij de laatste vraag voor het tekenen.
     `VKMAAT` heeft geen knop, dus daar geldt het blok nooit: gebruik `Opmaak`.
   - **Niet op een scherm gezien:** het blok in het instellingenvenster en hoe een eigen aanwijslijnstijl (ook een
-    annotatieve) of tekststijl er in de tekening uitziet. Met de standaard tekent VLEA zoals in 0.2.9: in de
-    AutoCAD-kern van 2025 en 2026 gaven `VKPUNTEN`, de NAP-leider en `VKMAAT` zonder `Opmaak` dezelfde lagen, stijlen,
-    teksten en hoogtes als 0.2.9.
+    annotatieve) of tekststijl er in de tekening uitziet. Met de standaard tekent VLEA zoals in 0.2.9, behalve de laag
+    (sinds 1.1.0 de oranje laag van het gereedschap): in de
+    AutoCAD-kern van 2025 en 2026 gaven `VKPUNTEN`, de NAP-leider en `VKMAAT` zonder `Opmaak` in 0.2.10 dezelfde lagen,
+    stijlen, teksten en hoogtes als 0.2.9, en in 1.1.0 (13 november 2026) hun oranje laag.
 - Stuur je een tekening naar iemand zonder VLEA: gebruik eTransmit, zodat `NLCS.shx` meegaat.
 
 ## 8. Bronvermelding
-De bronvermelding staat in de tekeningeigenschappen (een KLIC-levering heeft per levering een eigen
-eigenschap: "Bronvermelding klic <meldnummer>") en kan als tekst in de tekening komen (optie
-"bronvermelding plaatsen"). Verplaats die tekst naar je layout, zodat hij op de plot staat. Bij
-CC BY-bronnen (BGT, ook als kaartbeeld, BRT, kadaster, luchtfoto) is naamsvermelding verplicht wanneer je de tekening deelt
-of publiceert. De zones langs waterkeringen (`VKZONERINGEN`) vallen onder CC BY-SA 4.0 ("gelijk delen"):
-die van de waterschappen zijn CC BY-SA 4.0, de legger van Rijkswaterstaat is CC0 1.0, en VLEA houdt voor
-de hele kaart de strengste licentie van de twee aan. Deel je die zones (of een bewerking ervan) verder,
+Na het laden van een kaart staat de bronvermelding (bronhouder, licentie, bewerkt, datum) op de opdrachtregel, onderaan
+het palet en in de tekeningeigenschappen (`DWGPROPS`; een KLIC-levering heeft per levering een eigen eigenschap:
+"Bronvermelding klic <meldnummer>"). In `DWGPROPS` staat per kaart alleen de bronvermelding van de laatste keer laden:
+laad je de riolering of de zones daarna in een ander gebied, dan noemt ze alleen de gemeente of het waterschap van die
+laatste keer. Geef je zo'n tekening door, neem de bronvermelding dan direct na elke keer laden over, of zet
+**Bronvermelding in de tekening** aan (hieronder). `VKINFO` op een object van een kaart noemt haar ook, in dezelfde vorm
+als bij het
+laden. Bij het AHN-hoogtemodel, het DHMV, de BRT, de riolering en de zones langs waterkeringen niet: daar hangt de tekst
+af van wat je precies laadde (versie, model, lijnen of kaartbeeld; bij het AHN zelfs de licentie; bij de riolering of er
+riolering van de gemeente Eindhoven of Papendrecht bij kwam; bij de zones of er zones van de kaartdienst van een waterschap
+bij kwamen), en liever geen regel dan een verkeerde. Kijk daar op de opdrachtregel of in `DWGPROPS`. `VKOVER` en `BRONNEN.md` geven per kaart bronhouder en licentie.
+
+**Als tekst in de tekening komt ze sinds 1.1.0 standaard niet meer** (besluit van 12-11-2026: de rode tekst onder elke
+kaart moest weg). Wil je haar wel in de tekening, zet dan in de instellingen (tandwiel, **Opties**, **Stijl**) **Bronvermelding
+in de tekening** aan en klik **Opslaan**; getypt of in een script: `bronvermelding=aan` bij de opties. Dan zet VLEA per
+kaart een regel onder het gebied, zoals tot en met 1.0.0. Verplaats die tekst naar je layout, zodat hij op de plot staat.
+Een tekst die er al stond (van 1.0.0), blijft staan tot je die kaart vervangt of wist. Bij eigen grondonderzoek (`VKGEF`)
+gaat hij bij vervangen niet mee: hij gaat weg met `VKWISSEN` (`eigenonderzoek`, dat wist ook de onderzoeken), of als je
+opnieuw inleest met **Bronvermelding in de tekening** aan (dan komt de nieuwe tekst in de plaats van de oude).
+
+**Sommige bronnen vragen om naamsvermelding als je een tekening doorgeeft.** Geef je een tekening met zulke kaarten door
+(aan een opdrachtgever, of op een plot), zet de bronvermelding er dan zelf op of zet **Bronvermelding in de tekening** aan.
+Bij
+CC BY-bronnen (BGT, ook als kaartbeeld, BRT, kadaster, luchtfoto, en de zones van De Stichtse Rijnlanden van de kaartdienst
+van het waterschap) is naamsvermelding verplicht wanneer je de tekening deelt of publiceert. De zones langs waterkeringen (`VKZONERINGEN`) van PDOK en van Rijkswaterstaat vallen onder CC BY-SA 4.0
+("gelijk delen"): die van de waterschappen bij PDOK zijn CC BY-SA 4.0, de legger van Rijkswaterstaat is CC0 1.0, en VLEA
+houdt voor die zones de strengste licentie van de twee aan. Voor de zones van de kaartdienst van een waterschap geldt wat
+dat waterschap zelf zegt (hieronder). Deel je de zones van PDOK of Rijkswaterstaat (of een bewerking ervan) verder,
 dan onder dezelfde of een compatibele licentie. De licentie spreekt van delen met het publiek; of een
 tekening aan één opdrachtgever daaronder valt, beoordeelt VLEA niet. Wat dat betekent, staat in de
 README. Wil je dat niet, wis de zones dan in de kopie die je verstuurt (`VKWISSEN`, kaart `zoneringen`).
@@ -1961,6 +2293,30 @@ met "Bron: AWV", noemt AWV ook voluit en heeft de dag waarop je de paaltjes opha
 bijgewerkt). Bij de sonderingen uit DOV
 staat de bronvermelding in de vorm die DOV voorschrijft ("Databank Ondergrond Vlaanderen - (MOW, Afdeling
 Geotechniek; sonderingen) - Geraadpleegd op …, op https://www.dov.vlaanderen.be").
+
+Komt er bij `VKRIOOL` riolering van de gemeente Eindhoven of Papendrecht in je tekening (zie 4, Riolering), dan noemt de
+bronvermelding van de riolering ook die gemeente, achter Stichting RIONED: "Gemeente Eindhoven (Riolering en
+aansluitingen), Public Domain Mark 1.0 (https://creativecommons.org/publicdomain/mark/1.0/deed.nl)" of "Gemeente
+Papendrecht (Rioolviewer Papendrecht), openbaar gedeeld, geen licentie genoemd". Papendrecht deelt de rioolkaart
+openbaar, maar noemt geen licentie; VLEA maakt er zelf geen licentie van. Zonder objecten van een gemeente blijft de
+bronvermelding zoals ze was. Die bronvermelding staat op de opdrachtregel, onderaan het palet en in `DWGPROPS`; `VKINFO`
+noemt bij de riolering geen bronvermelding, ook niet bij een object van PDOK: aan één object is niet te zien of er bij
+die keer laden een gemeente bij kwam.
+
+Komen er bij `VKZONERINGEN` zones van de kaartdienst van een waterschap in je tekening (zie 4, Zones langs waterkeringen),
+dan noemt de bronvermelding van de zones ook dat waterschap, met wat het waterschap zelf over het gebruik zegt:
+"Hoogheemraadschap De Stichtse Rijnlanden (Waterschapsverordening), CC BY 4.0
+(https://creativecommons.org/licenses/by/4.0/deed.nl)", "Waterschap Zuiderzeeland (Zonering waterkering), geen
+gebruiksbeperking", "Waterschap Scheldestromen (zoneringen waterkeringen), openbaar gedeeld, geen licentie genoemd",
+"Waterschap Hunze en Aa's (Zonering waterkering), Public Domain Mark 1.0
+(https://creativecommons.org/publicdomain/mark/1.0/deed.nl)", "Waterschap Vechtstromen (legger, vastgesteld), openbaar
+gedeeld, geen licentie genoemd" of "Wetterskip Fryslân (Waterkering, open data), openbaar gedeeld, geen licentie genoemd".
+De Stichtse Rijnlanden vraagt naamsvermelding (CC BY 4.0): de bronvermelding noemt het waterschap, en geef je een tekening
+met die zones door, zet haar er dan op of zet **Bronvermelding in de tekening** aan (hierboven). Scheldestromen,
+Vechtstromen en Wetterskip Fryslân delen hun zones openbaar, maar noemen geen licentie; VLEA maakt er zelf geen licentie
+van. Zonder zones van een waterschap blijft de bronvermelding zoals ze was. Die bronvermelding staat op de opdrachtregel,
+onderaan het palet en in `DWGPROPS`; `VKINFO` noemt bij de zones geen bronvermelding, ook niet bij een zone van PDOK: aan
+één object is niet te zien of er bij die keer laden zones van een waterschap bij kwamen.
 
 ## 9. Over VLEA
 `VKOVER` toont de versie, de licenties (de licentie van de plugin, CC BY 4.0 voor NLCS), de regels
@@ -2009,6 +2365,26 @@ de plek van het punt gaat dus mee. Een
 doorverwijzing van die dienst volgt VLEA niet. Bij AHN4, de standaard,
 maakt VLEA met die dienst geen verbinding.
 
+De riolering van Eindhoven en Papendrecht (sinds 1.1.0; zie 4, Riolering) komt niet van PDOK maar van de kaartdienst van
+de gemeente zelf: `gisservice.eindhoven.nl` voor Eindhoven en `services8.arcgis.com` voor Papendrecht (daar alleen de twee
+vaste lagen van de gemeente: de leidingen, en de putten en kolken). Alleen bij het laden van de riolering (`VKRIOOL`,
+`VKLADEN` of in het palet de knop **Laden** bij de riolering) met een gebied dat een vaste rechthoek om die gemeente
+raakt, en niet als PDOK in je gebied al riolering van die gemeente geeft. Mee gaat alleen het deel van je gebied binnen
+die rechthoek, als rechthoek in RD, en de versie van de plugin. VLEA stelt daar alleen een vaste vraag met vaste parameters, in RD; de volgende pagina zet VLEA zelf in de vraag
+(hoogstens 15 pagina's van 2.000 objecten per laag en per tegel), en een doorverwijzing of een link uit het antwoord volgt VLEA niet.
+
+De zones van zes waterschappen waarvan PDOK ze niet of niet goed heeft (sinds 1.1.0; zie 4, Zones langs waterkeringen),
+komen van de kaartdienst van het waterschap zelf: `services1.arcgis.com` (alleen de negen vaste lagen van De Stichtse
+Rijnlanden en de vaste laag van Vechtstromen en van Wetterskip Fryslân), `services.arcgis.com` (alleen de vaste laag van
+Zuiderzeeland), `geo.scheldestromen.nl` (alleen de vaste laag van Scheldestromen) en `opendata.hunzeenaas.nl` (alleen de
+vaste collectie van Hunze en Aa's). Alleen bij het laden van de zones (`VKZONERINGEN`, `VKLADEN` of in het palet de knop
+**Laden** bij de zones) met een gebied dat een vaste rechthoek om de zones van een laag van dat waterschap raakt, ook met
+de optie `rws` uit. Mee gaat per laag de rechthoek om het deel van je gebied binnen die rechthoek, in RD (bij een lange
+strook per blok van 3 km; bij De Stichtse Rijnlanden altijd één rechthoek per laag), en de versie van de plugin. VLEA stelt daar alleen een vaste vraag met vaste parameters, in RD; bij de lagen zet VLEA de volgende
+pagina zelf in de vraag (hoogstens 15 pagina's van 2.000 objecten per laag en per vraag, bij Zuiderzeeland van 1.000), bij
+Hunze en Aa's is het één pagina van hoogstens 1.000 objecten. Een doorverwijzing of een link uit het antwoord volgt VLEA
+niet.
+
 VLEA kijkt hoogstens één keer per dag bij GitHub (`api.github.com`) of er een nieuwere versie is en
 zet dan een regel onderaan het palet. GitHub ziet daarbij je IP-adres en het versienummer; verder
 gaat er niets mee, en er wordt niets automatisch bijgewerkt. Uitzetten kan in de instellingen
@@ -2025,7 +2401,9 @@ Uitzetten kan in de instellingen (tandwiel, **Algemeen**), met het vinkje "Statu
 bronnen tonen" uit staat: het is een commando dat je zelf start. Ook Digitaal Vlaanderen, DOV en AWV vraagt `VKSTATUS`
 altijd, ook bij een tekening in RD. De dienst van AHN5 en AHN6 vraagt `VKSTATUS` niet (die vraagt alleen het palet, als
 bij **AHN hoogtemodel** een andere versie dan AHN4 staat); wie niets instelt, maakt ook met `VKSTATUS` geen verbinding
-met `api.ellipsis-drive.com`.
+met `api.ellipsis-drive.com`. Het palet en `VKSTATUS` vragen de kaartdiensten van de gemeenten nooit: alleen het laden van
+de riolering vraagt ze. Het palet en `VKSTATUS` vragen de kaartdiensten van de waterschappen nooit: alleen het laden van de
+zones vraagt ze.
 
 Een KLIC-levering (`VKKLIC`) en eigen grondonderzoek (`VKGEF`) leest VLEA alleen van je eigen schijf; daarbij
 maakt VLEA geen verbinding.
@@ -2070,6 +2448,10 @@ vanuit een script; in de AutoCAD-kern zonder schermen (`accoreconsole`) niet (de
   als label. Per laag een map, in de kleur van
   de laag. Maatvoering, rasterafbeeldingen, 3D-objecten en het hoogtemodel gaan niet mee; de
   opdrachtregel noemt ze.
+- Een vlak van de BGT of de BAG dat op de rand van het gebied is geknipt, staat in de tekening als open lijn (zie 4,
+  Vlakken op de rand van het gebied) en wordt in Google Earth dus een lijn, geen vlak; VLEA verzint de knip er niet bij.
+  Wil je het als vlak in Google Earth, laad dan met **Gesloten omtrek per vlak**. Kies je zo'n open stuk als enige object,
+  dan wordt het een boortracé (zie hierboven).
 - Het bestand komt naast de tekening in de map `<tekening>_kaarten`: `<tekening>_googleearth.kmz`,
   of `<tekening>_boortrace.kmz`. Is de tekening nog niet opgeslagen, dan in
   `%LOCALAPPDATA%\VLEA-AutoCAD\export`. Een bestand met dezelfde naam wordt vervangen; staat het nog
@@ -2083,6 +2465,13 @@ vanuit een script; in de AutoCAD-kern zonder schermen (`accoreconsole`) niet (de
   Enter = standaard.
 - De omschrijving van het bestand noemt de bronvermelding van de VLEA-kaarten erin: deel je het
   bestand, dan geldt de naamsvermelding van CC BY ook daar.
+- **Bekend, voor een volgende versie:** zit er riolering van de kaartdienst van Eindhoven of Papendrecht of een zone van de
+  kaartdienst van een waterschap in het bestand, dan noemt de omschrijving bij die kaart alleen de bronhouder en de
+  licentie van de kaart zelf (bij de riolering Stichting RIONED, CC0 1.0; bij de zones Het Waterschapshuis en
+  Rijkswaterstaat, CC BY-SA 4.0), niet de gemeente of het waterschap en wat die zelf over het gebruik zeggen. De
+  bronvermelding met de gemeente of het waterschap staat na het laden op de opdrachtregel, onderaan het palet en in de
+  tekeningeigenschappen (zie 8; daar alleen die van de laatste keer laden): neem haar direct na het laden over als je het
+  bestand deelt.
 - **KLIC:** KLIC-gegevens zijn vertrouwelijk: volgens de WIBON (art. 4 lid 2) mag je ze alleen aan
   anderen geven voor zover dat noodzakelijk is om graafschade te voorkomen, of voor de oriëntatie op een
   verzoek tot medegebruik of coördinatie. Daarom
@@ -2102,8 +2491,8 @@ vanuit een script; in de AutoCAD-kern zonder schermen (`accoreconsole`) niet (de
 - Kies een .kml- of .kmz-bestand, bijvoorbeeld opgeslagen uit Google Earth. Met `FILEDIA` op 0 typ
   je het pad op de opdrachtregel, of `~` voor het venster.
 - Lijnen worden polylijnen, vlakken gesloten polylijnen (elk gat een eigen gesloten polylijn), punten
-  het symbool `VK_PUNT` met de naam als label. Alles op vaste lagen: `X-XX-AL-REFERENTIE-G` (lijnen en
-  vlakken), `X-XX-AL-REFERENTIE-S` (punten) en `X-XX-AL-REFERENTIE-T18` (labels).
+  het symbool `VK_PUNT` met de naam als label. Alles op de vaste laag `VLEA-GEREEDSCHAP-KML`, in oranje (sinds 1.1.0; tot en
+  met 1.0.0 `X-XX-AL-REFERENTIE-G` voor lijnen en vlakken, `-S` voor punten en `-T18` in rood voor de labels, zie 7).
 - Naam, omschrijving en de extra gegevens uit het bestand staan bij elk object: `VKINFO`. Wissen met
   `VKWISSEN` en kaart `kml` (alle ingelezen KML-bestanden), of met Ctrl+Z direct na het inlezen.
 - Hoogtes worden niet overgenomen: alles staat op hoogte 0 (de hoogte van een punt staat bij
@@ -2240,6 +2629,7 @@ aangemeld bij Autodesk), en `GEOMARKER` toont de markering van de plek. Er opent
 | Een kaart, een knop of een hele groep staat niet meer in het palet of op het lint | Je hebt hem verborgen (tandwiel, tabblad **Weergave**). Zet het vinkje weer aan, of klik **Alles weer tonen**, en **Opslaan**. Het commando werkt intussen gewoon als je het typt. |
 | `VKSCHETS` (Profielschets openen) vindt de levering niet, of opent niets | Kies de zip of de XML `GI_gebiedsinformatielevering_….xml` van de levering één keer als VLEA erom vraagt; daarna onthoudt VLEA hem. Is de KLIC ingelezen met 0.2.9 of eerder, lees de levering dan opnieuw in met `VKKLIC`. Opent er geen pdf-lezer, dan staat de kopie in `%LOCALAPPDATA%\VLEA-AutoCAD\detail\` (het pad staat op de opdrachtregel). |
 | Een klein venster naast de cursor bij de KLIC staat in de weg | Dat is het venster bij aanwijzen. Zet het uit in de instellingen (tandwiel, **Gereedschap**, **Venster bij aanwijzen (KLIC)**: **Uit**). |
+| Je wilt de rode verantwoording boven een KLIC-levering niet zien | Zet de laag `VLEA-KLIC-VERANTWOORDING` uit of bevries hem (sinds 1.1.0; zie 6). De bronvermelding van de andere kaarten blijft dan staan. Een levering die je met 1.0.0 of eerder inlas, heeft haar verantwoording nog op `X-XX-AL-TEKENBLAD_VERKLARING-T18`: lees hem opnieuw in (**Vervangen**). |
 | Na een update staan de uitroeptekens bij de KLIC weer aan, terwijl je ze had uitgezet | Ben je tussendoor terug geweest naar een oudere versie en heb je daar de instellingen opgeslagen, dan is die keuze weg (de oudere versie kent hem niet). Zet **Uitroeptekens** opnieuw uit. |
 | AutoCAD vraagt of de plugin geladen mag worden (venster "Security - Unsigned Executable File", want de DLL's zijn niet ondertekend, of "File Loading - Security Concern") | Kies **Load** of **Load Once** (AutoCAD heeft geen Nederlandse knoppen). Installeer opnieuw (met het installatieprogramma of `Installeer.bat`) als AutoCAD het elke keer vraagt. |
 | Geen lint-tabblad VLEA en geen `VKPALET` | Controleer met `APPAUTOLOAD` dat de waarde 14 is; start AutoCAD opnieuw. |
@@ -2253,8 +2643,15 @@ aangemeld bij Autodesk), en `GEOMARKER` toont de markering van de plek. Er opent
 | "overlapt met een andere levering" (bij meer dan één: "overlapt met 2 andere leveringen") bij `VKKLIC` | De nieuwe levering is erbij gezet; de andere levering of leveringen staan er nog. Wil je alleen de nieuwe, wis dan eerst met `VKWISSEN` (sleutel `klic`; dat wist alle KLIC-imports) en lees de nieuwe opnieuw in. |
 | Er staan minder sonderingen dan er in het gebied liggen | Zonder keuze tekent VLEA de 25 dichtst bij het midden van het gebied (bij een strook van `VKCONTOUR`: bij de lijn); de melding zegt hoeveel er niet getekend zijn. Kies een hoger aantal in de instellingen (tandwiel, Kaarten, Sonderingen (BRO)), of typ bij het commando `aantal=50`, `aantal=100` of `aantal=alle`, en laad opnieuw. |
 | Eén sondering te veel, of een gat in de rij sondeerplots | Weghalen: `VKWISSEN`, keuze `Selectie`, de sondering aanklikken en Enter (symbool, label en plot gaan samen weg). De andere plots schuiven dan niet op; laad opnieuw met Vervangen voor een nette rij (zie 4, Sonderingen weghalen). |
-| "Sla de tekening eerst op" bij de luchtfoto, de BRT (het plaatje) of het kaartbeeld van de BGT | Het beeld komt in een map naast de tekening; die bestaat pas na opslaan. Klik **Opslaan** onder de kaart in het palet. |
-| In het palet External References (`XREF`) staan beelden van VLEA (`luchtfoto_…`, `brt_…`, `bgtbeeld_…`) zonder beeld in de tekening, als **Unreferenced** | Die bleven achter na wissen of Vervangen met 0.2.3 of eerder; sinds 0.2.4 haalt VLEA ze zelf weg. Klik er met de rechtermuisknop op en kies **Detach**. Het bestand in `<tekening>_kaarten` blijft staan. |
+| "Sla de tekening eerst op" bij de luchtfoto, de BRT (het plaatje) of het kaartbeeld van de BGT | Het beeld komt als bestand naast de tekening; die plek is er pas na opslaan. Klik **Opslaan** onder de kaart in het palet. |
+| "De beelden staan direct in de map van de tekening: in de map '…_kaarten' kan het pad van een beeld tot … tekens lang worden …" | Niets: de beelden staan direct naast de tekening, zonder world-file, omdat het pad in de eigen map te lang kan worden (zie 4, Waar de beelden komen). Wil je ze in `<tekening>_kaarten`, sla de tekening dan op in een map met een korter pad of onder een kortere naam. |
+| "… het pad van een beeld kan te lang worden … Er is niets opgehaald." | Ook direct naast de tekening kan het pad langer worden dan 255 tekens. Sla de tekening op in een map met een korter pad (minder of kortere mappen) en laad opnieuw; een kortere naam van de tekening helpt hier niet. |
+| Een luchtfoto of kaartbeeld van 1.0.0 in een diepe projectmap verschijnt niet, of alleen als kader | Waarschijnlijk is het pad van het beeld langer dan 255 tekens. Laad die kaart opnieuw met **Vervangen**: sinds 1.1.0 kiest VLEA zelf een plek met een korter pad, of zegt het waarom het niet kan. |
+| "Rasterbestand …: AutoCAD laadt het beeld niet (…)" of "Rasterbestand …: het pad is … tekens lang …" | Tussen haakjes staat de reden die AutoCAD gaf, met de lengte van het pad. Bij een te lang pad: zie hierboven. Anders: kijk of het bestand er staat en of je het kunt openen. |
+| "… konden niet worden opgeslagen in … (…). Er is niets getekend." bij een luchtfoto of kaartbeeld | Tussen haakjes staat waarom: het pad is te lang, Windows weigert de toegang (geen schrijfrechten, of een bestand dat alleen-lezen of in gebruik is), de schijf is vol, het bestand is in gebruik (door een ander programma of door een andere open tekening), of de map is niet bereikbaar. |
+| In het palet External References (`XREF`) staan beelden van VLEA (`luchtfoto_…`, `brt_…`, `bgtbeeld_…`) zonder beeld in de tekening, als **Unreferenced** | Die bleven achter na wissen of Vervangen met 0.2.3 of eerder; sinds 0.2.4 haalt VLEA ze zelf weg. Klik er met de rechtermuisknop op en kies **Detach**. Het bestand blijft staan. |
+| Een rechte lijn langs de rand van het gebied bij de BGT of de BAG, ook waar twee geladen gebieden tegen elkaar liggen | Dat gebied is geladen met 1.0.0 of eerder, of met **Gesloten omtrek per vlak**. Laad het opnieuw met **Vervangen** en bij **Vlakken** de standaard **Zonder de rand van het gebied** (zie 4, Vlakken op de rand van het gebied). Laadde je met `VKCONTOUR`, dan kan het ook de contour zelf zijn: die staat bewust op de laag `VLEA-KAART-GEBIED`; zet die laag uit of bevries hem als je hem niet wilt zien. |
+| Een vlak van de BGT of de BAG is open: `AREA` of arceren met een aanwijspunt werkt niet | Het vlak is op de rand van het gebied geknipt en staat er zonder die rand. Wil je gesloten vlakken, laad dan opnieuw met **Vervangen** en **Gesloten omtrek per vlak** (`vlakken=omtrek`). |
 | `VKBGT` (of een ander kaartcommando) is onbekend | De plugin is niet geladen. Controleer met `APPAUTOLOAD` dat de waarde 14 is en start AutoCAD opnieuw. |
 | Laden duurt lang of faalt | Controleer je internetverbinding naar PDOK; probeer een kleiner gebied. |
 | `VKUPDATE`: "GitHub weigert het verzoek (HTTP 403)" | Zonder account staat GitHub 60 verzoeken per uur per netwerk toe. Probeer het over een uur opnieuw, of download de zip zelf via de releasepagina. |
