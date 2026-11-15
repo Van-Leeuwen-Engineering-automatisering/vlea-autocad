@@ -1,6 +1,6 @@
 # Handleiding – VLEA, kaarten voor AutoCAD
 
-> **Versie 1.1.0.** Voor AutoCAD 2025, 2026 en 2027. `VKHELP` opent deze pagina in je browser.
+> **Versie 1.2.0.** Voor AutoCAD 2025, 2026 en 2027. `VKHELP` opent deze pagina in je browser.
 
 ## 1. Voordat je begint
 - AutoCAD 2025, 2026 of 2027 voor Windows (ook Civil 3D of Map 3D). Niet AutoCAD LT, AutoCAD voor Mac of AutoCAD Web: die kunnen deze plugin niet laden (AutoCAD
@@ -32,7 +32,12 @@ lint-tabblad **VLEA** op **Palet** (nog een keer = sluiten). Van boven naar bene
 - **Gebied** – kies waar de kaart moet komen (zie 3): een adres zoeken, of de knoppen **Rechthoek**,
   **Polylijn** en **Contour** (een strook langs een lijn, met de breedte uit de instellingen).
   Daaronder staat het gekozen gebied.
-- **Kaarten** – per soort een groep (ondergrond, hoogte, grondonderzoek, infra, natuur, beperkingen).
+- **Kaarten** – bovenaan sinds 1.2.0 de knop **KLIC / KLIP inladen**: kies het bestand van een KLIC-levering
+  (Nederland) of een KLIP-levering (België); VLEA ziet zelf welke het is (zie 6 en 3, Een KLIP-levering). Tot en met 1.1.0
+  heette die knop **KLIC-levering** en stond hij bij het gereedschap. Hij werkt in elke tekening; staat er een gebied, dan
+  zegt een regel eronder wat daar niet kan ("KLIP-levering: alleen in België" in een tekening in RD, "KLIC-levering: alleen
+  in Nederland" in Lambert), en het commando weigert dan met de reden. Daaronder per soort een groep kaarten (ondergrond,
+  hoogte, grondonderzoek, infra, natuur, beperkingen).
   Elke kaart heeft een eigen knop **Laden**: die laadt alleen die kaart, in het gekozen gebied, met de
   opties uit de instellingen. Er is niets om vooraf aan te vinken. Een kaart die nu niet kan, staat
   grijs met de reden eronder: "te groot (max. … km²)" (de uitleg bij de knop zegt wat de kaart zou
@@ -47,7 +52,7 @@ lint-tabblad **VLEA** op **Palet** (nog een keer = sluiten). Van boven naar bene
   toont de vaste waarschuwing van een kaart.
 - **Gereedschap** – een rij knoppen: AHN-punt (`VKAHNPUNT`), NAP-referentie, NAP-leider en NAP herberekenen
   (`VKNAPSET`, `VKNAPLEADER`, `VKNAPUPDATE`; in een lengteprofiel, zie 4), Coördinaat (`VKCOORDINAAT`, sinds 0.2.10;
-  zie 4), Profielschets openen (`VKSCHETS`, sinds 0.2.10; zie 6), KLIC-levering (`VKKLIC`, met een bestandskiezer),
+  zie 4), Bijlage plaatsen (`VKBIJLAGE`, sinds 1.2.0; zie 6), Profielschets openen (`VKSCHETS`, sinds 0.2.10; zie 6),
   Eigen grondonderzoek (`VKGEF`, met een bestandskiezer voor een of meer GEF- of XML-bestanden,
   zie 4), Naar Google Earth (`VKKMZ`; wat je al gekozen had, neemt het mee als er geen commando
   loopt, anders de VLEA-kaarten in het gebied zonder KLIC; één open lijn of polylijn wordt een
@@ -85,8 +90,9 @@ en **Weergave** (welke kaarten en knoppen je ziet, zie verderop). Alles wat er i
   1 m, alleen de rand of de stijl van je tekening) en of de laag na het laden bevroren wordt;
 - **Gereedschap**: hoogte op een punt (AHN-versie, maaiveld of met gebouwen, label met de hoogte), de breedte van
   de contour (standaard 25 m aan weerszijden), "ook een los .kml-bestand" bij Google Earth, de
-  opties van de KLIC-levering, sinds 0.2.10 het **Venster bij aanwijzen (KLIC)** (zie 6), en bij de coördinaat het
-  aantal decimalen en of de Z erbij komt;
+  opties van de KLIC-levering (een KLIP-levering krijgt met de knop de opties op hun standaard), sinds 0.2.10 het
+  **Venster bij aanwijzen (KLIC)** (zie 6), sinds 1.2.0 de schaal om mee te beginnen bij **Bijlage in de tekening
+  (VKBIJLAGE)** (standaard 1:500, zie 6), en bij de coördinaat het aantal decimalen en of de Z erbij komt;
 - **Stijl**: NLCS-kleuren of grijze onderlegger voor de kaarten (een KLIC-levering komt altijd in
   NLCS-kleuren, de sonderingen, de boringen en de peilbuizen blijven altijd in kleur), en **Bronvermelding in de tekening**:
   of de bronvermelding als tekst onder het gebied komt (sinds 1.1.0 standaard uit; zie 8). De
@@ -95,9 +101,12 @@ en **Weergave** (welke kaarten en knoppen je ziet, zie verderop). Alles wat er i
   Daaronder het blok **Tekst en aanwijslijnen**: laag, tekststijl, aanwijslijnstijl en teksthoogte van de tekst die je zelf
   plaatst met de knoppen Coördinaat, NAP-leider en Punten (zie 7);
 - **Algemeen**: één keer per dag kijken of er een nieuwe versie is, of het palet de status van de bronnen toont
-  (standaard aan; zie hieronder), en sinds 1.1.0 bij **Luchtfoto's en kaartbeelden** waar die bestanden komen
+  (standaard aan; zie hieronder), sinds 1.1.0 bij **Luchtfoto's en kaartbeelden** waar die bestanden komen
   (**Bestanden opslaan**: in een eigen map per tekening, de standaard, of direct in de map van de tekening; zie 4, Waar de
-  beelden komen).
+  beelden komen), en sinds 1.2.0 bij **Tekening in België** het **Stelsel voor België**: Lambert 72 (EPSG:31370), de
+  standaard, of Lambert 2008 (EPSG:3812). Die keuze geldt alleen als je met de knop **KLIC / KLIP inladen** een
+  KLIP-levering inleest in een lege tekening (of een met alleen lokale coördinaten); een tekening waar al iets in Lambert 72
+  of Lambert 2008 in staat, houdt haar eigen stelsel (zie 3, Een KLIP-levering).
 
 Alle aan/uit-keuzes staan standaard aan, behalve maatvoering en annotaties van de KLIC-levering (zie 6),
 grondgebruik bij de BRT (zie 4), percelen, adrespunten en wegassen bij het GRB (zie 3), de Z bij de coördinaat (zie 4,
@@ -115,17 +124,19 @@ de stijl van het kaartbeeld en Terrein en reliëf (zie 4, De BRT).
 ### Weergave: kiezen wat je ziet
 Op het tabblad **Weergave** van het instellingenvenster kies je welke kaarten en knoppen je in het palet en op het lint
 ziet. Standaard staat alles aan: stel je niets in, dan zie je alles wat 0.2.9 toonde, plus de nieuwe knoppen
-**Profielschets openen** en **Coördinaat**.
+**Profielschets openen** en **Coördinaat**, en sinds 1.2.0 **Bijlage plaatsen**.
 
 - **Kaarten**: per kaart een vinkje, per soort zoals in het palet (ondergrond, hoogte, grondonderzoek, infra, natuur,
   beperkingen).
-- **Knoppen**: per knop een vinkje, in groepen: **KLIC** (KLIC-levering, Profielschets openen), **Tekenhulpen**
+- **Knoppen**: per knop een vinkje, in groepen: **KLIC** (KLIC / KLIP inladen, Profielschets openen, Bijlage plaatsen), **Tekenhulpen**
   (AHN-punt, NAP-referentie, NAP-leider, NAP herberekenen, Coördinaat, Punten inlezen), **Bestanden** (Eigen
   grondonderzoek, Naar Google Earth, KML inlezen), **Tekening** (Geografische plek, Info, Import wissen, Stijl) en
   **Bekijk de plek** (Google Maps, Street View, StreetSmart, DINOloket).
 - Vink uit wat je niet gebruikt en klik **Opslaan**: het verdwijnt meteen uit het palet en van het lint. Staan alle
   kaarten van een soort uit, dan verdwijnt ook de kop van die soort; staan alle kaarten uit, dan de hele groep
-  **Kaarten**. Zo gaat het ook met **Bekijk de plek**, en op het lint met een paneel zonder knoppen.
+  **Kaarten**, behalve als **KLIC / KLIP inladen** te zien is: die blijft dan alleen staan. Zo gaat het ook met **Bekijk de
+  plek**, en op het lint met een paneel zonder knoppen. Had je in 1.1.0 de knop **KLIC-levering** verborgen, dan is ook
+  **KLIC / KLIP inladen** verborgen (hetzelfde vinkje).
 - **Verbergen is niet uitzetten.** Elk commando werkt nog als je het typt (bijvoorbeeld `VKKLIC`), en een verborgen kaart
   laad je met haar commando (bijvoorbeeld `VKBGT`) of met `VKLADEN`.
 - **Altijd te zien**, en niet uit te zetten: het gebied, het tandwiel, de **?**, **Over VLEA** en **Bijwerken**, en op het
@@ -208,8 +219,10 @@ legger van Rijkswaterstaat. `VKSTATUS` stelt geen vragen, dus het werkt ook in e
 
 ### Een tekening in België
 Teken je in **Lambert 72** (EPSG:31370) of **Lambert 2008** (EPSG:3812), zoals in Vlaanderen, dan herkent VLEA dat
-aan de getallen van je gebied. Er is geen knop of instelling voor, en VLEA rekent niets om. Kies het gebied zoals
-altijd: rechthoek, polylijn, coördinaten of een strook (`VKCONTOUR`). Het palet en `VKGEBIED` zetten het stelsel
+aan de getallen van je gebied. Er is geen knop voor, en VLEA rekent niets om, met één uitzondering: een KLIP-levering
+rekent VLEA om naar het stelsel van je tekening (zie Een KLIP-levering hieronder); alleen daarvoor is er de instelling
+**Stelsel voor België**, voor een lege tekening. Kies het gebied zoals altijd: rechthoek, polylijn, coördinaten of een strook
+(`VKCONTOUR`). Het palet en `VKGEBIED` zetten het stelsel
 achter het oppervlak, bijvoorbeeld "Gekozen: 500 x 500 m (0,25 km²), in Lambert 72 (EPSG:31370)". Staat daar
 Lambert terwijl je tekening een eigen raster heeft, dan vallen je getallen toevallig in het bereik van Lambert;
 controleer dan je coördinaten.
@@ -228,25 +241,194 @@ controleer dan je coördinaten.
   Belgische tekening betekent dat: je getallen liggen niet in Lambert 72 of Lambert 2008; controleer je coördinaten.
 - **Weigert met uitleg** (er gebeurt niets, en de opdrachtregel of het palet zegt waarom): adres zoeken (`VKADRES` en
   het zoekveld in het palet), `VKKMLIMPORT`, `VKKMZ`, `VKKLIC`, `VKGEF`, `VKPUNTEN` en `VKGEOPLEK` als het gebied van
-  de tekening in Lambert ligt; `VKGOOGLE`, `VKSTREETVIEW`, `VKSTREETSMART` en `VKDINO` op een punt in Lambert. Die
+  de tekening in Lambert ligt (`VKKLIP` doet het omgekeerde: het weigert in een tekening in RD); `VKGOOGLE`, `VKSTREETVIEW`, `VKSTREETSMART` en `VKDINO` op een punt in Lambert. Die
   gereedschappen rekenen van of naar RD, zoeken in Nederland of lezen Nederlandse bestanden, en zouden in een
   Belgische tekening op de verkeerde plek tekenen. `VKAHNPUNT` weigert alleen in Lambert 2008: het DHMV is er alleen in
   Lambert 72.
 - **Kies in een Belgische tekening eerst een gebied.** Zonder gebied weet VLEA meestal niet dat de tekening in Lambert
   staat; dan doen `VKKMZ`, `VKKLIC`, `VKGEF` en `VKPUNTEN` wat ze in een Nederlandse tekening doen, en zoeken `VKADRES`
   en het zoekveld in het palet in Nederland: ze zetten dan een gebied in RD rond het adres, ver buiten je tekening (de
-  kaarten van Vlaanderen staan daarna grijs met "alleen in België"; kies dan opnieuw een gebied). Alleen
-  `VKKMLIMPORT` kijkt zonder gebied naar wat er al in de tekening staat (de grenzen van de tekening): ligt dat helemaal
-  in Lambert, dan weigert het ook ("De inhoud van deze tekening ligt in Lambert 72 …").
+  kaarten van Vlaanderen staan daarna grijs met "alleen in België"; kies dan opnieuw een gebied). Van deze
+  gereedschappen kijkt alleen `VKKMLIMPORT` zonder gebied naar wat er al in de tekening staat (de grenzen van de
+  tekening): ligt dat helemaal in Lambert, dan weigert het ook ("De inhoud van deze tekening ligt in Lambert 72 …"). Het
+  neemt de grenzen zoals AutoCAD ze bijhoudt, en AutoCAD maakt die bij het wissen niet kleiner: weigert `VKKMLIMPORT` in
+  een tekening waaruit je alles hebt gewist, kies dan eerst een gebied met `VKGEBIED`, of zoom in de modelruimte op alles
+  (`ZOOM`, `Extents`); wat op een bevroren laag staat, telt dan niet mee. `VKKLIP` bepaalt de grenzen sinds 1.2.0 zelf
+  (hieronder, Een KLIP-levering).
 - **Hoogtes in België zijn TAW**, niet NAP. VLEA rekent nooit om tussen NAP en TAW: het DHMV, `VKAHNPUNT` in Lambert 72
   en het NAP-gereedschap met een TAW-referentie schrijven "TAW +…" (zie Hoogte in Vlaanderen hieronder).
 - **Wat (nog) niet kan:** Wallonië en Brussel (die hebben eigen diensten), adres zoeken in Vlaanderen, Google Maps,
-  Street View, StreetSmart, DINOloket en de geografische plek (`VKGEOPLEK`) in Lambert, een KLIP-levering inlezen, het
-  DHMV en de hectometerpaaltjes in Lambert 2008, en punten uit Excel of CSV (`VKPUNTEN`) in Lambert.
+  Street View, StreetSmart, DINOloket en de geografische plek (`VKGEOPLEK`) in Lambert, het
+  DHMV en de hectometerpaaltjes in Lambert 2008, en punten uit Excel of CSV (`VKPUNTEN`) in Lambert. Een KLIP-levering
+  lees je sinds 1.2.0 in met `VKKLIP`, in een tekening in Lambert 72 of Lambert 2008 (zie hieronder); een kaart rekent VLEA
+  nooit om.
+
+#### Een KLIP-levering (`VKKLIP`, sinds 1.2.0)
+Een planaanvraag doe je zelf in het KLIP (het Kabel- en Leidinginformatieportaal van Vlaanderen); VLEA tekent de levering
+die je terugkrijgt. Daar is geen internet voor nodig en er gaat niets van de levering naar buiten. Klik op **KLIC / KLIP
+inladen** bovenaan in het palet (bij de kaarten) of op **KLIC / KLIP** op het lint (paneel Kaarten), of typ `VKKLIP`.
+
+**De knop of getypt.** De knop is één knop voor een KLIC- en een KLIP-levering: je kiest het bestand, en VLEA ziet aan de
+naam (en in een zip aan de namen erin) welke levering het is. Een `.klip`-bestand, een `.json`-bestand in een uitgepakte
+levering en een zip met een `.json` of `.klip` erin zijn een KLIP-levering; de XML van een KLIC-levering
+(`GI_gebiedsinformatielevering_….xml`) of een zip waar die in staat een KLIC-levering (zie 6). Staat er alleen een zip in de
+zip, dan kijkt VLEA daarin (met voortgang; Esc stopt). Is het geen van beide, dan zegt één zin wat je wel kiest: "Dit is
+geen KLIC- of KLIP-levering: kies de XML of de zip van een KLIC-levering (Nederland), of het .klip-bestand of de zip van een
+KLIP-levering (België; bij een uitgepakte levering een .json-bestand in die map)." Er is dan niets gelezen. Met de knop
+verder drie verschillen met `VKKLIP` getypt:
+- de opties krijgen hun standaard (zie de tabel) zonder vraag; wil je bijvoorbeeld de annotaties, typ dan `VKKLIP` met
+  `annotatie=aan`;
+- een lege tekening krijgt de instelling **Stelsel voor België** (stap 1);
+- de weigering in een tekening in RD (of zonder zeker stelsel) komt pas nadat je het bestand koos: vooraf weet VLEA niet of
+  je een KLIC- of een KLIP-levering kiest.
+
+**Vertrouwelijk.** Een KLIP-levering is net als een KLIC-levering niet openbaar. Na het inlezen op de opdrachtregel en in
+de verantwoording boven de levering zegt VLEA: "De gegevens komen uit een KLIP-levering en zijn vertrouwelijk: geef ze
+alleen door aan wie ze nodig heeft voor het werk." De bronvermelding noemt de levering vertrouwelijk. `VKKMZ` neemt een
+KLIP-levering nooit mee naar Google Earth, ook niet als je de objecten zelf kiest (zie 10).
+
+**Wat een tekening uit `VKKLIP` is.** Een onderlegger met de ligging van de kabels en leidingen, naast de levering; geen
+vervanging ervan. De plannen, de voorzorgsmaatregelen en de contactgegevens van de beheerders staan alleen in de levering
+zelf, en die blijft leidend bij graafwerk. Is een object volgens de levering risicovol, neem dan vóór het graven contact op
+met de beheerder.
+
+1. **Het stelsel.** VLEA tekent de levering in het stelsel van je tekening: Lambert 72 (EPSG:31370) of Lambert 2008
+   (EPSG:3812). Een KLIP-levering komt in Lambert 2008. Staat je tekening in Lambert 72, dan rekent VLEA elk punt van de
+   levering om met de grid van het NGI (dezelfde omzetting als PROJ, de open rekenbibliotheek voor coördinaten, binnen
+   1 mm) en draait elk symbool en elk label uit de levering mee met de plaatselijke draaiing (in België 0,004 tot 0,009
+   graad met de klok mee); de teksten die VLEA zelf bij een punt zet, blijven horizontaal. Maten, teksthoogtes en symbolen
+   blijven even groot: de schaal van de omzetting wijkt in België hoogstens 5 cm per km af. Een levering in Lambert 72
+   rekent VLEA zo nodig de andere kant op. Het stelsel van je tekening komt uit het bewaarde gebied (`VKGEBIED`). Zonder
+   gebied kijkt VLEA naar wat er in de tekening staat: ligt dat in één stelsel, dan is het dat stelsel. Ligt het niet in
+   één stelsel (bijvoorbeeld door een stempel of kader van je sjabloon rond 0,0), dan beslissen de hoeken linksonder en
+   rechtsboven van de tekening: ligt een van beide in RD, dan staat de tekening in RD; anders telt het Belgische stelsel
+   van de hoek rechtsboven, en ligt die in geen stelsel, dat van de hoek linksonder.
+   - **Een lege tekening** (of een tekening met alleen lokale coördinaten, die in geen enkel stelsel vallen): met de knop
+     **KLIC / KLIP inladen** geldt de instelling **Stelsel voor België** (zie 2, Instellingen; standaard Lambert 72), en de
+     opdrachtregel zegt bijvoorbeeld: "Deze tekening heeft nog geen stelsel (leeg, of alleen lokale coördinaten): VLEA tekent
+     de levering in Lambert 2008 (EPSG:3812), de instelling Stelsel voor België." Getypt (`VKKLIP`, ook in een script) neemt
+     VLEA de vaste standaard, Lambert 72, zoals elk getypt commando de vaste standaarden neemt; de opdrachtregel zegt dan:
+     "Deze tekening heeft nog geen stelsel (leeg, of alleen lokale coördinaten): VLEA tekent de levering in Lambert 72
+     (EPSG:31370), de vaste standaard. Wil je een ander stelsel, kies dan eerst een gebied met VKGEBIED." Zonder gebied telt
+     alleen wat er nu in de modelruimte staat, ook op een laag die bevroren, uit of vergrendeld is: heb je alles gewist
+     (bijvoorbeeld een eerdere levering met `VKWISSEN`), dan is de tekening weer leeg en geldt de instelling of de standaard.
+     Oneindige lijnen (`XLINE`, `RAY`) tellen niet mee. `VKKLIP` kijkt de tekening daarvoor alleen door en verandert er niets
+     aan.
+   - **Een tekening in RD:** `VKKLIP` weigert vóór de bestandsvraag (met de knop: nadat je het bestand koos): "Deze tekening
+     staat in RD (Nederland). Teken een KLIP-levering in een tekening in Lambert (België) of in een lege tekening."
+   - **Geen zeker stelsel:** ligt geen van beide hoeken in een stelsel, maar loopt de tekening wel over Nederland of België
+     heen (bijvoorbeeld een stempel rond 0,0 en een los object ver weg), dan weigert `VKKLIP` ook vóór de bestandsvraag (met
+     de knop: nadat je het bestand koos):
+     "VLEA kan het stelsel van deze tekening niet bepalen: er staat ook iets ver buiten Nederland en België in (bijvoorbeeld
+     rond 0,0). Kies eerst een gebied met VKGEBIED; VKKLIP tekent dan in het stelsel van dat gebied." Zo komt een levering
+     nooit 500 km naast je tekening.
+   - **Werk waarvan VLEA de plek niet kan lezen:** een xref die niet geladen of niet gevonden is; een xref, onderlegger,
+     afbeelding of object van een programma dat er niet is (een proxy-object) waarvan AutoCAD de begrenzing niet geeft; of
+     een object dat VLEA niet kon lezen. Is de rest van de tekening leeg of heeft ze alleen lokale coördinaten, dan weigert
+     `VKKLIP` ook vóór de bestandsvraag (met de knop: nadat je het bestand koos): "VLEA kan het stelsel van deze tekening niet bepalen: er staat iets in waarvan VLEA de plek niet kan lezen
+     (bijvoorbeeld een xref die niet geladen of niet gevonden is). Kies eerst een gebied met VKGEBIED; VKKLIP tekent dan in het
+     stelsel van dat gebied." Zo komt een levering niet in het verkeerde Lambert-stelsel naast werk dat je niet ziet. Laad je
+     de xref, dan telt ze gewoon mee.
+   - **Buiten de grid:** de grid van het NGI dekt België met minstens 5 km marge. Moet VLEA omrekenen en ligt een punt van
+     de levering buiten de grid, dan tekent VLEA niets en zegt waarom.
+
+   Twijfel je, of draai je een script, kies dan eerst een gebied met `VKGEBIED`: dan bepaalt dat gebied het stelsel, en niet
+   de instelling of de standaard.
+2. **Bestand kiezen.** Kies het `.klip`-bestand of de zip uit het KLIP. Heb je de levering uitgepakt, kies dan een
+   `.json`-bestand in die map (bijvoorbeeld `pmkl.json`): VLEA leest dan de hele map. Staat `FILEDIA` op 0 (of draai je een
+   script), typ dan het volledige pad van het bestand of de map (tussen aanhalingstekens als er een spatie in staat).
+   Bestaat het pad niet, of is het geen `.klip`, zip, `.json` of map, dan zegt VLEA dat meteen, vóór de opties. Is het geen
+   KLIP-levering, of staan er twee leveringen in, dan zegt VLEA dat na het lezen, voordat er iets getekend wordt. Met de knop
+   is de vraag dezelfde, maar mag je ook een KLIC-levering kiezen (de XML of de zip); VLEA kiest dan zelf de weg.
+3. **Opties.** Enter = de standaard (zie de tabel); bijvoorbeeld `annotatie=aan` of `diepte=uit`. De algemene opties
+   werken zoals bij de kaarten: `vervangen=ja|erbij|nee`, `stijl=grijs` en `bronvermelding=aan`. De verantwoording komt er
+   altijd, los van die keuze. Met de knop vraagt VLEA niets: de standaard, NLCS-kleuren, en de bronvermelding volgens
+   **Bronvermelding in de tekening** in de instellingen.
+4. **Inlezen en tekenen.** VLEA leest de levering (voortgang; Esc stopt) en tekent haar op haar eigen plek, in het stelsel
+   van je tekening (stap 1). Een gebied kiezen hoeft niet voor de plek: dat doet de levering. Het bewaarde gebied telt alleen
+   voor het stelsel van je tekening.
+
+| Optie (sleutel) | Wat | Standaard |
+|---|---|---|
+| `maatvoering` | maatlijnen, hulplijnen en maten van de beheerder | uit |
+| `annotatie` | labels, lijnen en pijlen van de beheerder | uit |
+| `diepte` | dieptes en dekkingen, als tekst bij hun punt | aan |
+| `eigentopografie` | eigen topografie van de beheerders | aan |
+| `detailinfo` | plekken met een extra plan (detailplan, gestuurde boring, dwarsprofiel) | aan |
+| `aanvraaggebied` | de aanvraagzone | aan |
+
+**Wat je daarna ziet**
+- Op de opdrachtregel de telling, bijvoorbeeld "KLIP-levering: 56 objecten; 49 getekend, 4 uitgezet met de keuzes, 3 niet
+  te tekenen." Die telling sluit altijd: elk object is getekend, door een keuze uitgezet, of staat met zijn nummer, id en
+  reden bij de niet-getekende objecten (hoogstens 200; het logboek telt ze per soort, zonder id).
+- In welk stelsel er getekend is, en of VLEA heeft omgerekend ("Getekend in Lambert 72 (EPSG:31370), omgerekend uit Lambert
+  2008 (EPSG:3812) met de grid van het NGI."), hoeveel getekende objecten volgens de levering risicovol zijn, welke beheerders geen
+  leidinggegevens gaven (alleen een plan, of nog geen antwoord; met hun naam uit de levering), en de status en ligging
+  zoals bij de KLIC (gepland, buiten gebruik, op of boven maaiveld).
+- Wat VLEA niet bij een thema kan plaatsen, staat op de lagen van OVERIG en wordt per reden en per soort genoemd: VLEA
+  raadt geen thema, en laat niets stil weg.
+- De achtergrond van de levering (`wfs.json` met percelen, gebouwen en wegen, `kmhm.json` met kilometerpunten) tekent VLEA
+  niet; de melding noemt het aantal. Gebruik voor de ondergrond het GRB. Plannen en andere bestanden in de levering worden
+  geteld en blijven in de levering.
+- Linksboven de levering de verantwoording, op de laag `VLEA-KLIC-VERANTWOORDING` (dezelfde als bij de KLIC): het nummer
+  van de aanvraag, de datum, het stelsel, de zin over de vertrouwelijkheid, de telling, per thema, OVERIG, wat uitgezet en
+  niet te tekenen is, en de beheerders zonder gegevens.
+
+**Lagen.** VLEA tekent op de lagen van de KLIC (zie 6):
+- elektriciteit naar spanning: laagspanning en openbare verlichting `B-OI-KL-ET_LS-G`, middenspanning
+  `B-OI-KL-ET_MS-G`, hoogspanning `B-OI-KL-ET_HS-G`. Vanaf 50 kV is het hoogspanning, boven 1 kV middenspanning. Zonder
+  spanning beslist het subthema van de beheerder: "distributie hoogspanning" is in de Nederlandse indeling middenspanning,
+  "transport" hoogspanning. Een kabel zonder spanning en zonder bruikbaar subthema staat op OVERIG, met een melding;
+- gas naar druk: lage druk `B-OI-KL-GAS_LD-G`, middendruk en hoge druk `B-OI-KL-GAS_HD-G` (Belgische middendruk ligt
+  boven de Nederlandse grens voor hoge druk; het subthema van de beheerder staat bij het object);
+- riolering naar stelsel: gemengd `B-OI-RI-GWA_RIOOLLEIDING-G`, vuil water `B-OI-RI-DWA_RIOOLLEIDING-G`, hemelwater
+  (ook oppervlaktewater en een ingebuisde gracht) `B-OI-RI-HWA_RIOOLLEIDING-G`, persleiding `B-OI-RI-PERSLEIDING-G`;
+- mantelbuizen (een behuizing, of een buis met als soort mantelbuis) op de mantelbuislaag van hun thema, bijvoorbeeld
+  `B-OI-KL-DATA_MANTELBUIS-G`;
+- leidingelementen als symbool van hun soort (brandkraan, afsluiter, lichtmast, huisaansluiting en andere; anders een
+  cirkel), met TYPE en LABEL ingevuld;
+- dieptes en dekkingslijnen op `B-OI-ZZ-HOOGTELABEL-S`, met de diepte als tekst op `B-OI-ZZ-HOOGTELABEL-T18`:
+  "dekking 1,83 m ±0,3 m" is de diepte onder het maaiveld, "10,60 m TAW ±onbekend" een peil, en "diepte 0,60 m
+  (referentie niet vermeld) ±onbekend" een diepte waarvan de levering niet zegt waartegen ze gemeten is. Zegt het label van
+  de beheerder iets anders, dan staat dat erachter ("(label …)"). VLEA rekent een diepte nooit om en zet nooit NAP;
+- extra plannen op `X-XX-AL-VERWIJZING_DETAIL-S` en `-G`, met de tekst "Detail: …"; het plan zelf staat in de levering;
+- installaties en andere vlakken, ook een bovengrondse hoogspanningslijn, als omtrek op de contourlaag van hun thema;
+- annotaties en maatvoering (als je ze aanzet): lijnen en pijlen op de `-M`-laag van hun thema, de labels van annotaties
+  op `-T18`, de maten van de maatvoering ook op `-M`.
+
+**Gegevens bij elk object.** `VKINFO` toont de beheerder (de organisatie uit de levering), het subthema, of het object
+risicovol is, de status, de ligging en de technische gegevens zoals de levering ze gaf; een spanning of druk van -1 heet
+"onbekend". Ook het stelsel van de levering (`vk_stelsel`) en dat van je tekening (`vk_stelsel_tekening`): verschillen ze, dan
+is het object omgerekend. Het venster bij aanwijzen toont ze bij een kabel of leiding als je in de instellingen **Ook bij kabels en
+leidingen** kiest (zie 6). Contactgegevens, de koptekst van een beheerder en bestandsnamen neemt VLEA niet over.
+
+**Opnieuw inlezen en wissen.** Lees je dezelfde levering (hetzelfde nummer van de aanvraag) opnieuw in, dan vraagt VLEA
+[Vervangen/Erbij/Overslaan] met **Overslaan** als standaard: een KLIP-levering heeft geen volgnummer, dus VLEA ziet niet
+welke de nieuwste is. Kijk in het KLIP (of naar de datum van de bestanden) welke levering de nieuwste is, en typ `V` om
+te vervangen; de verantwoording in de tekening noemt alleen de dag van inlezen. Dat geldt ook als de eerdere import in het
+andere Lambert-stelsel staat (bijvoorbeeld eerst zoals geleverd in een lege tekening, daarna met een gebied in Lambert 72):
+het is dezelfde aanvraag, dus Vervangen wist de eerdere import, waar die ook ligt. Een andere levering wist VLEA
+nooit; de nieuwe komt erbij, met een melding. `VKWISSEN` met de sleutel `klip` wist alle KLIP-imports, in welk stelsel ook;
+met de keuze `Selectie` blijven gekozen KLIP-objecten staan, want een levering wis je alleen als geheel.
+
+**Wat er niet getest is.** `VKKLIP` is gebouwd en met de testsuite gecontroleerd, op een verzonnen levering; het
+omrekenen naar Lambert 72 ook, tegen punten die met PROJ zijn uitgerekend (binnen 1 mm). Met diezelfde levering heeft
+het met scripts in de AutoCAD-kern van 2025 en 2026 gedraaid (zonder schermen): het omrekenen (binnen 1 mm) en de
+weigeringen van stap 1 (in RD, zonder zeker stelsel, met alleen een kader en een xref die niet geladen is, buiten de
+grid); na het wissen gold de tekening weer als leeg, en werk op een bevroren laag telde mee. Met een echte KLIP-levering
+en in AutoCAD 2027 is het niet geprobeerd, de weigering bij werk zonder bekende plek (stap 1) niet met een xref die niet
+gevonden is, een proxy-object of een onderlegger zonder bestand, en hoe lang het doorkijken van de tekening (stap 1) in
+een grote tekening duurt, is niet gemeten. De knop
+**KLIC / KLIP inladen** is gebouwd en het herkennen van KLIC tegen KLIP met de testsuite gecontroleerd, op verzonnen
+leveringen; palet en lint zijn op geen scherm gezien. VLEA herkent een levering aan de namen van de bestanden; noemt het
+KLIP de bestanden in een levering anders, dan kan de knop een KLIP-levering niet herkennen (`VKKLIP` getypt leest haar dan
+wel). VLEA leest de JSON-bestanden met de leidinggegevens, met de veldnamen die in leveringen voorkomen. Noemt een levering een
+gegeven anders, dan valt dat gegeven weg zonder fout (bijvoorbeeld geen regel "risicovol"). Kijk bij twijfel in de
+levering zelf.
 
 #### Kaarten van Vlaanderen
 In een tekening in Lambert 72 of Lambert 2008 laadt VLEA kaarten van Digitaal Vlaanderen (`geo.api.vlaanderen.be`),
-in het stelsel van je tekening: VLEA rekent niets om, en een gebied in Lambert 2008 krijgt de kaart in Lambert 2008. In
+in het stelsel van je tekening: VLEA rekent een kaart niet om, en een gebied in Lambert 2008 krijgt de kaart in Lambert 2008. In
 een Nederlandse tekening staan deze kaarten grijs met "alleen in België". Het palet vraagt de status van die bron ook
 alleen bij een tekening in Lambert. Neem de bronvermelding over op tekeningen die je deelt (de Modellicentie Gratis
 Hergebruik v1.0 vraagt naamsvermelding, zie 8); VLEA zet hem in de tekening, met vooraan de zin die Digitaal
@@ -314,7 +496,7 @@ VLEA dat.
   andere refpunt in de objectgegevens; de opdrachtregel zegt hoeveel. Punten met een ander opschrift tekent VLEA altijd,
   ook als ze bijna samenvallen.
 - **Alleen in Lambert 72.** In Lambert 2008 liggen de paaltjes van AWV centimeters naast het GRB (AWV rekent anders om
-  dan Digitaal Vlaanderen), en VLEA rekent zelf niets om: in een tekening in Lambert 2008 weigert `VKREFPUNTEN` met die
+  dan Digitaal Vlaanderen), en VLEA rekent een kaart zelf niet om: in een tekening in Lambert 2008 weigert `VKREFPUNTEN` met die
   uitleg. Grootste gebied 25 km², zoals het NWB.
 - **Een register.** AWV houdt de paaltjes bij als register: een paaltje dat er op straat (nog) niet staat of een ander
   opschrift heeft, kan er toch in staan. VLEA tekent ze allemaal, zoals AWV ze geeft.
@@ -392,9 +574,10 @@ keer). Grootste gebied 4 km², ook voor de omhullende rechthoek. In een Nederlan
 - De lintknoppen **BGT**, **Kadaster**, **Luchtfoto** en **AHN** laden die ene kaart met de keuzes
   uit de instellingen (opties, stijl en bronvermelding) en vragen op de opdrachtregel het gebied;
   Enter = het opgeslagen gebied van de tekening. Zonder Civil 3D zegt **AHN** meteen "alleen Civil 3D",
-  zonder eerst een gebied te vragen. Het lintpaneel **Gereedschap** heeft **Profielschets**, **KLIC**, **Eigen
-  grondonderzoek**, **Google Earth**, **AHN-punt**, **NAP-leider**, **NAP herberekenen**, **Coördinaat**, **Punten**,
-  **Bijwerken** en **Help**, met dezelfde keuzes als het palet.
+  zonder eerst een gebied te vragen. In het lintpaneel **Kaarten** staat sinds 1.2.0 ook **KLIC / KLIP** (na **Palet**
+  en **Adres**): dezelfde knop als **KLIC / KLIP inladen** in het palet. Het lintpaneel **Gereedschap** heeft **Bijlage**,
+  **Profielschets**, **Eigen grondonderzoek**, **Google Earth**, **AHN-punt**, **NAP-leider**, **NAP herberekenen**,
+  **Coördinaat**, **Punten**, **Bijwerken** en **Help**, met dezelfde keuzes als het palet.
 - De kaartcommando's hieronder vragen zelf naar gebied en opties. Ze gebruiken de keuzes uit de
   instellingen niet: Enter bij de opties = de standaardopties van die kaart.
 
@@ -1717,7 +1900,8 @@ Decimalen
   - In een script: `vervangen=ja` (vervangen), `vervangen=erbij`, `vervangen=nee` (overslaan) of
     `vervangen=vragen`.
   - Bij een KLIC-levering gaat dit per meldnummer, niet per plek: een andere levering wordt nooit
-    gewist (zie 6).
+    gewist (zie 6). Bij een KLIP-levering gaat het zo per nummer van de aanvraag, met Overslaan als standaard (zie 3,
+    Een KLIP-levering).
 - `VKWISSEN` wist eigen imports, per kaart te kiezen (of `Alle`). Andere objecten in de tekening blijven
   staan. Hoogtepunten staan erin als `ahn-punt`, contouren als `contour`, punten uit een bestand (`VKPUNTEN`) als
   `punten`, het NAP-gereedschap als `nap-referentie` en `nap-leader`, en maatlijnen (`VKMAAT`) als `maat`.
@@ -1738,12 +1922,12 @@ Decimalen
     alle plekken waar die naam staat samen weg. Een perceelnummer en een kilometertekst van het spoor staan
     op zichzelf. Wil je alleen een tekst weg, gebruik dan het gewone `ERASE` van AutoCAD: dat haalt alleen
     weg wat je aanwijst.
-  - Het geldt voor alles wat VLEA tekende, behalve een KLIC-levering. Trek je een venster over een stuk
+  - Het geldt voor alles wat VLEA tekende, behalve een KLIC- of KLIP-levering. Trek je een venster over een stuk
     tekening, dan gaat dus ook de BGT of het kadaster mee dat daar ligt; klik liever de objecten zelf aan
     als er andere kaarten onder liggen.
   - Objecten die VLEA niet tekende, blijven staan; de melding zegt hoeveel.
   - Een KLIC-levering wis je alleen als geheel (`VKWISSEN`, sleutel `klic`): gekozen KLIC-objecten blijven
-    staan, en de melding zegt dat.
+    staan, en de melding zegt dat. Een KLIP-levering ook (sleutel `klip`).
   - Wat bij elkaar hoort, leest VLEA uit het id bij de bron (`VKINFO` toont het). Spoor, riolering of zones
     langs waterkeringen die met 0.2.2 of eerder zijn geladen, hebben nog id's die twee objecten kunnen delen
     (bij het spoor het tracé en de kilometrering, bij de riolering op de grens van twee gemeenten, bij de
@@ -1751,7 +1935,9 @@ Decimalen
     opnieuw (Vervangen). De opdrachtregel zegt altijd hoeveel objecten er weg zijn.
   - Wat je zelf aan die objecten veranderde, gaat mee weg, net als bij Vervangen.
   - Blijft van een import alleen de bronvermelding over, dan gaat die tekst mee; staat er van een kaart
-    niets meer, dan verdwijnt ook de bronvermelding uit de tekeningeigenschappen.
+    niets meer, dan verdwijnt ook de bronvermelding uit de tekeningeigenschappen. Staat er van de riolering of de zones
+    nog wel iets, dan noemt de bronvermelding in de tekeningeigenschappen sinds 1.2.0 alleen nog de gemeenten of
+    waterschappen van wie er objecten staan (zie 8).
   - Bij een sondering met een sondeerplot blijft de plek in de rij plots leeg; de andere plots en hun
     volgnummers blijven zoals ze waren (zie 4, Sonderingen weghalen).
   - Enter zonder iets te kiezen wist niets. `U` maakt het wissen ongedaan.
@@ -1769,6 +1955,8 @@ Decimalen
     Gebruikt geen tekening de beelden nog, ruim die bestanden dan zelf op.
   - Wiste je beelden met 0.2.3 of eerder, dan staan hun koppelingen nog in External References, zonder beeld in de
     tekening (zie 12).
+- **Geplaatste bijlagen** (`VKBIJLAGE`, sinds 1.2.0, zie 6): net als bij beelden gaat de koppeling naar de pdf mee weg
+  als niets hem meer gebruikt; de pdf zelf blijft staan in `<tekening>_kaarten`, submap `klic-bijlagen`.
 - `VKINFO` toont bij een object waar het vandaan komt (bron, id, datum) en de gegevens van PDOK, ook
   bij het AHN-model in Civil 3D. Bij een object van een kaart staat sinds 1.1.0 ook de bronvermelding erbij
   ("Bronvermelding: Kadaster (Kadastrale kaart), CC BY 4.0 (…), bewerkt, opgehaald 28-09-2026"), behalve bij het
@@ -1788,20 +1976,30 @@ Decimalen
 
 ## 6. Een KLIC-levering tekenen (`VKKLIC`)
 Een KLIC-melding doe je zelf bij het Kadaster; VLEA tekent de levering die je terugkrijgt. Daar is
-geen internet voor nodig en er gaat niets van de levering naar buiten. Start met de knop
-**KLIC-levering** in het palet of **KLIC** op het lint (de opties komen dan uit de instellingen), of
-typ `VKKLIC`. Vanuit palet en lint komt een levering altijd in NLCS-kleuren, ook als je in de
+geen internet voor nodig en er gaat niets van de levering naar buiten. Wat je in de tekening zet (de levering, en
+sinds 1.2.0 een geplaatste bijlage met zijn pdf naast de tekening) reist wel mee als je de tekening deelt. Een
+KLIP-levering uit Vlaanderen lees je in met `VKKLIP` (sinds 1.2.0; zie 3, Een KLIP-levering). Start met de knop
+**KLIC / KLIP inladen** bovenaan in het palet (bij de kaarten) of **KLIC / KLIP** op het lint (paneel Kaarten; de opties
+komen dan uit de instellingen), of typ `VKKLIC`. Tot en met 1.1.0 heette de knop **KLIC-levering** (op het lint **KLIC**) en
+stond hij bij het gereedschap. Met de knop kies je ook een KLIP-levering: VLEA ziet aan het bestand welke het is (zie 3, Een
+KLIP-levering). In een tekening met een gebied in Lambert weigert `VKKLIC` vóór de bestandsvraag; met de knop komt die
+weigering pas nadat je een KLIC-levering koos. Vanuit palet en lint komt een levering altijd in NLCS-kleuren, ook als je in de
 instellingen "grijze onderlegger" voor de kaarten gekozen hebt; grijs kan daarna met `VKSTIJL`, of
 getypt met `stijl=grijs`.
 
 **Vertrouwelijk.** Een KLIC-levering is vertrouwelijk (WIBON art. 4 lid 2): je mag de gegevens, ook in
 een tekening of een Google Earth-bestand, alleen aan anderen geven voor zover dat noodzakelijk is om
 graafschade te voorkomen, of voor de oriëntatie op een verzoek tot medegebruik of coördinatie. De
-bronvermelding zegt daarom "(WIBON, vertrouwelijk)", en `VKKMZ` neemt KLIC met Enter niet mee (zie 10). Sinds 1.1.0 komt
-de bronvermelding standaard niet meer als tekst in de tekening (zie 8), en de verantwoording zegt het niet: op de tekening
-en op een plot staat dan niet dat de levering vertrouwelijk is, alleen op de opdrachtregel, onderaan het palet en in de
-tekeningeigenschappen. Geef je een tekening met een KLIC-levering door, zet het er dan zelf bij, of zet **Bronvermelding
-in de tekening** aan vóór het inlezen.
+bronvermelding zegt daarom "(WIBON, vertrouwelijk)", en `VKKMZ` neemt KLIC met Enter niet mee (zie 10). Dat geldt
+ook voor een bijlage die je met `VKBIJLAGE` als pdf in de tekening zet: die reist met de tekening mee. Sinds 1.1.0 komt
+de bronvermelding standaard niet meer als tekst in de tekening (zie 8). Sinds 1.2.0 zegt de verantwoording boven de
+levering het zelf: "De gegevens komen uit een KLIC-levering en zijn vertrouwelijk (WIBON art. 4 lid 2)." De verantwoording
+staat altijd in de tekening, ook met de standaard: linksboven de levering, op de laag `VLEA-KLIC-VERANTWOORDING`. Op een
+plot staat ze alleen als dat deel van de tekening op de plot staat en die laag aan staat. Plot je een ander deel, of zet je
+die laag uit of bevries je hem, zet het er dan zelf bij als je de plot of de tekening doorgeeft, of zet **Bronvermelding in
+de tekening** aan vóór het inlezen (die regel komt onder de levering, op een andere laag; zie 8). Een levering die je met
+1.1.0 of eerder inlas, heeft de regel in de verantwoording nog niet: lees haar opnieuw in (**Vervangen**), of zet het er zelf bij als
+je die tekening doorgeeft.
 
 1. **Bestand kiezen.** Kies de zip die je van het Kadaster kreeg, of uit de uitgepakte levering de
    XML `GI_gebiedsinformatielevering_….xml`. Een zip in een zip mag ook. Staat `FILEDIA` op 0 (of
@@ -1878,7 +2076,8 @@ de verantwoording in de tekening ("Uitgezet, wel in de levering: maatvoering 2.1
 - Kon AutoCAD een deel van de tekenobjecten niet tekenen, dan staat boven de verantwoording "LET OP: N
   tekenobjecten konden niet getekend worden; de levering staat dus niet volledig op de tekening". De
   opdrachtregel en het logboek zeggen meer.
-- In de tekening, linksboven de levering, een verantwoording: meldnummer, soort melding en datum, de
+- In de tekening, linksboven de levering, een verantwoording: meldnummer, soort melding en datum, sinds 1.2.0 de regel
+  "De gegevens komen uit een KLIC-levering en zijn vertrouwelijk (WIBON art. 4 lid 2).", de
   telling ("Volledigheid: 1.234 objecten in de levering = … getekend + … niet te tekenen + …
   uitgezet + … administratief (niet getekend)."), de regel over de eis voorzorgsmaatregel, per thema
   hoeveel er getekend is (samen precies het aantal getekend, met de objecten zonder thema erbij, zoals
@@ -1890,7 +2089,10 @@ de verantwoording in de tekening ("Uitgezet, wel in de levering: maatvoering 2.1
 - **De verantwoording op een eigen laag (sinds 1.1.0).** De verantwoording staat op de laag
   `VLEA-KLIC-VERANTWOORDING` (rood, kleur 10, 0,18 mm, zoals voorheen). Tot en met 1.0.0 stond ze op
   `X-XX-AL-TEKENBLAD_VERKLARING-T18`, de laag van de bronvermelding van alle kaarten. Wil je de verantwoording niet
-  zien, zet dan de laag `VLEA-KLIC-VERANTWOORDING` uit of bevries hem. De bronvermelding van de andere kaarten en de ene
+  zien, zet dan de laag `VLEA-KLIC-VERANTWOORDING` uit of bevries hem. Let op: dan staat ook niet meer op de tekening of
+  op een plot dat de levering vertrouwelijk is (sinds 1.2.0 zegt de verantwoording dat; zie Vertrouwelijk, hierboven). Zet
+  het er dan zelf bij, of zet **Bronvermelding in de tekening** aan vóór het inlezen (een levering die er al staat: opnieuw
+  inlezen met **Vervangen**). De bronvermelding van de andere kaarten en de ene
   regel "Bron: KLIC-levering …" onder de levering (met "WIBON, vertrouwelijk") raak je daarmee niet: die staan, alleen
   met **Bronvermelding in de tekening** aan, op de laag van de bronvermelding. De verantwoording zelf tekent VLEA
   altijd: bij opnieuw inlezen vergelijkt VLEA de levering met die in de tekening aan de hand van de verantwoording. Wis
@@ -2019,9 +2221,10 @@ label dat iets anders zegt dan de waarde, dan staan beide in het label ("0,00 m-
 VLEA rekent nooit een hoogte van een kabel of leiding uit.
 
 **Bijlagen** (de PDF's van de netbeheerders, zoals profielschetsen en de eisen voorzorgsmaatregel)
-tekent VLEA niet. De opdrachtregel en de verantwoording noemen hoeveel er zijn, en de plek van extra
+tekent `VKKLIC` niet. De opdrachtregel en de verantwoording noemen hoeveel er zijn, en de plek van extra
 detailinformatie (de "infolaag") staat in de tekening (met `detailinfo=uit` niet, en dat staat erbij). Sinds 0.2.10
-open je een bijlage vanuit de tekening (hieronder).
+open je een bijlage vanuit de tekening, en sinds 1.2.0 zet je hem als pdf in de tekening met `VKBIJLAGE` (beide
+hieronder).
 
 **Uitroeptekens (sinds 0.2.10).** Bij elke infolaag met een bijlage (profielschets, huisaansluitschets, overige
 detailinformatie) en bij elke zone met een eis voorzorgsmaatregel zet VLEA een uitroepteken: een driehoek
@@ -2038,7 +2241,7 @@ blijft: de lijn of het vlak van de infolaag, de tekst "Detail: …", de zone met
 - Een levering die al in je tekening staat, krijgt de tekens pas als je hem opnieuw inleest.
 
 **Een profielschets openen (`VKSCHETS`, sinds 0.2.10).** Klik op **Profielschets openen** in het palet of
-**Profielschets** op het lint (bij de KLIC-levering), of typ `VKSCHETS`. Wijs de infolaag aan: de lijn of het vlak,
+**Profielschets** op het lint (paneel Gereedschap, na Bijlage), of typ `VKSCHETS`. Wijs de infolaag aan: de lijn of het vlak,
 het symbool, de tekst "Detail: …", of het uitroepteken. Dat mag ook als de KLIC in een XREF staat, en bij een zone met
 een eis voorzorgsmaatregel opent het de bijlage met de eis. Op de opdrachtregel staan de soort, het thema, de
 netbeheerder (als code), de levering en de bijlage(n); heeft het object er meer, dan vraagt VLEA welke (Enter = 1).
@@ -2090,6 +2293,10 @@ je nog iets hoeft aan te wijzen.
   "...". Het volledige id staat bij `VKINFO`. De gegevens staan al in de tekening: elke levering die een venster krijgt
   (ingelezen met 0.2.4 of later), toont ze zonder opnieuw in te lezen. Het venster staat standaard nog steeds op
   **Bij infolagen**: wil je dit bij elke kabel zien, kies dan **Ook bij kabels en leidingen**.
+- **Bij een kabel of leiding uit een KLIP-levering** (sinds 1.2.0, ook alleen met **Ook bij kabels en leidingen**; een
+  KLIP-levering heeft geen infolagen): het nummer van de aanvraag ("KLIP-aanvraag …"), de soort, de beheerder, of hij
+  risicovol is, de diameter of breedte, het materiaal, de spanning of druk, de status, de ligging en het id, zoals de
+  levering ze gaf.
 - Het venster blijft staan zolang de muis op het object of op het venster zelf staat. Beweeg je weg, dan verdwijnt
   het na een halve seconde; zo heb je tijd om naar de knop te gaan. Dat geldt ook als je de muis meteen van het object
   naar het palet, het lint, de opdrachtregel of een ander programma beweegt. Opent AutoCAD een venster (ook het
@@ -2114,12 +2321,115 @@ je nog iets hoeft aan te wijzen.
   snel het is in een zware tekening, waar het precies staat bij een schermschaal van 125 of 150 % of op een tweede
   scherm, of het in een XREF het object onder de cursor vindt, en of het weggaat als je de muis meteen uit de
   tekening beweegt of een ander programma kiest, is dus nog niet bekeken. Hindert het je, zet het dan op **Uit**. Ook
-  de regels die er in 1.1.0 bij kwamen (KLIC-melding, soort, status, ligging, bovengronds zichtbaar, id) zijn alleen
-  met tests gecontroleerd; hoe groot het venster daarmee wordt, heeft nog niemand gezien.
+  de regels die er in 1.1.0 bij kwamen (KLIC-melding, soort, status, ligging, bovengronds zichtbaar, id) en die van een
+  KLIP-levering (1.2.0) zijn alleen met tests gecontroleerd; hoe groot het venster daarmee wordt, heeft nog niemand
+  gezien.
 
 Niet op een scherm getest: het palet, het lint, het icoon, het openen in de pdf-lezer en het aanwijzen in een XREF
 zijn gebouwd en met de tests van de kern en de broncode gecontroleerd, maar in 0.2.10 nog niet door iemand in AutoCAD
 met schermen gezien.
+
+**Een bijlage in de tekening plaatsen (`VKBIJLAGE`, sinds 1.2.0).** Klik op **Bijlage plaatsen** in het palet of
+**Bijlage** op het lint (vóór Profielschets openen), of typ `VKBIJLAGE`. Gebruik je de knop niet, verberg hem dan in het
+tabblad **Weergave** (groep KLIC; zie 2, Weergave). VLEA zet een profielschets, andere detailinformatie, de bijlage bij
+een eis voorzorgsmaatregel of een algemene bijlage van de levering als pdf-onderlegger in de tekening, op de laag
+`VLEA-KLIC-BIJLAGE`. In stappen:
+1. **Welke bijlage.** Wijs een infolaag of uitroepteken aan (zoals bij `VKSCHETS`; heeft het object er meer, dan vraagt
+   VLEA welke, Enter = 1), of kies **Lijst**: VLEA leest de levering en zet alle bijlagen genummerd op de opdrachtregel
+   (eerst de profielschetsen, dan de andere detailinformatie, de eisen en de algemene bijlagen), en je typt het nummer.
+   Wijs je een kabel of leiding aan, dan gokt VLEA niet welke schets erbij hoort: je krijgt de lijst. Staan er meer
+   leveringen in de tekening, dan vraagt **Lijst** eerst een object van die levering (een kabel mag ook). Staat de levering
+   niet in de tekening zelf maar in een XREF, dan wijs je een object ervan in de XREF aan (Enter = stoppen). De levering
+   zoekt VLEA zoals bij `VKSCHETS`; vindt het hem niet, dan kies je hem één keer (niet in een script). Noemt de levering
+   bijlagen die VLEA niet kan plaatsen (geen pdf, of een plek die buiten de levering wijst), dan zegt de lijst hoeveel;
+   bekijk die in de levering.
+2. **De pdf naast de tekening.** VLEA kopieert de pdf naar de map naast de tekening: `<tekening>_kaarten`, submap
+   `klic-bijlagen` (zoals de luchtfoto), en de tekening verwijst ernaar met een pad vanaf de tekening. Daarom moet de
+   tekening opgeslagen zijn; is ze dat niet, dan zegt VLEA dat eerst. De naam maakt VLEA zelf (soort, meldnummer en een
+   vaste code); dezelfde bijlage nog eens plaatsen gebruikt dezelfde pdf, een andere versie krijgt een eigen naam, en
+   VLEA overschrijft of wist nooit een pdf in die map. Het is niet de kopie van `VKSCHETS`: die gaat na een dag weg.
+3. **De pagina.** Heeft de pdf er meer, dan vraagt VLEA welke (Enter = 1).
+4. **Het invoegpunt:** de linkeronderhoek van de pagina. Enter = naast de levering: rechts ervan, zoals de sondeerplots,
+   en nooit over iets wat VLEA al tekende.
+5. **De schaal.** De pagina staat nu in de tekening op de schaal om mee te beginnen (standaard 1:500). Typ een ander getal
+   n voor 1:n (de pagina ligt dan zoals op papier als je de tekening op 1:n plot; een A4 op 1:500 is 105 m breed), of
+   Enter om hem zo te laten. Of kies **Punten**: wijs twee punten op de pdf aan (snappen op de lijnen van de pdf kan) en
+   typ hun echte afstand in meter; dan schaalt VLEA de pagina rond het invoegpunt. Zo krijg je een schets die niet op
+   schaal is toch passend, bijvoorbeeld met een maatlijn of een schaalstok op de schets. De papiermaat leest VLEA uit de
+   pdf zelf: de grootte van de pagina zoals een pdf-lezer haar toont, met haar draaiing. Voor de schaal heeft VLEA ook
+   de maat nodig die AutoCAD van de geplaatste pagina geeft. Is de papiermaat niet te lezen (bijvoorbeeld een pdf in een
+   vorm die VLEA niet leest), dan zegt VLEA dat. Zegt VLEA dat het de papiermaat niet kan vaststellen, dan weet VLEA
+   niet zeker hoe groot AutoCAD de pagina neerzet (zie de probleemtabel), en gokt het niet. In beide gevallen staat de
+   pagina klein (factor 1) met de linkeronderhoek op het invoegpunt, en vraagt VLEA meteen de twee punten: zoom daar in
+   (bij **Alle** niet, zie hieronder).
+6. **De draaiing** in graden, tegen de klok in (Enter = 0), of **Lijn**: kies een lijn, polylijn of boog, en de onderkant
+   van de pagina komt in haar richting. Nooit op zijn kop: een lijn van rechts naar links geeft dezelfde draaiing.
+
+Onder de pagina zet VLEA een bijschrift: de soort, de KLIC-melding, de netbeheerder, de pagina, en "Informatief; de
+levering zelf blijft leidend bij graafwerk." De pdf komt direct boven de luchtfoto en het kaartbeeld van VLEA (die zijn
+ondoorzichtig en zouden hem bedekken) en onder al het andere, zodat de getekende levering erboven zichtbaar blijft; ook als
+je later nog een kaart laadt. Een eigen beeld (een raster dat je zelf invoegde) schuift VLEA niet: ligt dat boven de pdf,
+zet het dan zelf naar achteren (`DRAWORDER`). Druk je Esc bij een vraag, ook bij de schaal, de twee punten of de draaiing,
+dan stopt `VKBIJLAGE` met "Laden geannuleerd" en staat er niets: een pagina die al te zien was, haalt VLEA weer weg. De pdf
+naast de tekening blijft staan.
+- **Alle:** kies **Alle** bij de eerste vraag, dan de soort (**Profielschetsen**, de standaard; **Detail**, **Eisen**,
+  **Bijlagen** of **Alle**) en de schaal. Elke pagina komt in rijen van vijf rechts naast de levering, met haar
+  bijschrift, zonder draaiing. Wat al geplaatst is, slaat VLEA over. Hoogstens 100 pagina's per keer: zijn het er meer,
+  dan zegt VLEA dat en komt de rest bij de volgende keer **Alle**. Bij veel pagina's staat na elke tien een regel op de
+  opdrachtregel; Esc tussen twee pagina's stopt, en dan staat er niets. **Alle** heeft geen **Punten**: kan VLEA van een
+  pagina de papiermaat niet vaststellen, dan staat die pagina klein op factor 1 (schaal onbekend), en VLEA zegt hoeveel
+  pagina's dat zijn; welke het zijn, zie je aan hun grootte of met `VKINFO` ("onbekend (factor 1)"). Wis ze en plaats ze
+  los met **Punten**. **Alle** werkt alleen als de levering in de tekening zelf staat (niet alleen in
+  een XREF): VLEA moet weten waarnaast de pagina's komen.
+- **Wat VLEA niet plaatst, en zegt:** een bijlage die geen pdf is, een beschadigde pdf, een beveiligde pdf (met een
+  wachtwoord, versleuteld of tegen bewerken: VLEA plaatst geen beveiligde pdf; bekijk hem in de levering), een pagina die
+  niet bestaat, een bestand dat een ander programma open heeft (sluit het), een map naast de tekening waarin je niet mag
+  schrijven, en een pdf naast de tekening met een volledig pad van meer dan 255 tekens (de map `<tekening>_kaarten`,
+  submap `klic-bijlagen`, plus een naam van ongeveer 40 tekens; zet de tekening in een kortere map). Bij **Alle** staat per
+  bijlage op de opdrachtregel wat niet lukte; de rest wordt wel geplaatst.
+- **`VKINFO`** op de pdf of zijn bijschrift toont "Bijlage uit een KLIC-levering", de soort, het meldnummer, het bestand
+  in de levering, de pagina, de schaal, de draaiing en waar de pdf naast de tekening staat. **`VKWISSEN`** wist ze met de
+  sleutel `klic-bijlage` (of met Selectie de pdf met zijn bijschrift); de pdf naast de tekening blijft staan.
+- **Een levering opnieuw inlezen** met **Vervangen** laat de geplaatste bijlagen van die levering staan: ze hebben een
+  eigen sleutel. VLEA zegt hoeveel het er zijn; wis ze met `VKWISSEN` als ze niet meer bij de nieuwe levering horen.
+- **Delen.** Een geplaatste bijlage reist met de tekening mee: stuur de map `<tekening>_kaarten` mee (eTransmit neemt de
+  pdf mee). Voor het delen van KLIC-gegevens blijven de regels van de WIBON gelden (hierboven, **Vertrouwelijk**), ook
+  voor een geplaatste schets. Hernoem of verplaats je de tekening zonder die map, dan vindt AutoCAD de pdf niet meer
+  (net als bij de luchtfoto).
+- **`VKSCHETS` met Plaatsen:** kies bij de eerste vraag van `VKSCHETS` het trefwoord **Plaatsen**; dan volgen dezelfde
+  stappen als bij `VKBIJLAGE`.
+- **Instelling:** **Schaal om mee te beginnen (1:n)** (tandwiel, Gereedschap, **Bijlage in de tekening (VKBIJLAGE)**).
+  Die geldt voor de knop in het palet en op het lint. Typ je `VKBIJLAGE` (of kies je **Plaatsen** bij `VKSCHETS`), dan
+  begint VLEA op 1:500; een andere schaal om mee te beginnen geef je dan met het trefwoord **Schaal** bij de eerste vraag,
+  en elke schaal kun je bij de stap **De schaal** nog aanpassen.
+- **In een script** of in de AutoCAD-kern heeft elke vraag een getypte vorm: een punt als `x,y`, getallen voor nummer,
+  pagina, schaal, afstand en draaiing, en de trefwoorden **Lijst**, **Alle**, **Schaal**, **Punten** en **Lijn**. Typ de
+  trefwoorden bij de eerste vraag voluit: die vraag wil een object, en AutoCAD kent daar zelf ook een woord dat met een L
+  begint (het laatste object). In een script vraagt VLEA nooit een bestand: is de levering niet te vinden, plaats dan één
+  keer zonder script.
+
+```text
+VKBIJLAGE
+Lijst
+1
+2
+155300,463000
+250
+
+```
+
+  (Lijst, bijlage 1, pagina 2, invoegpunt, schaal 1:250, Enter = geen draaiing.)
+- Niet op een scherm getest: `VKBIJLAGE` is gebouwd en met de testsuite gecontroleerd (het rekenwerk, het lezen van de
+  papiermaat uit de pdf en de meldingen), maar hoe de pdf eruitziet, het snappen op de pdf, de tekenvolgorde en het
+  plotten heeft nog niemand in AutoCAD gezien. In de AutoCAD-kern van 2025 en 2026 met scripts gecontroleerd (zonder
+  schermen, ook met de programmabestanden uit de zip): bij factor 1 is een pagina zoveel tekeneenheden breed als ze in
+  inch is, in een tekening in meter en in een tekening zonder eenheid, met haar draaiing en haar eigen eenheid. Met die
+  maat werd een A4 op schaal 1:250 precies 52,5 m breed. Bij een pdf waarvan de papiermaat niet te lezen of niet vast te
+  stellen is, vroeg VLEA meteen om twee punten; met **Alle** kwam een pagina zonder leesbare papiermaat op factor 1, met
+  een regel daarover. Alleen afgelezen, niet nagemeten: van een pdf waarvan de zichtbare pagina kleiner is dan het blad,
+  toonde AutoCAD de zichtbare pagina. In AutoCAD met schermen is niets hiervan gemeten. Daarom neemt VLEA niets aan: het
+  legt de papiermaat naast de maat die AutoCAD van de geplaatste pagina geeft, en geeft AutoCAD die niet, dan vraagt
+  VLEA om twee punten.
 
 **Opnieuw inlezen gaat per meldnummer.** VLEA onthoudt bij elk getekend object het meldnummer.
 - Staat **dezelfde levering** (hetzelfde meldnummer) al in de tekening, dan vraagt VLEA
@@ -2195,6 +2505,9 @@ FILEDIA
   | NAP-referentie en NAP-leider (`VKNAPSET`, `VKNAPLEADER`) | `HDD-NAP-REFERENTIE` en `HDD-NAP-LEADER` (zelfde namen) | dezelfde lagen in wit (7) en rood (1) |
 
   De contour (`VKCONTOUR`) blijft magenta op `VLEA-KAART-GEBIED`: dat is de grens van het gebied, geen tekenhulp.
+- **Een geplaatste bijlage van een KLIC-levering** (`VKBIJLAGE`, sinds 1.2.0, zie 6): de pdf en zijn bijschrift op de
+  eigen laag `VLEA-KLIC-BIJLAGE` (kleur 7, 0,18 mm; geen NLCS: NLCS kent geen laag voor een onderlegger). Zet die laag uit
+  of bevries hem om de pdf's te verbergen; de levering zelf blijft dan zichtbaar.
 - **In een tekening van 1.0.0** verandert er niets aan wat er al staat: oude AHN-punten, coördinaten, punten, maten en
   KML blijven op hun oude laag in hun oude kleur, ook met `VKSTIJL` (`Nlcs` zet een oude laag terug op zijn NLCS-kleur,
   nooit stil op oranje). Wat je nu tekent, komt op de nieuwe oranje laag. `VKWISSEN` en `VKINFO` vinden oude en nieuwe
@@ -2256,10 +2569,18 @@ FILEDIA
 ## 8. Bronvermelding
 Na het laden van een kaart staat de bronvermelding (bronhouder, licentie, bewerkt, datum) op de opdrachtregel, onderaan
 het palet en in de tekeningeigenschappen (`DWGPROPS`; een KLIC-levering heeft per levering een eigen eigenschap:
-"Bronvermelding klic <meldnummer>"). In `DWGPROPS` staat per kaart alleen de bronvermelding van de laatste keer laden:
-laad je de riolering of de zones daarna in een ander gebied, dan noemt ze alleen de gemeente of het waterschap van die
-laatste keer. Geef je zo'n tekening door, neem de bronvermelding dan direct na elke keer laden over, of zet
-**Bronvermelding in de tekening** aan (hieronder). `VKINFO` op een object van een kaart noemt haar ook, in dezelfde vorm
+"Bronvermelding klic <meldnummer>", een KLIP-levering "Bronvermelding klip <aanvraag>"). In `DWGPROPS` staat per kaart één bronvermelding, met de datum van de laatste keer
+laden. Bij de riolering en de zones langs waterkeringen noemt ze sinds 1.2.0 elke gemeente en elk waterschap waarvan VLEA
+de gegevens bij hun eigen kaartdienst haalt (de riolering van Eindhoven en Papendrecht, de zones van de zes waterschappen
+in 4, Zones langs waterkeringen) en van wie nog objecten van die kaart in je tekening staan: laad je de riolering in
+Eindhoven en daarna in Papendrecht, dan noemt ze beide. Riolering van een andere gemeente komt uit GWSW en valt onder
+Stichting RIONED; die gemeente staat er niet apart in. Zo ook zones van PDOK: die vallen onder Het Waterschapshuis en
+Rijkswaterstaat. Vervang of wis je iets (`VKWISSEN`), dan noemt ze alleen nog wie er staat; staat er van die kaart niets
+meer, dan gaat ze weg. VLEA werkt haar bij als je die kaart laadt of er iets van wist met `VKWISSEN`; wis je objecten met
+`ERASE`, dan pas de volgende keer. Tot en met 1.1.0 stond daar alleen de gemeente of het waterschap van de laatste keer
+laden; in een tekening uit 1.1.0 wordt dat goed zodra je die kaart opnieuw laadt of er iets van wist. Op de opdrachtregel
+en onderaan het palet staat de bronvermelding van wat je net laadde.
+`VKINFO` op een object van een kaart noemt haar ook, in dezelfde vorm
 als bij het
 laden. Bij het AHN-hoogtemodel, het DHMV, de BRT, de riolering en de zones langs waterkeringen niet: daar hangt de tekst
 af van wat je precies laadde (versie, model, lijnen of kaartbeeld; bij het AHN zelfs de licentie; bij de riolering of er
@@ -2319,9 +2640,9 @@ onderaan het palet en in `DWGPROPS`; `VKINFO` noemt bij de zones geen bronvermel
 één object is niet te zien of er bij die keer laden zones van een waterschap bij kwamen.
 
 ## 9. Over VLEA
-`VKOVER` toont de versie, de licenties (de licentie van de plugin, CC BY 4.0 voor NLCS), de regels
-voor naam en logo, de privacy, de bronnen en alle commando's met per kaart de grens. **Over VLEA** onderaan het
-palet toont hetzelfde met het logo, zonder de commando's en de grenzen.
+`VKOVER` toont de versie, de licenties (de licentie van de plugin, CC BY 4.0 voor NLCS en voor de grid van het NGI),
+de regels voor naam en logo, de privacy, de bronnen en alle commando's met per kaart de grens. **Over VLEA** onderaan
+het palet toont hetzelfde met het logo, zonder de commando's en de grenzen.
 
 ### Hulp en website (`VKHELP`, `VKWEBSITE`)
 `VKHELP` toont op de opdrachtregel de versie, de map waarin VLEA geïnstalleerd is, waar je instellingen
@@ -2465,17 +2786,15 @@ vanuit een script; in de AutoCAD-kern zonder schermen (`accoreconsole`) niet (de
   Enter = standaard.
 - De omschrijving van het bestand noemt de bronvermelding van de VLEA-kaarten erin: deel je het
   bestand, dan geldt de naamsvermelding van CC BY ook daar.
-- **Bekend, voor een volgende versie:** zit er riolering van de kaartdienst van Eindhoven of Papendrecht of een zone van de
-  kaartdienst van een waterschap in het bestand, dan noemt de omschrijving bij die kaart alleen de bronhouder en de
-  licentie van de kaart zelf (bij de riolering Stichting RIONED, CC0 1.0; bij de zones Het Waterschapshuis en
-  Rijkswaterstaat, CC BY-SA 4.0), niet de gemeente of het waterschap en wat die zelf over het gebruik zeggen. De
-  bronvermelding met de gemeente of het waterschap staat na het laden op de opdrachtregel, onderaan het palet en in de
-  tekeningeigenschappen (zie 8; daar alleen die van de laatste keer laden): neem haar direct na het laden over als je het
-  bestand deelt.
+- Zit er riolering van de kaartdienst van Eindhoven of Papendrecht of een zone van de kaartdienst van een waterschap in
+  het bestand, dan noemt de omschrijving bij die kaart sinds 1.2.0 ook die gemeente of dat waterschap en wat die zelf over
+  het gebruik zeggen, net als de bronvermelding bij het laden (tot en met 1.1.0 alleen Stichting RIONED, CC0 1.0, of Het
+  Waterschapshuis en Rijkswaterstaat, CC BY-SA 4.0).
 - **KLIC:** KLIC-gegevens zijn vertrouwelijk: volgens de WIBON (art. 4 lid 2) mag je ze alleen aan
   anderen geven voor zover dat noodzakelijk is om graafschade te voorkomen, of voor de oriëntatie op een
   verzoek tot medegebruik of coördinatie. Daarom
-  neemt **Enter** de objecten van een KLIC-levering niet mee; de opdrachtregel zegt hoeveel dat er zijn
+  neemt **Enter** de objecten van een KLIC-levering niet mee (sinds 1.2.0 ook niet het bijschrift van een bijlage
+  die je met `VKBIJLAGE` plaatste; de pdf zelf gaat nooit mee, net als een luchtfoto); de opdrachtregel zegt hoeveel dat er zijn
   ("… objecten uit een KLIC-levering niet meegenomen; selecteer ze zelf als je ze wilt delen"). Wil je
   ze toch in het bestand, kies ze dan zelf. Dan noemt de omschrijving ook de herkomst (Kadaster en
   netbeheerders), de zin "Informatief; de levering zelf blijft leidend bij graafwerk." en de
@@ -2483,6 +2802,9 @@ vanuit een script; in de AutoCAD-kern zonder schermen (`accoreconsole`) niet (de
   niet per object: waar het in een naam of omschrijving zou staan (de id's van het aanvraaggebied, de
   teksten van de bronvermelding en de verantwoording), staat "[meldnummer weggelaten]". De bestandsnaam
   volgt de naam van je tekening; staat het meldnummer daarin, hernoem dan het bestand voordat je het deelt.
+- **KLIP:** objecten uit een KLIP-levering (sinds 1.2.0, `VKKLIP`) gaan nooit mee, ook niet als je ze zelf kiest: de
+  gegevens zijn vertrouwelijk, en VLEA maakt een Google Earth-bestand alleen uit RD. De opdrachtregel zegt hoeveel dat er
+  zijn ("… objecten uit een KLIP-levering niet meegenomen …").
 - VLEA rekent RD om naar lengte- en breedtegraad met de openbare benaderingsformules: ruim binnen 1 m,
   genoeg voor Google Earth, niet voor landmeten. Objecten die niet in RD liggen (lokale coördinaten),
   gaan niet mee.
@@ -2627,6 +2949,10 @@ aangemeld bij Autodesk), en `GEOMARKER` toont de markering van de plek. Er opent
 | Het installatieprogramma zegt "AutoCAD draait nog" | Sluit alle AutoCAD-vensters en klik op **Opnieuw proberen**. Er is niets gewijzigd. |
 | Het installatieprogramma zegt "Het is niet gelukt" | De zin eronder zegt wat er wel en niet gewijzigd is; vaak helpt even wachten en **Opnieuw proberen** (een virusscanner kan nieuwe bestanden kort vasthouden). De technische melding staat in `%LOCALAPPDATA%\VLEA-AutoCAD\logs\setup.log`, zonder je Windows-naam; zet dat bestand bij je melding. |
 | Een kaart, een knop of een hele groep staat niet meer in het palet of op het lint | Je hebt hem verborgen (tandwiel, tabblad **Weergave**). Zet het vinkje weer aan, of klik **Alles weer tonen**, en **Opslaan**. Het commando werkt intussen gewoon als je het typt. |
+| `VKBIJLAGE` (Bijlage plaatsen) zegt "Sla de tekening eerst op", of de pdf in de tekening is weg na verplaatsen | De pdf komt in een map naast de tekening (`<tekening>_kaarten`, submap `klic-bijlagen`): sla de tekening eerst op. Verplaats of hernoem je de tekening, neem die map dan mee (eTransmit doet dat); de tekening verwijst naar de pdf met een pad vanaf de tekening. |
+| `VKBIJLAGE` plaatst een bijlage niet ("geen pdf", "beschadigd", "beveiligd") | VLEA plaatst alleen een gewone pdf. Een beveiligde pdf plaatst VLEA niet: bekijk hem in de levering. Een beschadigde: download de levering opnieuw. |
+| `VKBIJLAGE` zegt dat de papiermaat niet te lezen of niet vast te stellen is en vraagt twee punten | "Niet te lezen": VLEA kon de maat van de pagina niet uit de pdf lezen. "Niet vaststellen": de pdf is niet kapot, maar VLEA weet niet zeker hoe groot AutoCAD de pagina neerzet (AutoCAD gaf van de geplaatste pagina geen bruikbare maat, die maat past niet bij de pdf, of twee maten van de pdf passen allebei, bijvoorbeeld een A4 als zichtbaar deel van een A3); VLEA gokt dan niet. De pagina staat klein (factor 1) op het invoegpunt: zoom daar in, wijs twee punten op de pdf aan waarvan je de echte afstand weet (een maatlijn of de schaalstok op de schets) en typ die afstand. |
+| Een geplaatste pdf is niet te zien | Ligt er een eigen beeld (een raster dat je zelf invoegde) boven, zet dat dan naar achteren (`DRAWORDER`); de luchtfoto en het kaartbeeld van VLEA legt VLEA zelf onder de pdf. Of de laag `VLEA-KLIC-BIJLAGE` staat uit of is bevroren. |
 | `VKSCHETS` (Profielschets openen) vindt de levering niet, of opent niets | Kies de zip of de XML `GI_gebiedsinformatielevering_….xml` van de levering één keer als VLEA erom vraagt; daarna onthoudt VLEA hem. Is de KLIC ingelezen met 0.2.9 of eerder, lees de levering dan opnieuw in met `VKKLIC`. Opent er geen pdf-lezer, dan staat de kopie in `%LOCALAPPDATA%\VLEA-AutoCAD\detail\` (het pad staat op de opdrachtregel). |
 | Een klein venster naast de cursor bij de KLIC staat in de weg | Dat is het venster bij aanwijzen. Zet het uit in de instellingen (tandwiel, **Gereedschap**, **Venster bij aanwijzen (KLIC)**: **Uit**). |
 | Je wilt de rode verantwoording boven een KLIC-levering niet zien | Zet de laag `VLEA-KLIC-VERANTWOORDING` uit of bevries hem (sinds 1.1.0; zie 6). De bronvermelding van de andere kaarten blijft dan staan. Een levering die je met 1.0.0 of eerder inlas, heeft haar verantwoording nog op `X-XX-AL-TEKENBLAD_VERKLARING-T18`: lees hem opnieuw in (**Vervangen**). |
@@ -2667,6 +2993,12 @@ aangemeld bij Autodesk), en `GEOMARKER` toont de markering van de plek. Er opent
 | Een NAP-leider toont een hoogte die niet klopt | Heb je hem verschoven, klik dan **NAP herberekenen** (`VKNAPUPDATE`). Klopt het daarna nog niet: kijk of het UCS op Wereld staat (`UCS`, Enter) en of de referentie en de verticale schaal goed zijn; stel ze zo nodig opnieuw in met **NAP-referentie** en kies `Ja`. |
 | `VKNAPLEADER` zegt dat de referentie in de andere ruimte staat | De referentie hoort bij de modelruimte of bij één layout. Ga naar die ruimte, of stel in de ruimte waar je werkt een nieuwe referentie in (`VKNAPSET`); de vorige wordt dan vervangen. |
 | "Dit bestand is geen KLIC-levering" | Kies de zip van het Kadaster of de XML `GI_gebiedsinformatielevering_….xml`, niet een bijlage of een bestand van een KLIC-viewer. |
+| "Dit is geen KLIC- of KLIP-levering" na **KLIC / KLIP inladen** | VLEA zag aan de naam van het bestand (en in een zip aan de namen erin) geen KLIC- en geen KLIP-levering, en las niets. Kies bij een KLIC-levering de zip of de XML, bij een KLIP-levering het `.klip`-bestand, de zip of een `.json`-bestand in de uitgepakte map. Of de zip is beschadigd: download de levering opnieuw. Herkent de knop een echte KLIP-levering niet, typ dan `VKKLIP` en kies haar daar, en meld het als issue (zonder de levering mee te sturen). |
+| "Deze tekening staat in RD (Nederland)" bij `VKKLIP` (of met de knop **KLIC / KLIP inladen**, nadat je een KLIP-levering koos) | Een KLIP-levering teken je in een tekening in Lambert 72 of Lambert 2008, of in een lege tekening. Het stelsel komt uit het bewaarde gebied, of zonder gebied uit wat er in de modelruimte staat (zie 3, Een KLIP-levering, stap 1). Open de tekening van je project in België, of begin een nieuwe tekening in meters. Er is niets getekend. |
+| "VLEA kan het stelsel van deze tekening niet bepalen: er staat ook iets ver buiten Nederland en België in" bij `VKKLIP` | Geen van de twee hoeken van de tekening ligt in een stelsel, maar de tekening loopt wel over Nederland of België heen (bijvoorbeeld een stempel of kader van je sjabloon rond 0,0 en een los object ver weg). Kies eerst een gebied met `VKGEBIED`: dan tekent `VKKLIP` in het stelsel van dat gebied. Er is niets getekend. |
+| "VLEA kan het stelsel van deze tekening niet bepalen: er staat iets in waarvan VLEA de plek niet kan lezen" bij `VKKLIP` | In de modelruimte staat een xref die niet geladen of niet gevonden is; een xref, onderlegger, afbeelding of proxy-object waarvan AutoCAD de begrenzing niet geeft; of een object dat VLEA niet kon lezen. De rest van de tekening is leeg of heeft alleen lokale coördinaten. Laad de xref in het palet External References (`XREF`), zo nodig met het goede pad: dan telt ze mee. Of kies eerst een gebied met `VKGEBIED`: dan tekent `VKKLIP` in het stelsel van dat gebied. Er is niets getekend. |
+| "Een punt van de levering ligt buiten het gebied waarin VLEA naar … kan omrekenen" bij `VKKLIP` | De levering en je tekening staan in een ander Lambert-stelsel, en een punt van de levering ligt buiten de grid van het NGI (België met minstens 5 km marge). Er is niets getekend en niets gewist. Kijk of je de goede levering koos. In een tekening in hetzelfde stelsel als de levering (een KLIP-levering komt in Lambert 2008) rekent VLEA niet om. |
+| "VLEA kan niet omrekenen: de grid van het NGI in de installatie is beschadigd" bij `VKKLIP` | De installatie van VLEA is niet in orde; aan de levering ligt het niet. Sluit AutoCAD en installeer VLEA opnieuw (met het installatieprogramma of `Installeer.bat`). Er is niets getekend. |
 | "Kies de XML van de levering … of de zip" direct na het pad | Je koos een ander bestand of een map. Met `FILEDIA` = 0 zet AutoCAD `.xml` achter een getypt pad met een andere extensie. Typ het volledige pad naar de zip of de XML. |
 | De vraag bij dezelfde KLIC-levering heeft Overslaan als standaard | De nieuwe levering is ouder, niet compleet of niet te vergelijken met die in de tekening; de vraag zegt welke. Typ `V` als je toch wilt vervangen. |
 | `VKKLIC`, `VKGEF` of `VKKMLIMPORT` vraagt het pad op de opdrachtregel in plaats van een venster | `FILEDIA` staat op 0 (bijvoorbeeld na een afgebroken script). Typ `~` voor het venster (bij `VKGEF` dan het venster van AutoCAD, voor één bestand), of zet `FILEDIA` op 1. |
@@ -2676,13 +3008,13 @@ aangemeld bij Autodesk), en `GEOMARKER` toont de markering van de plek. Er opent
 | Een bolletje achter een kaart is rood | De bron van die kaart antwoordt nu niet, of anders dan VLEA verwacht; de uitleg bij het bolletje zegt welke bron en waarom. Laden mag je toch proberen. Probeer het later opnieuw (**Status vernieuwen**). Staan alle bolletjes rood, kijk dan of je internet hebt en of een proxy of firewall PDOK doorlaat. |
 
 Het log staat in `%LOCALAPPDATA%\VLEA-AutoCAD\logs\` (één bestand per dag, 14 dagen). Mappen staan
-er niet in, bestandsnamen wel. Id's en coördinaten uit een KLIC-levering komen er niet in (bij
-niet-getekende objecten alleen klasse, thema en reden). Van `VKPUNTEN` komt er alleen een regel met aantallen in:
+er niet in, bestandsnamen wel. Id's en coördinaten uit een KLIC- of KLIP-levering komen er niet in (bij
+niet-getekende objecten alleen klasse, thema en reden; bij een KLIP-levering klasse en reden). Van `VKPUNTEN` komt er alleen een regel met aantallen in:
 geen bestandsnaam, namen of coördinaten. Plak bij een foutmelding alleen het relevante
 stuk, en haal eerst bestandsnamen en coördinaten weg die iets over een project zeggen.
 
 ## 13. Belangrijk
 De kaarten zijn informatief. VLEA vervangt geen KLIC-melding: vraag vóór graafwerk altijd een
 KLIC-melding aan.
-Ook een levering die je met `VKKLIC` tekent, is informatief: de levering zelf blijft leidend bij
-graafwerk.
+Ook een levering die je met `VKKLIC` of `VKKLIP` tekent, is informatief: de levering zelf blijft leidend bij
+graafwerk. VLEA vervangt ook geen planaanvraag in het KLIP.

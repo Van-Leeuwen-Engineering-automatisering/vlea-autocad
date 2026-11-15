@@ -21,7 +21,7 @@ hectometerpaaltjes van het Agentschap Wegen en Verkeer (AWV). De kaarten van Vla
 
 | Onderdeel | Commando | Wat |
 |---|---|---|
-| Palet | `VKPALET` | Palet openen of sluiten. Alles kan ook vanuit het palet: per kaart een knop "Laden", een rij knoppen voor het gereedschap en een link naar de website. De keuzes per kaart en per gereedschap staan in het instellingenvenster (tandwiel), aan/uit standaard aan (behalve maatvoering en annotaties van een KLIC-levering en het grondgebruik bij de BRT). |
+| Palet | `VKPALET` | Palet openen of sluiten. Alles kan ook vanuit het palet: per kaart een knop "Laden", bovenaan bij de kaarten de knop "KLIC / KLIP inladen" (sinds 1.2.0), een rij knoppen voor het gereedschap en een link naar de website. De keuzes per kaart en per gereedschap staan in het instellingenvenster (tandwiel), aan/uit standaard aan (behalve maatvoering en annotaties van een KLIC-levering en het grondgebruik bij de BRT). |
 | Gebied | `VKADRES`, `VKGEBIED` | Adres, postcode of perceel zoeken; rechthoek, gesloten polylijn of coördinaten als gebied kiezen. |
 | | `VKCONTOUR` | Een strook op een vaste breedte langs een lijn (in Civil 3D ook een as) tekenen en als gebied kiezen. |
 | Laden | `VKLADEN` | Kaarten laden voor het gekozen gebied, ook meer tegelijk (sleutels met komma's, bijvoorbeeld `bgt,bag`). In het palet heeft elke kaart een eigen knop "Laden". |
@@ -46,8 +46,10 @@ hectometerpaaltjes van het Agentschap Wegen en Verkeer (AWV). De kaarten van Vla
 | | `VKRIOOL` | Gemeentelijke riolering uit GWSW (PDOK). PDOK heeft geen riolering van Eindhoven en Papendrecht: daar komt de riolering van de kaartdienst van de gemeente zelf, op dezelfde lagen (sinds 1.1.0; in Eindhoven strengen en putten zonder bob, maat, materiaal en maaiveld). Gedeeltelijke dekking; niet voor WIBON/KLIC. |
 | Natuur | `VKNATURA2000` | Natura 2000-gebieden (beta). |
 | Beperkingen | `VKZONERINGEN` | Zones langs waterkeringen: kernzone, beschermingszone en profiel van vrije ruimte (beta). Van De Stichtse Rijnlanden, Zuiderzeeland, Scheldestromen, Hunze en Aa's, Vechtstromen en Wetterskip Fryslân, waarvan PDOK de zones niet of niet goed heeft, komen die zones van de kaartdienst van het waterschap zelf, op dezelfde lagen (sinds 1.1.0). Toch kan overal een zone ontbreken: een ontbrekende zone betekent niet dat er geen zone is; de legger van de beheerder is leidend. |
-| KLIC | `VKKLIC` | Een KLIC-levering (de IMKL-XML of de zip van het Kadaster) inlezen en op NLCS-lagen tekenen, met een telling per thema en bij elk object dat niet getekend kan worden de reden. Opnieuw inlezen gaat per meldnummer: een andere levering wordt nooit gewist. Werkt zonder internet. |
+| KLIC | `VKKLIC` | Een KLIC-levering (de IMKL-XML of de zip van het Kadaster) inlezen en op NLCS-lagen tekenen, met een telling per thema en bij elk object dat niet getekend kan worden de reden. Opnieuw inlezen gaat per meldnummer: een andere levering wordt nooit gewist. In het palet de knop "KLIC / KLIP inladen" bovenaan bij de kaarten (op het lint "KLIC / KLIP" in het paneel Kaarten; tot en met 1.1.0 "KLIC-levering" bij het gereedschap): je kiest het bestand en VLEA ziet zelf of het een KLIC- of een KLIP-levering is. Werkt zonder internet. |
+| KLIP | `VKKLIP` | Een KLIP-levering uit Vlaanderen (het .klip-bestand, de zip of de uitgepakte map) inlezen en op dezelfde NLCS-lagen als een KLIC-levering tekenen: elektriciteit naar spanning, gas naar druk, riolering naar stelsel, mantelbuizen, leidingelementen met hun symbool, dieptes als tekst (dekking of m TAW). Wat geen thema krijgt, staat op OVERIG en wordt gemeld; de telling sluit altijd. Bij elk object de beheerder en of het risicovol is. Tekent in het stelsel van de tekening: staat die in Lambert 72, dan rekent VLEA elk punt van de levering (Lambert 2008) om met de grid van het NGI, binnen 1 mm van PROJ (de open rekenbibliotheek voor coördinaten), en draait symbolen en labels uit de levering mee; een lege tekening krijgt Lambert 72, of met de knop de instelling "Stelsel voor België". Weigert in een tekening in RD (volgens het bewaarde gebied, of zonder gebied volgens wat er nu in de modelruimte staat, ook op bevroren lagen), als het stelsel van de tekening niet zeker is (ook als er werk staat waarvan VLEA de plek niet kan lezen, zoals een xref die niet gevonden is), en als VLEA moet omrekenen en een punt buiten de grid ligt; dan wordt er niets getekend. Vertrouwelijk: gaat nooit mee naar Google Earth. Werkt zonder internet. Met dezelfde knop als de KLIC-levering: "KLIC / KLIP inladen" in het palet, "KLIC / KLIP" op het lint (de opties dan op hun standaard, zonder vraag). Sinds 1.2.0. |
 | Profielschets | `VKSCHETS` | De profielschets of een andere bijlage van een infolaag van de KLIC openen, ook als de KLIC in een XREF staat: VLEA zoekt de levering en opent een kopie van de pdf. Bij het inlezen zet VKKLIC een uitroepteken bij elke infolaag met een bijlage en bij elke eis voorzorgsmaatregel; houd je de muis stil op een infolaag, dan verschijnt een venster met een knop die de schets opent. Sinds 0.2.10. |
+| Bijlage plaatsen | `VKBIJLAGE` | Een profielschets of andere bijlage uit een KLIC-levering als pdf in de tekening zetten, in stappen: aanwijzen of uit de lijst kiezen, pagina, invoegpunt, schaal (1:n, met de papiermaat die VLEA uit de pdf zelf leest, of twee punten en de echte afstand) en draaiing; of **Alle** profielschetsen in rijen naast de levering. Op de eigen laag `VLEA-KLIC-BIJLAGE`; de pdf komt naast de tekening (`<tekening>_kaarten`, submap `klic-bijlagen`) en reist met de tekening mee. Sinds 1.2.0. |
 | Google Earth | `VKKMZ`, `VKKMLIMPORT` | Objecten als KMZ (en standaard ook als los .kml-bestand) naar Google Earth (één open lijn: boortracé met begin, eind en lengte; Enter = alle VLEA-kaarten in het gebied, zonder KLIC-levering); een KML of KMZ inlezen op vaste lagen. |
 | Punten | `VKPUNTEN` | Punten uit een Excel- of CSV-bestand met RD-coördinaten: per rij een punt op zijn hoogte en een leider met naam en "NAP +1,23 m". VLEA herkent de kolommen (met of zonder kopregel), laat het eerste punt zien, controleert RD en hoogte en vraagt bij twijfel. Hetzelfde bestand opnieuw inlezen vraagt Vervangen/Erbij/Overslaan. Werkt zonder internet. |
 | Lengteprofiel | `VKNAPSET`, `VKNAPLEADER`, `VKNAPUPDATE` | NAP-hoogte in een lengteprofiel: een referentie (punt met een bekende NAP-hoogte en de verticale schaal), dan per aangewezen punt een leider met "NAP +1,25 m"; herberekenen na het verschuiven. In België in TAW (trefwoord `Stelsel`, "TAW +1,25 m"); VLEA rekent nooit om tussen NAP en TAW. Rekent zonder internet, ook in een tekening die niet in meters staat. Neemt de leiders van het LISP-script NAPLEADER over op verzoek. |
@@ -114,7 +116,7 @@ geen sondering uit de BRO binnen dit gebied.") in plaats van "0 objecten".
   langs waterkeringen van De Stichtse Rijnlanden, Zuiderzeeland, Scheldestromen, Hunze en Aa's, Vechtstromen en Wetterskip
   Fryslân naar `services1.arcgis.com`, `services.arcgis.com`, `geo.scheldestromen.nl` en `opendata.hunzeenaas.nl` (de
   kaartdienst van het waterschap); voor `VKUPDATE` ook naar GitHub
-  (zie [Privacy](#privacy)). `VKKLIC` en `VKGEF` hebben geen
+  (zie [Privacy](#privacy)). `VKKLIC`, `VKKLIP` en `VKGEF` hebben geen
   internet nodig.
   `VKHELP`, `VKWEBSITE` en de commando's onder "Bekijk de plek" openen je eigen browser.
 - De tekening staat in meters (RD, of in Vlaanderen Lambert 72 of Lambert 2008). Een tekening in een andere eenheid
@@ -233,11 +235,12 @@ geen sleutels. Hij maakt alleen deze verbindingen, allemaal via https:
 
 Bij elke verbinding ziet de ontvanger je IP-adres. Cookies bewaart en stuurt de plugin niet. Een
 doorverwijzing naar een adres buiten deze lijst volgt de plugin niet. Een ander programma start de
-plugin alleen voor vier dingen: het Google Earth-bestand openen (`VKKMZ`), de map met de nieuwe versie
+plugin alleen voor vijf dingen: het Google Earth-bestand openen (`VKKMZ`), de map met de nieuwe versie
 tonen (`VKUPDATE`), een van de twee vaste adressen hierboven in je browser (`VKHELP`, `VKWEBSITE`, en
-de link en "?" in het palet) en de plek in je browser (`VKGOOGLE`, `VKSTREETVIEW`, `VKSTREETSMART`,
-`VKDINO`: een adres volgens een vast sjabloon met alleen de coördinaten van het gekozen punt); alleen in
-AutoCAD met schermen. Instellingen, het logbestand en de versies
+de link en "?" in het palet), de plek in je browser (`VKGOOGLE`, `VKSTREETVIEW`, `VKSTREETSMART`,
+`VKDINO`: een adres volgens een vast sjabloon met alleen de coördinaten van het gekozen punt) en de kopie
+van een bijlage uit een KLIC-levering in je pdf-lezer (`VKSCHETS`, `VKINFO`: alleen een kopie die VLEA zelf
+maakte); alleen in AutoCAD met schermen. Instellingen, het logbestand en de versies
 die `VKUPDATE` ophaalt, staan alleen op je eigen pc, in `%LOCALAPPDATA%\VLEA-AutoCAD\`.
 
 Een bestand met punten (`VKPUNTEN`) leest VLEA alleen van je eigen schijf; er gaat niets naar buiten. In het
@@ -252,7 +255,9 @@ Maatlijnen (`VKMAAT`) rekent VLEA alleen uit de lijn die je kiest; er gaat niets
 Een coördinaat (`VKCOORDINAAT`) haalt VLEA uit het punt dat je aanwijst; er gaat niets naar buiten.
 
 Een KLIC-levering leest VLEA alleen van je eigen schijf; er gaat niets van naar buiten. In het logboek
-komen geen id's of coördinaten uit de levering.
+komen geen id's of coördinaten uit de levering. Een KLIP-levering (`VKKLIP`) ook niet. Een bijlage die je met `VKBIJLAGE`
+in de tekening zet (sinds 1.2.0), kopieert VLEA naar de map naast de tekening (`<tekening>_kaarten`, submap
+`klic-bijlagen`); die pdf reist met de tekening mee als je haar deelt.
 Eigen grondonderzoek (`VKGEF`: GEF-bestanden of een sondering uit de BRO als XML) leest VLEA ook alleen van je eigen
 schijf, zonder verbinding. In de tekening komt alleen wat ook bij een sondering uit de BRO staat (nummer, soort,
 plek, maaiveld, dieptes, datum, klasse en de meetwaarden); bedrijf, project en opdrachtgever niet. De naam van het
@@ -284,7 +289,7 @@ In het kort, wat de licenties vragen als je een tekening of export met de kaartd
 |---|---|---|
 | CC0 1.0, Public Domain Mark 1.0 | AHN, NWB, spoor, riolering (uit GWSW: Stichting RIONED, CC0 1.0; van de gemeente Eindhoven: Public Domain Mark 1.0), sonderingen, boringen, Natura 2000, BAG, en bij `VKZONERINGEN` de Zonering waterkering van Hunze en Aa's van de kaartdienst van het waterschap (Public Domain Mark 1.0) | geen voorwaarden; een bronvermelding is netjes, maar niet verplicht |
 | geen licentie genoemd | de riolering van Papendrecht (`VKRIOOL`, van de kaartdienst van de gemeente), en de zones van de waterschappen Scheldestromen, Vechtstromen, Wetterskip Fryslân en Zuiderzeeland van hun eigen kaartdienst (`VKZONERINGEN`) | de gemeente Papendrecht deelt haar rioolkaart openbaar, maar noemt geen licentie; VLEA maakt er zelf geen licentie van. De bronvermelding zegt "Gemeente Papendrecht (Rioolviewer Papendrecht), openbaar gedeeld, geen licentie genoemd": neem die over. Wat je verder met die data mag, zegt de gemeente niet. Zo ook bij Scheldestromen, Vechtstromen en Wetterskip Fryslân: ze delen hun zones openbaar en noemen geen licentie. Zuiderzeeland noemt geen licentie bij naam, wel "geen gebruiksbeperking" (zie onder de tabel) |
-| CC BY 4.0 | BGT (ook als kaartbeeld), BRT, kadaster, luchtfoto, en de zones van De Stichtse Rijnlanden van de kaartdienst van het waterschap (`VKZONERINGEN`) | naam van de bronhouder en de licentie noemen, en zeggen dat de data bewerkt is. De bronvermelding van VLEA zegt dat, maar komt sinds 1.1.0 niet meer vanzelf in de tekening: neem haar direct na het laden over van de opdrachtregel, onderaan het palet of uit de tekeningeigenschappen (`DWGPROPS`, die per kaart alleen de bronvermelding van de laatste keer laden houden), of zet **Bronvermelding in de tekening** aan (getypt `bronvermelding=aan`), dan zet VLEA haar als tekst onder het gebied |
+| CC BY 4.0 | BGT (ook als kaartbeeld), BRT, kadaster, luchtfoto, en de zones van De Stichtse Rijnlanden van de kaartdienst van het waterschap (`VKZONERINGEN`) | naam van de bronhouder en de licentie noemen, en zeggen dat de data bewerkt is. De bronvermelding van VLEA zegt dat, maar komt sinds 1.1.0 niet meer vanzelf in de tekening: neem haar direct na het laden over van de opdrachtregel, onderaan het palet of uit de tekeningeigenschappen (`DWGPROPS`, per kaart met de datum van de laatste keer laden; bij de riolering en de zones sinds 1.2.0 met elke gemeente en elk waterschap met een eigen kaartdienst, Eindhoven, Papendrecht en de zes waterschappen hieronder, van wie nog objecten in de tekening staan, bijgewerkt als je die kaart laadt of er iets van wist met `VKWISSEN`), of zet **Bronvermelding in de tekening** aan (getypt `bronvermelding=aan`), dan zet VLEA haar als tekst onder het gebied |
 | **CC BY-SA 4.0** ("gelijk delen") | de **zones langs waterkeringen** (`VKZONERINGEN`) van PDOK en Rijkswaterstaat: Het Waterschapshuis en Rijkswaterstaat | als bij CC BY, en daarbij: wie de zones (of een bewerking ervan, bijvoorbeeld de uitgesneden zones in een DWG, KMZ of export) verder verspreidt, moet die bewerking onder dezelfde of een compatibele licentie delen en mag er geen extra beperkingen op leggen. De licentie spreekt van delen met het publiek; of een tekening aan één opdrachtgever daaronder valt, beoordeelt VLEA niet. Of het ook voor de rest van een tekening geldt, hangt af van hoe de zones erin gebruikt zijn; ook daarover geeft VLEA geen juridisch oordeel. Wil je dat vermijden, deel de zones dan niet mee: wis ze in de kopie die je verstuurt (`VKWISSEN`, kaart `zoneringen`). Een bevroren of uitgezette laag zit nog in het bestand. |
 
 Voor de zones van PDOK en Rijkswaterstaat houdt VLEA de strengste licentie van de twee aan: de zones van de
@@ -307,26 +312,38 @@ voor de zones van de kaartdienst van een waterschap geldt wat dat waterschap zel
 Een **KLIC-levering** (`VKKLIC`) is geen open data maar een levering volgens de WIBON, en
 **vertrouwelijk** (WIBON art. 4 lid 2): je mag de gegevens alleen aan anderen geven voor zover dat
 noodzakelijk is om graafschade te voorkomen, of voor de oriëntatie op een verzoek tot medegebruik of
-coördinatie. Dat geldt ook voor een tekening, export of Google Earth-bestand met de levering erin; de
+coördinatie. Dat geldt ook voor een tekening, export of Google Earth-bestand met de levering erin, en voor een
+profielschets of andere bijlage die je met `VKBIJLAGE` in de tekening zet (de pdf naast de tekening reist mee); de
 bronvermelding van VLEA zegt daarom "(WIBON, vertrouwelijk)", en `VKKMZ` neemt KLIC met Enter niet mee. Sinds 1.1.0
-komt de bronvermelding standaard niet meer als tekst in de tekening: op de tekening en op een plot staat dan niet dat de
-levering vertrouwelijk is. Geef je die tekening door, zet het er dan zelf bij, of zet **Bronvermelding in de tekening**
+komt de bronvermelding standaard niet meer als tekst in de tekening; sinds 1.2.0 zegt de verantwoording boven de levering
+(die altijd in de tekening staat, linksboven de levering) zelf dat de gegevens uit een KLIC-levering komen en vertrouwelijk
+zijn (WIBON art. 4 lid 2). Op een plot staat dat alleen als dat deel van de tekening erop staat en de laag
+`VLEA-KLIC-VERANTWOORDING` aan staat; plot je een ander deel of zet je die laag uit, zet het er dan zelf bij. Een levering
+die je met 1.1.0 of eerder inlas, krijgt die regel als je haar opnieuw inleest (**Vervangen**). Wil je ook de regel "Bron:
+KLIC-levering …" onder de levering, zet dan **Bronvermelding in de tekening**
 aan vóór het inlezen.
+
+Een **KLIP-levering** (`VKKLIP`, uit het KLIP van Vlaanderen) is net zo min open data en ook vertrouwelijk: geef de
+gegevens alleen door aan wie ze nodig heeft voor het werk. VLEA zegt dat in de melding, in de verantwoording boven de
+levering en in de bronvermelding, en `VKKMZ` neemt een KLIP-levering nooit mee. Een tekening uit `VKKLIP` is een
+onderlegger naast de levering, geen vervanging ervan: de plannen en voorzorgsmaatregelen van de beheerders staan alleen in
+de levering zelf.
 
 De exacte voorwaarden staan in de licentieteksten (de link staat bij elke kaart in `BRONNEN.md`).
 
 **Belangrijk:** de kaarten zijn informatief. VLEA **vervangt geen KLIC-melding**; vraag vóór
 graafwerk altijd een KLIC-melding aan. De riolering is onvolledig en niet bedoeld voor WIBON of KLIC.
-Ook een levering die je met `VKKLIC` tekent, is informatief: de levering zelf blijft leidend bij
-graafwerk.
+Ook een levering die je met `VKKLIC` of `VKKLIP` tekent, is informatief: de levering zelf blijft leidend bij
+graafwerk. VLEA vervangt ook geen planaanvraag in het KLIP.
 
 ## Licentie
 
 - De plugin is gratis te gebruiken, ook voor je werk. Wijzigen, terugvertalen en zelf verspreiden
   mogen niet. Zie [`LICENSE`](LICENSE). De broncode is niet openbaar.
 - Naam en logo van VLEA: zie [`TRADEMARK.md`](TRADEMARK.md).
-- De NLCS-bestanden in de zip (laagnamen en lijntypen, digiGO NLCS 5.0.2) vallen onder CC BY 4.0; zie
-  `LICENSE-CC-BY-4.0.txt` en `NOTICE-NLCS.txt` in de zip.
+- De NLCS-bestanden in de zip (laagnamen en lijntypen, digiGO NLCS 5.0.2) en de grid van het NGI voor het
+  omrekenen tussen Lambert 72 en Lambert 2008 vallen onder CC BY 4.0; zie `LICENSE-CC-BY-4.0.txt`,
+  `NOTICE-NLCS.txt` en `NOTICE-NGI.txt` in de zip.
 - AutoCAD en Civil 3D zijn merken van Autodesk. VLEA is een onafhankelijke uitbreiding.
 
 ## Vragen en fouten

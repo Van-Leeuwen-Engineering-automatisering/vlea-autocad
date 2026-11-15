@@ -95,6 +95,18 @@ garanderen geen termijn.
   `%LOCALAPPDATA%\VLEA-AutoCAD\detail\` kopieerde, nooit een bestand in de levering of een plek die een tekening
   noemt; alleen in AutoCAD met schermen, nooit in de AutoCAD-kern zonder schermen.
   Geen opdrachtregel (cmd), geen script, geen PowerShell, geen installatie.
+- `VKBIJLAGE` (sinds 1.2.0) start geen programma: AutoCAD leest de pdf zelf als onderlegger. Dat is nieuw: tot 1.2.0
+  opende alleen je eigen pdf-lezer een bijlage, nu leest het AutoCAD-proces een pdf uit een levering. Daarom alleen een
+  `.pdf` die via dezelfde harde toets in de levering gevonden is als bij `VKSCHETS` (nooit een plek die een tekening
+  noemt buiten de levering, nooit een netwerkpad of een ander soort bestand), hoogstens 64 MB, eerst getoetst (de kop
+  van een pdf, het einde, en geen versleuteling: VLEA plaatst geen beveiligde pdf), en als kopie naast de
+  tekening (`<tekening>_kaarten`, submap `klic-bijlagen`), met een naam die VLEA zelf maakt. VLEA overschrijft en wist
+  daar nooit een bestand. Voor de schaal leest VLEA zelf de papiermaat uit die kopie: alleen de kruisverwijzingen, de
+  catalogus en de paginaboom (de maat, de draaiing en de eenheid van elke pagina), nooit de inhoud, en begrensd (een
+  bestand van hoogstens 64 MB, een uitgepakte stroom van hoogstens 16 MB, hoogstens 500.000 objecten, 64 bijgewerkte
+  versies, een paginaboom van hoogstens 32 niveaus en 2000 pagina's, en per pdf samen hoogstens 64 MB uit stromen,
+  128 MB gelezen tekens en 2 miljoen waarden). Esc stopt ook het lezen van de maat. Een pdf die daar niet in past of niet
+  te lezen is, geeft geen maat; dan vraagt VLEA om twee punten. Een beveiligde pdf leest VLEA ook zo niet.
 - Instellingen, log en de versies die `VKUPDATE` ophaalt alleen in `%LOCALAPPDATA%\VLEA-AutoCAD\`.
 - Geen automatische updater: `VKUPDATE` downloadt op jouw verzoek, controleert de SHA-256 tegen
   `SHA256SUMS.txt` van dezelfde release en pakt uit. Installeren doe je zelf met `Installeer.bat`;
