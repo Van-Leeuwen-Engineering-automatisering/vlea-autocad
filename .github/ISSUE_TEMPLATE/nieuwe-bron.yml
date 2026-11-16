@@ -17,7 +17,7 @@ body:
         de gemeente Papendrecht), de kaartdiensten van de waterschappen De Stichtse Rijnlanden, Zuiderzeeland, Scheldestromen,
         Hunze en Aa's, Vechtstromen en Wetterskip Fryslân voor de zones die PDOK niet of niet goed heeft (alleen hun vaste
         lagen op services1.arcgis.com, services.arcgis.com, geo.scheldestromen.nl en opendata.hunzeenaas.nl) en GitHub
-        (versiecheck en VKUPDATE).
+        (alleen de versiecheck).
         Een bron die daar niet staat, is een nieuwe netwerkbestemming: dat vraagt eerst een besluit
         van beheer. Zet hier geen tekeningen, klantnamen of projectlocaties in.
   - type: input

@@ -7,7 +7,7 @@ Engineering & Automatisering B.V. Alle rechten voorbehouden.
 ## Wat mag
 
 - Feitelijk naar VLEA verwijzen, bijvoorbeeld: "gemaakt met VLEA – kaarten voor AutoCAD".
-- De downloadpagina delen: https://vanleeuwenea.nl/autocad-kaarten.
+- De downloadpagina delen: https://vanleeuwenea.nl/vlea-tool.
 
 ## Wat niet mag zonder schriftelijke toestemming
 
@@ -18,7 +18,12 @@ Engineering & Automatisering B.V. Alle rechten voorbehouden.
 
 ## Overig
 
-AutoCAD en Civil 3D zijn merken van Autodesk. VLEA is een onafhankelijke uitbreiding en is niet
-gemaakt of goedgekeurd door Autodesk.
+Autodesk, AutoCAD, Civil 3D en Map 3D zijn merken van Autodesk. VLEA is een onafhankelijke
+uitbreiding en is niet gemaakt of goedgekeurd door Autodesk.
 
-Twijfelt u of iets mag? Vraag het dan eerst via https://vanleeuwenea.nl/contact.
+Google Maps, Street View en Google Earth zijn merken van Google. Street Smart is een merk van
+Cyclomedia. DINOloket is van TNO. PDOK is een merk van het Kadaster, NLCS van stichting digiGO.
+VLEA is niet verbonden aan deze partijen en is niet door hen gemaakt of goedgekeurd; de knoppen
+en commando's openen alleen hun eigen webpagina of programma, op verzoek van de gebruiker.
+
+Twijfelt u of iets mag? Vraag het dan eerst via info@vanleeuwenea.nl.

@@ -38,4 +38,6 @@ Laagnamen en lijntypen: NLCS 5.0.2 van digiGO, CC BY 4.0; omgezet naar JSON, laa
 
 Omrekenen tussen Lambert 72 en Lambert 2008: grid BD72 naar ETRS89 van het NGI (België), CC BY 4.0; omgezet naar een eigen formaat (zie NOTICE-NGI.txt in de map VLEA-AutoCAD.bundle).
 
-Informatief; vervangt geen KLIC-melding.
+Rekenwijze voor de Lambert-projectie en het omrekenen met de grid: PROJ, MIT-licentie; door VLEA nageschreven (zie NOTICE-PROJ.txt in de map VLEA-AutoCAD.bundle).
+
+Informatief; vervangt geen KLIC-melding of planaanvraag in het KLIP.

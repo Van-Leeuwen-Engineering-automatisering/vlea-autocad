@@ -1,5 +1,8 @@
 blank_issues_enabled: false
 contact_links:
+  - name: Een review, wens of verbeterpunt (zonder GitHub-account)
+    url: https://vanleeuwenea.nl/vlea-tool#reacties
+    about: Laat je reactie, wens of verbeterpunt achter op de website, bij Reviews en wensen.
   - name: Geen GitHub-account? Mail info@vanleeuwenea.nl
     url: https://vanleeuwenea.nl/vlea-tool
     about: Voor vragen zonder GitHub-account, mail info@vanleeuwenea.nl. De tool is gratis en zonder gegarandeerde ondersteuning.

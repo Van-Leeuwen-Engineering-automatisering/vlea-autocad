@@ -18,8 +18,8 @@ body:
         daarvoor aanwijst (api.ellipsis-drive.com), voor de riolering in en bij Eindhoven en Papendrecht de kaartdienst van
         de gemeente (gisservice.eindhoven.nl en services8.arcgis.com), voor de zones van De Stichtse Rijnlanden, Zuiderzeeland,
         Scheldestromen, Hunze en Aa's, Vechtstromen en Wetterskip Fryslân de kaartdienst van het waterschap
-        (services1.arcgis.com, services.arcgis.com, geo.scheldestromen.nl en opendata.hunzeenaas.nl) en GitHub (api.github.com; bij
-        VKUPDATE ook github.com en release-assets.githubusercontent.com). Laat een proxy of firewall die door, of noem hieronder
+        (services1.arcgis.com, services.arcgis.com, geo.scheldestromen.nl en opendata.hunzeenaas.nl) en GitHub (api.github.com,
+        de versiecheck; versies tot en met 1.2.0 bij VKUPDATE ook github.com en release-assets.githubusercontent.com). Laat een proxy of firewall die door, of noem hieronder
         welke niet bereikbaar is.
   - type: input
     id: autocad
@@ -33,7 +33,7 @@ body:
     attributes:
       label: Versie van VLEA
       description: Onderaan het palet, of typ VKHELP of VKOVER.
-      placeholder: "bijv. 0.2.0"
+      placeholder: "bijv. 1.3.0"
     validations:
       required: true
   - type: textarea

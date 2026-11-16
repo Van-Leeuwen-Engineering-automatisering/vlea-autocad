@@ -15,7 +15,8 @@ hectometerpaaltjes van het Agentschap Wegen en Verkeer (AWV). De kaarten van Vla
 > installatieprogramma van de nieuwste versie, voor AutoCAD 2025, 2026 en 2027. Liever de zip met
 > `Installeer.bat`: [VLEA-AutoCAD.zip](https://github.com/Van-Leeuwen-Engineering-automatisering/vlea-autocad/releases/latest/download/VLEA-AutoCAD.zip). Wat er per
 > versie veranderd is, staat bij de [releases](https://github.com/Van-Leeuwen-Engineering-automatisering/vlea-autocad/releases). De handleiding staat in
-> [`docs/handleiding.md`](docs/handleiding.md). Meer over de plugin: https://vanleeuwenea.nl/autocad-kaarten.
+> [`docs/handleiding.md`](docs/handleiding.md). Meer over de plugin: https://vanleeuwenea.nl/vlea-tool; daar werk je ook bij
+> naar een nieuwe versie.
 
 ## Wat kan het
 
@@ -28,7 +29,7 @@ hectometerpaaltjes van het Agentschap Wegen en Verkeer (AWV). De kaarten van Vla
 | Ondergrond | `VKBGT` | BGT (actuele versie), in groepen: wegen, water, panden, terrein, namen en nummers, overig. |
 | | `VKBGTBEELD` | De BGT als kaartbeeld (beta): de BGT van PDOK als afbeelding onder de tekening, in vier kaartstijlen (achtergrond, pastel, standaard en omtrek; zonder keuze komt de achtergrond), tot 5 km². Een plaatje: je kunt er niet op vastklikken; voor lijnen en vlakken is er `VKBGT`. Het rustiger kaartbeeld van de BRT in kleur krijg je met `VKBRT`. |
 | | `VKBAG` | BAG-panden en, als optie, de adressen met huisnummer (alleen actuele objecten; de rest wordt gemeld). |
-| | `VKBRT` | BRT-topografie voor een groter gebied (beta): standaard het plaatje in kleur, dezelfde kaart als het VLEA-portaal; in de instellingen ook het plaatje grijs of de lijnen (TOP10NL, een overzichtskaart). |
+| | `VKBRT` | BRT-topografie voor een groter gebied (beta): standaard het plaatje in kleur (de BRT-achtergrondkaart van het Kadaster); in de instellingen ook het plaatje grijs of de lijnen (TOP10NL, een overzichtskaart). |
 | | `VKKADASTER` | Kadastrale grenzen en perceelnummers. |
 | | `VKLUCHTFOTO` | Luchtfoto, "snel" (25 cm) of "scherp" (8 cm). |
 | Hoogte | `VKAHN` | AHN-maaiveld (of oppervlak met gebouwen) als surface, één per gebied ("VLEA AHN RD 154750-462750 500x500"). **Alleen in Civil 3D**; in AutoCAD zonder Civil 3D staat AHN in het palet grijs. |
@@ -52,7 +53,7 @@ hectometerpaaltjes van het Agentschap Wegen en Verkeer (AWV). De kaarten van Vla
 | Bijlage plaatsen | `VKBIJLAGE` | Een profielschets of andere bijlage uit een KLIC-levering als pdf in de tekening zetten, in stappen: aanwijzen of uit de lijst kiezen, pagina, invoegpunt, schaal (1:n, met de papiermaat die VLEA uit de pdf zelf leest, of twee punten en de echte afstand) en draaiing; of **Alle** profielschetsen in rijen naast de levering. Op de eigen laag `VLEA-KLIC-BIJLAGE`; de pdf komt naast de tekening (`<tekening>_kaarten`, submap `klic-bijlagen`) en reist met de tekening mee. Sinds 1.2.0. |
 | Google Earth | `VKKMZ`, `VKKMLIMPORT` | Objecten als KMZ (en standaard ook als los .kml-bestand) naar Google Earth (één open lijn: boortracé met begin, eind en lengte; Enter = alle VLEA-kaarten in het gebied, zonder KLIC-levering); een KML of KMZ inlezen op vaste lagen. |
 | Punten | `VKPUNTEN` | Punten uit een Excel- of CSV-bestand met RD-coördinaten: per rij een punt op zijn hoogte en een leider met naam en "NAP +1,23 m". VLEA herkent de kolommen (met of zonder kopregel), laat het eerste punt zien, controleert RD en hoogte en vraagt bij twijfel. Hetzelfde bestand opnieuw inlezen vraagt Vervangen/Erbij/Overslaan. Werkt zonder internet. |
-| Lengteprofiel | `VKNAPSET`, `VKNAPLEADER`, `VKNAPUPDATE` | NAP-hoogte in een lengteprofiel: een referentie (punt met een bekende NAP-hoogte en de verticale schaal), dan per aangewezen punt een leider met "NAP +1,25 m"; herberekenen na het verschuiven. In België in TAW (trefwoord `Stelsel`, "TAW +1,25 m"); VLEA rekent nooit om tussen NAP en TAW. Rekent zonder internet, ook in een tekening die niet in meters staat. Neemt de leiders van het LISP-script NAPLEADER over op verzoek. |
+| Lengteprofiel | `VKNAPSET`, `VKNAPLEADER`, `VKNAPUPDATE` | NAP-hoogte in een lengteprofiel: een referentie (punt met een bekende NAP-hoogte en de verticale schaal), dan per aangewezen punt een leider met "NAP +1,25 m"; herberekenen na het verschuiven. In België in TAW (trefwoord `Stelsel`, "TAW +1,25 m"); VLEA rekent nooit om tussen NAP en TAW. Rekent zonder internet, ook in een tekening die niet in meters staat. Leest de leiders van het oudere, eigen LISP-script NAPLEADER van VLEA en neemt ze op verzoek over. |
 | Maatlijnen | `VKMAAT` | Bij elk stuk van een lijn of polylijn een maat op 2 m: bij een gesloten vorm altijd buiten, bij een open lijn rechts (of links) van de tekenrichting; bij een boog de koorde. Op de laag `VLEA-GEREEDSCHAP-MAAT` (oranje) met de maatstijl `VK_MAAT`; je eigen maatstijl blijft zoals hij was. Eerst lijnen kiezen en dan `VKMAAT` bemaat ze allemaal. Werkt zonder internet. |
 | Coördinaat | `VKCOORDINAAT` | Een punt aanwijzen (snappen mag) en er een aanwijslijn bij zetten met de X en Y van dat punt, bijvoorbeeld bij de hoekpunten van een proefsleuf ("X = 155 000,00", "Y = 463 000,00"). Het zijn de coördinaten van je tekening (RD, of in België Lambert); VLEA rekent niets om. Decimalen (0 tot en met 3) en de Z erbij kies je in het instellingenvenster of met een trefwoord. Herhalen tot Enter. In het palet en op het lint de knop "Coördinaat". Werkt zonder internet. |
 | Bekijk de plek | `VKGOOGLE`, `VKSTREETVIEW`, `VKSTREETSMART`, `VKDINO` | Een punt aanwijzen (Enter = midden van het beeld) en die plek in je browser openen: Google Maps met een speld, Street View (het dichtstbijzijnde panorama; met een tweede punt ook de kijkrichting), StreetSmart van Cyclomedia (daarvoor heb je een eigen account van Cyclomedia nodig) of DINOloket van TNO. DINOloket opent ingezoomd op de plek, die in het midden van de kaart ligt; zet in DINOloket zelf "Bodem- en grondonderzoek" aan om sonderingen en boringen te zien. In het palet en op het lint: "Bekijk de plek". |
@@ -60,7 +61,7 @@ hectometerpaaltjes van het Agentschap Wegen en Verkeer (AWV). De kaarten van Vla
 | Gereedschap | `VKINFO`, `VKWISSEN`, `VKSTIJL`, `VKOVER` | Gegevens van een object, eigen imports wissen (per kaart, of met de keuze Selectie alleen wat je kiest: van een sondering of boring gaan symbool, label en plot samen weg), NLCS-kleuren of grijze onderlegger, versie, commando's en licenties. |
 | Hulp | `VKHELP`, `VKWEBSITE` | Versie, installatiemap, map van instellingen en logboek, bijwerken; de handleiding of de website van VLEA in je browser. |
 | Status | `VKSTATUS` | Per kaart of de bron nu werkt, traag is of eruit ligt (een of twee kleine verzoeken per kaart, in een vast testgebied). In het palet staat dat als bolletje achter elke kaart; laden kan altijd. |
-| Bijwerken | `VKUPDATE` | Nieuwste versie ophalen, controleren (SHA-256) en uitgepakt klaarzetten. Installeren doe je zelf met `Installeer.bat` (of met het installatieprogramma van de nieuwe versie). |
+| Bijwerken | `VKUPDATE` | Zegt welke versie je hebt en waar de nieuwste staat (https://vanleeuwenea.nl/vlea-tool), en opent die pagina in je browser als de versiecheck een nieuwere versie kent. Daar download je het installatieprogramma; dat vervangt de versie die er staat. De plugin downloadt en installeert zelf niets. |
 
 Alle commando's beginnen met `VK` en werken ook vanaf de opdrachtregel en in scripts, ook de
 kaartcommando's (`VKBGT` enz.) in de AutoCAD-kern zonder schermen.
@@ -83,8 +84,8 @@ geen sondering uit de BRO binnen dit gebied.") in plaats van "0 objecten".
   de contour van `VKCONTOUR` ook (`VLEA-KAART-GEBIED`: een laadgebied, geen object).
 - KLIC heeft geen officiële NLCS-mapping; VLEA kiest per thema (laagspanning, gas, water, riool …)
   lagen uit de NLCS-objectentabellen (discipline OI) en maakt alleen voor het thema "overig" een
-  eigen object (`OVERIG`) volgens de NLCS-systematiek. Ook de stijl is daar een keuze van VLEA: op een deel van
-  de lagen wijken kleur, lijndikte of lijntype bewust af van de objectentabel (", VLEA-stijl" in de
+  eigen object (`OVERIG`) volgens de NLCS-systematiek. Op een deel van de lagen wijken kleur, lijndikte of
+  lijntype af van de objectentabel (", VLEA-stijl" in de
   laagbeschrijving).
 - VLEA tekent op NLCS-lagen; de tool is niet door digiGO gecertificeerd.
 - Lijntypen gebruiken `NLCS.shx`. Stuur je een tekening naar iemand zonder deze plugin, gebruik dan
@@ -115,10 +116,10 @@ geen sondering uit de BRO binnen dit gebied.") in plaats van "0 objecten".
   Papendrecht naar `gisservice.eindhoven.nl` en `services8.arcgis.com` (de kaartdienst van de gemeente); voor de zones
   langs waterkeringen van De Stichtse Rijnlanden, Zuiderzeeland, Scheldestromen, Hunze en Aa's, Vechtstromen en Wetterskip
   Fryslân naar `services1.arcgis.com`, `services.arcgis.com`, `geo.scheldestromen.nl` en `opendata.hunzeenaas.nl` (de
-  kaartdienst van het waterschap); voor `VKUPDATE` ook naar GitHub
+  kaartdienst van het waterschap); voor de versiecheck naar `api.github.com`, één keer per dag
   (zie [Privacy](#privacy)). `VKKLIC`, `VKKLIP` en `VKGEF` hebben geen
   internet nodig.
-  `VKHELP`, `VKWEBSITE` en de commando's onder "Bekijk de plek" openen je eigen browser.
+  `VKHELP`, `VKWEBSITE`, `VKUPDATE` en de commando's onder "Bekijk de plek" openen je eigen browser.
 - De tekening staat in meters (RD, of in Vlaanderen Lambert 72 of Lambert 2008). Een tekening in een andere eenheid
   weigert VLEA, zonder iets te tekenen.
 - Voor de luchtfoto en de kaartbeelden van de BRT en de BGT (`VKBGTBEELD`), en in Vlaanderen het GRB als kaartbeeld
@@ -134,8 +135,9 @@ geen sondering uit de BRO binnen dit gebied.") in plaats van "0 objecten".
 
 ### Met het installatieprogramma
 
-1. Download `VLEA-AutoCAD-Setup.exe` bij de
-   [nieuwste release](https://github.com/Van-Leeuwen-Engineering-automatisering/vlea-autocad/releases/latest).
+1. Download `VLEA-AutoCAD-Setup.exe` op https://vanleeuwenea.nl/vlea-tool (knop **Download gratis**; het
+   is hetzelfde bestand als bij de
+   [nieuwste release](https://github.com/Van-Leeuwen-Engineering-automatisering/vlea-autocad/releases/latest)).
 2. Sluit AutoCAD en open het bestand. Het programma is niet ondertekend: **je browser en Windows kunnen
    waarschuwen**. Kies in je browser dat je het bestand wilt behouden, en in Windows **Meer informatie**
    en daarna **Toch uitvoeren**, als je de download vertrouwt (zie
@@ -146,6 +148,8 @@ geen sondering uit de BRO binnen dit gebied.") in plaats van "0 objecten".
    AutoCAD-versie alleen de map met de DLL's (`…\VLEA-AutoCAD.bundle\Contents\2025`, `…\Contents\2026`
    of `…\Contents\2027`) in de lijst vertrouwde locaties van AutoCAD (`TRUSTEDPATHS`), niet de map
    `ApplicationPlugins` zelf (zie [`SECURITY.md`](SECURITY.md)). Het maakt geen verbinding met internet.
+   Staat er al een versie, dan zegt het welke en welke erbij komt; staat er een nieuwere versie dan in dit
+   bestand, dan waarschuwt het. Het gedownloade bestand mag je daarna weggooien.
 4. Start AutoCAD. Vraagt AutoCAD of de plugin geladen mag worden, kies **Load** of **Load Once**
    (AutoCAD heeft geen Nederlandse versie). De DLL's van VLEA zijn niet ondertekend; het venster heet dan
    "Security - Unsigned Executable File", met Always Load, Load Once en Do Not Load. Het kan ook
@@ -163,15 +167,20 @@ niet, en `Installeer.bat` uit de zip ook niet.
 
 Dezelfde installatie als script: je ziet elke stap in een venster met tekst.
 
-1. Download `VLEA-AutoCAD.zip` bij de
+1. Download `VLEA-AutoCAD.zip` op https://vanleeuwenea.nl/vlea-tool of bij de
    [nieuwste release](https://github.com/Van-Leeuwen-Engineering-automatisering/vlea-autocad/releases/latest)
-   en pak de zip helemaal uit (rechtsklik, **Alles uitpakken**). Start niets vanuit de zip.
+   en pak de zip helemaal uit (rechtsklik, **Alles uitpakken**). Start niets vanuit de zip. In de uitgepakte
+   map staan `Installeer.bat`, `Verwijder.bat`, `LEESMIJ.txt`, de map `VLEA-AutoCAD.bundle` en de map
+   `scripts` met de twee PowerShell-scripts.
 2. Sluit AutoCAD.
 3. Dubbelklik `Installeer.bat`. **Windows kan waarschuwen** dat het bestand van internet komt; kies
    dan **Meer informatie** en daarna **Toch uitvoeren** (in een ander venster van Windows heet de knop
    **Uitvoeren**) als je de download vertrouwt (zie [Download controleren](#download-controleren)). Het script zegt wat het gaat doen en vraagt
-   `Doorgaan? (J/N)`: typ J en druk op Enter. Het doet daarna wat bij stap 3 hierboven staat.
-4. Start AutoCAD; verder zoals stap 4 en 5 hierboven.
+   `Doorgaan? (J/N)`: typ J en druk op Enter. Het doet daarna wat bij stap 3 hierboven staat, en haalt van de
+   gekopieerde bestanden de downloadmarkering van Windows af (`Unblock-File`). `Installeer.bat` start daarvoor
+   Windows PowerShell met `scripts\Installeer.ps1` en zet voor die ene start het uitvoeringsbeleid opzij
+   (`-ExecutionPolicy Bypass`); beveiligingssoftware kan dat melden. Het installatieprogramma doet dat niet.
+4. Start AutoCAD; verder zoals stap 4 en 5 hierboven. De uitgepakte map mag je daarna weggooien.
 
 Meldt het script "0 profielen": start AutoCAD één keer, sluit het en draai `Installeer.bat` opnieuw.
 
@@ -183,30 +192,52 @@ instellingen van VLEA in AutoCAD), dan heeft het venster de knop **Verwijderen**
 de map `%APPDATA%\Autodesk\ApplicationPlugins\VLEA-AutoCAD.bundle`, de registraties die AutoCAD voor
 VLEA aanmaakte ("VLEA AutoCAD <jaar>", "… Palet" en "… Civil") en in `TRUSTEDPATHS`, in elk profiel,
 precies de regels van VLEA (`…\VLEA-AutoCAD.bundle\Contents\2025`, `…\Contents\2026` en
-`…\Contents\2027`). Andere plugins en regels blijven staan. Je instellingen, het logboek en de versies
-die `VKUPDATE` ophaalde, in `%LOCALAPPDATA%\VLEA-AutoCAD\`, blijven ook staan; wil je die ook weg, typ
-dan in een opdrachtprompt, in de uitgepakte map, `Verwijder.bat -OokInstellingen`.
+`…\Contents\2027`). Andere plugins en regels blijven staan. Je instellingen en het logboek, in
+`%LOCALAPPDATA%\VLEA-AutoCAD\`, blijven ook staan; wil je die ook weg, typ dan in een opdrachtprompt, in de
+uitgepakte map, `Verwijder.bat -OokInstellingen`. Heb je het installatieprogramma of de zip niet meer, download ze
+dan opnieuw op https://vanleeuwenea.nl/vlea-tool.
 
 ### Bijwerken
 
-Typ `VKUPDATE` in AutoCAD. VLEA vraagt bij GitHub wat de nieuwste versie is, downloadt
-die, controleert de SHA-256 tegen `SHA256SUMS.txt` en zet hem uitgepakt klaar in
-`%LOCALAPPDATA%\VLEA-AutoCAD\updates\<versie>\` (in AutoCAD opent die map in Verkenner). Sluit daarna
-AutoCAD en dubbelklik `Installeer.bat` in die map. VLEA installeert nooit zelf en start geen scripts.
-Nog geen release of al de nieuwste versie: `VKUPDATE` zegt dat en downloadt niets.
+Bijwerken gaat via de website. Staat onderaan het palet "Nieuwe versie beschikbaar", klik daar dan op: je browser
+opent https://vanleeuwenea.nl/vlea-tool#bijwerken. Download daar het installatieprogramma, sluit AutoCAD, open het
+bestand en klik in het venster op **Installeren**. Het venster zegt welke versie er staat en welke erbij komt; je
+instellingen blijven staan. De knop **Bijwerken** in het palet en op het lint en `VKUPDATE` doen hetzelfde, maar openen
+de pagina alleen als de versiecheck (één keer per dag) een nieuwere versie kent; anders, en in een script in de
+AutoCAD-kern, zeggen ze alleen welke versie je hebt en waar de nieuwste staat, met de nieuwste release op GitHub als
+tweede adres. De plugin downloadt en installeert zelf niets en start geen scripts. Met een nieuwe zip kan het ook: zie
+[Met de zip](#met-de-zip-en-installeerbat).
 
-Je kunt ook het installatieprogramma van de nieuwe versie downloaden en openen: het vervangt de versie
-die er staat.
+De map `%LOCALAPPDATA%\VLEA-AutoCAD\updates`, waarin versies tot en met 1.2.0 een nieuwe versie klaarzetten, ruimt de
+plugin bij de volgende start van AutoCAD zelf op (alleen de mappen die VLEA daar zelf maakte; zie
+[`SECURITY.md`](SECURITY.md)). Het gedownloade installatieprogramma in je map Downloads ruimt VLEA niet op: dat mag
+je zelf weggooien.
+
+**Versie 1.2.0 en ouder:** daar doet de regel "Nieuwe versie beschikbaar" (en `VKUPDATE`) nog wat die versie altijd
+deed: VLEA downloadt de zip van GitHub, controleert de SHA-256 en zet hem uitgepakt klaar in
+`%LOCALAPPDATA%\VLEA-AutoCAD\updates\<versie>\`. Sluit dan AutoCAD en dubbelklik `Installeer.bat` in die map. Of
+werk bij via de website, zoals hierboven.
 
 ### Download controleren
 
 Naast de downloads staat `SHA256SUMS.txt`, met een regel voor de zip en een voor het
-installatieprogramma (`VKUPDATE` controleert de zip zelf). Vergelijk in PowerShell:
+installatieprogramma. Vergelijk in PowerShell:
 
 ```powershell
 Get-FileHash .\VLEA-AutoCAD-Setup.exe -Algorithm SHA256
 Get-FileHash .\VLEA-AutoCAD.zip -Algorithm SHA256
 ```
+
+De releases op GitHub zijn onveranderbaar: een uitgebracht bestand kan niet stil vervangen worden. Met het programma
+`gh` van GitHub controleer je dat een gedownload bestand precies het bestand uit een release is (ook als je het via de
+website kreeg):
+
+```powershell
+gh release verify-asset v1.3.0 .\VLEA-AutoCAD-Setup.exe -R Van-Leeuwen-Engineering-automatisering/vlea-autocad
+```
+
+`gh` vraagt eenmalig `gh auth login` (een gratis GitHub-account is genoeg); zonder account gebruik je `Get-FileHash`
+tegen `SHA256SUMS.txt` hierboven.
 
 ## Privacy
 
@@ -227,7 +258,7 @@ geen sleutels. Hij maakt alleen deze verbindingen, allemaal via https:
 | Bij het openen van het palet, hoogstens één keer per tien minuten vanzelf, en met de knop "Status vernieuwen" (de status van de bronnen; uit te zetten in de instellingen van het palet, onder "Algemeen") | dezelfde bronnen als de kaarten: PDOK (`api.pdok.nl`, `service.pdok.nl`), de BRO (`publiek.broservices.nl`, zoeken en, met de optie `standen` van de peilbuizen aan, één vaste meetreeks), met de optie `rws` aan de legger van Rijkswaterstaat (`geo.rijkswaterstaat.nl`) en, alleen als het gebied van de tekening in Lambert 72 of Lambert 2008 ligt, Digitaal Vlaanderen (`geo.api.vlaanderen.be`), DOV (`www.dov.vlaanderen.be`) en AWV (`opendata.apps.mow.vlaanderen.be`) (bij een tekening in RD nooit), en de dienst van AHN5 en AHN6 (`api.ellipsis-drive.com`) alleen als bij het AHN-hoogtemodel een andere versie dan AHN4 gekozen is; de kaartdiensten van de gemeenten en van de waterschappen nooit | per kaart een of twee kleine verzoeken in een vast testgebied (nooit jouw gebied), en de versie van de plugin |
 | Alleen als je `VKSTATUS` start (typen of in een script) | dezelfde bronnen: PDOK (`api.pdok.nl`, `service.pdok.nl`), de BRO (`publiek.broservices.nl`, zoeken en één vaste meetreeks), de legger van Rijkswaterstaat (`geo.rijkswaterstaat.nl`), Digitaal Vlaanderen (`geo.api.vlaanderen.be`, ook bij een tekening in RD), DOV (`www.dov.vlaanderen.be`, ook bij een tekening in RD) en AWV (`opendata.apps.mow.vlaanderen.be`, ook bij een tekening in RD). `VKSTATUS` vraagt altijd alle bronnen, ook de legger van Rijkswaterstaat, ook als de optie `rws` of "Status van de bronnen tonen" uit staat: het is een commando dat je zelf start. De dienst van AHN5 en AHN6 (`api.ellipsis-drive.com`) vraagt `VKSTATUS` niet: die vraagt alleen het palet, als bij het AHN-hoogtemodel een andere versie dan AHN4 gekozen is; wie niets instelt, maakt ook met `VKSTATUS` geen verbinding met die dienst. Het palet en `VKSTATUS` vragen de kaartdiensten van de gemeenten (`gisservice.eindhoven.nl`, `services8.arcgis.com`) nooit: alleen het laden van de riolering vraagt ze. Het palet en `VKSTATUS` vragen de kaartdiensten van de waterschappen (`services1.arcgis.com`, `services.arcgis.com`, `geo.scheldestromen.nl`, `opendata.hunzeenaas.nl`) nooit: alleen het laden van de zones vraagt ze | per kaart een of twee kleine verzoeken in een vast testgebied (nooit jouw gebied), en de versie van de plugin |
 | Eén keer per dag (uit te zetten in de instellingen van het palet, onder "Algemeen") | GitHub: `api.github.com` | alleen de versie van de plugin |
-| Alleen als je `VKUPDATE` start (typen, de knop Bijwerken in het palet of op het lint, of de regel "Nieuwe versie beschikbaar" onderaan het palet) | GitHub: `api.github.com`, `github.com` en `release-assets.githubusercontent.com` (daar laat GitHub de downloads vandaan komen) | alleen de versie van de plugin |
+| Alleen als je de regel "Nieuwe versie beschikbaar" onderaan het palet of de link "Laat een review of wens achter" (palet en "Over VLEA") gebruikt, of `VKUPDATE` start of op Bijwerken klikt terwijl de versiecheck een nieuwere versie kent | je eigen browser opent de pagina `vanleeuwenea.nl/vlea-tool` (bij Bijwerken of bij Reviews en wensen); de plugin maakt zelf geen verbinding | wat je browser altijd meestuurt; de plugin geeft alleen het vaste adres door, zonder versienummer of andere gegevens. De website ziet dat bezoek en telt het, zoals bij elk bezoek |
 | Alleen als je `VKHELP` of `VKWEBSITE` typt, Help op het lint kiest, of in het palet de link vanleeuwenea.nl of de knop "?" gebruikt | je eigen browser opent de handleiding op `github.com` of de website `vanleeuwenea.nl`; de plugin maakt zelf geen verbinding | wat je browser altijd meestuurt; de plugin geeft alleen het vaste adres door |
 | Alleen als je `VKGOOGLE`, `VKSTREETVIEW` of `VKSTREETSMART` start (typen, of de knoppen onder "Bekijk de plek" in het palet en op het lint) | je eigen browser opent Google Maps of Street View (`www.google.com`) of StreetSmart van Cyclomedia (`streetsmart.cyclomedia.com`); de plugin maakt zelf geen verbinding | de coördinaten van het gekozen punt (bij Street View ook de kijkrichting): die dienst ziet die plek (en wat de pagina van die dienst zelf laadt, zoals analysediensten), dus waar je project ligt; plus wat je browser altijd meestuurt (bij Google ook je Google-account als je daar ingelogd bent, bij StreetSmart je account van Cyclomedia) |
 | Alleen als je `VKDINO` start (typen, of de knop DINOloket) | je eigen browser opent de kaart van DINOloket (`www.dinoloket.nl`); de plugin maakt zelf geen verbinding | de coördinaten van het gekozen punt in hele meters, achter het #-teken van het adres: dat deel stuurt je browser niet mee met het eerste verzoek, maar de pagina van DINOloket leest het en vraagt dan zelf de kaart voor die plek op bij TNO (`www.dinoloket.nl`) en de achtergrondkaart bij PDOK (`service.pdok.nl`); TNO en PDOK zien dus die plek, plus wat je browser altijd meestuurt |
@@ -235,13 +266,16 @@ geen sleutels. Hij maakt alleen deze verbindingen, allemaal via https:
 
 Bij elke verbinding ziet de ontvanger je IP-adres. Cookies bewaart en stuurt de plugin niet. Een
 doorverwijzing naar een adres buiten deze lijst volgt de plugin niet. Een ander programma start de
-plugin alleen voor vijf dingen: het Google Earth-bestand openen (`VKKMZ`), de map met de nieuwe versie
-tonen (`VKUPDATE`), een van de twee vaste adressen hierboven in je browser (`VKHELP`, `VKWEBSITE`, en
-de link en "?" in het palet), de plek in je browser (`VKGOOGLE`, `VKSTREETVIEW`, `VKSTREETSMART`,
+plugin alleen voor vier dingen: het Google Earth-bestand openen (`VKKMZ`), een van de vier vaste adressen
+hierboven in je browser (`VKHELP`, `VKWEBSITE`, `VKUPDATE`, en in het palet de link, de "?", de regel "Nieuwe
+versie beschikbaar" en de link naar Reviews en wensen), de plek in je browser (`VKGOOGLE`, `VKSTREETVIEW`, `VKSTREETSMART`,
 `VKDINO`: een adres volgens een vast sjabloon met alleen de coördinaten van het gekozen punt) en de kopie
 van een bijlage uit een KLIC-levering in je pdf-lezer (`VKSCHETS`, `VKINFO`: alleen een kopie die VLEA zelf
-maakte); alleen in AutoCAD met schermen. Instellingen, het logbestand en de versies
-die `VKUPDATE` ophaalt, staan alleen op je eigen pc, in `%LOCALAPPDATA%\VLEA-AutoCAD\`.
+maakte); alleen in AutoCAD met schermen. Instellingen en het logbestand staan alleen op je eigen pc, in
+`%LOCALAPPDATA%\VLEA-AutoCAD\`. De plugin downloadt geen programma's of updates. Uit zichzelf wist hij alleen
+bestanden die hij zelf maakte: in die map, en naast de tekening (kaartbeelden die hij vervangt of na annuleren opruimt,
+oude kopieën van bijlagen, tijdelijke bestanden; zie [`SECURITY.md`](SECURITY.md)). Sinds 1.3.0 wist hij bij het laden
+ook de map `updates` van versies tot en met 1.2.0.
 
 Een bestand met punten (`VKPUNTEN`) leest VLEA alleen van je eigen schijf; er gaat niets naar buiten. In het
 logboek komen geen namen, coördinaten of bestandsnamen uit het bestand; in de tekening staan ze wel (bij
@@ -341,15 +375,22 @@ graafwerk. VLEA vervangt ook geen planaanvraag in het KLIP.
 - De plugin is gratis te gebruiken, ook voor je werk. Wijzigen, terugvertalen en zelf verspreiden
   mogen niet. Zie [`LICENSE`](LICENSE). De broncode is niet openbaar.
 - Naam en logo van VLEA: zie [`TRADEMARK.md`](TRADEMARK.md).
-- De NLCS-bestanden in de zip (laagnamen en lijntypen, digiGO NLCS 5.0.2) en de grid van het NGI voor het
-  omrekenen tussen Lambert 72 en Lambert 2008 vallen onder CC BY 4.0; zie `LICENSE-CC-BY-4.0.txt`,
-  `NOTICE-NLCS.txt` en `NOTICE-NGI.txt` in de zip.
-- AutoCAD en Civil 3D zijn merken van Autodesk. VLEA is een onafhankelijke uitbreiding.
+- De NLCS-bestanden van stichting digiGO in de zip (laagnamen en lijntypen) en de NLCS-gegevens in de laagtabellen
+  (digiGO NLCS 5.0.2), en de verschuivingsgrid van het NGI (België) voor het omrekenen tussen Lambert 72 en
+  Lambert 2008, vallen onder CC BY 4.0; zie `LICENSE-CC-BY-4.0.txt`, `NOTICE-NLCS.txt` en `NOTICE-NGI.txt` in de zip.
+- De rekenwijze van de Lambert-projectie en van het omrekenen met de grid is nageschreven naar PROJ en GeographicLib;
+  zie `NOTICE-PROJ.txt` in de zip.
+- Autodesk, AutoCAD, Civil 3D en Map 3D zijn merken van Autodesk. Google Maps, Street View en Google Earth zijn merken
+  van Google; Street Smart is een merk van Cyclomedia; DINOloket is van TNO; PDOK is een merk van het Kadaster, NLCS van
+  stichting digiGO. VLEA is een onafhankelijke uitbreiding, niet verbonden aan deze partijen en niet door hen gemaakt of
+  goedgekeurd (zie [`TRADEMARK.md`](TRADEMARK.md)).
 
 ## Vragen en fouten
 
-- Vragen en fouten: via [Issues](https://github.com/Van-Leeuwen-Engineering-automatisering/vlea-autocad/issues).
-  Voeg geen tekeningen of projectgegevens toe. De tool is gratis en zonder garantie of gegarandeerde
+- Een review, wens of verbeterpunt: laat hem achter op https://vanleeuwenea.nl/vlea-tool#reacties, bij **Reviews en
+  wensen**. Een vraag: mail info@vanleeuwenea.nl. Een fout met technische gegevens: via
+  [Issues](https://github.com/Van-Leeuwen-Engineering-automatisering/vlea-autocad/issues). Voeg geen tekeningen of
+  projectgegevens toe. De tool is gratis en zonder garantie of gegarandeerde
   ondersteuning.
 - Een beveiligingsprobleem: zie [`SECURITY.md`](SECURITY.md).
 - Handleiding: [`docs/handleiding.md`](docs/handleiding.md).
