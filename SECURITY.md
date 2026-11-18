@@ -18,7 +18,7 @@ garanderen geen termijn.
   VLEA, AutoCAD, en aangepaste versies van anderen.
 
 ## Wat de plugin doet en niet doet
-- Netwerkverkeer alleen naar `api.pdok.nl` en `service.pdok.nl` (kaarten), `publiek.broservices.nl`
+- Netwerkverkeer alleen naar `api.pdok.nl` en `service.pdok.nl` (kaarten en adres zoeken, ook de kaart en de luchtfoto in het kaartvenster van `VKZOEKKAART`), `publiek.broservices.nl`
   (sonderingen en boringen: per register alleen zoeken en één object ophalen; peilbuizen: alleen de meetreeks van één
   filter als CSV), één vast pad van
   `geo.rijkswaterstaat.nl` (de legger van Rijkswaterstaat, voor de zones langs waterkeringen; uit te
@@ -57,6 +57,12 @@ garanderen geen termijn.
   (versiecheck, één keer per dag, uit te zetten). Geen telemetrie, geen account, geen sleutels, geen cookies. De
   plugin downloadt geen programma's of updates (sinds 1.3.0; versies tot en met 1.2.0 downloaden bij `VKUPDATE` nog zelf van `github.com`
   en `release-assets.githubusercontent.com`, zie hieronder).
+- Het kaartvenster (`VKZOEKKAART`, knop "Zoek op kaart", sinds 1.4.0) is een eigen venster zonder browsercomponent: elk
+  stuk kaart (tegels van de BRT-achtergrondkaart), de luchtfoto en het zoeken komen via een eigen client met dezelfde
+  regels als die van de kaarten, met een eigen limiet (hoogstens drie tegels tegelijk, 600 per minuut, 60 luchtfoto's per minuut), alleen naar
+  `service.pdok.nl` en `api.pdok.nl`, en alleen in het geheugen (niets op schijf). De schermen halen zelf niets op: geen
+  adres en geen browser. PDOK ziet welke stukken kaart je
+  bekijkt, ook als je daarna niets kiest.
 - De status van de bronnen (het bolletje per kaart in het palet, en `VKSTATUS`) gebruikt alleen die bronnen: per
   kaart een of twee kleine verzoeken aan dezelfde dienst als de kaart, altijd in een vast testgebied en nooit in het
   gebied van de gebruiker. Het palet doet dat bij het openen hoogstens één keer per tien minuten (uit te zetten; de
@@ -180,8 +186,8 @@ die releases. De plugin controleert een download niet meer zelf (hij downloadt g
 ondertekend.
 - Met het programma `gh` van GitHub controleer je dat een gedownload bestand precies het bestand uit een release van
   deze repository is, ook als je het via de website kreeg:
-  `gh release verify-asset v1.3.0 .\VLEA-AutoCAD-Setup.exe -R Van-Leeuwen-Engineering-automatisering/vlea-autocad`
-  (en `gh release verify v1.3.0 -R Van-Leeuwen-Engineering-automatisering/vlea-autocad` voor de release zelf). Dat
+  `gh release verify-asset v1.4.0 .\VLEA-AutoCAD-Setup.exe -R Van-Leeuwen-Engineering-automatisering/vlea-autocad`
+  (en `gh release verify v1.4.0 -R Van-Leeuwen-Engineering-automatisering/vlea-autocad` voor de release zelf). Dat
   vangt een gewijzigde link of een beschadigde download, niet een kwaadwillende nieuwe release. `gh` vraagt eenmalig
   `gh auth login` (een gratis GitHub-account is genoeg); zonder account gebruik je `Get-FileHash` tegen
   `SHA256SUMS.txt` hieronder.

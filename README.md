@@ -23,7 +23,7 @@ hectometerpaaltjes van het Agentschap Wegen en Verkeer (AWV). De kaarten van Vla
 | Onderdeel | Commando | Wat |
 |---|---|---|
 | Palet | `VKPALET` | Palet openen of sluiten. Alles kan ook vanuit het palet: per kaart een knop "Laden", bovenaan bij de kaarten de knop "KLIC / KLIP inladen" (sinds 1.2.0), een rij knoppen voor het gereedschap en een link naar de website. De keuzes per kaart en per gereedschap staan in het instellingenvenster (tandwiel), aan/uit standaard aan (behalve maatvoering en annotaties van een KLIC-levering en het grondgebruik bij de BRT). |
-| Gebied | `VKADRES`, `VKGEBIED` | Adres, postcode of perceel zoeken; rechthoek, gesloten polylijn of coördinaten als gebied kiezen. |
+| Gebied | `VKADRES`, `VKZOEKKAART`, `VKGEBIED` | Adres, postcode of perceel zoeken; de plek zoeken op een kaart in een venster (schuiven, zoomen, ook straat en woonplaats; knop "Zoek op kaart" in het palet en op het lint, sinds 1.4.0); rechthoek, gesloten polylijn of coördinaten als gebied kiezen. |
 | | `VKCONTOUR` | Een strook op een vaste breedte langs een lijn (in Civil 3D ook een as) tekenen en als gebied kiezen. |
 | Laden | `VKLADEN` | Kaarten laden voor het gekozen gebied, ook meer tegelijk (sleutels met komma's, bijvoorbeeld `bgt,bag`). In het palet heeft elke kaart een eigen knop "Laden". |
 | Ondergrond | `VKBGT` | BGT (actuele versie), in groepen: wegen, water, panden, terrein, namen en nummers, overig. |
@@ -34,6 +34,7 @@ hectometerpaaltjes van het Agentschap Wegen en Verkeer (AWV). De kaarten van Vla
 | | `VKLUCHTFOTO` | Luchtfoto, "snel" (25 cm) of "scherp" (8 cm). |
 | Hoogte | `VKAHN` | AHN-maaiveld (of oppervlak met gebouwen) als surface, één per gebied ("VLEA AHN RD 154750-462750 500x500"). **Alleen in Civil 3D**; in AutoCAD zonder Civil 3D staat AHN in het palet grijs. |
 | | `VKAHNPUNT` | AHN-hoogte op aangewezen punten: een punt op die hoogte en een label "NAP +4,98 m". In een tekening in Lambert 72 komt de hoogte uit het DHMV van Digitaal Vlaanderen, met het label in TAW ("TAW +24,48 m"). Ook zonder Civil 3D. |
+| | `VKPROFIEL` | Maaiveldprofiel langs een lijn (sinds 1.4.0): wijs punten aan of kies een lijn, en VLEA tekent het maaiveld uit AHN4 (DTM, 0,5 m) als één doorlopende lijn met een NAP-referentielijn waar je klikt, horizontaal en verticaal op dezelfde schaal. Waar AHN geen hoogte heeft (water, panden), is de lijn recht doorgetrokken en gestippeld. Alleen in Nederland (RD), tot 5 km. In het palet en op het lint de knop "Maaiveldprofiel". Ook zonder Civil 3D. |
 | Vlaanderen | `VKGRB` | Het GRB (Grootschalig Referentie Bestand) van Digitaal Vlaanderen als lijnen, vlakken, punten en teksten, op de NLCS-lagen van de BGT voor hetzelfde soort object (beta). Alleen in een tekening in Lambert 72 of Lambert 2008, net als de twee kaarten hieronder; in een Nederlandse tekening staan ze grijs met "alleen in België". |
 | | `VKGRBBEELD` | Het GRB als kaartbeeld (kleur of grijs), een plaatje onder de tekening op de laag `VLEA-KAART-GRB` (beta). |
 | | `VKORTHO` | De orthofoto van Vlaanderen, "snel" (25 cm) of "scherp" (15 cm), op de laag van de luchtfoto (beta). |
@@ -149,7 +150,8 @@ geen sondering uit de BRO binnen dit gebied.") in plaats van "0 objecten".
    of `…\Contents\2027`) in de lijst vertrouwde locaties van AutoCAD (`TRUSTEDPATHS`), niet de map
    `ApplicationPlugins` zelf (zie [`SECURITY.md`](SECURITY.md)). Het maakt geen verbinding met internet.
    Staat er al een versie, dan zegt het welke en welke erbij komt; staat er een nieuwere versie dan in dit
-   bestand, dan waarschuwt het. Het gedownloade bestand mag je daarna weggooien.
+   bestand, dan waarschuwt het. Het venster zegt ook wat er nieuw is sinds de versie die er staat. Het
+   gedownloade bestand mag je daarna weggooien.
 4. Start AutoCAD. Vraagt AutoCAD of de plugin geladen mag worden, kies **Load** of **Load Once**
    (AutoCAD heeft geen Nederlandse versie). De DLL's van VLEA zijn niet ondertekend; het venster heet dan
    "Security - Unsigned Executable File", met Always Load, Load Once en Do Not Load. Het kan ook
@@ -180,7 +182,8 @@ Dezelfde installatie als script: je ziet elke stap in een venster met tekst.
    gekopieerde bestanden de downloadmarkering van Windows af (`Unblock-File`). `Installeer.bat` start daarvoor
    Windows PowerShell met `scripts\Installeer.ps1` en zet voor die ene start het uitvoeringsbeleid opzij
    (`-ExecutionPolicy Bypass`); beveiligingssoftware kan dat melden. Het installatieprogramma doet dat niet.
-4. Start AutoCAD; verder zoals stap 4 en 5 hierboven. De uitgepakte map mag je daarna weggooien.
+4. Start AutoCAD; verder zoals stap 4 en 5 hierboven. De uitgepakte map mag je daarna weggooien. Wat er
+   nieuw is, staat in `NIEUW.txt` in de map `VLEA-AutoCAD.bundle` (sinds 1.4.0).
 
 Meldt het script "0 profielen": start AutoCAD één keer, sluit het en draai `Installeer.bat` opnieuw.
 
@@ -201,8 +204,8 @@ dan opnieuw op https://vanleeuwenea.nl/vlea-tool.
 
 Bijwerken gaat via de website. Staat onderaan het palet "Nieuwe versie beschikbaar", klik daar dan op: je browser
 opent https://vanleeuwenea.nl/vlea-tool#bijwerken. Download daar het installatieprogramma, sluit AutoCAD, open het
-bestand en klik in het venster op **Installeren**. Het venster zegt welke versie er staat en welke erbij komt; je
-instellingen blijven staan. De knop **Bijwerken** in het palet en op het lint en `VKUPDATE` doen hetzelfde, maar openen
+bestand en klik in het venster op **Installeren**. Het venster zegt welke versie er staat en welke erbij komt, en wat
+er sindsdien nieuw is; je instellingen blijven staan. De knop **Bijwerken** in het palet en op het lint en `VKUPDATE` doen hetzelfde, maar openen
 de pagina alleen als de versiecheck (één keer per dag) een nieuwere versie kent; anders, en in een script in de
 AutoCAD-kern, zeggen ze alleen welke versie je hebt en waar de nieuwste staat, met de nieuwste release op GitHub als
 tweede adres. De plugin downloadt en installeert zelf niets en start geen scripts. Met een nieuwe zip kan het ook: zie
@@ -233,7 +236,7 @@ De releases op GitHub zijn onveranderbaar: een uitgebracht bestand kan niet stil
 website kreeg):
 
 ```powershell
-gh release verify-asset v1.3.0 .\VLEA-AutoCAD-Setup.exe -R Van-Leeuwen-Engineering-automatisering/vlea-autocad
+gh release verify-asset v1.4.0 .\VLEA-AutoCAD-Setup.exe -R Van-Leeuwen-Engineering-automatisering/vlea-autocad
 ```
 
 `gh` vraagt eenmalig `gh auth login` (een gratis GitHub-account is genoeg); zonder account gebruik je `Get-FileHash`
@@ -246,7 +249,7 @@ geen sleutels. Hij maakt alleen deze verbindingen, allemaal via https:
 
 | Wanneer | Met | Wat gaat er mee |
 |---|---|---|
-| Kaarten laden, adres zoeken | PDOK: `api.pdok.nl`, `service.pdok.nl` | het gebied of de zoektekst, en de versie van de plugin |
+| Kaarten laden, adres zoeken, het kaartvenster (`VKZOEKKAART`, knop "Zoek op kaart") | PDOK: `api.pdok.nl`, `service.pdok.nl` | het gebied of de zoektekst (bij `VKPROFIEL` vakken van 100 m langs de lijn), in het kaartvenster ook welke stukken kaart en luchtfoto je bekijkt (ook als je daarna niets kiest), en de versie van de plugin |
 | Sonderingen, boringen of peilbuizen laden | BRO: `publiek.broservices.nl` (alleen zoeken en één sondering of boring ophalen; de boringen in twee registers, geotechnisch en geologisch; bij de peilbuizen, met de optie `standen` (standaard aan), de meetreeks van elke gekozen peilbuis als CSV; de peilbuizen zelf zoekt de plugin bij PDOK) | het gebied (als zoekvak in graden), bij de peilbuizen welke meetreeksen (en dus welke plek) je bekijkt, en de versie van de plugin |
 | Zones langs waterkeringen laden, met de optie `rws` (standaard aan) | Rijkswaterstaat: `geo.rijkswaterstaat.nl` (alleen de openbare legger) | het gebied, en de versie van de plugin |
 | Kaarten van Vlaanderen laden, in een tekening in Lambert 72 of Lambert 2008 (het GRB als lijnen en vlakken en als kaartbeeld en de orthofoto; het hoogtemodel DHMV alleen in Lambert 72), en `VKAHNPUNT` in een tekening in Lambert 72 (de hoogte uit het DHMV) | Digitaal Vlaanderen: `geo.api.vlaanderen.be` (alleen vier vaste adressen, en altijd met het stelsel van de tekening) | het gebied (bij `VKAHNPUNT` een klein vak rond het punt), en de versie van de plugin |

@@ -1,6 +1,6 @@
 # Handleiding – VLEA, kaarten voor AutoCAD
 
-> **Versie 1.3.0.** Voor AutoCAD 2025, 2026 en 2027. `VKHELP` opent deze pagina in je browser.
+> **Versie 1.4.0.** Voor AutoCAD 2025, 2026 en 2027. `VKHELP` opent deze pagina in je browser.
 
 > **Belangrijk.** De kaarten zijn informatief. VLEA vervangt geen KLIC-melding (Nederland) en geen planaanvraag in het
 > KLIP (Vlaanderen): vraag die vóór graafwerk altijd aan. Een levering die je met `VKKLIC` of `VKKLIP` tekent, is een
@@ -12,7 +12,8 @@
   LT laadt geen .NET-plugins).
 - Installeren of bijwerken: download `VLEA-AutoCAD-Setup.exe` op https://vanleeuwenea.nl/vlea-tool, sluit AutoCAD,
   open het bestand en klik in het venster op **Installeren**. Een oudere versie wordt vervangen; je instellingen
-  blijven staan. Verwijderen kan met hetzelfde programma. Het bestand mag je daarna weggooien. Alle stappen, ook die
+  blijven staan. Het venster zegt ook wat er nieuw is sinds de versie die er staat. Verwijderen kan met hetzelfde
+  programma. Het bestand mag je daarna weggooien. Alle stappen, ook die
   met de zip en `Installeer.bat`, en wat je doet als Windows waarschuwt: zie de [README](../README.md#installeren) en
   hoofdstuk 12.
 - Je tekening staat in **meters**: in RD (Rijksdriehoekscoördinaten), of in Vlaanderen in Lambert 72 of Lambert 2008
@@ -35,8 +36,9 @@ lint-tabblad **VLEA** op **Palet** (nog een keer = sluiten). Van boven naar bene
   handleiding, allebei in je browser en zonder het commando af te breken waar je mee bezig bent (de
   versie en de mappen toont `VKHELP` op de opdrachtregel). Het **tandwiel** opent de instellingen (zie
   hieronder).
-- **Gebied** – kies waar de kaart moet komen (zie 3): een adres zoeken, of de knoppen **Rechthoek**,
-  **Polylijn** en **Contour** (een strook langs een lijn, met de breedte uit de instellingen).
+- **Gebied** – kies waar de kaart moet komen (zie 3): een adres zoeken, de knop **Zoek op kaart** (sinds 1.4.0: een
+  kaart in een venster, zie 3, Zoeken op de kaart), of de knoppen **Rechthoek**, **Polylijn** en **Contour** (een strook
+  langs een lijn, met de breedte uit de instellingen).
   Daaronder staat het gekozen gebied.
 - **Kaarten** – bovenaan sinds 1.2.0 de knop **KLIC / KLIP inladen**: kies het bestand van een KLIC-levering
   (Nederland) of een KLIP-levering (België); VLEA ziet zelf welke het is (zie 6 en 3, Een KLIP-levering). Tot en met 1.1.0
@@ -58,7 +60,7 @@ lint-tabblad **VLEA** op **Palet** (nog een keer = sluiten). Van boven naar bene
   toont de vaste waarschuwing van een kaart.
 - **Gereedschap** – een rij knoppen: AHN-punt (`VKAHNPUNT`), NAP-referentie, NAP-leider en NAP herberekenen
   (`VKNAPSET`, `VKNAPLEADER`, `VKNAPUPDATE`; in een lengteprofiel, zie 4), Coördinaat (`VKCOORDINAAT`, sinds 0.2.10;
-  zie 4), Bijlage plaatsen (`VKBIJLAGE`, sinds 1.2.0; zie 6), Profielschets openen (`VKSCHETS`, sinds 0.2.10; zie 6),
+  zie 4), Maaiveldprofiel (`VKPROFIEL`, sinds 1.4.0; zie 4; op het lint direct vóór AHN-punt), Bijlage plaatsen (`VKBIJLAGE`, sinds 1.2.0; zie 6), Profielschets openen (`VKSCHETS`, sinds 0.2.10; zie 6),
   Eigen grondonderzoek (`VKGEF`, met een bestandskiezer voor een of meer GEF- of XML-bestanden,
   zie 4), Naar Google Earth (`VKKMZ`; wat je al gekozen had, neemt het mee als er geen commando
   loopt, anders de VLEA-kaarten in het gebied zonder KLIC; één open lijn of polylijn wordt een
@@ -102,12 +104,14 @@ en **Weergave** (welke kaarten en knoppen je ziet, zie verderop). Alles wat er i
   **Venster bij aanwijzen (KLIC)** (zie 6), sinds 1.2.0 de schaal om mee te beginnen bij **Bijlage in de tekening
   (VKBIJLAGE)** (standaard 1:500, zie 6), en bij de coördinaat het aantal decimalen en of de Z erbij komt;
 - **Stijl**: NLCS-kleuren of grijze onderlegger voor de kaarten (een KLIC-levering komt altijd in
-  NLCS-kleuren, de sonderingen, de boringen en de peilbuizen blijven altijd in kleur), en **Bronvermelding in de tekening**:
+  NLCS-kleuren, de sonderingen, de boringen en de peilbuizen blijven altijd in kleur, en sinds 1.4.0 ook het maaiveldprofiel),
+  en **Bronvermelding in de tekening**:
   of de bronvermelding als tekst onder het gebied komt (sinds 1.1.0 standaard uit; zie 8). De
   grijze onderlegger maakt lagen grijs, geen beeld: de luchtfoto, het plaatje van de BRT, het kaartbeeld van de BGT,
   het GRB als kaartbeeld en de orthofoto blijven in hun eigen kleuren. Wil je de BRT grijs, kies dan bij de BRT **Plaatje grijs**.
   Daaronder het blok **Tekst en aanwijslijnen**: laag, tekststijl, aanwijslijnstijl en teksthoogte van de tekst die je zelf
-  plaatst met de knoppen Coördinaat, NAP-leider en Punten (zie 7);
+  plaatst met de knoppen Coördinaat, NAP-leider en Punten (zie 7). Het maaiveldprofiel gebruikt dit blok niet: het heeft
+  een eigen teksthoogte (trefwoord `Teksthoogte`, zie 4);
 - **Algemeen**: één keer per dag kijken of er een nieuwe versie is, of het palet de status van de bronnen toont
   (standaard aan; zie hieronder), sinds 1.1.0 bij **Luchtfoto's en kaartbeelden** waar die bestanden komen
   (**Bestanden opslaan**: in een eigen map per tekening, de standaard, of direct in de map van de tekening; zie 4, Waar de
@@ -132,12 +136,12 @@ de stijl van het kaartbeeld en Terrein en reliëf (zie 4, De BRT).
 ### Weergave: kiezen wat je ziet
 Op het tabblad **Weergave** van het instellingenvenster kies je welke kaarten en knoppen je in het palet en op het lint
 ziet. Standaard staat alles aan: stel je niets in, dan zie je alles wat 0.2.9 toonde, plus de nieuwe knoppen
-**Profielschets openen** en **Coördinaat**, en sinds 1.2.0 **Bijlage plaatsen**.
+**Profielschets openen** en **Coördinaat**, sinds 1.2.0 **Bijlage plaatsen** en sinds 1.4.0 **Maaiveldprofiel**.
 
 - **Kaarten**: per kaart een vinkje, per soort zoals in het palet (ondergrond, hoogte, grondonderzoek, infra, natuur,
   beperkingen).
 - **Knoppen**: per knop een vinkje, in groepen: **KLIC** (KLIC / KLIP inladen, Profielschets openen, Bijlage plaatsen), **Tekenhulpen**
-  (AHN-punt, NAP-referentie, NAP-leider, NAP herberekenen, Coördinaat, Punten inlezen), **Bestanden** (Eigen
+  (AHN-punt, NAP-referentie, NAP-leider, NAP herberekenen, Coördinaat, Maaiveldprofiel, Punten inlezen), **Bestanden** (Eigen
   grondonderzoek, Naar Google Earth, KML inlezen), **Tekening** (Geografische plek, Info, Import wissen, Stijl) en
   **Bekijk de plek** (Google Maps, Street View, StreetSmart, DINOloket).
 - Vink uit wat je niet gebruikt en klik **Opslaan**: het verdwijnt meteen uit het palet en van het lint. Staan alle
@@ -148,7 +152,7 @@ ziet. Standaard staat alles aan: stel je niets in, dan zie je alles wat 0.2.9 to
 - **Verbergen is niet uitzetten.** Elk commando werkt nog als je het typt (bijvoorbeeld `VKKLIC`), en een verborgen kaart
   laad je met haar commando (bijvoorbeeld `VKBGT`) of met `VKLADEN`.
 - **Altijd te zien**, en niet uit te zetten: het gebied, het tandwiel, de **?**, **Over VLEA** en **Bijwerken**, en op het
-  lint **Palet**, **Adres** en **Help**. Zo kom je altijd terug bij de instellingen.
+  lint **Palet**, **Adres**, **Zoek op kaart** en **Help**. Zo kom je altijd terug bij de instellingen.
 - **Alles weer tonen** zet alle vinkjes van dit tabblad weer aan. **Standaard herstellen** onderaan doet dat ook, samen met
   de rest van het venster. Bewaard wordt pas bij **Opslaan**.
 - Je keuze staat bij je andere instellingen in `%LOCALAPPDATA%\VLEA-AutoCAD\instellingen.json` en blijft staan bij
@@ -202,6 +206,8 @@ legger van Rijkswaterstaat. `VKSTATUS` stelt geen vragen, dus het werkt ook in e
 - **Adres, postcode of perceel** (`VKADRES`, of het zoekveld in het palet): typ bijvoorbeeld een
   straat met huisnummer en plaats en kies een suggestie. AutoCAD zoomt ernaartoe en VLEA stelt een
   gebied van 250 x 250 m rond dat punt voor.
+- **Zoeken op de kaart** (`VKZOEKKAART`, of de knop **Zoek op kaart** in het palet en op het lint, sinds 1.4.0): een
+  kaart in een venster; zie hieronder.
 - **Rechthoek aanwijzen**, **polylijn kiezen** of **coördinaten typen** (`VKGEBIED`): twee
   hoekpunten, een gesloten polylijn, of `xmin,ymin,xmax,ymax` in RD-meters (in een Belgische tekening in
   Lambert-meters, zie hieronder).
@@ -223,6 +229,43 @@ legger van Rijkswaterstaat. `VKSTATUS` stelt geen vragen, dus het werkt ook in e
 - Elke tekening onthoudt haar eigen gebied, ook na opslaan en opnieuw openen.
 - Het palet toont het oppervlak. Ligt het gebied buiten Nederland (buiten RD), dan zegt het palet
   dat. Ligt het in België, in Lambert 72 of Lambert 2008, dan staat dat achter het oppervlak (zie hieronder).
+
+### Zoeken op de kaart (`VKZOEKKAART`)
+Handig in een lege tekening, als je de plek nog moet vinden. De knop **Zoek op kaart** staat in het palet onder het
+zoekveld en op het lint direct na **Adres**; typen kan ook: `VKZOEKKAART`. Het venster toont de kaart van Nederland (de
+BRT-achtergrondkaart van het Kadaster) of, met de knop **Luchtfoto**, de actuele luchtfoto; die zie je pas als je ver
+genoeg ingezoomd bent.
+- **Schuiven:** sleep de kaart met de linkermuisknop, of met het ingedrukte wieltje zoals in AutoCAD, of gebruik de
+  pijltjes.
+- **Zoomen:** met het wieltje (rond de muis), of met + en − (knop of toets). In het zoekveld typen + en - gewoon een
+  teken.
+- **Zoeken:** bovenin typ je een adres, postcode, perceel, straat of woonplaats; kies een suggestie (of Enter). Bij een
+  adres, postcode of perceel gaat de kaart erheen en staat er meteen een oranje punt met het vierkant van 250 m
+  eromheen. Bij een straat of woonplaats gaat alleen de kaart erheen: klik dan zelf op de plek die je zoekt. Stond er
+  al tekst in het zoekveld van het palet, dan staat die hier geselecteerd: Enter zoekt ermee, typen vervangt hem. Typ je
+  verder en geef je meteen Enter, dan zoekt het venster eerst met je nieuwe tekst.
+- **Kiezen:** klik op de plek die je zoekt: er komt een oranje punt met het vierkant van 250 m eromheen. Ver uitgezoomd
+  zoomt een klik eerst drie stappen in, zodat je de plek precies kunt aanwijzen; de regel onderaan zegt of de volgende
+  klik nog inzoomt of de plek kiest. **Kies deze plek** (of Enter) zet dat vierkant als gebied in de tekening en zoomt
+  erheen, net als bij een adres. **Annuleren**, Esc of het kruisje laat het gebied zoals het was (met de lijst met
+  suggesties open sluit Esc eerst de lijst).
+- **Er staat al een gebied:** dan opent het venster daarop en zie je het als stippellijn met een witte rand, ook op de
+  luchtfoto; **Kies deze plek** vervangt het.
+  Anders opent het venster waar je het in deze tekening de vorige keer liet (in dezelfde AutoCAD-sessie), dan op het
+  midden van je beeld als dat in Nederland ligt, dan waar je het de laatste keer liet in een andere tekening, en anders op
+  heel Nederland.
+- **Een tekening in millimeters:** een lege tekening van het standaardsjabloon staat in millimeters. Dan vraagt
+  `VKZOEKKAART` eerst of de eenheid op meters mag (Enter = Ja); zo kun je daarna meteen kaarten laden. Kies je Ja en
+  daarna **Annuleren**, dan blijft de eenheid op meters staan. Staat er al iets in de tekening, of kies je Nee, dan zegt
+  VLEA dat de tekening niet in meters staat en opent het venster toch: het gebied staat dan in de tekening, maar VLEA
+  zoomt er niet heen en de kaarten laden pas als de eenheid op meters staat.
+- **Alleen in Nederland (RD):** in een tekening in Lambert weigert het, met de reden (zie hieronder, Een tekening in
+  België). Een klik buiten Nederland zet geen gebied.
+- **Op een layout** zet het het gebied, maar zoomt het niet; de kaart komt in de modelruimte (tabblad **Model**).
+- **Alleen in AutoCAD met schermen;** in een script, in AutoLISP en in de AutoCAD-kern gebruik je `VKADRES`.
+- Wil je de online kaart van AutoCAD eronder, zet dan daarna `VKGEOPLEK`: die neemt vanzelf het midden van dit gebied.
+- Het zoekveld in het palet en `VKADRES` zoeken zoals altijd: adres, postcode of perceel.
+- PDOK ziet welke stukken kaart en luchtfoto je in het venster bekijkt (zie 9, Netwerk).
 
 ### Een tekening in België
 Teken je in **Lambert 72** (EPSG:31370) of **Lambert 2008** (EPSG:3812), zoals in Vlaanderen, dan herkent VLEA dat
@@ -246,9 +289,10 @@ controleer dan je coördinaten.
   coördinaten (geen RD en geen Lambert), dan weigert VLEA het al bij het kiezen, met de zin "Het gekozen gebied ligt
   buiten het RD-stelsel (EPSG:28992). Kies een gebied in Nederland, in een tekening met RD-coördinaten." In een
   Belgische tekening betekent dat: je getallen liggen niet in Lambert 72 of Lambert 2008; controleer je coördinaten.
-- **Weigert met uitleg** (er gebeurt niets, en de opdrachtregel of het palet zegt waarom): adres zoeken (`VKADRES` en
-  het zoekveld in het palet), `VKKMLIMPORT`, `VKKMZ`, `VKKLIC`, `VKGEF`, `VKPUNTEN` en `VKGEOPLEK` als het gebied van
-  de tekening in Lambert ligt (`VKKLIP` doet het omgekeerde: het weigert in een tekening in RD); `VKGOOGLE`, `VKSTREETVIEW`, `VKSTREETSMART` en `VKDINO` op een punt in Lambert. Die
+- **Weigert met uitleg** (er gebeurt niets, en de opdrachtregel of het palet zegt waarom): adres zoeken (`VKADRES`,
+  het zoekveld in het palet en `VKZOEKKAART`), `VKKMLIMPORT`, `VKKMZ`, `VKKLIC`, `VKGEF`, `VKPUNTEN` en `VKGEOPLEK` als het gebied van
+  de tekening in Lambert ligt (`VKKLIP` doet het omgekeerde: het weigert in een tekening in RD); `VKGOOGLE`, `VKSTREETVIEW`, `VKSTREETSMART` en `VKDINO` op een punt in Lambert; `VKPROFIEL` (sinds 1.4.0) als het
+  gebied in Lambert ligt of een punt van de lijn. Die
   gereedschappen rekenen van of naar RD, zoeken in Nederland of lezen Nederlandse bestanden, en zouden in een
   Belgische tekening op de verkeerde plek tekenen. `VKAHNPUNT` weigert alleen in Lambert 2008: het DHMV is er alleen in
   Lambert 72.
@@ -256,10 +300,11 @@ controleer dan je coördinaten.
   staat; dan doen `VKKMZ`, `VKKLIC`, `VKGEF` en `VKPUNTEN` wat ze in een Nederlandse tekening doen, en zoeken `VKADRES`
   en het zoekveld in het palet in Nederland: ze zetten dan een gebied in RD rond het adres, ver buiten je tekening (de
   kaarten van Vlaanderen staan daarna grijs met "alleen in België"; kies dan opnieuw een gebied). Van deze
-  gereedschappen kijkt alleen `VKKMLIMPORT` zonder gebied naar wat er al in de tekening staat (de grenzen van de
-  tekening): ligt dat helemaal in Lambert, dan weigert het ook ("De inhoud van deze tekening ligt in Lambert 72 …"). Het
-  neemt de grenzen zoals AutoCAD ze bijhoudt, en AutoCAD maakt die bij het wissen niet kleiner: weigert `VKKMLIMPORT` in
-  een tekening waaruit je alles hebt gewist, kies dan eerst een gebied met `VKGEBIED`, of zoom in de modelruimte op alles
+  gereedschappen kijken alleen `VKKMLIMPORT` en `VKZOEKKAART` zonder gebied naar wat er al in de tekening staat (de
+  grenzen van de tekening; `VKZOEKKAART` alleen in een tekening in meters of zonder eenheid, want in millimeters zijn de
+  getallen geen RD of Lambert): ligt dat helemaal in Lambert, dan weigeren ze ook ("De inhoud van deze tekening ligt in
+  Lambert 72 …"). Ze nemen de grenzen zoals AutoCAD ze bijhoudt, en AutoCAD maakt die bij het wissen niet kleiner: weigert
+  `VKKMLIMPORT` of `VKZOEKKAART` in een tekening waaruit je alles hebt gewist, kies dan eerst een gebied met `VKGEBIED`, of zoom in de modelruimte op alles
   (`ZOOM`, `Extents`); wat op een bevroren laag staat, telt dan niet mee. `VKKLIP` bepaalt de grenzen sinds 1.2.0 zelf
   (hieronder, Een KLIP-levering).
 - **Hoogtes in België zijn TAW**, niet NAP. VLEA rekent nooit om tussen NAP en TAW: het DHMV, `VKAHNPUNT` in Lambert 72
@@ -581,10 +626,10 @@ keer). Grootste gebied 4 km², ook voor de omhullende rechthoek. In een Nederlan
 - De lintknoppen **BGT**, **Kadaster**, **Luchtfoto** en **AHN** laden die ene kaart met de keuzes
   uit de instellingen (opties, stijl en bronvermelding) en vragen op de opdrachtregel het gebied;
   Enter = het opgeslagen gebied van de tekening. Zonder Civil 3D zegt **AHN** meteen "alleen Civil 3D",
-  zonder eerst een gebied te vragen. In het lintpaneel **Kaarten** staat sinds 1.2.0 ook **KLIC / KLIP** (na **Palet**
-  en **Adres**): dezelfde knop als **KLIC / KLIP inladen** in het palet. Het lintpaneel **Gereedschap** heeft **Bijlage**,
-  **Profielschets**, **Eigen grondonderzoek**, **Google Earth**, **AHN-punt**, **NAP-leider**, **NAP herberekenen**,
-  **Coördinaat**, **Punten**, **Bijwerken** en **Help**, met dezelfde keuzes als het palet.
+  zonder eerst een gebied te vragen. In het lintpaneel **Kaarten** staat sinds 1.2.0 ook **KLIC / KLIP** (na **Palet**,
+  **Adres** en, sinds 1.4.0, **Zoek op kaart**): dezelfde knop als **KLIC / KLIP inladen** in het palet. Het lintpaneel **Gereedschap** heeft **Bijlage**,
+  **Profielschets**, **Eigen grondonderzoek**, **Google Earth**, **Maaiveldprofiel**, **AHN-punt**, **NAP-leider**,
+  **NAP herberekenen**, **Coördinaat**, **Punten**, **Bijwerken** en **Help**, met dezelfde keuzes als het palet.
 - De kaartcommando's hieronder vragen zelf naar gebied en opties. Ze gebruiken de keuzes uit de
   instellingen niet: Enter bij de opties = de standaardopties van die kaart.
 
@@ -1537,6 +1582,8 @@ tekening ze meer gebruikt.
 tekening. eTransmit neemt ze mee.
 
 ### Op de opdrachtregel en in een script
+`VKZOEKKAART` opent een venster en werkt alleen in AutoCAD met schermen; in een script gebruik je `VKADRES`.
+
 `VKLADEN` zonder palet vraagt achtereenvolgens: het gebied (`Opgeslagen`, `Rechthoek`, `Polylijn` of
 `Coördinaten`), de kaarten (sleutels gescheiden door komma's, bijvoorbeeld `bgt`, of `alle` voor alle
 kaarten) en de opties (`kaart.optie=waarde`, gescheiden door komma's; Enter = standaard). Er is geen
@@ -1880,6 +1927,98 @@ Decimalen
 
 
 ```
+
+### Maaiveldprofiel langs een lijn (`VKPROFIEL`)
+Teken een lijn in de plattegrond (of kies er een) en VLEA tekent het maaiveld langs die lijn als één doorlopende lijn,
+met één NAP-referentielijn eronder, waar je klikt. Sinds 1.4.0, op wens van gebruikers. Klik op **Maaiveldprofiel** bij het gereedschap in het palet of op het lint,
+of typ `VKPROFIEL`. Het maaiveld komt uit AHN4 DTM 0,5 m bij PDOK, dus je hebt internet nodig.
+
+1. **Punten:** "Wijs het eerste punt van de profiellijn aan (AHN4-maaiveld, teksthoogte 0,5) [Lijn/Teksthoogte]", dan
+   "Wijs het tweede punt aan [Ongedaan]" en daarna "Volgend punt, Enter = klaar (lijn nu 49,87 m, hoogstens 5.000 m)
+   [Ongedaan]". De lijn tot nu toe blijft zichtbaar, ook als je pant of zoomt. Snappen mag. `O` (`Ongedaan`) haalt het
+   laatste punt weg; `U` werkt hier niet. **Enter** maakt de lijn af (bij één punt vraagt VLEA eerst een tweede punt).
+   Met dynamische invoer typ je `#` voor een absolute coördinaat (niet gemeten op een scherm).
+2. **Ophalen:** VLEA haalt het maaiveld op in vakken van 100 m langs de lijn, met de voortgang in een venster (of op de
+   opdrachtregel); **Esc** of **Annuleren** stopt, en dan staat er niets.
+3. **Plek:** "Klik waar afstand 0 op NAP 0 m komt (kader 228,7 x 12,5 m; tekst links en eronder) [Teksthoogte]". De
+   klik is afstand 0 op de NAP-referentielijn; het profiel komt rechtsboven de klik, de hoogte van de referentielijn links
+   ervan, de afstanden, de maaiveldhoogtes en een paar regels uitleg eronder, en een kader om alles. De maat in de vraag is die van het kader: dat steekt
+   dus ook links en onder de klik uit. De klik tekent meteen.
+
+- **Wat er staat:** de maaiveldlijn (groen) van het begin tot het eind, één NAP-referentielijn (blauw) op een hele
+  meter 1 tot 2 m onder het laagste maaiveld met links de hoogte ("NAP +1,00 m"; ligt hij op NAP 0, dan streep-punt),
+  verticale lijnen van de referentielijn tot het maaiveld aan het begin en het eind, een afstandsas met daaronder een rij
+  afstanden en een rij maaiveldhoogtes, en onderaan de lengte, "H = V", de hoogte aan het begin en het eind, de bron
+  ("Bron: AHN4 DTM 0,5 m (2020-2022), PDOK, opgehaald …"; dat is de bron van het profiel, geen bronvermelding als tekst,
+  zie 8) en een regel als een stuk gestippeld is. Er is geen raster van NAP-lijnen. Een streepje omhoog op de
+  NAP-referentielijn is een knik in je lijn (alleen waar de lijn meer dan 3 graden van richting verandert). Horizontaal en verticaal staan op
+  dezelfde schaal (H = V, geen overhoging). Bij een getekende lijn komt die lijn ook in de plattegrond, in oranje, met een
+  0 bij het eerste punt: daar is afstand 0.
+- **Hoogte:** om de 0,5 m één hoogte: de AHN-pixel waarin het punt valt, zonder interpolatie en zonder gladstrijken.
+  Waar AHN geen hoogte heeft (water, panden), trekt VLEA de maaiveldlijn **recht door** tussen de bekende hoogtes
+  ervoor en erna en tekent hem daar **gestippeld** (losse streepjes, dus ook gestippeld zonder lijntype of `LTSCALE`); de
+  maaiveldhoogte in de rij staat daar tussen haakjes. Aan het begin of het eind, waar maar aan één kant een hoogte is,
+  loopt zo'n stuk waterpas vanaf de dichtstbijzijnde hoogte. De opdrachtregel noemt het aantal stukken zonder AHN-hoogte
+  en hun lengte. Altijd AHN4 DTM: de keuze AHN-versie van AHN-punt geldt hier niet; AHN5 en AHN6 zitten niet in 1.4.0.
+- **Trefwoorden:**
+
+  | Trefwoord | Bij | Wat |
+  |---|---|---|
+  | `Lijn` | eerste punt | een bestaande lijn, polylijn, boog, cirkel, ellips of spline kiezen (in Civil 3D ook een as); `Laatste` kiest het laatst getekende object |
+  | `Teksthoogte` | eerste punt en plek | de hoogte van de getallen en teksten in m (0,1 tot 10; typ met een punt, bijvoorbeeld `0.9`); standaard 0,5. VLEA onthoudt hem per tekening zolang AutoCAD open is |
+  | `Ongedaan` | volgend punt | het laatste punt weghalen |
+
+- **Afstand 0** is het begin van de lijn: het eerste punt dat je aanwees, of het begin van de gekozen lijn. De
+  opdrachtregel noemt de coördinaten. Komt het profiel andersom uit, draai de lijn dan om met het AutoCAD-commando
+  `REVERSE` en start opnieuw met `Lijn`. Bij een as van Civil 3D telt het profiel vanaf het begin van de as (0), niet vanaf
+  de stationering.
+- **Grenzen:** alleen in Nederland (RD), tot 5 km, in de modelruimte (ook in een viewport die op model staat) en in een
+  tekening in meters. Een punt in Lambert, buiten RD of buiten het gebied van het AHN (op zee of over de grens), en een
+  punt waarmee de lijn langer wordt dan 5 km, weigert VLEA meteen: getypt telt alleen dat punt niet en vraagt VLEA een
+  ander punt; uit een script stopt het commando. Staan er al twee punten, dan maakt Enter de lijn af tot het vorige punt.
+  Ligt een getypt punt ineens ver weg terwijl er al punten staan, dan las AutoCAD de coördinaat met dynamische invoer
+  waarschijnlijk als relatief; de melding zegt dan dat je er `#` voor zet. Een lege tekening: zet eerst `INSUNITS` op 6
+  (meters), zoek de plek in het palet
+  (Gebied), laad een kaart en teken de lijn daarop. Een gedraaid UCS geeft een melding: je punten kloppen, maar het profiel
+  komt recht in het wereldstelsel. Een lange lijn wordt met H = V op papier lang en plat (5 km is op 1:500 10 m papier) en
+  is dan weinig leesbaar: verdelen over rijen zit niet in 1.4.0; maak dan meer, kortere profielen.
+- **Mislukt het ophalen** (PDOK gaf na drie pogingen niets, of een tegel klopte niet), dan staat er geen profiel: een
+  ontbrekende tegel zou op een stuk zonder AHN-hoogte lijken. Een lijn die je getekend had, blijft dan in de plattegrond staan; start
+  `VKPROFIEL` opnieuw, kies `Lijn` en klik hem aan. Heeft AHN langs de hele lijn geen hoogte (water, buiten Nederland),
+  dan staat er niets. Bij Esc blijft er niets staan.
+- **Lagen:** `VLEA-GEREEDSCHAP-PROFIEL` (kader, getallen, teksten en de lijn in de plattegrond, oranje),
+  `VLEA-GEREEDSCHAP-PROFIEL-MAAIVELD` (groen, doorgetrokken en gestippeld), `VLEA-GEREEDSCHAP-PROFIEL-NAP` (blauw, de
+  NAP-referentielijn) en `VLEA-GEREEDSCHAP-PROFIEL-NAP0` (blauw, streep-punt, als de referentielijn op NAP 0 ligt; zie
+  7). Het blok **Tekst en aanwijslijnen** geldt niet voor het maaiveldprofiel; kies de hoogte met
+  het trefwoord `Teksthoogte`.
+- **Weghalen en gegevens:** één `U` haalt het hele profiel weg. `VKWISSEN` kent het als `maaiveldprofiel` (alle
+  profielen); met `Selectie` wist één aangewezen deel het hele profiel, ook de lijn in de plattegrond. `VKINFO` op een
+  deel toont de bron, het model en de methode. `VKKMZ` met Enter neemt een profiel niet mee naar Google Earth (zie 10).
+- **NAP-leiders op het profiel:** VLEA zet zelf geen NAP-referentie bij het profiel. Wil je `VKNAPLEADER` op het
+  profiel, zet dan met `VKNAPSET` de referentie op de NAP-referentielijn van het profiel, met de hoogte van die lijn en
+  verticale schaal 1. Staan er meer profielen in één tekening, dan rekent `VKNAPLEADER` alleen goed op het profiel waarop je de
+  laatste NAP-referentie zette. Zet je `VKNAPSET` op een volgend profiel, kies dan **Nee** bij "Herberekenen met de
+  nieuwe referentie". Anders krijgen de leiders op het vorige profiel een verkeerde hoogte.
+- **Civil 3D** maakt ook zelf een profiel van het AHN-model dat je met `VKAHN` laadt. Dat model trekt over water en
+  panden een rechte lijn tussen de randen; `VKPROFIEL` trekt daar ook een rechte lijn, maar gestippeld, zodat je ziet
+  waar AHN geen hoogte had.
+
+Een script (getallen met een punt, een lege regel is Enter):
+
+```text
+VKPROFIEL
+_Teksthoogte
+0.9
+154910.3,462920.4
+154950.25,462950.25
+155080,463060
+
+155300,462900
+```
+
+Met een bestaande lijn: `VKPROFIEL`, `_Lijn`, `_Laatste`, dan de plek. Stopt `VKPROFIEL` midden in een script (een punt
+dat niet mag, Enter na één punt, Enter bij de plek, een lijn die je niet kunt kiezen of een teksthoogte die niet mag), dan
+leest AutoCAD de regels erna als commando's; een lege regel herhaalt dan `VKPROFIEL`.
 
 ## 5. Opnieuw laden en wissen
 - Laad je een kaart in een gebied waar die kaart al (deels) staat, dan vraagt VLEA op de
@@ -2500,7 +2639,22 @@ FILEDIA
   | KML inlezen (`VKKMLIMPORT`): lijnen, vlakken, punten, namen | `VLEA-GEREEDSCHAP-KML` | `X-XX-AL-REFERENTIE-G`, `-S` (wit) en `-T18` (rood) |
   | NAP-referentie en NAP-leider (`VKNAPSET`, `VKNAPLEADER`) | `HDD-NAP-REFERENTIE` en `HDD-NAP-LEADER` (zelfde namen) | dezelfde lagen in wit (7) en rood (1) |
 
-  De contour (`VKCONTOUR`) blijft magenta op `VLEA-KAART-GEBIED`: dat is de grens van het gebied, geen tekenhulp.
+  De contour (`VKCONTOUR`) blijft magenta op `VLEA-KAART-GEBIED`: dat is de grens van het gebied, geen tekenhulp. Het
+  maaiveldprofiel (sinds 1.4.0, hieronder) heeft groen en blauw: ook dat zijn benoemde uitzonderingen op oranje.
+- **Het maaiveldprofiel** (`VKPROFIEL`, sinds 1.4.0, zie 4) tekent op vier eigen lagen, alles DoorLaag:
+
+  | Laag | Wat | Kleur, lijntype, dikte |
+  |---|---|---|
+  | `VLEA-GEREEDSCHAP-PROFIEL` | kader, randen, afstandsas, streepjes, alle getallen en teksten, de lijn in de plattegrond | oranje (30), doorgetrokken, 0,18 mm |
+  | `VLEA-GEREEDSCHAP-PROFIEL-MAAIVELD` | de maaiveldlijn (gestippeld als losse streepjes waar AHN geen hoogte heeft) | groen (3), doorgetrokken, 0,25 mm |
+  | `VLEA-GEREEDSCHAP-PROFIEL-NAP` | de NAP-referentielijn | blauw (5), doorgetrokken, 0,18 mm |
+  | `VLEA-GEREEDSCHAP-PROFIEL-NAP0` | de NAP-referentielijn als die op NAP 0 ligt | blauw (5), streep-punt `AL-NAP_LIJN-SO` uit `NLCS-5.0.lin`, 0,25 mm |
+
+  Groen en blauw zoals in de eigen tekeningen van VLEA: net als de magenta contour een benoemde uitzondering op het
+  gereedschap in oranje. Vier lagen omdat alles DoorLaag is en één laag één kleur en één lijntype heeft. `VKSTIJL` met
+  `Grijs` laat het profiel in kleur (het is je eigen werk, geen onderlegger); `Nlcs` zet 30, 3 en 5 terug. Vindt AutoCAD
+  het lijntype niet, dan wordt de referentielijn op NAP 0 doorgetrokken (met een melding); hij blijft herkenbaar aan de dikte (op
+  een plot, en op het scherm met `LWDISPLAY` aan) en aan zijn eigen laag `VLEA-GEREEDSCHAP-PROFIEL-NAP0`.
 - **Een geplaatste bijlage van een KLIC-levering** (`VKBIJLAGE`, sinds 1.2.0, zie 6): de pdf en zijn bijschrift op de
   eigen laag `VLEA-KLIC-BIJLAGE` (kleur 7, 0,18 mm; geen NLCS: NLCS kent geen laag voor een onderlegger). Zet die laag uit
   of bevries hem om de pdf's te verbergen; de levering zelf blijft dan zichtbaar.
@@ -2670,6 +2824,11 @@ adressen, altijd in het stelsel van de tekening) en de hectometerpaaltjes van Vl
 Lambert 72) van het Agentschap Wegen en Verkeer (AWV, `opendata.apps.mow.vlaanderen.be`, één vast adres). In een
 tekening in RD maakt VLEA met die drie geen verbinding, behalve met `VKSTATUS` (hieronder).
 
+Het kaartvenster (`VKZOEKKAART`, knop **Zoek op kaart**) haalt de kaart in stukjes (tegels) en de luchtfoto als één beeld
+per stand bij PDOK (`service.pdok.nl`), en zoekt bij de Locatieserver van PDOK (`api.pdok.nl`). PDOK ziet zo welke
+stukken kaart en luchtfoto je bekijkt, ook als je daarna niets kiest. VLEA bewaart die stukken alleen in het geheugen,
+zolang het venster open is, en vraagt er hoogstens drie tegelijk en 600 per minuut.
+
 AHN5 en AHN6 (sinds 0.2.11) komen niet van PDOK maar van de dienst die het AHN daarvoor zelf aanwijst
 (`api.ellipsis-drive.com`): alleen als je bij **AHN hoogtemodel** of bij `VKAHNPUNT` AHN5, AHN6 of de nieuwste kiest (de
 status van de bronnen in het palet alleen als bij **AHN hoogtemodel** een andere versie dan AHN4 staat, `VKSTATUS` nooit;
@@ -2741,9 +2900,11 @@ kaartbeelden bij Google op voor dat gebied; dat doet Google Earth, niet de plugi
 ### Bijwerken (`VKUPDATE`)
 Bijwerken gaat via de website. Staat onderaan het palet "Nieuwe versie beschikbaar", klik daar dan op: je browser
 opent https://vanleeuwenea.nl/vlea-tool#bijwerken. Download daar het installatieprogramma, sluit AutoCAD, open het
-bestand en klik in het venster op **Installeren**. Het venster zegt welke versie er staat en welke erbij komt, en het
-vervangt de versie die er staat; je instellingen blijven staan. Het gedownloade bestand mag je daarna weggooien. De
-klik op de regel breekt geen lopend commando af en werkt ook zonder open tekening.
+bestand en klik in het venster op **Installeren**. Het venster zegt welke versie er staat, welke erbij komt en wat er
+sindsdien nieuw is (hoogstens drie versies). Het vervangt de versie die er staat; je instellingen blijven staan. Het
+gedownloade bestand mag je daarna weggooien. De klik op de regel breekt geen lopend commando af en werkt ook zonder open
+tekening. Wat er per versie veranderde, staat in de releasetekst bij die versie (de releases van `vlea-autocad` op
+GitHub).
 
 De knop **Bijwerken** in het palet en op het lint, en `VKUPDATE`, zeggen welke versie je hebt, waar de nieuwste staat
 en, als tweede adres, de nieuwste release op GitHub. De pagina openen ze alleen als de versiecheck (hoogstens één keer
@@ -2766,7 +2927,10 @@ altijd deed: VLEA downloadt de zip van GitHub, controleert de SHA-256, pakt hem 
 ### Naar Google Earth (`VKKMZ`)
 - Kies objecten, of kies ze eerst en start dan `VKKMZ`. **Enter** zonder iets te kiezen = alle
   objecten van VLEA-kaarten in het gebied van de tekening (heeft de tekening nog geen gebied: alle
-  VLEA-kaarten), zonder de objecten van een KLIC-levering (zie **KLIC** hieronder).
+  VLEA-kaarten), zonder de objecten van een KLIC-levering (zie **KLIC** hieronder) en sinds 1.4.0 zonder een
+  maaiveldprofiel (`VKPROFIEL`): een profiel staat in RD op de plek waar je klikte, en dat zegt niets over de grond
+  daar. Ook de lijn in de plattegrond van het profiel gaat dan niet mee. De opdrachtregel telt wat niet meegaat; kies het
+  profiel zelf als je het toch wilt.
 - Kies je **één open lijn of polylijn**, dan wordt dat een **boortracé**: de lijn, de plekken "Begin"
   en "Eind", en de lengte (horizontaal, in de tekening gemeten) in de omschrijving.
 - Verder: lijnen, polylijnen en bogen als lijn (bogen benaderd tot op 5 cm), gesloten polylijnen,
@@ -2962,7 +3126,10 @@ achter** onderaan het palet). Een fout met technische gegevens meld je als issue
 | Je browser of Windows waarschuwt bij `VLEA-AutoCAD-Setup.exe` ("wordt niet vaak gedownload", of een blauw venster van Windows) | Het programma is niet ondertekend. Vertrouw je de download (zie "Download controleren" in de README), kies dan in je browser dat je het bestand wilt behouden en in Windows **Meer informatie** en daarna **Toch uitvoeren**. |
 | Windows zegt dat Smart App Control het installatieprogramma (of `Installeer.bat`) heeft geblokkeerd | Smart App Control van Windows 11 laat niet-ondertekende programma's en scripts van internet niet toe, en heeft geen knop om door te gaan. VLEA is nog niet ondertekend; op die pc lukt installeren niet. Laat het ons weten via https://vanleeuwenea.nl/vlea-tool#reacties. Wie niet mag bijwerken, kan de melding uitzetten in de instellingen, onder **Algemeen**. |
 | Het installatieprogramma zegt "AutoCAD draait nog" | Sluit alle AutoCAD-vensters en klik op **Opnieuw proberen**. Er is niets gewijzigd. |
+| Het installatieprogramma zegt niet (meer) wat er nieuw is | Sinds 1.4.0 zegt het dat alleen op het eerste scherm, als er een oudere versie of nog geen VLEA staat; na **Installeren** en bij dezelfde of een nieuwere versie niet meer. Teruglezen: open `NIEUW.txt` in `%APPDATA%\Autodesk\ApplicationPlugins\VLEA-AutoCAD.bundle` (met de zip: in de map `VLEA-AutoCAD.bundle`). |
 | Het installatieprogramma zegt "Het is niet gelukt" | De zin eronder zegt wat er wel en niet gewijzigd is; vaak helpt even wachten en **Opnieuw proberen** (een virusscanner kan nieuwe bestanden kort vasthouden). De technische melding staat in `%LOCALAPPDATA%\VLEA-AutoCAD\logs\setup.log`, zonder je Windows-naam; zet dat bestand bij je melding. |
+| Het kaartvenster (**Zoek op kaart**) blijft grijs, of onderaan staat dat de kaart nu niet binnenkomt | Geen verbinding met PDOK, of PDOK is traag. Het venster probeert het na een halve minuut zelf opnieuw, zolang het open is. Zoeken zegt dan "Zoeken lukt nu niet". Zonder verbinding zoek je later opnieuw, of kies je een gebied met **Rechthoek** of `VKGEBIED`. |
+| Na veel slepen en zoomen blijft een deel van het kaartvenster even grijs, onderaan staat "Even geduld" | VLEA vraagt PDOK hoogstens 600 stukjes kaart per minuut. De rest komt vanzelf, binnen een minuut; je hoeft niets te doen. |
 | Een kaart, een knop of een hele groep staat niet meer in het palet of op het lint | Je hebt hem verborgen (tandwiel, tabblad **Weergave**). Zet het vinkje weer aan, of klik **Alles weer tonen**, en **Opslaan**. Het commando werkt intussen gewoon als je het typt. |
 | `VKBIJLAGE` (Bijlage plaatsen) zegt "Sla de tekening eerst op", of de pdf in de tekening is weg na verplaatsen | De pdf komt in een map naast de tekening (`<tekening>_kaarten`, submap `klic-bijlagen`): sla de tekening eerst op. Verplaats of hernoem je de tekening, neem die map dan mee (eTransmit doet dat); de tekening verwijst naar de pdf met een pad vanaf de tekening. |
 | `VKBIJLAGE` plaatst een bijlage niet ("geen pdf", "beschadigd", "beveiligd") | VLEA plaatst alleen een gewone pdf. Een beveiligde pdf plaatst VLEA niet: bekijk hem in de levering. Een beschadigde: download de levering opnieuw. |

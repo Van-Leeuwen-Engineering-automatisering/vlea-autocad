@@ -33,7 +33,7 @@ body:
     attributes:
       label: Versie van VLEA
       description: Onderaan het palet, of typ VKHELP of VKOVER.
-      placeholder: "bijv. 1.3.0"
+      placeholder: "bijv. 1.4.0"
     validations:
       required: true
   - type: textarea
