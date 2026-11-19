@@ -1,6 +1,6 @@
 # Handleiding – VLEA, kaarten voor AutoCAD
 
-> **Versie 1.4.0.** Voor AutoCAD 2025, 2026 en 2027. `VKHELP` opent deze pagina in je browser.
+> **Versie 1.5.0.** Voor AutoCAD 2025, 2026 en 2027. `VKHELP` opent deze pagina in je browser.
 
 > **Belangrijk.** De kaarten zijn informatief. VLEA vervangt geen KLIC-melding (Nederland) en geen planaanvraag in het
 > KLIP (Vlaanderen): vraag die vóór graafwerk altijd aan. Een levering die je met `VKKLIC` of `VKKLIP` tekent, is een
@@ -37,7 +37,7 @@ lint-tabblad **VLEA** op **Palet** (nog een keer = sluiten). Van boven naar bene
   versie en de mappen toont `VKHELP` op de opdrachtregel). Het **tandwiel** opent de instellingen (zie
   hieronder).
 - **Gebied** – kies waar de kaart moet komen (zie 3): een adres zoeken, de knop **Zoek op kaart** (sinds 1.4.0: een
-  kaart in een venster, zie 3, Zoeken op de kaart), of de knoppen **Rechthoek**, **Polylijn** en **Contour** (een strook
+  kaart in een venster, waarin je sinds 1.5.0 ook een rechthoek trekt; zie 3, Zoeken op de kaart), of de knoppen **Rechthoek**, **Polylijn** en **Contour** (een strook
   langs een lijn, met de breedte uit de instellingen).
   Daaronder staat het gekozen gebied.
 - **Kaarten** – bovenaan sinds 1.2.0 de knop **KLIC / KLIP inladen**: kies het bestand van een KLIC-levering
@@ -207,7 +207,7 @@ legger van Rijkswaterstaat. `VKSTATUS` stelt geen vragen, dus het werkt ook in e
   straat met huisnummer en plaats en kies een suggestie. AutoCAD zoomt ernaartoe en VLEA stelt een
   gebied van 250 x 250 m rond dat punt voor.
 - **Zoeken op de kaart** (`VKZOEKKAART`, of de knop **Zoek op kaart** in het palet en op het lint, sinds 1.4.0): een
-  kaart in een venster; zie hieronder.
+  kaart in een venster, om een plek te kiezen of (sinds 1.5.0) het gebied als rechthoek te trekken; zie hieronder.
 - **Rechthoek aanwijzen**, **polylijn kiezen** of **coördinaten typen** (`VKGEBIED`): twee
   hoekpunten, een gesloten polylijn, of `xmin,ymin,xmax,ymax` in RD-meters (in een Belgische tekening in
   Lambert-meters, zie hieronder).
@@ -248,9 +248,19 @@ genoeg ingezoomd bent.
   zoomt een klik eerst drie stappen in, zodat je de plek precies kunt aanwijzen; de regel onderaan zegt of de volgende
   klik nog inzoomt of de plek kiest. **Kies deze plek** (of Enter) zet dat vierkant als gebied in de tekening en zoomt
   erheen, net als bij een adres. **Annuleren**, Esc of het kruisje laat het gebied zoals het was (met de lijst met
-  suggesties open sluit Esc eerst de lijst).
+  suggesties open sluit Esc eerst de lijst, en tijdens het trekken van een rechthoek stopt Esc alleen het trekken).
+- **Een rechthoek trekken** (sinds 1.5.0): klik rechtsboven op **Rechthoek** (de knop wordt oranje). Klik dan de eerste
+  en de tweede hoek van het gebied, of sleep de rechthoek met de linkermuisknop. De kaart schuift dan niet mee; schuiven
+  doe je met het ingedrukte wieltje, zoomen met het wieltje, ook tussen de twee hoeken. Terwijl je trekt, noemt de regel
+  onderaan de maat en voor hoeveel kaarten het gebied te groot is. Daarna staat de rechthoek in oranje en zegt de regel
+  voor welke kaarten hij te groot is: die staan grijs in het palet, net als na **Rechthoek** in het palet.
+  **Kies dit gebied** (of Enter) zet de rechthoek als gebied in de tekening en zoomt erheen; de opdrachtregel noemt de
+  maat en per kaart of het gebied binnen de grens valt, zoals `VKGEBIED`. Esc of nog eens **Rechthoek** stopt het
+  trekken; het venster blijft open. Een rechthoek is minstens 10 x 10 m, en hoogstens zo groot als de ruimste kaart
+  toestaat (100 km²): is hij kleiner of groter, dan blijft de eerste hoek staan en klik je een andere tweede hoek. Een klik
+  zonder **Rechthoek** kiest weer een plek.
 - **Er staat al een gebied:** dan opent het venster daarop en zie je het als stippellijn met een witte rand, ook op de
-  luchtfoto; **Kies deze plek** vervangt het.
+  luchtfoto; **Kies deze plek** of **Kies dit gebied** vervangt het.
   Anders opent het venster waar je het in deze tekening de vorige keer liet (in dezelfde AutoCAD-sessie), dan op het
   midden van je beeld als dat in Nederland ligt, dan waar je het de laatste keer liet in een andere tekening, en anders op
   heel Nederland.
@@ -260,7 +270,7 @@ genoeg ingezoomd bent.
   VLEA dat de tekening niet in meters staat en opent het venster toch: het gebied staat dan in de tekening, maar VLEA
   zoomt er niet heen en de kaarten laden pas als de eenheid op meters staat.
 - **Alleen in Nederland (RD):** in een tekening in Lambert weigert het, met de reden (zie hieronder, Een tekening in
-  België). Een klik buiten Nederland zet geen gebied.
+  België). Een klik of een hoek buiten Nederland zet geen gebied.
 - **Op een layout** zet het het gebied, maar zoomt het niet; de kaart komt in de modelruimte (tabblad **Model**).
 - **Alleen in AutoCAD met schermen;** in een script, in AutoLISP en in de AutoCAD-kern gebruik je `VKADRES`.
 - Wil je de online kaart van AutoCAD eronder, zet dan daarna `VKGEOPLEK`: die neemt vanzelf het midden van dit gebied.
@@ -2266,6 +2276,11 @@ uit de levering (`Kabelbed`, `Duct` of `Mantelbuis`). Riool vrij verval volgt he
 water, hemelwater). Op de lagen van kabels, leidingen en mantelbuizen loopt het lijntype door over de hoekpunten
 (lijntypegeneratie aan per polylijn): ook een kabel met veel korte stukken krijgt zijn streepjes en letters. Wil
 je dat voor een polylijn niet, zet het dan uit met `PEDIT` (optie Ltype gen) of in het eigenschappenvenster.
+Sinds 1.5.0 hebben de lagen van kabels en leidingen (`B-OI-KL-…` en `B-OI-RI-…`, ook bij de riolering) geen
+laagbeschrijving meer. Boorsoftware die een kruising in het lengteprofiel herkent aan een deel van de NLCS-laagnaam, las
+anders de beschrijving ("NLCS 5.0.2 KL-DATA (G)") en zette een algemeen symbool met die tekst in plaats van een leiding.
+Lees je in een bestaande tekening opnieuw in, dan haalt VLEA de beschrijving weg die het er zelf op had gezet; een
+beschrijving die je zelf typte, blijft staan.
 
 **Symbolen.** Een put, kast, mast, toren, technisch gebouw of leidingelement wordt een blok op de symboollaag
 (`-S`) van zijn thema, met de draaiing uit de levering. Welk symbool het wordt, hangt af van de klasse, bij een
@@ -2610,6 +2625,8 @@ FILEDIA
   nieuwe stijl in een bestaande tekening: bij KLIC `VKSTIJL` met de keuze `Nlcs` (hieronder); of wis de kaart of
   levering (`VKWISSEN`), verwijder de lege lagen (bijvoorbeeld met `PURGE`) en laad opnieuw. Wil je juist je eigen
   stijl, zet de lagen dan zo in je sjabloon: lagen die je zelf maakte, past VLEA nooit aan, ook niet met `VKSTIJL`.
+  Eén uitzondering (sinds 1.5.0): op een laag van kabels en leidingen die VLEA eerder maakte, haalt VLEA bij het opnieuw
+  inlezen de laagbeschrijving van VLEA weg (zie 6, Lagen).
 - `VKSTIJL`: NLCS-kleuren of grijze onderlegger (kleur 252), en terugzetten naar de kleur van
   daarvoor. Met `Nlcs` krijgt een KLIC-laag ook de lijndikte, het lijntype en de transparantie van VLEA (alleen de
   vullaag van een zone is doorzichtig, 80 %; de andere zijn dekkend). Of een laag afdrukt (Plot in het lagenbeheer),

@@ -186,8 +186,8 @@ die releases. De plugin controleert een download niet meer zelf (hij downloadt g
 ondertekend.
 - Met het programma `gh` van GitHub controleer je dat een gedownload bestand precies het bestand uit een release van
   deze repository is, ook als je het via de website kreeg:
-  `gh release verify-asset v1.4.0 .\VLEA-AutoCAD-Setup.exe -R Van-Leeuwen-Engineering-automatisering/vlea-autocad`
-  (en `gh release verify v1.4.0 -R Van-Leeuwen-Engineering-automatisering/vlea-autocad` voor de release zelf). Dat
+  `gh release verify-asset v1.5.0 .\VLEA-AutoCAD-Setup.exe -R Van-Leeuwen-Engineering-automatisering/vlea-autocad`
+  (en `gh release verify v1.5.0 -R Van-Leeuwen-Engineering-automatisering/vlea-autocad` voor de release zelf). Dat
   vangt een gewijzigde link of een beschadigde download, niet een kwaadwillende nieuwe release. `gh` vraagt eenmalig
   `gh auth login` (een gratis GitHub-account is genoeg); zonder account gebruik je `Get-FileHash` tegen
   `SHA256SUMS.txt` hieronder.

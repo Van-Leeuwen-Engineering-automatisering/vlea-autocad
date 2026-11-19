@@ -23,7 +23,7 @@ hectometerpaaltjes van het Agentschap Wegen en Verkeer (AWV). De kaarten van Vla
 | Onderdeel | Commando | Wat |
 |---|---|---|
 | Palet | `VKPALET` | Palet openen of sluiten. Alles kan ook vanuit het palet: per kaart een knop "Laden", bovenaan bij de kaarten de knop "KLIC / KLIP inladen" (sinds 1.2.0), een rij knoppen voor het gereedschap en een link naar de website. De keuzes per kaart en per gereedschap staan in het instellingenvenster (tandwiel), aan/uit standaard aan (behalve maatvoering en annotaties van een KLIC-levering en het grondgebruik bij de BRT). |
-| Gebied | `VKADRES`, `VKZOEKKAART`, `VKGEBIED` | Adres, postcode of perceel zoeken; de plek zoeken op een kaart in een venster (schuiven, zoomen, ook straat en woonplaats; knop "Zoek op kaart" in het palet en op het lint, sinds 1.4.0); rechthoek, gesloten polylijn of coördinaten als gebied kiezen. |
+| Gebied | `VKADRES`, `VKZOEKKAART`, `VKGEBIED` | Adres, postcode of perceel zoeken; de plek zoeken op een kaart in een venster (schuiven, zoomen, ook straat en woonplaats; knop "Zoek op kaart" in het palet en op het lint, sinds 1.4.0), of daar het gebied als rechthoek trekken (knop Rechthoek, sinds 1.5.0); rechthoek, gesloten polylijn of coördinaten als gebied kiezen. |
 | | `VKCONTOUR` | Een strook op een vaste breedte langs een lijn (in Civil 3D ook een as) tekenen en als gebied kiezen. |
 | Laden | `VKLADEN` | Kaarten laden voor het gekozen gebied, ook meer tegelijk (sleutels met komma's, bijvoorbeeld `bgt,bag`). In het palet heeft elke kaart een eigen knop "Laden". |
 | Ondergrond | `VKBGT` | BGT (actuele versie), in groepen: wegen, water, panden, terrein, namen en nummers, overig. |
@@ -236,7 +236,7 @@ De releases op GitHub zijn onveranderbaar: een uitgebracht bestand kan niet stil
 website kreeg):
 
 ```powershell
-gh release verify-asset v1.4.0 .\VLEA-AutoCAD-Setup.exe -R Van-Leeuwen-Engineering-automatisering/vlea-autocad
+gh release verify-asset v1.5.0 .\VLEA-AutoCAD-Setup.exe -R Van-Leeuwen-Engineering-automatisering/vlea-autocad
 ```
 
 `gh` vraagt eenmalig `gh auth login` (een gratis GitHub-account is genoeg); zonder account gebruik je `Get-FileHash`
